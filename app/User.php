@@ -16,10 +16,11 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Antvel\Components\AddressBook\Models\Address;
 use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+use Antvel\AddressBook\Models\Address;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {

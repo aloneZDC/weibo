@@ -214,7 +214,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
-        Antvel\ServiceProvider::class,
+
+        Antvel\AntvelServiceProvider::class,
 
         /*
          * Providers Vendors

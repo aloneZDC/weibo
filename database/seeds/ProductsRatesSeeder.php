@@ -6,7 +6,7 @@
  *
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
-use App\Address;
+use Antvel\AddressBook\Models\Address;
 use App\Category;
 use App\Order;
 use App\Product;
