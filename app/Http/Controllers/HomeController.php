@@ -8,11 +8,11 @@ namespace app\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
+use App\Order;
+use App\Product;
 use App\FreeProduct;
 use App\Helpers\productsHelper;
 use App\Http\Controllers\Controller;
-use App\Order;
-use App\Product;
 
 class HomeController extends Controller
 {

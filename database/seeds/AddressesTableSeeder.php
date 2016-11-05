@@ -1,10 +1,12 @@
 <?php
 
-/**
- * Antvel - Seeder
- * Addresses Table.
+/*
+ * This file is part of the Antvel Shop package.
  *
- * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
+ * (c) Gustavo Ocanto <gustavoocanto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 use App\User as User;
@@ -14,28 +16,51 @@ use Antvel\AddressBook\Models\Address;
 
 class AddressesTableSeeder extends Seeder
 {
+    /**
+     * Handles the seeder.
+     *
+     * @return void
+     */
     public function run()
     {
-        $faker = Faker::create();
-
         for ($i = 0; $i < 10; $i++) {
-
-            $user = User::select('id')
-                ->inRandomOrder()
-                ->first();
-
-            $address = Address::create([
-                'user_id'      => ($i <= 2) ? 4 : $user->id,
-                'default'      => 0,
-                'line1'        => $faker->streetAddress,
-                'line2'        => $faker->streetAddress,
-                'phone'        => $faker->e164PhoneNumber,
-                'name_contact' => $faker->streetName,
-                'zipcode'      => $faker->postcode,
-                'city'         => $faker->city,
-                'country'      => $faker->country,
-                'state'        => $faker->state,
-            ]);
+            Address::create(
+                $this->faker($i)
+            );
         }
+    }
+
+    /**
+     * Return a fake address.
+     * @param  int $pos
+     * @return array
+     */
+    protected function faker(int $pos) : array
+    {
+        $faker = Faker::create();
+        $user_id = $pos <= 2 ? 4 :  $this->user()->id;
+
+        return [
+            'default' => 0,
+            'user_id' => $user_id,
+            'city' => $faker->city,
+            'state' => $faker->state,
+            'country' => $faker->country,
+            'zipcode' => $faker->postcode,
+            'line1' => $faker->streetAddress,
+            'line2' => $faker->streetAddress,
+            'phone' => $faker->e164PhoneNumber,
+            'name_contact' => $faker->streetName,
+        ];
+    }
+
+    /**
+     * Return a random user.
+     *
+     * @return User
+     */
+    protected function user() : User
+    {
+        return User::select('id')->inRandomOrder()->first();
     }
 }

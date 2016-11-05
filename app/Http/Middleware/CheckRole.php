@@ -18,7 +18,7 @@ class CheckRole
     {
         $roles = $this->getRequiredRoleForRoute($request->route());
 
-        if ($request->user()->hasRole($roles) || !$roles) {
+        if (auth()->check() && $request->user()->hasRole($roles) || !$roles) {
             return $next($request);
         }
         // return response([
