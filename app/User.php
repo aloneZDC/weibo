@@ -20,7 +20,7 @@ use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-use Antvel\AddressBook\Models\Address;
+use Antvel\Components\AddressBook\Models\Address;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
