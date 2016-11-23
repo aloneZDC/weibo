@@ -54,5 +54,5 @@ Breadcrumbs::register('shoppingCartResume', function ($breadcrumbs, $addressId) 
 //shipping addresses
 Breadcrumbs::register('shippingAddresses', function ($breadcrumbs) {
     $breadcrumbs->parent('shoppingCart');
-    $breadcrumbs->push(trans('address.my_addresses'), route('orders.check_out'));
+    $breadcrumbs->push(trans('antvel::address.my_addresses'), route('orders.check_out'));
 });

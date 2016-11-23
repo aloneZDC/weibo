@@ -29,7 +29,11 @@ return [
    'edit_your_address'           => 'Edit your address',
    'full_name'                   => 'Full Name',
    'state_02'                    => 'State/Region',
-   'save_continue'               => 'Save & Continue',
-   'error_validation'            => 'You have to fill all the inputs before save a shipping address',
-   'error_updating'              => 'There was an error trying to save your information. Try again!',
+
+   'errors' => [
+      'update' => 'There was an error trying to save your information. Try again!',
+      'model_not_found' => 'The given address is not valid or not found. Try again!',
+      'validation' => 'You have to fill all the inputs before save a shipping address'
+   ]
+
 ];

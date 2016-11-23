@@ -1,7 +1,7 @@
 <div class="row">
-	
+
 	<div class="col-lg-3 text-right">
-		{!! Form::label('name_contact',trans('address.full_name').':') !!}
+		{!! Form::label('name_contact',trans('antvel::address.full_name').':') !!}
 	</div>
 
 	<div class="col-lg-9">
@@ -23,7 +23,7 @@
 <div class="row">
 
 	<div class="col-lg-3 text-right">
-		{!! Form::label('line1',trans('address.address_line1').':') !!}
+		{!! Form::label('line1',trans('antvel::address.address_line1').':') !!}
 	</div>
 
 	<div class="col-lg-9">
@@ -42,11 +42,11 @@
 </div>
 
 <div class="row">
-	
+
 	<div class="col-lg-3 text-right">
-		{!! Form::label('line2',trans('address.address_line2').':') !!}
+		{!! Form::label('line2',trans('antvel::address.address_line2').':') !!}
 	</div>
-		
+
 	<div class="col-lg-9">
 		<div class="form-group">
 			<div class="input-group">
@@ -64,11 +64,11 @@
 </div>
 
 <div class="row">
-	
+
 	<div class="col-lg-3 text-right">
-		{!! Form::label('city',trans('address.city').':') !!}
+		{!! Form::label('city',trans('antvel::address.city').':') !!}
 	</div>
-		
+
 	<div class="col-lg-9">
 		<div class="form-group">
 			<div class="input-group">
@@ -86,11 +86,11 @@
 </div>
 
 <div class="row">
-	
+
 	<div class="col-lg-3 text-right">
-		{!! Form::label('state',trans('address.state_02').':') !!}
+		{!! Form::label('state',trans('antvel::address.state_02').':') !!}
 	</div>
-		
+
 	<div class="col-lg-9">
 		<div class="form-group">
 			<div class="input-group">
@@ -108,11 +108,11 @@
 </div>
 
 <div class="row">
-	
+
 	<div class="col-lg-3 text-right">
-		{!! Form::label('zipcode',trans('address.zipcode').':') !!}
+		{!! Form::label('zipcode',trans('antvel::address.zipcode').':') !!}
 	</div>
-		
+
 	<div class="col-lg-9">
 		<div class="form-group">
 			<div class="input-group">
@@ -130,11 +130,11 @@
 </div>
 
 <div class="row">
-	
+
 	<div class="col-lg-3 text-right">
-		{!! Form::label('country', trans('address.country').':') !!}
+		{!! Form::label('country', trans('antvel::address.country').':') !!}
 	</div>
-		
+
 	<div class="col-lg-9">
 		<div class="form-group">
 			@if (isset($address))
@@ -151,11 +151,11 @@
 	</div>
 
 </div>
- 
+
 <div class="row">
-	
+
 	<div class="col-lg-3 text-right">
-		{!! Form::label('phone',trans('address.phone_number').':') !!}
+		{!! Form::label('phone',trans('antvel::address.phone_number').':') !!}
 	</div>
 
 	<div class="col-lg-9">
