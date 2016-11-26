@@ -1,13 +1,8 @@
 <?php
 
-/**
- * Antvel - Data Base
- * Person Table.
- *
- * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
- */
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreatePersonsTable extends Migration
 {

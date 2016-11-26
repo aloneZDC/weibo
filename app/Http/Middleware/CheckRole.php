@@ -42,6 +42,6 @@ class CheckRole
     {
         $actions = $route->getAction();
 
-        return isset($actions['roles']) ? $actions['roles'] : null;
+        return isset($actions['roles']) ? $actions['roles'] : ['person'];
     }
 }

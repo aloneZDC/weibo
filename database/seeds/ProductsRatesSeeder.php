@@ -6,14 +6,14 @@
  *
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
-use Antvel\AddressBook\Models\Address;
-use App\Category;
+use App\User;
 use App\Order;
 use App\Product;
-use App\User;
+use App\Category;
 use App\UserPoints;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Antvel\Components\AddressBook\Models\Address;
 
 class ProductsRatesSeeder extends Seeder
 {

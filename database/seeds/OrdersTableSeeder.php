@@ -6,12 +6,12 @@
  *
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
-use Antvel\AddressBook\Models\Address;
 use App\Order;
-use App\OrderDetail;
 use App\Product;
+use App\OrderDetail;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Antvel\Components\AddressBook\Models\Address;
 
 class OrdersTableSeeder extends Seeder
 {
