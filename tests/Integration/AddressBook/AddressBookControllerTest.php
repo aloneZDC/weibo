@@ -11,9 +11,8 @@ _* This file is part of the Antvel Shop package.
 
 namespace App\Integration\AddressBook;
 
-use App\User as UserApp;
+use App\User;
 use App\Tests\AbstractTestCase;
-use Antvel\Components\Customer\Models\User;
 
 class AddressBookControllerTest extends AbstractTestCase
 {
@@ -22,35 +21,22 @@ class AddressBookControllerTest extends AbstractTestCase
 	 *
 	 * @var null
 	 */
-	protected $buyer = null;
+	protected $user = null;
 
 	public function setUp()
 	{
 		parent::setUp();
 
-		$this->buyer = User::where('id', 4)->first();
-
-		// dd($this->buyer);
+		$this->user = User::where('id', 4)->first();
 	}
 
 	public function test_a_logged_user_can_see_his_address_book()
 	{
-		// dd($this->buyer->toArray());
-		// dd($this->buyer->role, $this->buyer->profile);
-
-		$this->actingAs($this->buyer);
-
-		// dd($this->app['auth']->user()->toArray());
-
-
+		$this->actingAs($this->user);
 		$response = $this->call('GET', 'user/address');
 
-		// dd($response->content());
-		// dd($response->isRedirect());
-		// dd(get_class_methods($this->buyer));
-
 		$this->assertResponseOk();
-		// $this->assertViewHas('addresses');
+		$this->assertViewHas('addresses');
 	}
 
 }

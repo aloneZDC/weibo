@@ -1,6 +1,6 @@
 <?php
 
-namespace app;
+namespace App;
 
 /*
  * Antvel - Users Model
@@ -14,21 +14,16 @@ use App\UserPoints;
 use App\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Antvel\Components\Customer\hasAntvel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-
-
-
-
-use Antvel\Components\AddressBook\Models\Address;
-
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, SoftDeletes, Notifiable;
+    use Authenticatable, CanResetPassword, SoftDeletes, Notifiable, hasAntvel;
 
     /**
      * The database table used by the model.
@@ -43,18 +38,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $fillable = [
-        'nickname',
-        'email',
-        'password',
-        'role',
-        'pic_url',
-        'language',
-        'website',
-        'twitter',
-        'facebook',
-        'mobile_phone',
-        'work_phone',
-        'description',
+        'facebook', 'mobile_phone', 'work_phone', 'description',
+        'pic_url', 'language', 'website', 'twitter',
+        'nickname', 'email', 'password', 'role',
         'disabled_at',
     ];
 
@@ -75,20 +61,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function relationsToArray()
     {
         return array_merge($this->attributesToArray(), $this->profile->attributesToArray());
-    }
-
-    public function profile()
-    {
-        if (in_array($this->role, ['business', 'nonprofit'])) {
-            return $this->hasOne('App\Business');
-        }
-
-        return $this->hasOne('App\Person');
-    }
-
-    public function addresses()
-    {
-        return $this->hasMany(Address::class);
     }
 
     public function Product()
