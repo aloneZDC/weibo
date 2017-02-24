@@ -16,7 +16,8 @@
 			<h5>{{ trans('user.user_account_settings') }}</h5>
 		</div>
 
-		{!! Form::model($user, ['url'=>'user/profile/save', 'class'=>'form-horizontal', 'role'=>'form']) !!}
+		{!! Form::model($user, ['url'=>'customer', 'class'=>'form-horizontal', 'role'=>'form', 'method' => 'PATCH']) !!}
+
 		<div ng-controller="ProfileController" ng-cloak>
 
 			<div ng-show="disabled" class="alert alert-danger" role="alert">
@@ -43,13 +44,9 @@
 												<input type="hidden" value="[[file!=''?file:picture]]" name="pic_url">
 											</div>
 										</div>
-										<h5>
-											@if (\Auth::user()->hasRole(['person','admin']))
-											 	{{ ucwords($user['first_name'].' '.$user['last_name']) }}
-											@else
-												{{  ucwords($user['business_name']) }}
-											@endif
-										</h5>
+
+										<h5>{{ ucwords($user->fullName) }}</h5>
+
 									</div>
 								</div>
 								<div class="row">
@@ -142,7 +139,7 @@
 			app.controller('ProfileController',['$scope','$http','notify',function($scope, $http,notify){
 				$scope.wantDelete = false;
 				$scope.disabled = false;
-				var disabled = '{{ $user['disabled_at'] }}';
+				var disabled = '{{ $user->disabled_at }}';
 				if (disabled !== '') $scope.disabled = new Date(disabled);
 
 				$scope.disableAccount = function(){
@@ -197,7 +194,8 @@
             app.controller('uploadCtrl', ['$scope', '$upload', '$timeout','notify', function ($scope, $upload, $timeout,notify) {
             	$scope.usingFlash = FileAPI && FileAPI.upload != null;
 				$scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
-				$scope.picture = '{{ $user['pic_url'] }}';
+				$scope.picture = '{{ $user->pic_url }}';
+				// console.log('pic: ', $scope.picture);
 
             	$scope.$watch('files', function () {
                     upload($scope.files);

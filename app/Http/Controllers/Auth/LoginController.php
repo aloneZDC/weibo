@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Antvel\Components\Customer\Sessions;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -22,20 +23,22 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login / registration.
+     * The Antvel sessions driver.
      *
-     * @var string
+     * @var Antvel\Components\Customer\Sessions
      */
-    protected $redirectTo = '/';
+    protected $sessions = null;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Sessions $sessions)
     {
         $this->middleware('guest', ['except' => 'logout']);
+
+        $this->sessions = $sessions;
     }
 
     /**
@@ -46,66 +49,6 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        if ($request->input('newuser')) {
-            session()->flash('email', $request->input('email'));
-
-            return redirect('/register');
-        }
-
-        return $this->handle($request);
-    }
-
-    /**
-     * Handle the user login.
-     *
-     * @param  Request $request
-     * @return void
-     */
-    protected function handle(Request $request)
-    {
-        $this->validate($request, $this->rules());
-
-        if (auth()->attempt($this->credentials($request), $request->has('remember'))) {
-            return redirect($this->redirectTo);
-        }
-
-        return redirect('/login')
-            ->withInput($request->only('email', 'remember'))
-            ->withErrors([
-                'email' => $this->getFailedLoginMessage(),
-            ]);
-    }
-
-    /**
-     * Return the login validation rules.
-     *
-     * @return array
-     */
-    protected function rules()
-    {
-        $rules = [
-            'email' => 'required|email',
-            'password' => 'required',
-        ];
-
-        if (! env('APP_DEBUG')) {
-            $rules['g-recaptcha-response'] = 'required|recaptcha';
-        }
-
-        return $rules;
-    }
-
-    /**
-     * Return the user credentials.
-     *
-     * @param  Request $request
-     * @return array
-     */
-    protected function credentials(Request $request)
-    {
-        return [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
+        return $this->sessions->authenticate($request);
     }
 }

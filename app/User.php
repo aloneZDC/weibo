@@ -33,89 +33,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $table = 'users';
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'facebook', 'mobile_phone', 'work_phone', 'description',
-        'pic_url', 'language', 'website', 'twitter',
-        'nickname', 'email', 'password', 'role',
-        'disabled_at',
-    ];
-
-    /**
-     * The attribute for soft deletes.
-     *
-     * @var [type]
-     */
-    protected $dates = ['deleted_at'];
-
-    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function relationsToArray()
-    {
-        return array_merge($this->attributesToArray(), $this->profile->attributesToArray());
-    }
+    // public function relationsToArray()
+    // {
+    //     return array_merge($this->attributesToArray(), $this->profile->attributesToArray());
+    // }
 
     public function Product()
     {
         return $this->hasMany('App\Product');
     }
 
-    public function getHasPhoneAttribute()
-    {
-        return !is_null($this->mobile_phone) || !is_null($this->work_phone)
-            || ($this->profile() && $this->profile()->has_phone);
-    }
-
-    public function setPasswordAttribute($value)
-    {
-        if (!empty($value)) {
-            $this->attributes['password'] = $value;
-        }
-    }
-
-    //Role Manage
-
-    public function hasRole($role)
-    {
-        if (is_array($role)) {
-            return in_array($this->attributes['role'], $role);
-        }
-
-        return $this->attributes['role'] == $role;
-    }
-
-    public function isAdmin()
-    {
-        return $this->attributes['role'] == 'admin';
-    }
-
-    public function isPerson()
-    {
-        return $this->attributes['role'] == 'person';
-    }
-
-    public function isCompany()
-    {
-        return $this->attributes['role'] == 'business';
-    }
-
-   //Type user Manage
-
-   public function isTrusted()
-   {
-       return $this->attributes['type'] == 'trusted';
-   }
-
     //Cart Manage
-
     public function getCartCount()
     {
         $basicCart = Order::ofType('cart')->where('user_id', $this->id)->first();

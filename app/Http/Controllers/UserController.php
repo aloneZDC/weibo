@@ -152,8 +152,10 @@ class UserController extends Controller
      */
     public function profile()
     {
-        $user = User::findOrFail(\Auth::id())->relationsToArray();
+        $user = User::findOrFail(\Auth::id())->first();
         $panel = $this->view_panel;
+
+        // dd($user);
 
         return view('user.profile', compact('panel', 'user'));
     }
