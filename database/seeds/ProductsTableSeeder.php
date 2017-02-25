@@ -6,11 +6,12 @@
  *
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
-use App\Business as Business;
-use App\Product as Product;
-use App\ProductOffer as ProductOffer;
+
 use Faker\Factory as Faker;
+use App\Product as Product;
 use Illuminate\Database\Seeder;
+use App\ProductOffer as ProductOffer;
+use Antvel\Components\Customer\Models\Business;
 
 class ProductsTableSeeder extends Seeder
 {

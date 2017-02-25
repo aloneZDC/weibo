@@ -6,11 +6,12 @@
  *
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
-use App\Business as Business;
-use App\Product as Product;
+
 use App\VirtualProduct;
+use App\Product as Product;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Antvel\Components\Customer\Models\Business;
 
 class VirtualProductsSeeder extends Seeder
 {

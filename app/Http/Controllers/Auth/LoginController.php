@@ -27,18 +27,18 @@ class LoginController extends Controller
      *
      * @var Antvel\Components\Customer\Sessions
      */
-    protected $sessions = null;
+    protected $antvel = null;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Sessions $sessions)
+    public function __construct(Sessions $antvel)
     {
         $this->middleware('guest', ['except' => 'logout']);
 
-        $this->sessions = $sessions;
+        $this->antvel = $antvel;
     }
 
     /**
@@ -49,6 +49,6 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        return $this->sessions->authenticate($request);
+        return $this->antvel->authenticate($request);
     }
 }
