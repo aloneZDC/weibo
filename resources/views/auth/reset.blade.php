@@ -43,7 +43,7 @@
 								<button type="submit" class="btn btn-primary">
 									{{ trans('user.reset_password') }}
 								</button>
-								{!! link_to(URL::previous(), trans('globals.cancel'), ['class' => 'btn btn-danger']) !!}
+								{!! link_to('/login', trans('globals.cancel'), ['class' => 'btn btn-danger']) !!}
 							</div>
 						</div>
 					</form>

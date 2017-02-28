@@ -10,8 +10,8 @@
     <tr><td>&nbsp;</td></tr>
     <tr>
         <td align="left">
-            <a href="{{ url('verification', ['token' => md5($data['email'].'_'.$data['_token'].'_'.$data['email'])]) }}">
-                {{ url('/verification/') }}
+            <a href="{{ $route }}">
+                {{ $route }}
             </a>
         </td>
     </tr>

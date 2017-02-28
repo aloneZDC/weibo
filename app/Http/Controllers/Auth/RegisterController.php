@@ -2,24 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\Person;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Antvel\Components\Customer\Register;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
     use RegistersUsers;
 
     /**
@@ -27,16 +16,25 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/login';
+
+    /**
+     * The Antvel sessions driver.
+     *
+     * @var Antvel\Components\Customer\Register
+     */
+    protected $antvel = null;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Register $antvel)
     {
         $this->middleware('guest');
+
+        $this->antvel = $antvel;
     }
 
     /**
@@ -58,74 +56,38 @@ class RegisterController extends Controller
      */
     protected function register(Request $request)
     {
-        $this->validate($request, $this->rules());
+        $this->antvel->register($request)
+            ->withRegistrationEmail([
+                'subject' => trans('user.emails.verification_account.subject')
+            ]);
 
-        $user = $this->createUser($request->all());
-
-        $this->sendRegistrationEmail($request->all());
-
-        auth()->login($user);
+        session()->flash('message', trans('user.signUp_message', [
+            '_name' => $request->get('first_name') . ' ' . $request->get('last_name')
+        ]));
 
         return redirect($this->redirectTo);
     }
 
     /**
-     * Return the registration validation rules
+     * Confirms the user subscription.
      *
-     * @return array
-     */
-    protected function rules()
-    {
-        return [
-            'first_name' => 'required|max:20|min:3',
-            'last_name' => 'required|max:20|min:3',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-        ];
-    }
-
-    /**
-     * Create a new user.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function createUser(array $data)
-    {
-        $user = User::create([
-            'email'       => $data['email'],
-            'nickname'    => $data['email'],
-            'password'    => bcrypt($data['password']),
-            'role'        => 'person',
-        ]);
-
-        Person::create([
-            'user_id'    => $user->id,
-            'first_name' => $data['first_name'],
-            'last_name'  => $data['last_name'],
-        ]);
-
-        return $user;
-    }
-
-    /**
-     * Send the registration email.
-     *
-     * @param  array  $data
+     * @param  string $token
+     * @param  string $email
      * @return void
      */
-    protected function sendRegistrationEmail(array $data)
+    protected function confirm($token, $email)
     {
-        $title = trans('user.emails.verification_account.subject');
+        try {
 
-        $name = $data['first_name'].' '.$data['last_name'];
+            $user = $this->antvel->validateConfirmation($token, $email)->activateUser();
+            auth()->login($user);
+            return redirect('/');
 
-        \Mail::queue('emails.accountVerification', ['data' => $data, 'title' => $title, 'name' => $name], function ($message) use ($data) {
-            $message->to($data['email'])->subject(trans('user.emails.verification_account.subject'));
-        });
+        } catch (\Exception $e) {
 
-        session()->put('message', trans('user.signUp_message', ['_name' => $name]));
+            session()->flash('message', trans('user.account_verified_error_message'));
+            return redirect($this->redirectTo);
 
-        session()->save();
+        };
     }
 }
