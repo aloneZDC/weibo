@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Antvel\Components\Customer\Register;
+use Antvel\Components\Customer\Auth\Register;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Antvel\Components\Customer\Requests\RegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -23,18 +23,18 @@ class RegisterController extends Controller
      *
      * @var Antvel\Components\Customer\Register
      */
-    protected $antvel = null;
+    protected $register = null;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Register $antvel)
+    public function __construct(Register $register)
     {
         $this->middleware('guest');
 
-        $this->antvel = $antvel;
+        $this->register = $register;
     }
 
     /**
@@ -50,22 +50,45 @@ class RegisterController extends Controller
     }
 
     /**
-     * Process the user registration.
+     * Handles the user registration.
      *
+     * @param RegisterRequest $request
      * @return void
      */
-    protected function register(Request $request)
+    protected function register(RegisterRequest $request)
     {
-        $this->antvel->register($request)
-            ->withRegistrationEmail([
-                'subject' => trans('user.emails.verification_account.subject')
-            ]);
-
-        session()->flash('message', trans('user.signUp_message', [
-            '_name' => $request->get('first_name') . ' ' . $request->get('last_name')
-        ]));
+        $this->register
+            ->store($request)
+            ->withEmail($this->emailBody())
+            ->withMessage($this->message($request));
 
         return redirect($this->redirectTo);
+    }
+
+    /**
+     * Returns the registration success message.
+     *
+     * @param  RegisterRequest $request
+     * @return string
+     */
+    protected function message($request) : string
+    {
+        $fullName = $request['first_name'] . ' ' . $request['last_name'];
+
+        return trans('user.signUp_message', ['_name' => $fullName]);
+    }
+
+    /**
+     * Returns the registration email body.
+     *
+     * @return array
+     */
+    protected function emailBody() : array
+    {
+        return [
+            'subject' => trans('user.emails.verification_account.subject'),
+            'view' => 'emails.accountVerification',
+        ];
     }
 
     /**
@@ -77,17 +100,14 @@ class RegisterController extends Controller
      */
     protected function confirm($token, $email)
     {
-        try {
+        $confirm = $this->register->confirm($token, $email);
 
-            $user = $this->antvel->validateConfirmation($token, $email)->activateUser();
-            auth()->login($user);
+        if ($confirm->response() == 'ok') {
             return redirect('/');
+        }
 
-        } catch (\Exception $e) {
+        $confirm->flashError(trans('user.account_verified_error_message'));
 
-            session()->flash('message', trans('user.account_verified_error_message'));
-            return redirect($this->redirectTo);
-
-        };
+        return redirect($this->redirectTo);
     }
 }
