@@ -30,8 +30,8 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-			{!! Form::label('sex',trans('user.gender')) !!}:
-			{!! Form::select('sex', trans('globals.person_sex'), $user->profile->sex, ['ng-disabled'=>'disabled','class'=>'input-sm form-control']) !!}
+			{!! Form::label('gender',trans('user.gender')) !!}:
+			{!! Form::select('gender', trans('globals.person_sex'), $user->profile->gender, ['ng-disabled'=>'disabled','class'=>'input-sm form-control']) !!}
 		</div>
 	</div>
 
@@ -66,7 +66,7 @@
 		{!! Form::label('nickname',trans('user.nickname')) !!}:
 		<div class="input-group">
       		<div class="input-group-addon input-sm"><span class="fa fa-user-secret"></span></div>
-			{!! Form::text('nickname', null, ['ng-disabled'=>'disabled','class'=>'form-control input-sm']) !!}
+			{!! Form::text('nickname', $user->nickname, ['ng-disabled'=>'disabled','class'=>'form-control input-sm']) !!}
 		</div>
 	</div>
 </div>
@@ -76,7 +76,7 @@
 		{!! Form::label('email',trans('user.email')) !!}:
 		<div class="input-group">
       		<div class="input-group-addon input-sm"><span class="fa fa-envelope"></span></div>
-			{!! Form::email('email', (isset($email))?$email:null, ['ng-disabled'=>'disabled','class'=>'form-control input-sm']) !!}
+			{!! Form::email('email', $user->email ?? null, ['ng-disabled'=>'disabled','class'=>'form-control input-sm']) !!}
 		</div>
 	</div>
 </div>

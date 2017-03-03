@@ -16,7 +16,10 @@
 			<h5>{{ trans('user.user_account_settings') }}</h5>
 		</div>
 
-		{!! Form::model($user, ['url'=>'customer', 'class'=>'form-horizontal', 'role'=>'form', 'method' => 'PATCH']) !!}
+		<form class="form-horizontal" role="form" method="POST" action="{{ route('customer.update', ['customer' => $user]) }}">
+
+		{{ csrf_field() }}
+		{{ method_field('PUT') }}
 
 		<div ng-controller="ProfileController" ng-cloak>
 
@@ -120,7 +123,7 @@
 
 		</div>
 
-		{!! Form::close() !!}
+		</form>
 	@stop
 
 @endsection
