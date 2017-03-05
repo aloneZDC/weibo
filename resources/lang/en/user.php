@@ -100,6 +100,15 @@ return [
                         'msg_04'  => 'to get assistance!',
                         'msg_05'  => 'Thanks!',
                 ],
+
+                'email_confirmation' => [
+                        'subject' => 'Please confirm your email address',
+                        'msg_01'  => 'You are receiving this email because you recently requested to change your current email address. To verify your account you will need to visit the following link.',
+                        'msg_02'  => 'After visiting the above link your account will be hundred percent security of external uses.',
+                        'msg_03'  => 'If you have any problem verifying your account, please send a email to',
+                        'msg_04'  => 'to get assistance!',
+                        'msg_05'  => 'Thanks!',
+                ],
         ],
 
         'account_verified_ok_message'    => '<strong>Activation results!</strong><br/><br/>Congratulation [name]!, your account was successfully activated.',

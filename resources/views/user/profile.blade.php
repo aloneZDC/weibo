@@ -32,7 +32,7 @@
 				<div class="col-lg-12">
 						<tabset>
 							{{-- user information --}}
-							<tab heading="{{ trans('user.my_profile') }}">
+							<tab heading="{{ trans('user.my_profile') }}" onclick="document.getElementById('referral').value = 'profile'">
 								<div class="row">&nbsp;</div>
 								<div class="row">
 									<div class="col-lg-12">
@@ -60,7 +60,7 @@
 							</tab>
 
 							{{-- social information --}}
-							<tab heading="{{ trans('user.social_information') }}">
+							<tab heading="{{ trans('user.social_information') }}" onclick="document.getElementById('referral').value = 'social'">
 								<div class="row">&nbsp;</div>
 								<div class="row">
 									<div class="col-lg-12">
@@ -70,7 +70,7 @@
 							</tab>
 
 							{{-- security information --}}
-							<tab heading="{{ trans('user.pass_account') }}">
+							<tab heading="{{ trans('user.pass_account') }}" onclick="document.getElementById('referral').value = 'account'">
 								<div class="row">&nbsp;</div>
 								<div class="row">
 									<div class="col-lg-12">
@@ -123,6 +123,7 @@
 
 		</div>
 
+			<input type="hidden" name="referral" id="referral" value="profile">
 		</form>
 	@stop
 
