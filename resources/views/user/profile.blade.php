@@ -24,7 +24,6 @@
 		<div ng-controller="ProfileController" ng-cloak>
 
 			<div ng-show="disabled" class="alert alert-danger" role="alert">
-				<p>{{ trans('user.disabled_at') }}: [[ disabled | date:'medium' ]]</p>
 				<small>{{ trans('user.account_disabled_description') }}</small>
 			</div>
 
@@ -75,30 +74,6 @@
 								<div class="row">
 									<div class="col-lg-12">
 										@include('user.partial.security_inputs')
-										<div ng-hide="disabled">
-											<label>{{ trans('user.disable_account') }}:</label>
-											<div class="panel panel-danger">
-												<div class="panel-body">
-												    <p class="text-warning">{{ trans('user.disable_account_description') }}</p>
-												    <button type="button" ng-click="wantDelete = true" class="btn btn-xs btn-danger">{{ trans('user.disable_account') }}</button>
-												    <div ng-show="wantDelete">
-												    	<strong>{{ trans('user.are_you_sure') }}?</strong>
-														<button type="button" class="btn btn-warning" ng-click="disableAccount()">{{ trans('globals.yes') }}</button>
-														<button type="button" class="btn btn-success" ng-click="wantDelete = false">{{ trans('globals.no') }}</button>
-												    </div>
-												</div>
-											</div>
-										</div>
-
-										<div ng-show="disabled">
-											<div class="panel panel-danger">
-												<label>{{ trans('user.enable_account') }}:</label>
-												<div class="panel-body">
-												    <p>{{ trans('user.enable_account_description') }}</p>
-												    <button type="button" ng-click="enableAccount()" class="btn btn-xs btn-primary">{{ trans('user.enable_account') }}</button>
-												</div>
-											</div>
-										</div>
 									</div>
 								</div>
 							</tab>
@@ -147,30 +122,36 @@
 				if (disabled !== '') $scope.disabled = new Date(disabled);
 
 				$scope.disableAccount = function(){
-					$http.post('/user/profile/disable').
+					$http.patch("{{ route('customer.action', ['action' => 'disable']) }}").
 						success(function(data, status) {
 							if (data.success) {
-								$scope.disabled = new Date(data.date);
 								$scope.wantDelete = false;
-								notify({message:data.message,classes:'alert-danger'});
-							}else{
-								console.log(data); //mensajes de error en validacion de form
+								$scope.disabled = new Date(data.date);
+								notify({
+									messageTemplate: '<p>' + data.message + '</p>',
+									classes:'alert-danger'
+								});
 							}
 						}).
-						error(function(data, status, headers, config) {
-							notify({duration:2000,message:data.message,classes:'alert-error'});
+						error(function(data, status, headers, config) { console.log('sdsd');
+							notify({
+								messageTemplate: '<p>' + data.message + '</p>',
+								classes:'alert-error',
+								duration:2000
+							});
 						});
 				};
 
 				$scope.enableAccount = function(){
-					$http.post('/user/profile/enable').
+					$http.patch("{{ route('customer.action', ['action' => 'enable']) }}").
 						success(function(data, status) {
 							if (data.success) {
 								$scope.wantDelete = false;
 								$scope.disabled = false;
-								notify({message:data.message,classes:'alert-success'});
-							}else{
-								console.log(data); //mensajes de error en validacion de form
+								notify({
+									messageTemplate: '<p>' + data.message + '</p>',
+									classes:'alert-success'
+								});
 							}
 						}).
 						error(function(data, status, headers, config) {
