@@ -16,7 +16,7 @@
 			<h5>{{ trans('user.user_account_settings') }}</h5>
 		</div>
 
-		<form class="form-horizontal" role="form" method="POST" action="{{ route('customer.update', ['customer' => $user]) }}">
+		<form class="form-horizontal" role="form" method="POST" action="{{ route('user.update', ['customer' => $user]) }}">
 
 		{{ csrf_field() }}
 		{{ method_field('PUT') }}
@@ -122,7 +122,7 @@
 				if (disabled !== '') $scope.disabled = new Date(disabled);
 
 				$scope.disableAccount = function(){
-					$http.patch("{{ route('customer.action', ['action' => 'disable']) }}").
+					$http.patch("{{ route('user.action', ['action' => 'disable']) }}").
 						success(function(data, status) {
 							if (data.success) {
 								$scope.wantDelete = false;
@@ -143,7 +143,7 @@
 				};
 
 				$scope.enableAccount = function(){
-					$http.patch("{{ route('customer.action', ['action' => 'enable']) }}").
+					$http.patch("{{ route('user.action', ['action' => 'enable']) }}").
 						success(function(data, status) {
 							if (data.success) {
 								$scope.wantDelete = false;
