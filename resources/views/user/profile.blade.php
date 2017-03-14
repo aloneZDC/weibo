@@ -16,7 +16,7 @@
 			<h5>{{ trans('user.user_account_settings') }}</h5>
 		</div>
 
-		<form class="form-horizontal" role="form" method="POST" action="{{ route('user.update', ['customer' => $user]) }}">
+		<form class="form-horizontal" role="form" method="POST" action="{{ route('user.update', ['user' => $user]) }}">
 
 		{{ csrf_field() }}
 		{{ method_field('PUT') }}
@@ -158,21 +158,6 @@
 							notify({duration:2000,message:data.message,classes:'alert-error'});
 						});
 				};
-
-				$scope.checkDisable = function(){
-					$http.post('/user/profile/disable').
-						success(function(data, status) {
-							if (data.success) {
-								$scope.disabled = true;
-								notify({message:data.message,classes:'alert-success'});
-							}else{
-								console.log(data); //mensajes de error en validacion de form
-							}
-						}).
-						error(function(data, status, headers, config) {
-							notify({duration:2000,message:data.message,classes:'alert-error'});
-						});
-				};
 			}]);
 
 			//Upload
@@ -180,7 +165,6 @@
             	$scope.usingFlash = FileAPI && FileAPI.upload != null;
 				$scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
 				$scope.picture = '{{ $user->pic_url }}';
-				// console.log('pic: ', $scope.picture);
 
             	$scope.$watch('files', function () {
                     upload($scope.files);
@@ -192,31 +176,36 @@
                     if (files && files.length) {
                         for (var i = 0; i < files.length; i++) {
                             var file = files[i];
-                            var url='/user/upload';
+                            var url="{{ route('user.update', ['user' => $user]) }}";
                             $upload.upload({
                                 url: url,
-                                fields: {"_token":'{{ csrf_token() }}',"_method":"POST"},
+                                fields: {"referral":"upload", "_token":'{{ csrf_token() }}', "_method":"PATCH"},
                                 file: file
                             }).progress(function (evt) {
+
                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                                 $scope.progress= progressPercentage + '% ';
+
                             }).success(function (data, status, headers, config) {
 
-                                if(data.indexOf("Error:")> -1){
-
-                                    $scope.progress='';
-                                    notify({duration:4000,message:data,classes:'alert alert-danger'});
-
-                                }else{
+                            		$scope.progress= '';
+                                	notify({
+                                		duration:2000,
+                                		messageTemplate: "<p>{{ trans('responses.success') }}</p>",
+                                		classes:'alert alert-danger'
+                                	});
 									generateThumb(file);
-                                    $scope.file=data;
-                                    $scope.picture = data;
-                                    $timeout(function(){
-                                        $scope.progress= '';
-                                    }, 1000);
-                                }
 
-                            });
+                            }).error(function(data, status, headers, config) {
+
+                            	$scope.progress= '';
+								notify({
+                            		duration:4000,
+                            		messageTemplate: "<p>{{ trans('responses.errors.avatar') }}</p>",
+                            		classes:'alert alert-error'
+                            	});
+
+							});
                         }
                     }
                 }
@@ -230,8 +219,7 @@
 								fileReader.readAsDataURL(file);
 								fileReader.onload = function(e) {
 									$timeout(function() {
-										console.log(e.target.result);
-										file.dataUrl = e.target.result;
+										$scope.picture = file.dataUrl = e.target.result;
 									});
 								};
 							});
