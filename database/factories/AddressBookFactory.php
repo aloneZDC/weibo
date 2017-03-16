@@ -2,7 +2,7 @@
 
 use App\User;
 use Faker\Generator as Faker;
-use Antvel\Components\AddressBook\Models\Address;
+use Antvel\AddressBook\Models\Address;
 
 $factory->define(Address::class, function (Faker $faker)  use ($factory) {
 

@@ -2,8 +2,8 @@
 
 use App\User;
 use Faker\Generator as Faker;
-use Antvel\Components\Customer\Models\Person;
-use Antvel\Components\Customer\Models\Business;
+use Antvel\User\Models\Person;
+use Antvel\User\Models\Business;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
