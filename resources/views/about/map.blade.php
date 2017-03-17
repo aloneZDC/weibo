@@ -1,3 +1,4 @@
+@if (isset($main_company))
 <div class="row">
 	<iframe
 	  width="100%"
@@ -7,3 +8,4 @@
 	    &q={{$main_company['address']}},{{$main_company['city']}}+{{$main_company['state']}}" >
 	</iframe>
 </div>
+@endif

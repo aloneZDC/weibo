@@ -10,7 +10,7 @@
 use App\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use Antvel\Components\Customer\Models\{ Person, Business};
+use Antvel\User\Models\{ Person, Business};
 
 class UsersTableSeeder extends Seeder
 {

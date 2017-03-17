@@ -11,101 +11,120 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AddressBookTest extends TestCase
 {
-	use DatabaseTransactions;
+    use DatabaseMigrations;
+
+    /**
+     * The given user.
+     *
+     * @var User
+     */
+    protected $user = null;
+
+    /**
+     * The given address.
+     *
+     * @var Address
+     */
+    protected $address = null;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->create()->first();
+
+        $this->address = factory(Address::class, 1)->create([
+            'user_id' => $this->user->id
+        ])->first();
+    }
 
     public function test_a_logged_user_can_see_his_address_book()
     {
-    	$user = $this->user(3);
-
-    	$address = factory(Address::class, 1)->create([
-    		'user_id' => $user->id
-    	])->first();
-
-        $this->actingAs($user);
+        $this->actingAs($this->user);
 
         $response = $this->call('GET', 'user/address');
 
         $response
-        	->assertStatus(200)
-        	->assertViewHas('addresses')
-        	->assertViewHas('addresses', function($view) use ($user, $address) {
-        		$data = $view->first();
-        		return $user->id === $data->user_id && $address->line1 === $data->line1;
-        	});
+            ->assertStatus(200)
+            ->assertViewHas('addresses')
+            ->assertViewHas('addresses', function ($view) {
+                $data = $view->first();
+                return $this->user->id == $data->user_id && $this->address->line1 == $data->line1;
+        });
     }
 
-    public function test_an_user_must_be_logged_in_to_handle_his_address_book()
+    public function test_an_user_must_be_authenticated_to_handle_his_address_book()
     {
-    	$response = $this->call('GET', 'user/address');
+        $response = $this->get('user/address');
 
-    	$response
-    		->assertStatus(302)
-    		->assertRedirect('/login');
+        $response
+            ->assertStatus(302)
+            ->assertRedirect('/login');
     }
 
     public function test_an_user_can_create_an_address()
     {
-    	$user = $this->user(3);
-        $this->actingAs($user);
+        $this->actingAs($this->user);
 
-    	$response = $this->put('user/address/store', [
-            'line1' => 'Malave Villalba',
+        $response = $this->put('user/address/store', [
             'name_contact' => 'Gustavo',
+            'line1' => 'Malave Villalba',
             'country' => 'Venezuela',
             'phone' => '0000000000',
             'state' => 'Carabobo',
             'city' => 'Guacara',
             'zipcode' => '2001',
-    		'line2' => '',
-    	]);
+            'line2' => '',
+        ]);
 
-    	$response->assertExactJson([
+        $response->assertExactJson([
             'message' => trans('address.success_save'),
-			'redirectTo' => '/user/address',
+            'redirectTo' => '/user/address',
             'callback' => '/user/address',
             'success' => true,
-    	]);
+        ]);
 
-    	$address = Address::latest()->first();
-
-    	$this->assertEquals($address->name_contact, 'Gustavo');
-    	$this->assertEquals($address->city, 'Guacara');
-    	$this->assertEquals($address->default, 1);
+        $this->assertDatabaseHas('addresses', [
+            'user_id' => $this->user->id,
+            'name_contact' => 'Gustavo',
+            'zipcode' => '2001',
+        ]);
     }
 
     public function test_the_address_information_has_to_pass_validation_rules()
     {
-    	$user = $this->user(3);
-        $this->actingAs($user);
+        $this->actingAs($this->user);
 
-    	$response = $this->put('user/address/store', []);
+        $response = $this->put('user/address/store', []);
 
-    	$response->assertStatus(302);
+        $response->assertStatus(302);
     }
 
     public function test_an_address_can_be_deleted()
     {
-    	$user = $this->user(3);
-    	$this->actingAs($user);
+        $this->actingAs($this->user);
 
-    	$address = factory(Address::class, 1)->create([
-    		'user_id' => $user->id
-    	])->first();
+        $response = $this->post('user/address/delete', ['id' => $this->address->id]);
 
-    	$response = $this->post('user/address/delete', ['id' => $address->id]);
+        $response->assertStatus(200);
 
-    	$response->assertStatus(200);
+        $this->assertDatabaseHas('addresses', [
+            'id' => $this->address->id,
+            ['deleted_at', '!=', null]
+        ]);
     }
 
     public function test_an_address_can_be_marked_as_default()
     {
-    	$user = $this->user(3);
-    	$this->actingAs($user);
+        $this->actingAs($this->user);
 
-    	$address = Address::inRandomOrder()->first();
+        $response = $this->post('user/address/default', ['id' => $this->address->id]);
 
-    	$response = $this->post('user/address/default', ['id' => $address->id]);
+        $response->assertStatus(200);
 
-    	$response->assertStatus(200);
+        $this->assertDatabaseHas('addresses', [
+            'id' => $this->address->id,
+            'default' => 1
+        ]);
     }
 }

@@ -14,7 +14,7 @@ use App\OrderDetail;
 use App\FreeProductOrder;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use Antvel\Components\AddressBook\Models\Address;
+use Antvel\AddressBook\Models\Address;
 
 class FreeProductsTableSeeder extends Seeder
 {

@@ -13,7 +13,7 @@ use App\Category;
 use App\UserPoints;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use Antvel\Components\AddressBook\Models\Address;
+use Antvel\AddressBook\Models\Address;
 
 class ProductsRatesSeeder extends Seeder
 {

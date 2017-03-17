@@ -8,19 +8,23 @@
 				<span class="icon-bar"></span>
 			</button>
 			<div class="navbar-brand">
-				<a href="/home" class="navbar-brand">
-					@if($main_company['logo'])
-						<span class="navbar-brand-text">
-							<img src="{{$main_company['logo']}}" alt="">
-						</span>
-					@else
-						<span class="navbar-brand-text">{{ $main_company['name'] }}</span>
-					@endif
+				@if (isset($main_company))
+					<a href="/home" class="navbar-brand">
+						@if($main_company['logo'])
+							<span class="navbar-brand-text">
+								<img src="{{$main_company['logo']}}" alt="">
+							</span>
+						@else
+							<span class="navbar-brand-text">{{ $main_company['name'] }}</span>
+						@endif
 
-					@if(isset($main_company['slogan']))
-						<span class="navbar-brand-slogan">{{$main_company['slogan']}}</span>
-					@endif
-				</a>
+						@if(isset($main_company['slogan']))
+							<span class="navbar-brand-slogan">{{$main_company['slogan']}}</span>
+						@endif
+					</a>
+				@else
+					Antvel
+				@endif
 			</div>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
@@ -129,6 +133,7 @@
 
 	<nav ng-controller="CategoriesController">
 		{!! Form::model(Request::all(),['url'=> action('ProductsController@index'), 'method'=>'GET', 'id'=>'searchForm']) !!}
+		@if (isset($categories_menu))
 		<div class="input-group">
 			<span class="input-group-btn categories-search">
 				<button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -157,6 +162,8 @@
 				<button class="btn btn-default fui-search" type="submit"></button>
 			</span>
 		</div>
+		@endif
+
 		{!! Form::close() !!}
 		</nav>
 </div>

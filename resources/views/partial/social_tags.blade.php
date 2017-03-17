@@ -1,13 +1,17 @@
 <meta name="description" content = "{{ $description }}">
 
 <meta name = "twitter:card" content = "summary_large_image">
+@if (isset($main_company))
 <meta name = "twitter:site" content = "@{{ $main_company['twitter'] }}">
+@endif
 <meta name = "twitter:title" content = "{{ $title }}">
 <meta name = "twitter:image" content = "{{ $image }}">
 <meta name = "twitter:description" content = "{{ $description }}">
 
 <meta property = "og:title" content = "{{ $title }}" />
+@if (isset($main_company))
 <meta property = "og:site_name" content = "{{ $main_company['website_name']}}"/>
+@endif
 <meta property = "og:description" content = "{{ $description }}" />
 <meta property = "og:image" content = "{{ $image }}" >
 <meta property = "og:type" content = "og:product" />

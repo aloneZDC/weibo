@@ -1,3 +1,4 @@
+@if (isset($main_company))
 <div class="navbar-wrapper">
     <nav class="navbar">
         <div class="container">
@@ -6,7 +7,7 @@
                     <a href="/home" class="navbar-brand">
                         {{ $main_company['name'] }}
                         <br>
-                        
+
                     </a>
                 </div>
             </div>
@@ -14,3 +15,4 @@
         </div>
     </nav>
 </div>
+@endif

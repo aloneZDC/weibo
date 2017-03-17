@@ -22,6 +22,7 @@
         </td>
     </tr>
     <tr><td>&nbsp;</td></tr>
+    @if (isset($main_company))
     <tr>
         <td align="left">
             {{ trans('user.emails.verification_account.msg_03') }}
@@ -29,6 +30,7 @@
             {{ trans('user.emails.verification_account.msg_04') }}
         </td>
     </tr>
+    @endif
     <tr><td>&nbsp;</td></tr>
     <tr>
         <td align="left">

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "873ac759477a94d7c35f92f23095ac04",
+    "hash": "6101ffe8e717f088c7b287d79eea4249",
     "content-hash": "035b40b0ad657c6f381c5215bf1a9296",
     "packages": [
         {
@@ -13,7 +13,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/Gustavo/Documents/VALET/Shop",
-                "reference": "c56ddd97483995d16bba870e0b254fdb7523d216",
+                "reference": "f38ada00b5a5487200545108a7fac46d45f0ec16",
                 "shasum": null
             },
             "require": {

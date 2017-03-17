@@ -11,7 +11,7 @@
 	@show
 
 	<link rel="icon" href="favicon.ico">
-	<title>@section('title'){{ $main_company['website_name']}} @show</title>
+	<title>@section('title'){{ isset($main_company) ? $main_company['website_name'] : ''}} @show</title>
 
 	<script type="text/javascript">
 	FileAPI = {

@@ -103,9 +103,13 @@
                 {{-- contact info --}}
                 <div class="col-xs-12 col-md-12">
                     <div class="col-md-1 home-info-bar-icon"><div class="glyphicon glyphicon-phone-alt"></div></div>
+                    @if (isset($main_company))
                     <div class="col-md-3 home-info-bar-text">{{ $main_company['phone_number'] }}</div>
+                    @endif
                     <div class="col-md-1 home-info-bar-icon"><div class="glyphicon glyphicon-envelope"></div></div>
+                    @if (isset($main_company))
                     <div class="col-md-3 home-info-bar-text"><a href="mailto:{{ $main_company['sales_email'] }}">{{ $main_company['sales_email'] }}</a></div>
+                    @endif
                     <div class="col-md-1 home-info-bar-icon"><div class="glyphicon glyphicon-plane"></div></div>
                     <div class="col-md-3 home-info-bar-text"><a href="#">{{ trans('globals.delivery') }}</a></div>
                 </div>

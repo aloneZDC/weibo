@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Antvel\Components\AddressBook\Models\Address;
+use Antvel\AddressBook\Models\Address;
 
 class AddressBookTableSeeder extends Seeder
 {

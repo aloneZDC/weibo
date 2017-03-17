@@ -11,7 +11,7 @@ use App\VirtualProduct;
 use App\Product as Product;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use Antvel\Components\Customer\Models\Business;
+use Antvel\User\Models\Business;
 
 class VirtualProductsSeeder extends Seeder
 {

@@ -10,6 +10,7 @@
 			</ul>
 		</div>
 
+		@if (isset($main_company))
 		<div class="col-xs-4 col-sm-4 col-md-4 menu">
 			<h3>{{ trans('globals.social_label') }}</h3>
 			<ul>
@@ -18,6 +19,7 @@
 				<li><a href="https://plus.google.com/u/0/{{ $main_company['google_plus'] }}" target="_blank">{{ trans('globals.google_label') }}</a></li>
 			</ul>
 		</div>
+		@endif
 
 		<div class="col-xs-4 col-sm-4 col-md-4 newsletter" ng-controller = "NewslettersCtrl">
 			@if (\Auth::user())
