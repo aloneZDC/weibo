@@ -5,9 +5,7 @@ namespace Tests\Feature;
 use App\User;
 use Tests\TestCase;
 use Antvel\AddressBook\Models\Address;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AddressBookTest extends TestCase
 {

@@ -75,10 +75,17 @@
 					<div class="form-group">
 						<div class="col-md-12">
 							<hr>
-							<div class="btn-group" role="group">
-								<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>&nbsp;{{ trans('user.create_my_account') }}</button>
-								<a href="/login" class="btn btn-info"><span class="fa fa-sign-in"></span>&nbsp;{{  trans('user.sign_in_my_account') }}</a>
-							</div>
+
+								<button type="submit" class="btn btn-primary">
+									<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;
+									{{ trans('user.create_my_account') }}
+								</button>
+
+								<a href="{{ route('login') }}" class="btn btn-default">
+									<span class="glyphicon glyphicon-log-in"></span>&nbsp;
+									{{  trans('user.sign_in_my_account') }}
+								</a>
+
 						</div>
 					</div>
 

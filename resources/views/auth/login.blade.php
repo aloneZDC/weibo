@@ -27,7 +27,7 @@
 				{{ csrf_field() }}
 
 				<div class="form-group">
-					<h6 class="black_color">{{ trans('user.email_address') }}</h6>
+					<h6 class="black_color">{{ trans('user.email_address') }}:</h6>
 					<div class="input-group">
 	      				<div class="input-group-addon"><span class="fa fa-envelope-o"></span></div>
 						<input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -35,16 +35,11 @@
 				</div>
 
 				<div class="form-group">
-					<h6 class="black_color">{{ trans('user.password_message.do_you_have') }}</h6>
+					<h6 class="black_color">{{ trans('user.password') }}:</h6>
 					<div class="input-group">
 	  					<div class="input-group-addon"><span class="fa fa-lock"></span></div>
-						<input ng-disabled="!havePassword" type="password" class="form-control" name="password">
+						<input type="password" class="form-control" name="password">
 					</div>
-					<label>
-						&nbsp;<input name="newuser" type="radio" value="0" ng-click="setHavePassword(true)" checked="havePassword">&nbsp;{{ trans('user.password_message.have') }}
-						<br>
-						&nbsp;<input name="newuser" type="radio" value="1" ng-click="setHavePassword(false)">&nbsp;{{ trans('user.password_message.nohave') }}
-					</label>
 				</div>
 
 				<div class="form-group" style="height: 120px">
@@ -65,10 +60,17 @@
 
 				<div class="form-group">
 					<hr>
+
 					<button type="submit" class="btn btn-primary">
-						<span class="fa fa-sign-out"></span>&nbsp;
+						<span class="glyphicon glyphicon-log-in"></span>&nbsp;
 						{{ trans('user.sign_in_my_account') }}
 					</button>
+
+					<a href="{{ route('register') }}" class="btn btn-default">
+						<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;
+						{{ trans('user.create_my_account') }}
+					</a>
+
 				</div>
 
 				{!! Form::close() !!}

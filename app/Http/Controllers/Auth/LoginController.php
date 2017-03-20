@@ -2,30 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Antvel\User\Auth\Login;
 use Illuminate\Http\Request;
-use Antvel\User\Auth\Sessions;
 use App\Http\Controllers\Controller;
+use Antvel\User\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
     /**
      * The Antvel sessions driver.
      *
-     * @var Sessions
+     * @var Login
      */
     protected $antvel = null;
 
@@ -34,7 +24,7 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(Sessions $antvel)
+    public function __construct(Login $antvel)
     {
         $this->middleware('guest', ['except' => 'logout']);
 
@@ -47,7 +37,7 @@ class LoginController extends Controller
      * @param  Request $request
      * @return void
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         return $this->antvel->authenticate($request);
     }
