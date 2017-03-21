@@ -2,6 +2,7 @@
 	"name": "ant-vel/app",
 	"description": "A Laravel ecommerce solution",
 	"keywords": ["ecommerce", "laravel", "virtual store", "store", "php"],
+	"minimum-stability": "dev",
 	"homepage": "http://antvel.com",
 	"license": "MIT",
 	"type": "project",
