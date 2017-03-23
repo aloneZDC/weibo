@@ -1,6 +1,6 @@
 {
 	"name": "ant-vel/app",
-	"description": "A Laravel ecommerce solution",
+	"description": "Laravel e-commerce Application",
 	"keywords": ["ecommerce", "laravel", "virtual store", "store", "php"],
 	"minimum-stability": "dev",
 	"homepage": "http://antvel.com",
