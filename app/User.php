@@ -25,34 +25,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, CanResetPassword, SoftDeletes, Notifiable, hasAntvel;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
-
-    protected $fillable = [
-        'facebook', 'mobile_phone', 'work_phone', 'description',
-        'pic_url', 'language', 'website', 'twitter',
-        'nickname', 'email', 'password', 'role',
-        'disabled_at', 'confirmation_token'
-    ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
-
-    protected $dates = ['deleted_at'];
-
-    // public function relationsToArray()
-    // {
-    //     return array_merge($this->attributesToArray(), $this->profile->attributesToArray());
-    // }
-
     public function Product()
     {
         return $this->hasMany('App\Product');
