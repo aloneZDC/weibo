@@ -4,9 +4,7 @@ namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
 use Antvel\User\Models\Person;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Notifications\Auth\ResetPasswordNotification;
 
 class ResetPasswordTest extends TestCase
 {
@@ -21,8 +19,6 @@ class ResetPasswordTest extends TestCase
 
 	public function test_a_user_can_request_to_reset_his_password()
 	{
-		Notification::fake();
-
 		$person = factory(Person::class)->create()->first();
 
 		$response = $this->post('password/email', [
@@ -30,9 +26,5 @@ class ResetPasswordTest extends TestCase
 		]);
 
 		$response->assertSessionHas('status');
-
-		Notification::assertSentTo(
-            [$person->user], ResetPasswordNotification::class
-        );
 	}
 }
