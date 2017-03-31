@@ -4,22 +4,17 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f720f0903ef3cd6910d84c8fcd98882d",
-    "content-hash": "950d6ac771e226ecf119def4abdb43cc",
+    "hash": "b5f290dc0ad2d83455607a64c718015a",
+    "content-hash": "018be349b17834782472ceb567c4f7b4",
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "625961e31cbfcfcbe27ae6b239d61e33e7189d79"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/625961e31cbfcfcbe27ae6b239d61e33e7189d79",
-                "reference": "625961e31cbfcfcbe27ae6b239d61e33e7189d79",
-                "shasum": ""
+                "type": "path",
+                "url": "/Users/Gustavo/Documents/VALET/Antvel/Shop",
+                "reference": "a26e4f9df4067e49f4fa5dd6a1673de707acfc45",
+                "shasum": null
             },
             "require": {
                 "illuminate/support": "5.4.*",
@@ -43,7 +38,19 @@
                     "src/Foundation/helpers.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Antvel\\Tests\\": "tests"
+                },
+                "classmap": [
+                    "tests/TestCase.php"
+                ]
+            },
+            "scripts": {
+                "test": [
+                    "./vendor/bin/phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -65,7 +72,10 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-03-30 00:37:27"
+            "support": {
+                "source": "https://github.com/ant-vel/Shop",
+                "issues": "https://github.com/ant-vel/Shop/issues"
+            }
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -4511,7 +4521,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "antvel/shop": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

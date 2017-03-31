@@ -4,7 +4,7 @@ namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
 use Antvel\User\Mail\Registration;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RegisterTest extends TestCase
@@ -20,7 +20,7 @@ class RegisterTest extends TestCase
 
 	public function test_a_user_is_able_to_sign_up()
 	{
-		Mail::fake();
+		Notification::fake();
 
 		$data = [
             'email' => 'gocanto@gmail.com',
@@ -34,17 +34,18 @@ class RegisterTest extends TestCase
 		$response->assertRedirect('login')
 			->assertSessionHas('message');
 
-		Mail::assertSent(Registration::class, function ($mail) use ($data) {
+		$user = app()->make(\Antvel\User\UsersRepository::class)->find([
+			'email' => $data['email']
+		]);
 
-			return $mail->user->email === $data['email'] &&
-				$mail->template['view'] === 'emails.accountVerification' &&
-				$mail->build()->viewData['name'] == $data['first_name'] . ' ' . $data['last_name'];
-        });
+		Notification::assertSentTo(
+            [$user], \Antvel\User\Notifications\Registration::class
+        );
 	}
 
 	public function test_a_user_must_provide_a_valid_information_when_registering()
 	{
-		$this->post('register', []);
+		$response = $this->post('register', []);
 
 		$errors = $this->app->make('session')->get('errors')->all();
 
