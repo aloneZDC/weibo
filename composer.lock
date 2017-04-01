@@ -4,17 +4,22 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b5f290dc0ad2d83455607a64c718015a",
-    "content-hash": "018be349b17834782472ceb567c4f7b4",
+    "hash": "f720f0903ef3cd6910d84c8fcd98882d",
+    "content-hash": "950d6ac771e226ecf119def4abdb43cc",
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "dev-master",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ant-vel/Shop.git",
+                "reference": "6453a3b212051ff5dfec35346cace60d22654652"
+            },
             "dist": {
-                "type": "path",
-                "url": "/Users/Gustavo/Documents/VALET/Antvel/Shop",
-                "reference": "a26e4f9df4067e49f4fa5dd6a1673de707acfc45",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/6453a3b212051ff5dfec35346cace60d22654652",
+                "reference": "6453a3b212051ff5dfec35346cace60d22654652",
+                "shasum": ""
             },
             "require": {
                 "illuminate/support": "5.4.*",
@@ -38,19 +43,7 @@
                     "src/Foundation/helpers.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Antvel\\Tests\\": "tests"
-                },
-                "classmap": [
-                    "tests/TestCase.php"
-                ]
-            },
-            "scripts": {
-                "test": [
-                    "./vendor/bin/phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -72,10 +65,7 @@
                 "shop",
                 "store"
             ],
-            "support": {
-                "source": "https://github.com/ant-vel/Shop",
-                "issues": "https://github.com/ant-vel/Shop/issues"
-            }
+            "time": "2017-03-31 21:39:02"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -83,12 +73,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "afd47046302aff65c4c64a7bfa971894e0e57593"
+                "reference": "3d5653df7102d7b0ea78ab836ea4108f5220f900"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/afd47046302aff65c4c64a7bfa971894e0e57593",
-                "reference": "afd47046302aff65c4c64a7bfa971894e0e57593",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/3d5653df7102d7b0ea78ab836ea4108f5220f900",
+                "reference": "3d5653df7102d7b0ea78ab836ea4108f5220f900",
                 "shasum": ""
             },
             "require": {
@@ -129,7 +119,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2017-03-15 13:40:38"
+            "time": "2017-03-31 09:22:31"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -811,12 +801,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "94272a4c30e2ea7d516eb4e865d770b2aa20b16a"
+                "reference": "7f1d851e0bd29795b1b5aa7db5490126f5ebe18c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/94272a4c30e2ea7d516eb4e865d770b2aa20b16a",
-                "reference": "94272a4c30e2ea7d516eb4e865d770b2aa20b16a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7f1d851e0bd29795b1b5aa7db5490126f5ebe18c",
+                "reference": "7f1d851e0bd29795b1b5aa7db5490126f5ebe18c",
                 "shasum": ""
             },
             "require": {
@@ -932,7 +922,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-03-29 21:57:27"
+            "time": "2017-03-31 18:36:19"
         },
         {
             "name": "laravel/tinker",
@@ -2332,12 +2322,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "9a07038280118d43492d3df3a6a888700285253d"
+                "reference": "d95c776e4d51b86c249cc26ec69cdf9bbdcbdcc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/9a07038280118d43492d3df3a6a888700285253d",
-                "reference": "9a07038280118d43492d3df3a6a888700285253d",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/d95c776e4d51b86c249cc26ec69cdf9bbdcbdcc8",
+                "reference": "d95c776e4d51b86c249cc26ec69cdf9bbdcbdcc8",
                 "shasum": ""
             },
             "require": {
@@ -2409,7 +2399,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-25 14:07:47"
+            "time": "2017-03-30 12:49:17"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -3362,12 +3352,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "cb9dd0ea37df29fa3c6ae5ac26c3408a7609cb4f"
+                "reference": "785775520e2c490a79fc92c96995f018789ccb00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cb9dd0ea37df29fa3c6ae5ac26c3408a7609cb4f",
-                "reference": "cb9dd0ea37df29fa3c6ae5ac26c3408a7609cb4f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/785775520e2c490a79fc92c96995f018789ccb00",
+                "reference": "785775520e2c490a79fc92c96995f018789ccb00",
                 "shasum": ""
             },
             "require": {
@@ -3417,7 +3407,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-07 10:28:00"
+            "time": "2017-03-31 13:20:01"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3611,12 +3601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c4ebb68af6e68179eb2381603ad35032622894cf"
+                "reference": "1502e0ef6d5a8e5c7627f5e6bb4e852e4f6042e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c4ebb68af6e68179eb2381603ad35032622894cf",
-                "reference": "c4ebb68af6e68179eb2381603ad35032622894cf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1502e0ef6d5a8e5c7627f5e6bb4e852e4f6042e9",
+                "reference": "1502e0ef6d5a8e5c7627f5e6bb4e852e4f6042e9",
                 "shasum": ""
             },
             "require": {
@@ -3685,7 +3675,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-20 17:41:26"
+            "time": "2017-03-31 14:59:49"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4419,12 +4409,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "76ae7f27e17ab4e5e177d8f9aa6c116d56fe47df"
+                "reference": "bd17d508c08e7862f4a7630ce49eaff66237039e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/76ae7f27e17ab4e5e177d8f9aa6c116d56fe47df",
-                "reference": "76ae7f27e17ab4e5e177d8f9aa6c116d56fe47df",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/bd17d508c08e7862f4a7630ce49eaff66237039e",
+                "reference": "bd17d508c08e7862f4a7630ce49eaff66237039e",
                 "shasum": ""
             },
             "require": {
@@ -4466,7 +4456,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-22 19:08:11"
+            "time": "2017-03-30 07:16:02"
         },
         {
             "name": "webmozart/assert",
@@ -4521,9 +4511,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "antvel/shop": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

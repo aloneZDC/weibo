@@ -1,8 +1,7 @@
-# Antvel Introduction
+## Antvel Introduction
 
-[![Total Downloads](https://img.shields.io/packagist/dt/ant-vel/ant-vel.svg?style=flat-square)](https://img.shields.io/packagist/dt/ant-vel/ant-vel.svg?style=flat-square)
-[![Bower](https://img.shields.io/bower/v/bootstrap.svg?style=flat-square)]()
-[![StyleCI](https://styleci.io/repos/44852299/shield)](https://styleci.io/repos/44852299)
+<a href="https://packagist.org/packages/ant-vel/Shop"><img src="https://img.shields.io/packagist/dt/antvel/shop.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/ant-vel/Shop"><img src="https://img.shields.io/packagist/v/antvel/shop.svg" alt="Latest Stable Version"></a>
 
 
 
@@ -12,7 +11,7 @@
 
 
 <a name="installation"></a>
-# Installation
+## Installation
 
 Antvel uses [Composer](https://getcomposer.org) to manage its dependencies. So, before using it, make sure you have Composer installed on your machine.
 
@@ -33,7 +32,7 @@ Once installed, the `antvel install` command will create a fresh copy of the pro
 
 
 <a name="features"></a>
-# Features
+## Features
 
 * Responsivity
 * Open Source
@@ -74,7 +73,7 @@ Once installed, the `antvel install` command will create a fresh copy of the pro
 * Dynamic Breadcrumbs
 
 
-# Demo
+## Demo
 
 * <a href="http://antvel.com" target="_blank">http://antvel.com</a>
 * Admin: admin@antvel.com / admin
@@ -82,32 +81,32 @@ Once installed, the `antvel install` command will create a fresh copy of the pro
 * Seller: seller@antvel.com / admin
 
 
-# To do list
+## To do list
 If you like antvel and want to contribute, you can check this task list.
 
 <a href="https://github.com/ant-vel/Discussion/issues" target="_blank">https://github.com/ant-vel/Discussion/issues</a>
 
 
 
-# Chat Rooms
+## Chat Rooms
 
 We keep the conversation going in our ***Slack*** channel, so if you would, you can ask us how.
 
 
-# Gratipay Profile
+## Gratipay Profile
 
 <a href="https://gratipay.com/Antvel/" target="_blank">https://gratipay.com/Antvel/</a>
 
-# Contributing
+## Contributing
 
 Please feel free to fork this package and contribute by submitting a pull request to enhance the functionalities.
 
-# License
+## License
 
 The MIT License (MIT). Please see [License File](https://github.com/ant-vel/App/blob/master/LICENSE) for more information.
 
 
-# How can I thank you?
+## How can I thank you?
 Why not star the github repo and share the link for this repository on Twitter? Spread the word!
 
 
