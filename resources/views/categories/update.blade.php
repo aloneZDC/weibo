@@ -5,7 +5,7 @@
 	<div ng-controller="CategoryController" class="panel panel-default">
 		<div class="panel-heading"> <span class="glyphicon glyphicon-tasks"></span> {{ trans('categories.update_title') }}</div>
 		<div class="panel-body" ng-init="icon='{{ $category->icon }}'">
-			{!! Form::model($category,['route'=>['wpanel.category.update',$category],'method'=>'PUT','class'=>'form-horizontal','role'=>'form']) !!}
+			{!! Form::model($category,['route'=>['category.update',$category],'method'=>'PUT','class'=>'form-horizontal','role'=>'form']) !!}
 				<div class="form-group">
 					<label class="col-md-4 control-label">{{ trans('globals.name') }}</label>
 					<div class="col-md-6">
@@ -108,7 +108,7 @@
                     return status_list[($scope.category.status!==undefined&&$scope.category.status)||1];
                 };
                 $scope.link=function(){
-                    return '{{ route('wpanel.category.edit','ID') }}'.replace('ID',$scope.category.id);
+                    return '{{ route('category.edit','ID') }}'.replace('ID',$scope.category.id);
                 };
                 $scope.type=function(){
                     return type_list[$scope.category.type];

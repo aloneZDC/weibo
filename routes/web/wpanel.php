@@ -1,7 +1,5 @@
 <?php
 
-Route::get('categories', 'CategoriesController@index');
-
 Route::group(['prefix' => 'wpanel', 'roles' => 'admin', 'middleware' => ['auth', 'roles']], function () {
     Route::resource('/', 'WpanelController');
 
