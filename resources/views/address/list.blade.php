@@ -26,18 +26,18 @@
 	@section('center_content')
 
 		<div class="page-header">
-            <h5>{{ trans('antvel::address.my_addresses') }}</h5>
+            <h5>{{ trans('address.my_addresses') }}</h5>
         </div>
 
         <div class="row">
             <div class="col-md-12 text-right">
 
-        		<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'/user/address/create',controller:'AddressesControllerModal', size: 'md'})" class="btn  btn-sm btn-info"><span class="glyphicon glyphicon-plus"></span>&nbsp;{{ trans('antvel::address.add') }}</button>
+        		<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'/user/address/create',controller:'AddressesControllerModal', size: 'md'})" class="btn  btn-sm btn-info"><span class="glyphicon glyphicon-plus"></span>&nbsp;{{ trans('address.add') }}</button>
 
 				@if(isset($defaultId) && $defaultId != '')
                 	<a class="btn btn-success btn-sm" href="/user/orders/checkOut/address/{{ $defaultId }}">
 						<span class="glyphicon glyphicon-ok"></span>&nbsp;
-                		{{ trans('antvel::address.use_selected') }}
+                		{{ trans('address.use_selected') }}
                 	</a>
                 @endif
 
@@ -52,11 +52,11 @@
 			@if (count($addresses) == 0)
 				<div class="col-lg-12">
 					<div class="alert alert-warning">
-						<strong> <span class="fui-location"></span> {{ trans('antvel::address.no_registered') }}.</strong>
+						<strong> <span class="fui-location"></span> {{ trans('address.no_registered') }}.</strong>
 						<div class="row">&nbsp;</div>
 						<div class="row">
 							<div class="col-lg-12">
-								{{ trans('antvel::address.no_registered_instructions') }}
+								{{ trans('address.no_registered_instructions') }}
 								<a href="javascript:void(0)" ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'/user/address/create',controller:'AddressesControllerModal',resolve:'address', size: 'md'})">{{ trans('globals.click_here') }}</a>
 							</div>
 						</div>
@@ -103,7 +103,7 @@
 									</button>
 									<button ng-click="setDefaultAddress('{{ $address->id }}')" class="btn btn-info btn-sm">
 										<span class="glyphicon glyphicon-pushpin"></span>&nbsp;
-										{{ trans('antvel::address.make_default_1') }}
+										{{ trans('address.make_default_1') }}
 									</button>
 								@endif
 
@@ -115,7 +115,7 @@
 								@if(isset($defaultId) && $defaultId != '')
                                     <a class="btn btn-primary btn-sm" href="/user/orders/checkOut/address/{{ $address->id  }}">
 										<span class="glyphicon glyphicon-pushpin"></span>&nbsp;
-                                    	{{ trans('antvel::address.use_this') }}
+                                    	{{ trans('address.use_this') }}
                                     </a>
                                 @endif
 
