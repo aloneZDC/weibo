@@ -12,7 +12,12 @@ class AddressBookTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Address::class, 6)->create();
-        factory(Address::class, 'buyer', 4)->create();
+        $user = app()->make(\Antvel\User\UsersRepository::class)->find([
+            'nickname' => 'buyer'
+        ]);
+
+        factory(Address::class, 6)->create([
+            'user_id' => $user->id
+        ]);
     }
 }

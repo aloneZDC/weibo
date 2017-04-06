@@ -7,10 +7,8 @@
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\User;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use Antvel\User\Models\{ Person, Business};
+use Antvel\User\Models\{ User, Person, Business};
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,12 +19,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Person::class, 1)->create([
-            'user_id' => factory(User::class, 'root', 1)->create()->first()->id
+        factory(Person::class)->create([
+            'user_id' => factory(User::class, 'admin')->create()->first()->id
         ]);
 
-        factory(Person::class, 1)->create([
-            'user_id' => factory(User::class, 'admin', 1)->create()->first()->id
+        factory(Business::class)->create([
+            'user_id' => factory(User::class, 'admin')->create([
+                'nickname' => 'antvel',
+                'email' => 'info@antvel.com'
+            ])->first()->id
         ]);
 
         factory(Business::class, 1)->create([
