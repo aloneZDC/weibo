@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use Tests\TestCase;
 use Antvel\AddressBook\Models\Address;
+use Antvel\User\Models\{ User, Person };
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class AddressBookTest extends TestCase
@@ -16,7 +16,7 @@ class AddressBookTest extends TestCase
      *
      * @var User
      */
-    protected $user = null;
+    protected $person = null;
 
     /**
      * The given address.
@@ -29,31 +29,35 @@ class AddressBookTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create()->first();
+        $buyer = factory(User::class, 'buyer')->create()->first();
+
+        $this->person = factory(Person::class)->create([
+            'user_id' => $buyer->id
+        ])->first()->load('user');
 
         $this->address = factory(Address::class, 1)->create([
-            'user_id' => $this->user->id
+            'user_id' => $this->person->user->id
         ])->first();
     }
 
     public function test_a_logged_user_can_see_his_address_book()
     {
-        $this->actingAs($this->user);
+        $this->actingAs($this->person->user);
 
-        $response = $this->call('GET', 'user/address');
+        $response = $this->get('addressBook');
 
         $response
             ->assertStatus(200)
             ->assertViewHas('addresses')
             ->assertViewHas('addresses', function ($view) {
                 $data = $view->first();
-                return $this->user->id == $data->user_id && $this->address->line1 == $data->line1;
+                return $this->person->user->id == $data->user_id && $this->address->line1 == $data->line1;
         });
     }
 
     public function test_an_user_must_be_authenticated_to_handle_his_address_book()
     {
-        $response = $this->get('user/address');
+        $response = $this->get('addressBook');
 
         $response
             ->assertStatus(302)
@@ -62,9 +66,9 @@ class AddressBookTest extends TestCase
 
     public function test_an_user_can_create_an_address()
     {
-        $this->actingAs($this->user);
+        $this->actingAs($this->person->user);
 
-        $response = $this->put('user/address/store', [
+        $response = $this->put('addressBook/store', [
             'name_contact' => 'Gustavo',
             'line1' => 'Malave Villalba',
             'country' => 'Venezuela',
@@ -75,15 +79,15 @@ class AddressBookTest extends TestCase
             'line2' => '',
         ]);
 
-        $response->assertExactJson([
+        $response->assertJson([
             'message' => trans('address.success_save'),
-            'redirectTo' => '/user/address',
-            'callback' => '/user/address',
+            'redirectTo' => '/addressBook',
+            'callback' => '/addressBook',
             'success' => true,
         ]);
 
         $this->assertDatabaseHas('addresses', [
-            'user_id' => $this->user->id,
+            'user_id' => $this->person->user->id,
             'name_contact' => 'Gustavo',
             'zipcode' => '2001',
         ]);
@@ -91,18 +95,18 @@ class AddressBookTest extends TestCase
 
     public function test_the_address_information_has_to_pass_validation_rules()
     {
-        $this->actingAs($this->user);
+        $this->actingAs($this->person->user);
 
-        $response = $this->put('user/address/store', []);
+        $response = $this->put('addressBook/store', []);
 
         $response->assertStatus(302);
     }
 
     public function test_an_address_can_be_deleted()
     {
-        $this->actingAs($this->user);
+        $this->actingAs($this->person->user);
 
-        $response = $this->post('user/address/delete', ['id' => $this->address->id]);
+        $response = $this->post('addressBook/delete', ['id' => $this->address->id]);
 
         $response->assertStatus(200);
 
@@ -114,9 +118,9 @@ class AddressBookTest extends TestCase
 
     public function test_an_address_can_be_marked_as_default()
     {
-        $this->actingAs($this->user);
+        $this->actingAs($this->person->user);
 
-        $response = $this->post('user/address/default', ['id' => $this->address->id]);
+        $response = $this->post('addressBook/default', ['id' => $this->address->id]);
 
         $response->assertStatus(200);
 

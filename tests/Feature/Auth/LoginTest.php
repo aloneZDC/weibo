@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use App\User;
 use Tests\TestCase;
+use Antvel\User\Models\{ User, Person };
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LoginTest extends TestCase
@@ -19,18 +19,17 @@ class LoginTest extends TestCase
 
 	public function test_a_user_can_authenticate()
 	{
-		$user = factory(User::class)->create()->first();
+		$user = factory(User::class)->create([
+			'nickname' => 'gocanto'
+		])->first();
 
 		$response = $this->post('login', [
 			'email' => $user->email,
 			'password' => '123456'
 		]);
 
-		$response->assertRedirect('/');
-
-		$this->assertEquals(
-			$user, $this->app->make('auth')->user()
-		);
+		$this->assertEquals($user->email, $this->app->make('auth')->user()->email);
+		$this->assertEquals($user->nickname, $this->app->make('auth')->user()->nickname);
 	}
 
 	public function test_a_user_must_be_registered_to_log_into_the_app()

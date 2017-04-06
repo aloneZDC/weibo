@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-md-12 text-right">
 
-        		<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'/user/address/create',controller:'AddressesControllerModal', size: 'md'})" class="btn  btn-sm btn-info"><span class="glyphicon glyphicon-plus"></span>&nbsp;{{ trans('address.add') }}</button>
+        		<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'{{ route("addressBook.create") }}',controller:'AddressesControllerModal', size: 'md'})" class="btn  btn-sm btn-info"><span class="glyphicon glyphicon-plus"></span>&nbsp;{{ trans('address.add') }}</button>
 
 				@if(isset($defaultId) && $defaultId != '')
                 	<a class="btn btn-success btn-sm" href="/user/orders/checkOut/address/{{ $defaultId }}">
@@ -57,7 +57,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								{{ trans('address.no_registered_instructions') }}
-								<a href="javascript:void(0)" ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'/user/address/create',controller:'AddressesControllerModal',resolve:'address', size: 'md'})">{{ trans('globals.click_here') }}</a>
+								<a href="javascript:void(0)" ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'{{ route("addressBook.create") }}',controller:'AddressesControllerModal',resolve:'address', size: 'md'})">{{ trans('globals.click_here') }}</a>
 							</div>
 						</div>
 					</div>
@@ -107,7 +107,7 @@
 									</button>
 								@endif
 
-								<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'/user/address/{{ $address->id }}/edit', size: 'md', controller:'AddressesControllerModal' })" class="btn btn-success btn-sm">
+								<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'{{ route("addressBook.edit", ["id" => $address->id]) }}', size: 'md', controller:'AddressesControllerModal' })" class="btn btn-success btn-sm">
 									<span class="glyphicon glyphicon-edit"></span>&nbsp;
 									{{ trans('globals.edit') }}
 								</button>
@@ -144,7 +144,7 @@
 
 				$scope.setDefaultAddress = function(id)
 				{
-					$http.post('/user/address/default/', { 'id': id }).
+					$http.post('{{ route("addressBook.default") }}', { 'id': id }).
 					success(function(data, status) {
 						@if (isset($callBackUrl))
 							$window.location.href = '{{ $callBackUrl }}';
@@ -156,7 +156,7 @@
 
 				$scope.deleteAddress = function(id)
 				{
-		  			$http.post('/user/address/delete', { 'id': id }).
+		  			$http.post('{{ route("addressBook.delete") }}', { 'id': id }).
 					success(function(data, status, headers, config) {
 						@if (isset($callBackUrl))
 							$window.location.href = '{{ $callBackUrl }}';

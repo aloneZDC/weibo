@@ -397,7 +397,7 @@ app.controller('AddressesControllerModal', function($scope, $http, $rootScope, $
 
 	$scope.create = function()
 	{
-		$http.put('/user/address/store', $scope._address).
+		$http.put('/addressBook/store', $scope._address).
 			success(function(data, status)
 			{
 				if (data.success)
@@ -415,7 +415,7 @@ app.controller('AddressesControllerModal', function($scope, $http, $rootScope, $
 
 	$scope.update = function(){
 
-		$http.put('/user/address/'+$scope._address.id, $scope._address).
+		$http.put('/addressBook/' + $scope._address.id, $scope._address).
 
 			success(function(data, status) {
 

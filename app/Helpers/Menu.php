@@ -26,8 +26,8 @@ class Menu
     {
         $menu = [
             ['route' => '/dashboard', 'text' => trans('user.dashboard'), 'icon' => 'glyphicon glyphicon-dashboard'],
-            ['route' => '/user/profile', 'text' => trans('user.profile'), 'icon' => 'glyphicon glyphicon-user'],
-            ['route' => '/user/address', 'text' => trans('user.address_book'), 'icon' => 'glyphicon glyphicon-map-marker', 'divider' => 1],
+            ['route' => route('user.index'), 'text' => trans('user.profile'), 'icon' => 'glyphicon glyphicon-user'],
+            ['route' => route('addressBook.index'), 'text' => trans('user.address_book'), 'icon' => 'glyphicon glyphicon-map-marker', 'divider' => 1],
         ];
         //Menu para empresas
         if (\Auth::user()->hasRole(['business', 'admin'])) {
