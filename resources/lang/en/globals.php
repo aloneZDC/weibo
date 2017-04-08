@@ -201,8 +201,8 @@ return [
   'enable'                 => 'Enable',
   'active'                 => 'Active',
   'brand'                  => 'Brand',
-  'inactive'               => 'Inactive',
-  'status'                 => 'Status',
+  'inactive'               => 'Inactive', //used
+  'status'                 => 'Status', //used
   'integerValidate'        => 'must be a number integer',
   'numberValidate'         => 'must be a number',
   'required'               => 'Required',
@@ -219,14 +219,14 @@ return [
   'yes'                    => 'Yes',
   'action'                 => 'Action',
   'category'               => 'Category',
-  'description'            => 'Description',
+  'description'            => 'Description', //used
   'error_not_available'    => 'This content is not available.',
   'file_does_not_exist'    => 'File does not exist',
   'filter'                 => 'Filter',
   'filtered'               => 'Filtered',
   'filter_results'         => 'Filter Results',
   'induced_error'          => 'To better serve you follow the instructions properly.',
-  'name'                   => 'Name',
+  'name'                   => 'Name', //used
   'no_results'             => 'No Results',
   'personalize'            => 'Personalize',
   'search_for'             => 'Search for',
@@ -293,4 +293,7 @@ return [
   'send_a_email_label'     => 'Send an email',
   'share_on_facebook'      => 'Share on Facebook',
   'share_on_twitter'       => 'Share on Twitter',
+
+  //----
+  'submit' => 'Submit'
 ];

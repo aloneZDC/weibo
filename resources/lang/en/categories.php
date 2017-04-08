@@ -1,6 +1,12 @@
 <?php
 
 return [
+   'background' => 'Background',
+   'parent' => 'Parent',
+   'icon' => 'Icon',
+
+   //----
+
    'icono'                     => 'Icono',
    'no_father'                 => 'Main',
    'parent_category'           => 'Parent Category',
