@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "b62c9542cdb3c6d3a69b382ce174c966bdf99538"
+                "reference": "91ff35189f030aaaf2aaa0f5b0e97704d2023654"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/b62c9542cdb3c6d3a69b382ce174c966bdf99538",
-                "reference": "b62c9542cdb3c6d3a69b382ce174c966bdf99538",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/91ff35189f030aaaf2aaa0f5b0e97704d2023654",
+                "reference": "91ff35189f030aaaf2aaa0f5b0e97704d2023654",
                 "shasum": ""
             },
             "require": {
@@ -38,10 +38,7 @@
                 ],
                 "psr-4": {
                     "Antvel\\": "src/"
-                },
-                "files": [
-                    "src/Foundation/helpers.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -65,7 +62,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-04-06 04:57:08"
+            "time": "2017-04-14 01:15:06"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -3035,12 +3032,12 @@
             "version": "0.9.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "483c43d92b6581ea7f8c330231d2dabf8b1ec51f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/483c43d92b6581ea7f8c330231d2dabf8b1ec51f",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/483c43d92b6581ea7f8c330231d2dabf8b1ec51f",
                 "reference": "483c43d92b6581ea7f8c330231d2dabf8b1ec51f",
                 "shasum": ""
             },

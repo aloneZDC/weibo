@@ -25,6 +25,6 @@ class ResetPasswordTest extends TestCase
 			'email' => $person->user->email
 		]);
 
-		$response->assertSessionHas('status');
+		$this->assertTrue(app('session.store')->has('status'));
 	}
 }

@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
     }
 
-        /**
+    /**
      * Define the "web" routes for the application.
      *
      * These routes all receive session state, CSRF protection, etc.
