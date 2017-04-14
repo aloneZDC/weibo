@@ -2,7 +2,7 @@
 @section('title')@parent - @if ($product['id'] == '')
 
                             {{ trans('product.form_create_title') }}
-                            
+
                             @else
 
                             {{ str_replace('[prod]', '"'.$product->name.'"', trans('product.form_edit_title')) }}
@@ -26,7 +26,7 @@
                 @endif
             </h5>
         </div>
-    
+
         @if(isset($product['id']))
             <div class="row">
                 <div class="col-md-12">
@@ -40,22 +40,22 @@
                 </div>
             </div>
         @endif
-        
+
         <div class="row">&nbsp;</div>
         <div class="row">
         <div class="col-md-12">
-            
+
             @include('partial.message')
 
             @if(!$edit)
-                
+
                 {!! Form::model(Request::all(),['url'=>'products', 'class'=>'form-horizontal', 'role'=>'form']) !!}
             @else
                     {{-- {{dd($product)}}            --}}
                 {!! Form::model($product,['route'=>['products.update',$product],'method'=>'PUT','class'=>'form-horizontal','role'=>'form']) !!}
             @endif
                 <div  ng-class="defaultClass">
-        
+
                     <div class="form-group" >
                         <div class="col-sm-3">
                             {!! Form::label('status',trans('globals.status')) !!}:&nbsp;
@@ -122,7 +122,7 @@
 
                     <div class="form-group ng-cloak" ng-show="typeItem=='key'">
                         <div class="col-sm-2 col-sm-offset-4">
-                            <div ng-controller="upload" ng-init="file='{{ (Input::old('key')?Input::old('key'):'') }}'">
+                            <div ng-controller="upload" ng-init="file='{{ (old('key')?old('key'):'') }}'">
                                 <button class="form-control col-sm-2" ng-file-select ng-model="files" accept=".txt" type="button" ng-click="type_file='key'" ng-class="successClass">{{ trans('globals.file') }}
                                 <input type="hidden" value="[[file]]" name="key">
                                 </button>
@@ -141,7 +141,7 @@
 
                     <div class="form-group ng-cloak" ng-show="typeItem=='software'">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <div ng-controller="upload" ng-init="file='{{ (Input::old('software')?Input::old('software'):'') }}'">
+                            <div ng-controller="upload" ng-init="file='{{ (old('software')?old('software'):'') }}'">
                             <button class="form-control col-sm-2" ng-file-select ng-model="files" accept=".rar,.zip" type="button" ng-click="type_file='software'" ng-class="successClass">{{ trans('globals.file') }}
                                 <input type="hidden" value="[[file]]" name="software">
                             </button>
@@ -152,7 +152,7 @@
 
                     <div class="form-group ng-cloak" ng-show="typeItem=='software_key'">
                         <div class="col-sm-6 col-sm-offset-4">
-                            <div ng-controller="upload" ng-init="file='{{ (Input::old('software_key')?Input::old('software_key'):'') }}'">
+                            <div ng-controller="upload" ng-init="file='{{ (old('software_key')?old('software_key'):'') }}'">
                             <button class="form-control col-sm-2" ng-file-select ng-model="files" accept=".rar,.zip" type="button" ng-click="type_file='software'" ng-class="successClass">{{ trans('globals.file').' '.trans('product.globals.software') }}
                                 <input type="hidden" value="[[file]]" name="software_key">
                             </button>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="col-sm-12"></div>
                         <div class="col-sm-3 col-sm-offset-4">
-                            <div ng-controller="upload" ng-init="file='{{ (Input::old('key_software')?Input::old('key_software'):'') }}'">
+                            <div ng-controller="upload" ng-init="file='{{ (old('key_software')?old('key_software'):'') }}'">
                                 <button class="form-control col-sm-2" ng-file-select ng-model="files" accept=".txt" type="button" ng-click="type_file='key'" ng-class="successClass">{{ trans('globals.file').' '.trans('product.globals.key') }}
                                 <input type="hidden" value="[[file]]" name="key_software">
                                 </button>
@@ -179,14 +179,14 @@
                         </div>
                         <div class="col-sm-8 col-sm-offset-4">{!! trans('product.inputs_view.gift_card_option') !!}</div>
                     </div>
-                       
+
                     <h5>{{ trans('product.globals.features') }}</h5>
 
                     <hr>
-               
+
                     @include('features.makeInputsToDocumentsPicturesVideos',['force'=>false])
                     @include('features.makeInputs',['force'=>false])
-                   
+
                 </div>
 
                 <div class="row">
@@ -197,7 +197,7 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <button type="submit" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;{{ trans('product.globals.save') }}</button>  
+                        <button type="submit" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;{{ trans('product.globals.save') }}</button>
                         <button  type="button" ng-controller="ModalCtrl"
                                 ng-click="modalOpen({templateUrl:'productsGroup/{{$product['id']}}/edit',controller:'ModalCtrl', noCache:true})" class="btn btn-sm btn-info">
                         <span class="glyphicon glyphicon-link"></span>&nbsp;
@@ -216,7 +216,7 @@
     @parent
     {!! Html::script('/js/vendor/file-upload/angular-file-upload-shim.min.js') !!}
     {!! Html::script('/js/vendor/file-upload/angular-file-upload.min.js') !!}
-    
+
     <script>
         (function(app){
             app.controller('upload', ['$scope', '$upload', '$timeout','$http', function ($scope, $upload, $timeout, $http) {
@@ -262,9 +262,9 @@
                                     if(old){
                                         $scope.delete(old);
                                     }
-                                   
+
                                 }
-                                
+
                             });
                         }
                     }
@@ -279,7 +279,7 @@
                                     if (parseInt(data)==1 && !old) {
                                         $scope.file='';
                                     }
-                                    
+
                               });
                     }
                 };

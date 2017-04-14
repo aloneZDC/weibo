@@ -214,17 +214,17 @@
     <script>
         (function(app){
             app.controller('features_form', ['$scope', function ($scope) {
-                $scope.number='{{ Input::old("max_num_values")?Input::old("max_num_values"):($edit?$feature["max_num_values"]:1)  }}'*1;
+                $scope.number='{{ old("max_num_values")?old("max_num_values"):($edit?$feature["max_num_values"]:1)  }}'*1;
                 $scope.repeat=[];
                 $scope.numberMax=5;
                 $scope.numberMin=1;
-                $scope.typeInput='{{ Input::old("input_type")?Input::old("input_type"):($edit?$feature["input_type"]:"")  }}'.trim();
-                $scope.condition='{{ Input::old("condition")?Input::old("condition"):($edit?$feature["condition"]:"")  }}'.trim();
-                $scope.validation='{{ Input::old("validation")?Input::old("validation"):($edit?$feature["validation"]:"")  }}'.trim();
-                $scope.type_data='{{ Input::old("type_data")?Input::old("type_data"):($edit?$feature["type_data"]:"")  }}'.trim();
-                $scope.numerical_validation='{{ Input::old("numerical_validation")?Input::old("numerical_validation"):($edit?$feature["numerical_validation"]:"")  }}'.trim();
-                $scope.number_characters='{{ Input::old("number_characters")?Input::old("number_characters"):($edit?$feature["number_characters"]:"")  }}'.trim();
-                $scope.type_message='{{ Input::old("type_message")?Input::old("type_message"):($edit?$feature["type_message"]:"")  }}'.trim();
+                $scope.typeInput='{{ old("input_type")?old("input_type"):($edit?$feature["input_type"]:"")  }}'.trim();
+                $scope.condition='{{ old("condition")?old("condition"):($edit?$feature["condition"]:"")  }}'.trim();
+                $scope.validation='{{ old("validation")?old("validation"):($edit?$feature["validation"]:"")  }}'.trim();
+                $scope.type_data='{{ old("type_data")?old("type_data"):($edit?$feature["type_data"]:"")  }}'.trim();
+                $scope.numerical_validation='{{ old("numerical_validation")?old("numerical_validation"):($edit?$feature["numerical_validation"]:"")  }}'.trim();
+                $scope.number_characters='{{ old("number_characters")?old("number_characters"):($edit?$feature["number_characters"]:"")  }}'.trim();
+                $scope.type_message='{{ old("type_message")?old("type_message"):($edit?$feature["type_message"]:"")  }}'.trim();
     			// $scope.typeInput=$scope.typeInput?$scope.typeInput:null;
 				// $scope.condition=$scope.condition?$scope.condition:null;
 				// $scope.validation=$scope.validation?$scope.validation:null;

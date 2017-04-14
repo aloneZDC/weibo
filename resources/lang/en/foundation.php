@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Foundation',
+    'title' => 'Antvel',
     'nav' => [
         'home' => 'Home',
         'categories' => 'Categories'

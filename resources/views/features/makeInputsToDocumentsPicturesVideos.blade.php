@@ -5,12 +5,12 @@
 		<?php     continue; ?>
 		@endif
 		<div class="form-group" ng-show="(typeItem=='{{ $feature['type_products'] }}'||'{{ $feature['type_products'] }}'=='all')">
-            
+
             <div class="col-sm-12">
             {!! Form::label('feature_'.$feature['indexByName'],$feature['upperName'].':') !!}
 			@for($i=1;$i<=$feature['max_num_values'];$i++)
 				<?php
-                    $file=Input::old('feature_'.$feature['indexByName'].'_'.$i);
+                    $file=old('feature_'.$feature['indexByName'].'_'.$i);
                     $file=!$file?($edit?$oldFeatures['feature_'.$feature['indexByName'].'_'.$i]:''):$file;
                 ?>
 				@if($feature['input_type']=='image')
@@ -24,7 +24,7 @@
 	                     		 ng-file-select ng-model="files" accept=".jpg,.png" type="button" >
 	                    	<span class="[[file ? 'glyphicon glyphicon-edit' : 'glyphicon glyphicon-plus']]"></span>
 	                    </button>
-	                    
+
 		                    <div class="progress ng-cloak" ng-show="progress">
 								  <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="[[progress]]" aria-valuemin="0" aria-valuemax="100" style="width: [[progress]]%;">
 								    [[progress]]%

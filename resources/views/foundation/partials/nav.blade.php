@@ -7,11 +7,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">{{ trans('foundation.title') }}</a>
+            <a class="navbar-brand" href="/">{{ trans('foundation.title') }}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ route('foundation.home') }}">{{ trans('foundation.nav.home') }}</a></li>
+                <li><a href="{{ route('foundation.home') }}">{{ trans('foundation.nav.home') }}</a></li>
                 <li><a href="{{ route('categories.index') }}">{{ trans('foundation.nav.categories') }}</a></li>
             </ul>
         </div>

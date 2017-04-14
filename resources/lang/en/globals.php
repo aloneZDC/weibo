@@ -173,8 +173,11 @@ return [
         'message_02' => 'or head straight to our',
         'link_02'    => 'home page',
     ],
+
+    'id' => 'Id',
+
   'faq'                    => 'FAQs',
-  'cancel'                 => 'Cancel',
+  'cancel'                 => 'Cancel', //used
   'contact'                => 'Contact',
   'file'                   => 'File',
   'help'                   => 'Help',
@@ -192,7 +195,7 @@ return [
   'next'                   => 'Next',
   'previous'               => 'Previous',
   'click_here'             => 'Click here',
-  'delete'                 => 'Delete',
+  'delete'                 => 'Delete', //used
   'edit'                   => 'Edit',
   'new'                    => 'New',
   'save'                   => 'Save',
@@ -217,7 +220,7 @@ return [
   'to'                     => 'to',
   'total'                  => 'Total',
   'yes'                    => 'Yes',
-  'action'                 => 'Action',
+  'action'                 => 'Action', //used
   'category'               => 'Category',
   'description'            => 'Description', //used
   'error_not_available'    => 'This content is not available.',
@@ -260,7 +263,7 @@ return [
   'top_rated'              => 'Top Rated',
   'image'                  => 'Image',
   'points_earned'          => 'Points Earned',
-  'close_label'            => 'Close',
+  'close_label'            => 'Close', //used
   'customer_name'          => 'Customer Name',
   'full_report'            => 'Full Report',
   'filtered'               => 'Filtered By',
@@ -287,7 +290,9 @@ return [
   'power_by_label'         => 'Power By',
   'antvel_eCommerce'       => 'Antvel eCommerce',
   'validation_error_label' => 'Validation Error',
-  'success_label'          => 'Success',
+  'success_label'          => 'Success', //used
+  'success_text' => 'The process was successfully completed.', //used
+  'error_label'          => 'Oops, it seems like something went wrong', //used
   'newsletter_email_error' => 'Email is required!',
   'reach_us_msg'           => 'Reach us by email anytime! We will be in touch as soon as possible.',
   'send_a_email_label'     => 'Send an email',

@@ -18,17 +18,23 @@
 <body>
 	<header>
 		@include ('foundation.partials.nav')
+
 	</header>
 
-	<section>
-		<div class="container">
+	<div class="container">
+		@include ('foundation.partials.alert')
+		<section>
 			<div class="page-header">
-				<h3>#@yield('sectionTitle', 'Antvel')</h3>
+				<h3>
+					<i class="glyphicon glyphicon-th-large"></i>&nbsp;
+					@yield('sectionTitle', 'Dashboard')
+				</h3>
 			</div>
 
 			@section('content') @show
-		</div>
-	</section>
+		</section>
+	</div>
+
 
 	{!! Html::script('/antvel-bower/jquery/dist/jquery.min.js') !!}
 	{!! Html::script('/antvel-bower/bootstrap/dist/js/bootstrap.min.js') !!}
