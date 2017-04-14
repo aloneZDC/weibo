@@ -73,6 +73,19 @@ Once installed, the `antvel install` command will create a fresh copy of the pro
 * Dynamic Breadcrumbs
 
 
+## Foundation Panel
+
+The foundation panel is the e-commerce ***dashboard*** administration. Here, you will be able to manage the base information of your store, such as categories, products features and more. 
+
+At the moment, the panel just has the module to manage the store categories. However, it is intended to be the replacement for ***wpanel***.
+
+You will be able to visit this section by typing this address within your installed app, as so ```http://app.dev/foundation```. Once the whole ***wpanel*** is migrated to it, we will be updating the references in the app.
+
+To visit the foundation panel, you will have to be logged in as <a href="antvel.com">admin@antvel.com</a>
+
+
+
+
 ## Demo
 
 * <a href="http://antvel.com" target="_blank">http://antvel.com</a>
