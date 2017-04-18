@@ -8,7 +8,7 @@ namespace app\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Address;
+use Antvel\AddressBook\Models\Address;
 use App\FreeProduct;
 use App\FreeProductOrder;
 use App\FreeProductParticipant;

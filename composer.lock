@@ -743,12 +743,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "9a150bedc3ae6566d05f0a8d1657c658ce98dcad"
+                "reference": "4dd4331f02dfbb78505ffd5a91c304b253d7f15d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/9a150bedc3ae6566d05f0a8d1657c658ce98dcad",
-                "reference": "9a150bedc3ae6566d05f0a8d1657c658ce98dcad",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/4dd4331f02dfbb78505ffd5a91c304b253d7f15d",
+                "reference": "4dd4331f02dfbb78505ffd5a91c304b253d7f15d",
                 "shasum": ""
             },
             "require": {
@@ -790,7 +790,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2017-04-07 21:47:06"
+            "time": "2017-04-18 18:05:29"
         },
         {
             "name": "laravel/framework",
@@ -798,12 +798,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "85097f6eb84027365cdb9c565faab8e4111fbd0e"
+                "reference": "51cad04a923bf22c9ae96d77e4cb07767d634c17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/85097f6eb84027365cdb9c565faab8e4111fbd0e",
-                "reference": "85097f6eb84027365cdb9c565faab8e4111fbd0e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/51cad04a923bf22c9ae96d77e4cb07767d634c17",
+                "reference": "51cad04a923bf22c9ae96d77e4cb07767d634c17",
                 "shasum": ""
             },
             "require": {
@@ -919,7 +919,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-04-13 17:58:14"
+            "time": "2017-04-18 15:36:20"
         },
         {
             "name": "laravel/tinker",
@@ -2319,12 +2319,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "b4a8c8867c1ae43b0d22a0a41bb3f0af42ed8a57"
+                "reference": "055a2937e2700ba9dc0820a666d59f9d7acc963a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/b4a8c8867c1ae43b0d22a0a41bb3f0af42ed8a57",
-                "reference": "b4a8c8867c1ae43b0d22a0a41bb3f0af42ed8a57",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/055a2937e2700ba9dc0820a666d59f9d7acc963a",
+                "reference": "055a2937e2700ba9dc0820a666d59f9d7acc963a",
                 "shasum": ""
             },
             "require": {
@@ -2396,7 +2396,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-13 13:45:25"
+            "time": "2017-04-15 11:32:48"
         },
         {
             "name": "symfony/polyfill-mbstring",

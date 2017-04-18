@@ -109,7 +109,7 @@ class Menu
             $menu = [
                 ['route' => '/wpanel',            'text' => trans('user.dashboard'),              'icon' => 'glyphicon glyphicon-dashboard'],
                 ['route' => '/wpanel/profile',    'text' => trans('company.store_config'),        'icon' => 'glyphicon glyphicon-cog'],
-                ['route' => '/wpanel/features',   'text' => trans('features.product_features'),   'icon' => 'glyphicon glyphicon-th-list'],
+                ['route' => '/wpanel/productsdetails',   'text' => trans('features.product_features'),   'icon' => 'glyphicon glyphicon-th-list'],
             ];
         }
 

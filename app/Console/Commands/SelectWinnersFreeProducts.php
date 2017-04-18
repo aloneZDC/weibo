@@ -2,7 +2,7 @@
 
 namespace app\Console\Commands;
 
-use App\Address;
+use Antvel\AddressBook\Models\Address;
 use App\FreeProduct;
 use App\FreeProductParticipant;
 use App\Order;

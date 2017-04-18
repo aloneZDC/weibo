@@ -8,7 +8,7 @@ namespace app;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Address;
+use Antvel\AddressBook\Models\Address;
 use App\Eloquent\Model;
 use App\Http\Controllers\ProductsController as ProductsController;
 use App\Http\Controllers\UserController as UserController;
