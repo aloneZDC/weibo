@@ -17,6 +17,7 @@
                 <span class="badge">{{ $products->total() }}</span> <small> {{ trans('globals.searchResults') }} </small>
             </li>
             <?php $filterSelected = []; ?>
+
             @foreach ($refine as $key => $value)
                 @if (trim($value)!='' && $key != 'category_name' && $key != 'page')
                     <li>
@@ -238,7 +239,7 @@
                 </div>
             @endif
 
-            @if(isset($suggestions) && is_array($suggestions) && count($suggestions) > 0)
+            @if(isset($suggestions) && count($suggestions) > 0)
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">
