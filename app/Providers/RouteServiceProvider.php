@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Providers;
+namespace App\Providers;
 
 use Antvel\Antvel;
 use Illuminate\Support\Facades\Route;

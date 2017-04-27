@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Console\Commands;
+namespace App\Console\Commands;
 
 use Antvel\AddressBook\Models\Address;
 use App\FreeProduct;

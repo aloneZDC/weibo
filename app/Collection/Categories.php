@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Collection;
+namespace App\Collection;
 
 use App\Category;
 use App\Eloquent\Collection;
