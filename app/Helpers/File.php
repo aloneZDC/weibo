@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Helpers;
+namespace App\Helpers;
 
 /*
  * Antvel - Files Validations Helper

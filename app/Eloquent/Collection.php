@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Eloquent;
+namespace App\Eloquent;
 
 use Illuminate\Database\Eloquent\Collection as BaseCollection;
 

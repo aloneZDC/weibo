@@ -1,6 +1,6 @@
 <?php
 
-namespace app;
+namespace App;
 
 /*
  * Antvel - Free Products Participants Model
