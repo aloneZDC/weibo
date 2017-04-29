@@ -62,7 +62,7 @@ return [
         'order_detail'            => 'order_detail',
         'paypal'                  => 'paypal',
     ],
-    'product_features'        => [
+    'product_features'        => [ //used
         'color'                 => 'color',
         'weight'                => 'weight',
         'dimensions'            => 'dimensions',

@@ -8,10 +8,10 @@
  */
 
 use App\VirtualProduct;
-use App\Product as Product;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Antvel\User\Models\Business;
+use Antvel\Product\Models\Product;
 
 class VirtualProductsSeeder extends Seeder
 {
@@ -43,7 +43,7 @@ class VirtualProductsSeeder extends Seeder
                 ]),
                 'condition' => $faker->randomElement(['new', 'refurbished', 'used']),
                 'tags'      => json_encode($faker->word.','.$faker->word.','.$faker->word),
-                'type'      => 'key',
+                'type'      => 'software_key',
             ]);
             $faker->unique($reset = true);
             $virtual = VirtualProduct::create([

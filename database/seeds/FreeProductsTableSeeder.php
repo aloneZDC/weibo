@@ -8,12 +8,12 @@
  */
 use App\User;
 use App\Order;
-use App\Product;
 use App\FreeProduct;
 use App\OrderDetail;
 use App\FreeProductOrder;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Antvel\Product\Models\Product;
 use Antvel\AddressBook\Models\Address;
 
 class FreeProductsTableSeeder extends Seeder
