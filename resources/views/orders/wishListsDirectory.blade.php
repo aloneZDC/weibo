@@ -124,7 +124,7 @@
             @endif
             <div class="row">
                 <div class="col-md-12">
-                    <a class="btn btn-success btn-sm" href="{{ route('products') }}">
+                    <a class="btn btn-success btn-sm" href="{{ route('products.index') }}">
                         <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
                         {{trans('store.continue_shopping')}}
                     </a>

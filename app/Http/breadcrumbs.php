@@ -14,7 +14,7 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
 //products list
 Breadcrumbs::register('products', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('store.products_list_label'), route('products'));
+    $breadcrumbs->push(trans('store.products_list_label'), route('products.index'));
 });
 
 //products detail
@@ -31,7 +31,7 @@ Breadcrumbs::register('productDetail', function ($breadcrumbs, $product) {
     }
 
     $breadcrumbs->push($catProd->name, 'products?category='.urlencode($catProd->id.'|'.$catProd->name));
-    $breadcrumbs->push($product->name, route('products', $product->id));
+    $breadcrumbs->push($product->name, route('products.index', $product->id));
 });
 
 //products list

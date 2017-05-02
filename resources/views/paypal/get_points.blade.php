@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="row text-center">
-                <a class="btn btn-primary" href="{{ route('products') }}">{{trans('store.continue_shopping')}}</a>
+                <a class="btn btn-primary" href="{{ route('products.index') }}">{{trans('store.continue_shopping')}}</a>
             </div>
         </div>
     </div>

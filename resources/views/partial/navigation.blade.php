@@ -132,7 +132,7 @@
 	</nav>
 
 	<nav ng-controller="CategoriesController">
-		{!! Form::model(Request::all(),['url'=> action('ProductsController@index'), 'method'=>'GET', 'id'=>'searchForm']) !!}
+		{!! Form::model(Request::all(),['url'=> route('products.index') , 'method'=>'GET', 'id'=>'searchForm']) !!}
 		@if (isset($categories_menu))
 		<div class="input-group">
 			<span class="input-group-btn categories-search">

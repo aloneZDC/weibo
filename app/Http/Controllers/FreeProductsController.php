@@ -119,7 +119,7 @@ class FreeProductsController extends Controller
 
             return view('freeproducts.create', compact('jsonOrder', 'panel', 'orderId'));
         } else {
-            return redirect()->route('products')->withErrors(trans('freeproduct.unauthorized_access'));
+            return redirect()->route('products.index')->withErrors(trans('freeproduct.unauthorized_access'));
         }
     }
 
@@ -228,7 +228,7 @@ class FreeProductsController extends Controller
         } else {
             Session::flash('message', trans('freeproduct.freeproduct_not_exist'));
 
-            return redirect(route('products'));
+            return redirect(route('products.index'));
         }
     }
 
@@ -306,7 +306,7 @@ class FreeProductsController extends Controller
         } else {
             Session::flash('message', trans('freeproduct.freeproduct_not_exist'));
 
-            return redirect(route('products'));
+            return redirect(route('products.index'));
         }
     }
 

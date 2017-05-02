@@ -47,7 +47,7 @@
                         <small>{{ trans('store.cart_view.not_logged_disclaimer') }}</small>
                     @endif
                     <p>&nbsp;</p>
-                    <a class="btn btn-primary" href="{{ route('products') }}">{{trans('store.continue_shopping')}}</a>
+                    <a class="btn btn-primary" href="{{ route('products.index') }}">{{trans('store.continue_shopping')}}</a>
                 </div>
             @endif
 
