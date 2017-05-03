@@ -203,7 +203,7 @@
                             <div class="panel-body">
                                 <div class="tags-cloud">
                                     @foreach ($tagsCloud as $tag)
-                                        <a href="{{ action('ProductsController@index') }}/?search={{ $tag }}" class="t{{ mt_rand(1,10) }}" >
+                                        <a href="{{ route('products.index') }}/?search={{ $tag }}" class="t{{ mt_rand(1,10) }}" >
                                             {{ $tag }}
                                         </a>
                                     @endforeach

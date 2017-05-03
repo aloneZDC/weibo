@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.0.8",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "64be0b26f600150c4a55289fed9b5fe34d924711"
+                "reference": "e8fb9a854c98eb7ea0ea14106c6d3fb831a973ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/64be0b26f600150c4a55289fed9b5fe34d924711",
-                "reference": "64be0b26f600150c4a55289fed9b5fe34d924711",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/e8fb9a854c98eb7ea0ea14106c6d3fb831a973ed",
+                "reference": "e8fb9a854c98eb7ea0ea14106c6d3fb831a973ed",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-04-29 02:50:56"
+            "time": "2017-05-02 22:22:44"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -799,12 +799,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "4624b8998b921978e0dff52e76ab50bb3fa44b21"
+                "reference": "c2e2c05a446980aeaac5222b43e7ca4af803cbd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/4624b8998b921978e0dff52e76ab50bb3fa44b21",
-                "reference": "4624b8998b921978e0dff52e76ab50bb3fa44b21",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c2e2c05a446980aeaac5222b43e7ca4af803cbd7",
+                "reference": "c2e2c05a446980aeaac5222b43e7ca4af803cbd7",
                 "shasum": ""
             },
             "require": {
@@ -920,7 +920,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-05-02 13:08:16"
+            "time": "2017-05-03 18:35:30"
         },
         {
             "name": "laravel/tinker",
@@ -1233,12 +1233,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "4cdd014b809867f4c040523011d2c3607d55e6b4"
+                "reference": "35c07a81de6200e5aa0629eacecd11fd925d19dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4cdd014b809867f4c040523011d2c3607d55e6b4",
-                "reference": "4cdd014b809867f4c040523011d2c3607d55e6b4",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/35c07a81de6200e5aa0629eacecd11fd925d19dc",
+                "reference": "35c07a81de6200e5aa0629eacecd11fd925d19dc",
                 "shasum": ""
             },
             "require": {
@@ -1303,7 +1303,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-04-10 07:58:43"
+            "time": "2017-05-03 13:17:21"
         },
         {
             "name": "mtdowling/cron-expression",

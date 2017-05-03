@@ -9,7 +9,7 @@
     @section('center_content')
 
         <div class="page-header"><h5>{{ trans('user.your_products') }}</h5></div>
-        
+
         <div class="row">
            <div class="col-lg-11">
                 <div class="dropdown pull-left">
@@ -38,10 +38,10 @@
                 </a>
             </div>
         </div>
-        
+
         <div class="row">&nbsp;</div>
         <div class="row">&nbsp;</div>
-       
+
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
@@ -53,11 +53,11 @@
                             @if ($product->status == 0)
                                 <span class="label label-warning">{{ trans('globals.inactive') }}</span>
                             @endif
-                            
-                            <a href="{{ action('ProductsController@index') }}/{{ $product->id }}">
+
+                            <a href="{{ route('products.index') }}/{{ $product->id }}">
                                 @if (isset($product->features['images'][0]))
-                                    <img class="thumbnail"  
-                                         src="{{ $product->features['images'][0] }}?w=100" alt="{{ $product->name }}" 
+                                    <img class="thumbnail"
+                                         src="{{ $product->features['images'][0] }}?w=100" alt="{{ $product->name }}"
                                          width="100" height="100">
                                 @else
                                     <img class="thumbnail" src="/img/no-image.jpg" alt="{{ $product->name }}" width="100" height="100">
@@ -67,11 +67,11 @@
                                 </p>
                             </a>
                             @if ($product->stock <= $product->low_stock)
-                                <span>{{ $product->stock }} {{ trans('store.inStock') }} 
+                                <span>{{ $product->stock }} {{ trans('store.inStock') }}
                                     <span class="label label-danger">{{ ' '.trans('product.inputs_view.low_stock') }}</span>
                                 </span>
                             @endif
-                            <small>{{ $product->view_counts.' '.trans('product.globals.views') }} 
+                            <small>{{ $product->view_counts.' '.trans('product.globals.views') }}
                             @if ($product->rate_count > 0)
                                 {{ Utility::showRate($product->rate_val) }}
                             @endif
@@ -81,8 +81,8 @@
                             </p>
                             <p>
                                 <strong>{{ Utility::showPrice($product->price) }}</strong>
-                                <a class="btn-xs btn-primary" href="{{ action('ProductsController@index') }}/{{ $product->id }}/edit" role="button">{{ trans('globals.edit') }}</a>
-                                <a class="btn-xs btn-default" href="{{ action('ProductsController@index') }}/{{ $product->id }}" role="button">{{ trans('product.globals.view_details') }} &raquo;</a>
+                                <a class="btn-xs btn-primary" href="{{ route('products.index') }}/{{ $product->id }}/edit" role="button">{{ trans('globals.edit') }}</a>
+                                <a class="btn-xs btn-default" href="{{ route('products.index') }}/{{ $product->id }}" role="button">{{ trans('product.globals.view_details') }} &raquo;</a>
                             </p>
                         </div>
                     </div>
@@ -91,8 +91,8 @@
         </div>
 
     @if (count($products) < 1)
-        
-        <div class="row"> 
+
+        <div class="row">
             <div class="col-lg-12">
                 <div class="alert alert-warning">
                     <strong>
@@ -112,12 +112,12 @@
                 </div>
             </div>
         </div>
-        
+
     @endif
 
     <div class="row">
         {!! $products->appends(Request::only(['filter']))->render() !!}
     </div>
-        
+
     @stop
 @stop

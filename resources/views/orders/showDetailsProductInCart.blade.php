@@ -13,7 +13,7 @@
                 	<img class="thumbnail" ng-src="[[ product.features.images[0] ]]" alt="[[ product.name ]]" >
                 </div>
                 <div class="col-md-9">
-                    <a href="{{ action('ProductsController@index') }}/[[ product.id ]]">
+                    <a href="{{ route('products.index') }}/[[ product.id ]]">
                 	   <h6>[[product.name]]</h6>
                     </a>
                 	<div>{{ trans('product.showDetailsProductInCart_view.sold_by') }}: <span>[[product.seller]]</span></div>
