@@ -9,9 +9,9 @@ namespace App\Http\Controllers;
  */
 
 use App\Order;
-use App\Product;
 use App\FreeProduct;
 use App\Helpers\productsHelper;
+use Antvel\Product\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductsController;
 

@@ -8,20 +8,20 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use Antvel\AddressBook\Models\Address;
-use App\FreeProduct;
-use App\FreeProductOrder;
-use App\FreeProductParticipant;
-use App\Http\Controllers\Controller;
-use App\Order;
-use App\OrderDetail;
-use App\Product;
 use App\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Order;
+use App\FreeProduct;
+use App\OrderDetail;
+use App\FreeProductOrder;
 use Illuminate\Http\Request;
+use App\FreeProductParticipant;
+use Antvel\Product\Models\Product;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Antvel\AddressBook\Models\Address;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class FreeProductsController extends Controller
 {
