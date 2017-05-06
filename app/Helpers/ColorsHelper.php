@@ -7,7 +7,7 @@ namespace App\Helpers;
  *
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
-class colorsHelper
+class ColorsHelper
 {
     private $colors = [
             ['name' => 'alice_blue',                'code' => '#F0F8FF'],
