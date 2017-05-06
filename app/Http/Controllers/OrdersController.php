@@ -11,7 +11,7 @@ namespace App\Http\Controllers;
 use Antvel\AddressBook\Models\Address;
 use App\Business;
 use App\Comment;
-use App\Helpers\productsHelper;
+use App\Helpers\ProductsHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductsController as ProductsController;
 use App\Log;
@@ -381,7 +381,7 @@ class OrdersController extends Controller
 
         $user = \Auth::user();
 
-        $productsHelper = new productsHelper();
+        $productsHelper = new ProductsHelper();
 
         $suggestions = [];
 

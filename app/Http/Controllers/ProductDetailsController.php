@@ -8,10 +8,10 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Helpers\featuresHelper;
-use App\Http\Controllers\Controller;
 use App\ProductDetail;
 use Illuminate\Http\Request;
+use App\Helpers\FeaturesHelper;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class ProductDetailsController extends Controller

@@ -8,11 +8,10 @@ namespace App\Helpers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Helpers\colorsHelper;
 use App\ProductDetail;
 use Illuminate\Support\Facades\Validator;
 
-class featuresHelper
+class FeaturesHelper
 {
     private $features = [];
     private $called = '';

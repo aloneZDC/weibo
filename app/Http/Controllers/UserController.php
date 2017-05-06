@@ -9,7 +9,7 @@ namespace App\Http\Controllers;
  */
 
 use App\Helpers\File;
-use App\Helpers\userHelper;
+use App\Helpers\UserHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

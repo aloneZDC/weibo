@@ -7,7 +7,7 @@ namespace App\Helpers;
  *
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
-class userHelper
+class UserHelper
 {
     private $preferences = [];
 

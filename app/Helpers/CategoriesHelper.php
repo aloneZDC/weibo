@@ -7,7 +7,7 @@ namespace App\Helpers;
  *
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
-class categoriesHelper
+class CategoriesHelper
 {
     public static function separateTypesCategories($data)
     {
