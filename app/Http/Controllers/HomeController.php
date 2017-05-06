@@ -10,7 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\FreeProduct;
-use App\Helpers\productsHelper;
+use App\Helpers\ProductsHelper;
 use Antvel\Product\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductsController;
@@ -29,7 +29,7 @@ class HomeController extends Controller
             ],
         ];
 
-        $helperProd = new productsHelper();
+        $helperProd = new ProductsHelper();
 
         $carousel = $helperProd->suggest('carousel');
         $viewed = $helperProd->suggest('viewed', 8);

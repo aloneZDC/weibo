@@ -171,7 +171,7 @@ class ProductsHelper
              *
              * @var [type]
              */
-            $level = categoriesHelper::level($array, $row['category_id']);
+            $level = CategoriesHelper::level($array, $row['category_id']);
 
             $s = '';
             for ($i = 0; $i < $level; $i++) {

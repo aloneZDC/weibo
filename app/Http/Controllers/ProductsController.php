@@ -10,9 +10,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\FreeProductOrder;
-use App\Helpers\featuresHelper;
+use App\Helpers\FeaturesHelper;
 use App\Helpers\File;
-use App\Helpers\productsHelper;
+use App\Helpers\ProductsHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use App\Order;
@@ -100,13 +100,13 @@ class ProductsController extends Controller
         $typeItem = 'item';
 
         //categories drop down formatted
-        productsHelper::categoriesDropDownFormat($arrayCategories, $categories);
+        ProductsHelper::categoriesDropDownFormat($arrayCategories, $categories);
 
         $disabled = '';
         $edit = false;
         $panel = $this->panel;
         $oldFeatures = ProductDetail::oldFeatures([]);
-        $productsDetails = new featuresHelper();
+        $productsDetails = new FeaturesHelper();
 
         return view('products.form',
                 compact('product', 'panel', 'features', 'categories', 'condition', 'typeItem', 'typesProduct', 'disabled', 'edit', 'oldFeatures', 'productsDetails'));
@@ -297,7 +297,7 @@ class ProductsController extends Controller
 
             //retrieving products groups of the product shown
             if (count($product->group)) {
-                $featuresHelper = new featuresHelper();
+                $featuresHelper = new FeaturesHelper();
                 $product->group = $featuresHelper->group($product->group);
             }
 
@@ -339,7 +339,7 @@ class ProductsController extends Controller
         $categories = ['' => trans('product.controller.select_category')];
 
         //categories drop down formatted
-        productsHelper::categoriesDropDownFormat($allCategoriesStore, $categories);
+        ProductsHelper::categoriesDropDownFormat($allCategoriesStore, $categories);
 
         $condition = ['new' => trans('product.controller.new'), 'refurbished' => trans('product.controller.refurbished'), 'used' => trans('product.controller.used')];
 
@@ -348,7 +348,7 @@ class ProductsController extends Controller
 
         $oldFeatures = ProductDetail::oldFeatures($product->features);
 
-        $productsDetails = new featuresHelper();
+        $productsDetails = new FeaturesHelper();
 
         return view('products.form', compact('product', 'panel', 'features', 'categories', 'condition', 'typeItem', 'disabled', 'edit', 'oldFeatures', 'productsDetails'));
     }
