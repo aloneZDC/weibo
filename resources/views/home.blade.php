@@ -19,6 +19,7 @@
                 <div id="store-home-carousel" class="carousel slide" data-ride="carousel">
 
                     {{-- indicators --}}
+
                     <ol class="carousel-indicators">
                         @for ($s=0; $s<count($suggestion['carousel']); $s++)
                             <li data-target="#store-home-carousel" data-slide-to="{{ $s }}" @if ($s==0) class="active" @endif ></li>
@@ -28,7 +29,7 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
 
-                    <?php $pos = 0; ?>
+                    <?php $pos = 0; $i = 0; ?>
                     @foreach ($suggestion['carousel'] as $product)
 
                         {{-- slide items --}}
@@ -37,14 +38,14 @@
                             @if (isset($banner[$pos]))
                                 <img src= "{{ $banner[$pos++] }}" alt="{{ $product['name'] }}">
                             @else
-                                <img src="/img/no-image.jpg" alt="{{ $product['name'] }}">
+                                <img src="/img/no-image.jpg" alt="{{ str_limit($product['name'], 30) }}">
                             @endif
                             {{-- panel --}}
-                            <div class="jumbotron {{ $jumbotronClasses[mt_rand(0,1)] }} ">
+                            <div class="jumbotron jumbotron-box-left">
 
                                 <h5>{{ $product['name'] }}</h5>
 
-                                <p class = "description">{{ str_limit($product['description'], 200,'...') }}</p>
+                                <p class = "description">{{ str_limit($product['description'], 100,'...') }}</p>
 
                                 @if ($product['price'] > 0)
                                     <p class = "price">
@@ -137,7 +138,7 @@
 
                     <div class="container-fluid marketing">
                         <div class="row">
-                            @foreach ($suggestion['viewed'] as $product)
+                            @foreach ($suggestion['product_viewed'] as $product)
                                 @include('products.partial.productBox', $product)
                             @endforeach
                         </div>
@@ -154,7 +155,7 @@
 
                     <div class="container-fluid marketing">
                         <div class="row">
-                            @foreach ($suggestion['categories'] as $product)
+                            @foreach ($suggestion['product_categories'] as $product)
                                 @include('products.partial.productBox', $product)
                             @endforeach
                         </div>
@@ -175,7 +176,7 @@
 
                     <div class="container-fluid marketing">
                         <div class="row">
-                            @foreach ($suggestion['purchased'] as $product)
+                            @foreach ($suggestion['product_purchased'] as $product)
                                 @include('products.partial.productBox', $product)
                             @endforeach
                         </div>

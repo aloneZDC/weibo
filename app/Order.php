@@ -8,17 +8,19 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use Antvel\AddressBook\Models\Address;
-use App\Eloquent\Model;
-use App\Http\Controllers\ProductsController as ProductsController;
-use App\Http\Controllers\UserController as UserController;
 use App\Log;
 use App\Notice;
 use App\OrderDetail;
-use App\Product;
 use App\VirtualProduct;
+use App\Eloquent\Model;
 use App\VirtualProductOrder;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\ProductsController as ProductsController;
+
+//shop components.
+use Antvel\Product\Models\Product;
+use Antvel\AddressBook\Models\Address;
+use Antvel\User\UsersRepository as Users;
 
 class Order extends Model
 {
@@ -337,7 +339,7 @@ class Order extends Model
 
                     //saving tags in users preferences
                     if (trim($orderDetail->product->tags) != '') {
-                        UserController::setPreferences('product_purchased', explode(',', $orderDetail->product->tags));
+                        Users::updatePreferences('product_purchased', $product->tags);
                     }
                 }
             }

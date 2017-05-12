@@ -8,29 +8,30 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use Antvel\AddressBook\Models\Address;
-use App\Business;
-use App\Comment;
-use App\Helpers\ProductsHelper;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\ProductsController as ProductsController;
 use App\Log;
-use App\Notice;
 use App\Order;
-use App\OrderDetail;
-use App\Product;
-use App\Repositories\OrderRepository;
-use App\User;
-use App\VirtualProduct;
-use App\VirtualProductOrder;
+use App\Notice;
+use App\Comment;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\OrderDetail;
+use App\VirtualProduct;
 use Illuminate\Http\Request;
+use App\VirtualProductOrder;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+//shop components.
+use App\User;
+use Antvel\Product\Products;
+use Antvel\User\Models\Business;
+use Antvel\Product\Models\Product;
+use Antvel\AddressBook\Models\Address;
 
 class OrdersController extends Controller
 {
@@ -42,17 +43,26 @@ class OrdersController extends Controller
     protected $order;
 
     /**
+     * Products suggestions based on user's preferences.
+     *
+     * @var array
+     */
+    protected $suggestions;
+
+    /**
      * Create a new controller instance.
      *
      * @param OrderRepository $order
      *
      * @return void
      */
-    public function __construct(OrderRepository $order)
+    public function __construct(OrderRepository $order, Products $products)
     {
         $this->middleware('auth');
 
         $this->order = $order;
+        $suggestions = $products->suggestForPreferences(['product_purchased']);
+        $this->suggestions = $suggestions['product_purchased']->toArray();
     }
 
     /**
@@ -381,10 +391,6 @@ class OrdersController extends Controller
 
         $user = \Auth::user();
 
-        $productsHelper = new ProductsHelper();
-
-        $suggestions = [];
-
         $hasWishList = true;
 
         $hasLaterCart = true;
@@ -460,7 +466,6 @@ class OrdersController extends Controller
             if ($cart) {
                 if ($cart->details && $cart->details->count() > 0) {
                     //saving the ids selected to not include them into suggestions.
-                    $productsHelper->setToHaystack($cart->details, 'product_id');
                 } else {
                     $hasWishList = false;
                 }
@@ -470,10 +475,7 @@ class OrdersController extends Controller
 
             //evaluating wish list
             if ($laterCart) {
-                if ($laterCart->details && $laterCart->details->count() > 0) {
-                    //saving the ids selected to not include them into suggestions.
-                    $productsHelper->setToHaystack($laterCart->details, 'product_id');
-                } else {
+                if (! $laterCart->details && $laterCart->details->count() == 0) {
                     $hasLaterCart = false;
                 }
             } else {
@@ -489,10 +491,8 @@ class OrdersController extends Controller
             'center' => ['width' => '12'],
         ];
 
-        //suggestions based on cart content
-        $suggestions = ProductsController::getSuggestions(['preferences_key' => Session::get('suggest-listed'), 'limit' => 4]);
 
-        Session::forget('suggest-listed');
+        $suggestions = $this->suggestions;
 
         return view('orders.wish',
             compact(
@@ -533,8 +533,7 @@ class OrdersController extends Controller
             'center' => ['width' => '12'],
         ];
 
-        //suggestionst
-        $suggestions = ProductsController::getSuggestions(['limit' => 4]);
+        $suggestions = $this->suggestions;
 
         return view('orders.wishListsDirectory', compact('orders', 'panel', 'suggestions'));
     }
@@ -551,7 +550,7 @@ class OrdersController extends Controller
         /*
          * $suggest-listed keeps tracking listed products to control the suggestion view
          */
-        Session::forget('suggest-listed');
+        // Session::forget('suggest-listed');
 
         /**
          * $totalAmount saves the shopping cart total amount.
@@ -689,10 +688,7 @@ class OrdersController extends Controller
             'center' => ['width' => '12'],
         ];
 
-        //suggestions based on cart content
-        $suggestions = ProductsController::getSuggestions(['preferences_key' => Session::get('suggest-listed'), 'limit' => 4]);
-
-        Session::forget('suggest-listed');
+        $suggestions = $this->suggestions;
 
         return view('orders.cart', compact('cart', 'user', 'panel', 'laterCart', 'suggestions', 'totalItems', 'totalAmount'));
     }

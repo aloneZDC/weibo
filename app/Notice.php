@@ -8,8 +8,8 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Eloquent\Collection;
 use App\Eloquent\Model;
+use App\Eloquent\Collection;
 
 class Notice extends Model
 {

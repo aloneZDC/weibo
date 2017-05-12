@@ -8,9 +8,9 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
+use App\Notice;
 use App\ActionType;
 use App\Http\Controllers\Controller;
-use App\Notice;
 
 class NoticesController extends Controller
 {

@@ -9,7 +9,7 @@ namespace App\Helpers;
  */
 
 use App\Order;
-use App\Product;
+use Antvel\Product\Models\Product;
 
 class Menu
 {

@@ -17,7 +17,7 @@ class User extends BaseUser
 {
     public function Product()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('Antvel\Product\Products');
     }
 
     //Cart Manage

@@ -165,6 +165,8 @@ class UserHelper
 
             //product_viewed, product_purchased, product_shared, and my_searches suggestions
             default:
+            dd($preferences);
+
                 if (isset($preferences[$preferences_key]) && count($preferences[$preferences_key]) > 0) {
                     foreach ($preferences[$preferences_key] as $value) {
                         if (trim($value['tag']) != '') {

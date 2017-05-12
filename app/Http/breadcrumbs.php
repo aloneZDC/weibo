@@ -6,6 +6,8 @@
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
+use Antvel\Categories\Models\Category;
+
 //home
 Breadcrumbs::register('home', function ($breadcrumbs) {
     $breadcrumbs->push(trans('globals.home'), route('home'));
@@ -20,15 +22,8 @@ Breadcrumbs::register('products', function ($breadcrumbs) {
 //products detail
 Breadcrumbs::register('productDetail', function ($breadcrumbs, $product) {
     $breadcrumbs->parent('products');
-    $list = [];
-    $catProd = app\Category::find($product->categories->id);
-    $categoriesTree = app\Category::parentsTree($catProd->category_id, $list);
 
-    $list = array_reverse($list);
-
-    foreach ($list as $value) {
-        $breadcrumbs->push($value['name'], 'products?category='.urlencode($value['id'].'|'.$value['name']));
-    }
+    $catProd = Category::find($product->category->id); //while refactoring
 
     $breadcrumbs->push($catProd->name, 'products?category='.urlencode($catProd->id.'|'.$catProd->name));
     $breadcrumbs->push($product->name, route('products.index', $product->id));

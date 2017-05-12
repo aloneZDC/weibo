@@ -9,9 +9,9 @@ namespace App;
  */
 
 use App\Order;
+use App\Notice;
 use App\ActionType;
 use App\Eloquent\Model;
-use App\Notice;
 
 class Comment extends Model
 {

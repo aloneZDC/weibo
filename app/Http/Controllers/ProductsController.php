@@ -8,24 +8,27 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Category;
-use App\FreeProductOrder;
-use App\Helpers\FeaturesHelper;
-use App\Helpers\File;
-use App\Helpers\ProductsHelper;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\UserController;
 use App\Order;
 use App\OrderDetail;
-use App\Product;
+use App\Helpers\File;
 use App\ProductDetail;
-use App\User;
 use App\VirtualProduct;
+use App\FreeProductOrder;
 use Illuminate\Http\Request;
+use App\Helpers\FeaturesHelper; //WIP
+use App\Helpers\ProductsHelper;
 use Illuminate\Support\Collection;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+
+//shop components.
+use App\User;
+use Antvel\Product\Products;
+use Antvel\Product\Models\Product;
+use Antvel\Categories\Models\Category;
+use Antvel\User\UsersRepository as Users;
 
 class ProductsController extends Controller
 {
@@ -50,18 +53,35 @@ class ProductsController extends Controller
         'center' => ['width' => '10'],
     ];
 
+    /**
+     * The Antvel products component.
+     *
+     * @var Products
+     */
+    protected $products = null;
+
+    /**
+     * Creates a new instance.
+     *
+     * @param Products $products
+     */
+    public function __construct(Products $products)
+    {
+        $this->products = $products;
+    }
+
     public function myProducts(Request $request)
     {
         $filter = $request->get('filter');
         if ($filter && $filter != '') {
             switch ($filter) {
-                case 'active': $products = Product::auth()->actives()->where('type', '<>', 'freeproduct')->paginate(12); break;
-                case 'inactive': $products = Product::auth()->inactives()->where('type', '<>', 'freeproduct')->paginate(12); break;
-                case 'low': $products = Product::auth()->whereRaw('stock <= low_stock')->where('type', '<>', 'freeproduct')->paginate(12); break;
-                default: $products = Product::auth()->where('type', '<>', 'freeproduct')->paginate(12); break;
+                case 'active': $products = Product::where('user_id', auth()->user()->id)->actives()->where('type', '<>', 'freeproduct')->paginate(12); break;
+                case 'inactive': $products = Product::where('user_id', auth()->user()->id)->inactives()->where('type', '<>', 'freeproduct')->paginate(12); break;
+                case 'low': $products = Product::where('user_id', auth()->user()->id)->whereRaw('stock <= low_stock')->where('type', '<>', 'freeproduct')->paginate(12); break;
+                default: $products = Product::where('user_id', auth()->user()->id)->where('type', '<>', 'freeproduct')->paginate(12); break;
             }
         } else {
-            $products = Product::auth()->where('type', '<>', 'freeproduct')->paginate(12);
+            $products = Product::where('user_id', auth()->user()->id)->where('type', '<>', 'freeproduct')->paginate(12);
         }
         $panel = $this->panel;
 
@@ -250,7 +270,7 @@ class ProductsController extends Controller
             'group' => function ($query) {
                 $query->select(['id', 'products_group', 'features']);
             },
-        ])->with('categories')->find($id);
+        ])->with('category')->find($id);
 
         if ($product) {
 
@@ -270,7 +290,7 @@ class ProductsController extends Controller
 
             //saving the product tags into users preferences
             if (trim($product->tags) != '') {
-                UserController::setPreferences('product_viewed', explode(',', $product->tags));
+                Users::updatePreferences('product_viewed', $product->tags);
             }
 
             //receiving products user reviews & comments
@@ -289,16 +309,12 @@ class ProductsController extends Controller
 
             $freeproductId = isset($freeproduct) ? $freeproduct->freeproduct_id : 0;
 
-            //products suggestions control
-            //saving product id into suggest-listed, in order to exclude products from suggestions type "view"
-            Session::push('suggest-listed', $product->id);
-            $suggestions = $this->getSuggestions(['preferences_key' => $product->id, 'limit' => 4]);
-            Session::forget('suggest-listed');
+            $suggestions = $this->products->suggestForPreferences(['product_viewed']);
+            $suggestions = $suggestions['product_viewed']->toArray();
 
             //retrieving products groups of the product shown
             if (count($product->group)) {
-                $featuresHelper = new FeaturesHelper();
-                $product->group = $featuresHelper->group($product->group);
+                $product->group = (new FeaturesHelper())->group($product->group);
             }
 
             return view('products.detailProd', compact('product', 'panel', 'allWishes', 'reviews', 'freeproductId', 'features', 'suggestions'));
@@ -811,141 +827,6 @@ class ProductsController extends Controller
     }
 
     /**
-     * To get the products suggestion, taking in account either the preference key, such as
-     * (product_viewed, product_purchased, product_shared, product_categories, my_searches), or all of them.
-     *
-     * @param [array] $data, which is the suggest configuration
-     *
-     * @return [array] $products, which will contain all the suggestion for the user either in session or suggested
-     */
-    public static function getSuggestions($data)
-    {
-        $options = [
-            'user_id'         => '',
-            'preferences_key' => '',
-            'limit'           => '4',
-            'category'        => '',
-            'select'          => '*', //array with items to select
-        ];
-
-        $suggest_listed = Session::get('suggest-listed');
-
-        if (count($suggest_listed)) {
-            $suggest_listed = array_unique($suggest_listed);
-        } else {
-            $suggest_listed = [];
-        }
-
-        $data = $data + $options;
-        $diff = 0;
-        $productsHelper = new ProductsHelper();
-        $needle['tags'] = [];
-
-        // the suggestions based on one id (one product)
-        if (is_int($data['preferences_key'])) {
-            $data['preferences_key'] = [$data['preferences_key']];
-        }
-
-        // the suggestions based on a list of products
-        if (is_array($data['preferences_key'])) {
-            foreach ($data['preferences_key'] as $id) {
-                $needleAux = Product::select('tags', 'name')
-                    ->where('id', $id)
-                    ->free()
-                    ->orderBy('rate_count', 'desc')
-                    ->first()
-                    ->toArray();
-
-                //extraction of tags and name of products
-                $needle['tags'] = array_merge($needle['tags'],
-                                              explode(',', trim($needleAux['tags'])),
-                                              explode(' ', trim($needleAux['name'])));
-            }
-        } else {
-            $needle = UserController::getPreferences($data['preferences_key']); //getting the user preferences
-        }
-
-        if (count($needle['tags']) > 0) {
-            //by preferences
-            if ($data['preferences_key'] == 'product_categories') {
-                //look up by categories. If we want to get a specific category, we have to add "category" to data array
-                \DB::enableQueryLog();
-                $products[0] = Product::select($data['select'])
-                                        ->free()
-                                        ->whereNotIn('id', $suggest_listed)
-                                        ->inCategories('category_id', $needle['tags'])
-                                        ->orderBy('rate_count', 'desc')
-                                        ->take($data['limit'])
-                                        ->get()
-                                        ->toArray();
-            } else {
-                //look up by products tags and name
-                $products[0] = Product::select($data['select'])
-                    ->free()
-                    ->whereNotIn('id', $suggest_listed)
-                    ->like(['tags', 'name'], $needle['tags'])
-                    ->orderBy('rate_count', 'desc')
-                    ->take($data['limit'])
-                    ->get()
-                    ->toArray();
-            }
-        }
-
-        $diff = $data['limit'] - (isset($products[0]) ? count($products[0]) : 0); //limit control
-
-        //if we get suggestion results, we save those id
-        if (isset($products[0])) {
-            $productsHelper->setToHaystack($products[0]);
-        }
-
-        //by rate
-        if ($diff > 0 && $diff <= $data['limit']) {
-            $products[1] = Product::select($data['select'])
-                                    ->where($productsHelper->getFieldToSuggestions($data['preferences_key']), '>', '0')
-                                    ->whereNotIn('id', $suggest_listed)
-                                    ->free()
-                                    ->orderBy($productsHelper->getFieldToSuggestions($data['preferences_key']), 'DESC')
-                                    ->take($diff)
-                                    ->get()
-                                    ->toArray();
-
-            $diff = $diff - count($products[1]); //limit control
-        }
-
-        //if we get suggestion results, we save those id
-        if (isset($products[1])) {
-            $productsHelper->setToHaystack($products[1]);
-        }
-
-        //by rand
-        if ($diff > 0 && $diff <= $data['limit']) {
-            $products[2] = Product::select($data['select'])
-                ->free()
-                ->whereNotIn('id', $suggest_listed)
-                ->orderByRaw('RAND()')
-                ->take($diff)
-                ->get()
-                ->toArray();
-        }
-
-        //if we get suggestion results, we save those id
-        if (isset($products[2])) {
-            $productsHelper->setToHaystack($products[2]);
-        }
-
-        //making one array to return
-        $array = [];
-        $products = array_values($products);
-        for ($i = 0; $i < count($products); $i++) {
-            if (count($products[$i]) > 0) {
-                $array = array_merge($array, $products[$i]);
-            }
-        }
-
-        return $array;
-    }
-
-    /**
      * To get a existing category id from products.
      *
      * @return [integer] $category_id [product category id field]
@@ -980,27 +861,22 @@ class ProductsController extends Controller
 
         if ($crit != '') {
             if ($suggest) {
-                $response['products']['categories'] = Category::select('id', 'name')
-                                                        ->search($crit, null, true)
-                                                        ->actives()
-                                                        ->where('type', 'store')
-                                                        ->orderBy('name')
-                                                        ->take(3)
-                                                        ->get();
+                $response['products']['categories'] = [];
             }
 
-            $response['products']['results'] = Product::where(function ($query) use ($crit) {
-                $query->where('name', 'like', '%'.$crit.'%')
-                                                              ->orWhere('description', 'like', '%'.$crit.'%');
-            })
-                                                        ->select('id', 'name', 'products_group')
-                                                        ->actives()
-                                                        ->free()
-                                                        ->orderBy('rate_val', 'desc');
+            $response['products']['results'] = Product::select('id', 'name', 'products_group')
+                ->actives()
+                ->free()
+                ->where(function ($query) use ($crit) {
+                    $query->where('name', 'like', '%'.$crit.'%');
+                    $query->orWhere('description', 'like', '%'.$crit.'%');
+                })
+                ->orderBy('rate_val', 'desc');
+
             if ($group) {
                 $response['products']['results']->where(function ($query) use ($group) {
-                    $query->where('products_group', '<>', $group)
-                                                          ->orWhereNull('products_group');
+                    $query->where('products_group', '<>', $group);
+                    $query->orWhereNull('products_group');
                 })->where('id', '<>', $group);
             }
 
@@ -1031,18 +907,15 @@ class ProductsController extends Controller
             }
 
             if ($suggest) {
-                $response['products']['suggestions'] = self::getSuggestions([
-                                                                                            'user_id'         => \Auth::id(),
-                                                                                            'preferences_key' => 'my_searches',
-                                                                                            'limit'           => 3,
-                                                                                            'select'          => ['id', 'name', 'features'],
-                                                                                            ]);
+                $suggestions = $this->products->suggestForPreferences(['my_searches']);
+                $suggestions = $suggestions['my_searches']->toArray();
 
-                if (!$response['products']['categories']->count() && strlen($crit) > 2) {
+                $response['products']['suggestions'] = $suggestions;
+
+                if (! count($suggestions) && strlen($crit) > 2) {
                     $response['products']['categories'] = Category::select('id', 'name')
-                                                                ->search($deep, null, true)
                                                                 ->actives()
-                                                                ->where('type', 'store')
+                                                                ->where('name', 'like', '%' . $crit . '%')
                                                                 ->orderBy('name')
                                                                 ->take(3)
                                                                 ->get();

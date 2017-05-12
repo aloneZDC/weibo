@@ -8,8 +8,8 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Http\Controllers\Controller;
 use App\Log;
+use App\Http\Controllers\Controller;
 
 class LogController extends Controller
 {

@@ -8,9 +8,9 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Http\Controllers\Controller;
-use App\Product;
 use Illuminate\Http\Request;
+use Antvel\Product\Models\Product;
+use App\Http\Controllers\Controller;
 
 class ProductsGroupController extends Controller
 {

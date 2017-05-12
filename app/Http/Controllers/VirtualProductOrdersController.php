@@ -8,14 +8,14 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Http\Controllers\Controller;
+use App\User;
 use App\Order;
 use App\OrderDetail;
-use App\Product;
-use App\User;
 use App\VirtualProduct;
 use App\VirtualProductOrder;
 use Illuminate\Http\Request;
+use Antvel\Product\Models\Product;
+use App\Http\Controllers\Controller;
 
 class VirtualProductOrdersController extends Controller
 {

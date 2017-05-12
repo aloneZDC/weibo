@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Controllers\OrdersController;
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\OrdersController;
 
 class Authenticate
 {

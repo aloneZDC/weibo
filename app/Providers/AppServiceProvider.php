@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use App\Category;
 use App\Company;
-
+use Antvel\Categories\Categories;
 use Laravel\Dusk\DuskServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,11 +25,10 @@ class AppServiceProvider extends ServiceProvider
                 $main_company = Company::defaultCompany();
             }
 
-            $categories_menu = \Cache::remember('categories_mothers', 25, function () {
-                return Category::select('id', 'name')
-                  ->childsOf('mothers')
-                  ->actives()
-                  ->get()->toArray();
+            $categories_menu = \Cache::remember('categories_parents', 25, function () {
+                return $this->app->make(Categories::class)
+                    ->parents()
+                    ->toArray();
             });
 
             $menu = [];

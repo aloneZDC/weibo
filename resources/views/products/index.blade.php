@@ -239,7 +239,7 @@
                 </div>
             @endif
 
-            @if(isset($suggestions) && count($suggestions) > 0)
+            @if(isset($suggestions['my_searches']) && count($suggestions['my_searches']) > 0)
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">
@@ -248,7 +248,7 @@
                     <section class="products_view">
                             <div class="container-fluid marketing">
                                 <div class="row">
-                                    @foreach ($suggestions as $productSuggestion)
+                                    @foreach ($suggestions['my_searches'] as $productSuggestion)
                                         @include('products.partial.productBox', $productSuggestion)
                                     @endforeach
                                 </div>
