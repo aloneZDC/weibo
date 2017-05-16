@@ -1,7 +1,5 @@
 <?php
 
-Route::get('search/', 'ProductsController@searchAll');
-
 Route::get('products/{id}', ['uses' => 'ProductsController@show', 'as' => 'products.show']);
 
 Route::resource('productsoffers', 'ProductOffersController');

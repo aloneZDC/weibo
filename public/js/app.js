@@ -34,24 +34,27 @@ app.factory('Templates',function(){
 // Auto Complete Busqueda general
 app.controller('AutoCompleteCtrl', function($scope,$http,$location) {
 
-	//Envia formulario
+	//sending form
 	$scope.selectedItem = function(result){
 
-		if (result.kind === 'suggestions') {
+		if ('undefined' !== typeof result && result.kind === 'suggestions') {
 
-			window.location = '/products/'+result.originalObject.id;
+			window.location = '/products/' + result.originalObject.id;
 
-		}else if(result.kind === 'categories'){
+		}else if('undefined' !== typeof result && result.kind === 'categories'){
 
-			var filter = {"categories":{"name":result.title,"id":result.originalObject.id}};
-			$location.search('refine','['+JSON.stringify(filter)+']');
+			$location.search(
+				'category',
+				encodeURI(result.originalObject.id + '|' + result.title)
+			);
+
 			$location.path('/products/');
             window.location = $location.absUrl();
 
 		}else{
 
+			$('#search_value').val(result.title);
 			$('#searchForm').submit();
-
 		}
 	};
 });

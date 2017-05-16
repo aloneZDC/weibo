@@ -8,7 +8,7 @@
           pause="100"
           selected-object="selectedItem"
           match-class="highlight"
-          remote-url="/search/?group={{ isset($group) ? $group : 0 }}&suggest={{ !isset($suggest) ? 1 : 0 }}&crit="
+          remote-url = "{{ route('products.search') }}?q="
           auto-match="true"
           image-field="image"
           remote-url-data-field="products"
@@ -19,5 +19,5 @@
           text-no-results="{{ trans('globals.no_results') }}"
           minlength="3"
           input-class="form-control"/>
-          
+
 </div>

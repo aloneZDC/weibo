@@ -21,8 +21,6 @@
     {!! Breadcrumbs::render('productDetail', $product) !!}
 @stop
 
-
-
 @if($product->status==0)
     <div class="alert alert-danger" role="alert">
         {{ trans('product.show_view.status_inactive') }}
@@ -129,7 +127,7 @@
 
 	                    {!! Form::open(array('url' => route('orders.add_to_order',['cart',$product->id]), 'method' => 'put')) !!}
 
-	                    @if (auth()->user()->id != $product->user_id)
+	                    @if (auth()->check() && (auth()->user()->id != $product->user_id))
 		                    <div class="row">
 								<div class="col-lg-12">
 									<label for = "quantity">{{ trans('store.quantity_long') }}:</label>

@@ -8,6 +8,7 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
+use App\Order;
 use Antvel\Product\Products;
 use App\Http\Controllers\Controller;
 
@@ -36,6 +37,8 @@ class HomeController extends Controller
      */
     public function __construct(Products $products)
     {
+        $this->middleware('auth')->only('dashboard');
+
         $this->products = $products;
     }
 
@@ -99,8 +102,14 @@ class HomeController extends Controller
             'left'   => ['width' => '2', 'class' => 'user-panel'],
             'center' => ['width' => '10'],
         ];
-        $query = Product::where('user_id', \Auth::id())->Free()->get();
+
+        //temporary
+        $query = auth()->user()->products()
+            ->where('type', '<>', 'freeproduct')
+            ->get();
+
         $products = ['active' => 0, 'inactive' => 0, 'lowStock' => 0, 'all' => $query->count()];
+
         foreach ($query as $row) {
             if ($row->status) {
                 $products['active']++;
