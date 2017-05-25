@@ -383,12 +383,12 @@ class Order extends Model
                 ];
                 //dd($data['order']->details,$newOrder->id);
                 $title = trans('email.new_order_for_user.subject')." (#$newOrder->id)";
-                Mail::queue('emails.neworder', compact('data', 'title'), function ($message) use ($user) {
+                Mail::send('emails.neworder', compact('data', 'title'), function ($message) use ($user) {
                     $message->to($user->email)->subject(trans('email.new_order_for_user.subject'));
                 });
                 //Send a mail to the seller: Order has been placed
                 $title = trans('email.new_order_for_seller.subject')." (#$newOrder->id)";
-                Mail::queue('emails.sellerorder', compact('data', 'title'), function ($message) use ($email) {
+                Mail::send('emails.sellerorder', compact('data', 'title'), function ($message) use ($email) {
                     $message->to($email)->subject(trans('email.new_order_for_seller.subject'));
                 });
             }

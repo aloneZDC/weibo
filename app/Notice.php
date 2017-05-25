@@ -8,8 +8,8 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Eloquent\Model;
 use App\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class Notice extends Model
 {
@@ -32,70 +32,6 @@ class Notice extends Model
      * @var [array]
      */
     protected $actionsType = [1, 2, 3, 8, 9, 10, 11, 14, 15];
-
-    // protected $hidden = [ 'action', 'source' ];
-
-    /**
-     * Create one or more notices.
-     * If user and sender are the same, this notices will be ignored.
-     *
-     * @param array $attr attributes
-     *
-     * @return Model|Collection element(s) created
-     *
-     * optional:
-     * @attribute users : array with 2 users, notice to both users, sender and receiver
-     * @attribute user_ids : send a notice from sender to all that user receivers
-     */
-    public static function create(array $attr = [])
-    {
-        if (!isset($attr['status'])) {
-            $attr['status'] = 'new';
-        }
-        $notices = [];
-        if (isset($attr['users'])) {
-            if ($attr['users'][0] == $attr['users'][1]) {
-                return new Collection();
-            }
-            $user = $attr['users'];
-            unset($attr['users']);
-
-            return self::createMany([
-                $attr + ['user_id' => $user[0], 'sender_id' => $user[1]],
-                $attr + ['user_id' => $user[1], 'sender_id' => $user[0]],
-            ]);
-        } elseif (isset($attr['user_ids'])) {
-            $users = $attr['user_ids'];
-            unset($attr['user_ids']);
-            foreach ($users as $user) {
-                $notices[] = $attr + ['user_id' => $user];
-            }
-
-            return self::createMany($notices);
-        } else {
-            return ($attr['user_id'] == $attr['sender_id']) ? null : parent::create($attr);
-        }
-    }
-
-    /**
-     * create many notices.
-     * If user and sender are the same, this notices will be ignored.
-     *
-     * @param array $notices [description]
-     *
-     * @return [type] [description]
-     */
-    public static function createMany(array $notices)
-    {
-        $valids = [];
-        foreach ($notices as $notice) {
-            if ($notice['user_id'] != $notice['sender_id']) {
-                $valids[] = $notice;
-            }
-        }
-
-        return parent::createMany($valids);
-    }
 
     public function getActionAttribute()
     {
