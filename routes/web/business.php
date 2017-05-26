@@ -42,7 +42,5 @@ Route::group(['roles' => ['business', 'nonprofit', 'admin'], 'middleware' => ['a
 
     Route::post('freeproducts', ['uses' => 'FreeProductsController@store', 'as' => 'freeproducts.store']);
 
-    Route::get('products/myProducts', ['uses' => 'ProductsController@myProducts', 'as' => 'products.myProducts']);
-
     Route::post('/products/delete_img', ['uses' => 'ProductsController@deleteImg', 'as' => 'products.deleteImg']);
 });

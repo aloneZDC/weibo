@@ -24,10 +24,9 @@
                 <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="{{ route('products.myProducts') }}">{{ trans('globals.all') }}</a></li>
-                <li><a href="{{ route('products.myProducts').'?filter=active' }}">{{ trans('globals.active') }}</a></li>
-                <li><a href="{{ route('products.myProducts').'?filter=inactive' }}">{{ trans('globals.inactive') }}</a></li>
-                <li><a href="{{ route('products.myProducts').'?filter=low' }}">{{ trans('product.inputs_view.low_stock') }}</a></li>
+                <li><a href="{{ route('users.products') }}">{{ trans('globals.active') }}</a></li>
+                <li><a href="{{ route('users.products').'?inactives=1' }}">{{ trans('globals.inactive') }}</a></li>
+                <li><a href="{{ route('users.products').'?low_stock=1' }}">{{ trans('product.inputs_view.low_stock') }}</a></li>
                 </ul>
                 </div>
             </div>

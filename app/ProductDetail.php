@@ -9,6 +9,7 @@ namespace App;
  */
 
 use App\Eloquent\Model;
+use Antvel\Product\Models\Product;
 
 class ProductDetail extends Model
 {
@@ -44,7 +45,7 @@ class ProductDetail extends Model
 
     public function product()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany(Product::class);
     }
 
     public function order()

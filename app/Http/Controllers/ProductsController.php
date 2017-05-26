@@ -70,24 +70,6 @@ class ProductsController extends Controller
         $this->products = $products;
     }
 
-    public function myProducts(Request $request)
-    {
-        $filter = $request->get('filter');
-        if ($filter && $filter != '') {
-            switch ($filter) {
-                case 'active': $products = Product::where('user_id', auth()->user()->id)->actives()->where('type', '<>', 'freeproduct')->paginate(12); break;
-                case 'inactive': $products = Product::where('user_id', auth()->user()->id)->inactives()->where('type', '<>', 'freeproduct')->paginate(12); break;
-                case 'low': $products = Product::where('user_id', auth()->user()->id)->whereRaw('stock <= low_stock')->where('type', '<>', 'freeproduct')->paginate(12); break;
-                default: $products = Product::where('user_id', auth()->user()->id)->where('type', '<>', 'freeproduct')->paginate(12); break;
-            }
-        } else {
-            $products = Product::where('user_id', auth()->user()->id)->where('type', '<>', 'freeproduct')->paginate(12);
-        }
-        $panel = $this->panel;
-
-        return view('products.myProducts', compact('panel', 'products', 'filter'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
