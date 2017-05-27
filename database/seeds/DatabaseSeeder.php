@@ -1,7 +1,16 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
+/*
+ * This file is part of the Antvel App package.
+ *
+ * (c) Gustavo Ocanto <gustavoocanto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +23,12 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call('UsersTableSeeder'); //refactored
-        $this->call('CategoriesTableSeeder');
-        $this->call('AddressBookTableSeeder'); //refactored
-        $this->call('ProductsTableSeeder');
+        $this->call(UsersTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(AddressBookTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
         $this->call('ProductsDetailTableSeeder');
+        $this->call(ProductsFeaturesTableSeeder::class);
         $this->call('OrdersTableSeeder');
         $this->call('ProductsRatesSeeder');
         $this->call('LogsTableSeeder');

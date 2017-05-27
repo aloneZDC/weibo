@@ -1,10 +1,12 @@
 <?php
 
-/**
- * Antvel - Seeder
- * Categories Table.
+/*
+ * This file is part of the Antvel App package.
  *
- * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
+ * (c) Gustavo Ocanto <gustavoocanto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 use Illuminate\Database\Seeder;

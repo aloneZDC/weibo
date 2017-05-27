@@ -24,9 +24,9 @@ return [
    'separate_with_bar'         => 'Please separate them with bar "|"',
    'separate_with_commas'      => 'Please separate them with commas',
    'type_data'                 => 'Data type',
-   'type_input'                => 'Type Input',
+   'input_type'                => 'Type of Input', //used
    'type_message'              => 'Type of message',
-   'type_product'              => 'Type Product',
+   'product_type'              => 'Type of Product', //used
    'use_bar'                   => 'Use bar "|" to determine the number of values',
    'validation'                => 'Validation',
    'view_product_detail'       => 'View Product Detail',

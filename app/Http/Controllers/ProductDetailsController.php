@@ -583,7 +583,7 @@ class ProductDetailsController extends Controller
                     $data['default'] = $array['general'];
                 }
             } else {
-                if ($array['values']) {
+                if (isset($array['values']) && $array['values']) {
                     $data['condition'] = 'specific_data';
                 } else {
                     $data['condition'] = 'custom_specific_data';

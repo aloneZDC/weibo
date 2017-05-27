@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.0.11",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "5ae5d4bca60a8fecf066f61f52ac47acf592fbe9"
+                "reference": "fbd1a11603871f441fac1e326092153b49d0545b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/5ae5d4bca60a8fecf066f61f52ac47acf592fbe9",
-                "reference": "5ae5d4bca60a8fecf066f61f52ac47acf592fbe9",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/fbd1a11603871f441fac1e326092153b49d0545b",
+                "reference": "fbd1a11603871f441fac1e326092153b49d0545b",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-05-16 02:46:22"
+            "time": "2017-05-26 03:58:40"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -799,12 +799,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "0f5337f854ecdd722e7e289ff58cc252337e7a9d"
+                "reference": "653dc3db32a09797797e788d879367f9de67d52d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0f5337f854ecdd722e7e289ff58cc252337e7a9d",
-                "reference": "0f5337f854ecdd722e7e289ff58cc252337e7a9d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/653dc3db32a09797797e788d879367f9de67d52d",
+                "reference": "653dc3db32a09797797e788d879367f9de67d52d",
                 "shasum": ""
             },
             "require": {
@@ -920,7 +920,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-05-25 13:56:48"
+            "time": "2017-05-26 12:44:32"
         },
         {
             "name": "laravel/tinker",

@@ -299,6 +299,9 @@ return [
   'share_on_facebook'      => 'Share on Facebook',
   'share_on_twitter'       => 'Share on Twitter',
 
+  'created_at' => 'Creatd At', //used
+  'updated_at' => 'Updated At', //used
+
   //----
   'submit' => 'Submit'
 ];
