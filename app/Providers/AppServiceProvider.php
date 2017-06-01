@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
 
             $categories_menu = \Cache::remember('categories_parents', 25, function () {
                 return $this->app->make(Categories::class)
-                    ->parents()
+                    ->havingProducts()
                     ->toArray();
             });
 

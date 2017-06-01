@@ -301,6 +301,8 @@ return [
 
   'created_at' => 'Creatd At', //used
   'updated_at' => 'Updated At', //used
+  'text' => 'Text', //used
+  'select' => 'Select', //used
 
   //----
   'submit' => 'Submit'

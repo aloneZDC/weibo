@@ -5,9 +5,8 @@
 @section('content')
 	<div class="row">
 		<div class="col-lg-12">
-			<a href="{{ route('categories.create') }}" class="btn btn-success">
-				<i class="glyphicon glyphicon-plus"></i>&nbsp;
-				features
+			<a href="{{ route('features.create') }}" class="btn btn-success">
+				{{ trans('features.create') }}
 			</a>
 			<hr>
 		</div>

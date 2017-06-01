@@ -1,11 +1,18 @@
 <?php
 
 return [
+
+   'create' => 'Create new feature',
+   'edit' => 'Edit feature',
+   'input_type' => 'Type of Input',
+   'help_message' => 'Help message',
+
+   //////////////////////////////////////////////
    'one_is_required'           => '(at less one image is required)',
    'default_values'            => 'default values',
    'defaults_method_not_exist' => 'The method that you indicated does not exist in the helper',
    'defaults_required'         => 'The defaults are required',
-   'help_message'              => 'Help message',
+
    'help_messages'             => 'Help messages',
    'helper_method'             => 'Specify the name of the helper method (this method should be previously programmed)',
    'max_num_values'            => 'Maximum number of values',
@@ -24,7 +31,7 @@ return [
    'separate_with_bar'         => 'Please separate them with bar "|"',
    'separate_with_commas'      => 'Please separate them with commas',
    'type_data'                 => 'Data type',
-   'input_type'                => 'Type of Input', //used
+
    'type_message'              => 'Type of message',
    'product_type'              => 'Type of Product', //used
    'use_bar'                   => 'Use bar "|" to determine the number of values',

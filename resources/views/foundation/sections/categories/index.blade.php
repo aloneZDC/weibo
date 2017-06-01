@@ -6,8 +6,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<a href="{{ route('categories.create') }}" class="btn btn-success">
-				<i class="glyphicon glyphicon-plus"></i>&nbsp;
-				{{ trans('categories.registration_category') }}
+				{{ trans('categories.create') }}
 			</a>
 			<hr>
 		</div>

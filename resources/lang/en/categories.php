@@ -9,6 +9,7 @@ return [
    'update_title' => 'Update Category',
    'parent_category' => 'Parent Category',
    'registration_category' => 'Create Category',
+   'create' => 'Create new category',
 
    //----
 

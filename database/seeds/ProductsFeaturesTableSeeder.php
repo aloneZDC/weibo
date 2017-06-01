@@ -10,7 +10,7 @@
  */
 
 use Illuminate\Database\Seeder;
-use Antvel\Product\Features\Models\ProductFeatures;
+use Antvel\Product\Models\ProductFeatures;
 
 class ProductsFeaturesTableSeeder extends Seeder
 {
@@ -19,16 +19,6 @@ class ProductsFeaturesTableSeeder extends Seeder
         factory(ProductFeatures::class)->create([
             'name' => trans('globals.product_features.weight'),
             'product_type' => 'item',
-        ]);
-
-        factory(ProductFeatures::class)->create([
-            'name' => 'virtual size',
-            'product_type' => 'key',
-        ]);
-
-        factory(ProductFeatures::class)->create([
-            'name' => 'os',
-            'product_type' => 'key',
         ]);
 
         factory(ProductFeatures::class)->create([
