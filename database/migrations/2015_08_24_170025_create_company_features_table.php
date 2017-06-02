@@ -21,7 +21,7 @@ class CreateCompanyFeaturesTable extends Migration
         Schema::create('company_features', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->unsigned();
-            $table->string('description');
+            $table->string('description', 150);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('company_id')->references('id')->on('company');

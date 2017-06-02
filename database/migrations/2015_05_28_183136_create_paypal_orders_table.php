@@ -21,7 +21,7 @@ class CreatePaypalOrdersTable extends Migration
         Schema::create('paypal_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('payment_id');
+            $table->string('payment_id', 100);
             $table->integer('amount')->unsigned();
             $table->timestamps();
 

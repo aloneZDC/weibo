@@ -23,7 +23,7 @@ class CreateCommentsTable extends Migration
             $table->integer('action_type_id')->unsigned();
             $table->integer('source_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('comment', 500);
+            $table->string('comment', 250);
             $table->timestamps();
 
             $table->foreign('action_type_id')->references('id')->on('action_types');

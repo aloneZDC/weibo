@@ -25,7 +25,7 @@ class CreateProductDetailsTable extends Migration
             $table->json('default_values');
             $table->json('validation_rules');
             $table->json('help_message');
-            $table->string('type_products');
+            $table->string('type_products', 20);
             $table->smallInteger('max_num_values')->default(1);
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();

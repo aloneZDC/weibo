@@ -25,10 +25,10 @@ class CreateOrdersTable extends Migration
             $table->integer('seller_id')->unsigned()->nullable();
             $table->enum('status', array_keys(trans('globals.order_status')));
             $table->enum('type', ['cart', 'wishlist', 'order', 'later', 'freeproduct']);
-            $table->string('description')->nullable();
+            $table->string('description', 150)->nullable();
             $table->dateTime('end_date')->nullable(); //cancelled or paid
             $table->integer('rate')->nullable();
-            $table->string('rate_comment')->nullable();
+            $table->string('rate_comment', 250)->nullable();
             $table->boolean('rate_mail_sent')->default(false);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('address_id')->references('id')->on('addresses');

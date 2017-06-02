@@ -21,7 +21,7 @@ class CreateFreeproductsTable extends Migration
         Schema::create('freeproducts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->string('description');
+            $table->string('description', 250);
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('participation_cost');

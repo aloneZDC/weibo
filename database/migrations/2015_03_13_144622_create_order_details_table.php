@@ -27,7 +27,7 @@ class CreateOrderDetailsTable extends Migration
             $table->boolean('status')->default(1);
             $table->dateTime('delivery_date')->nullable();
             $table->integer('rate')->nullable();
-            $table->string('rate_comment')->nullable();
+            $table->string('rate_comment', 250)->nullable();
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('order_id')->references('id')->on('orders');
             $table->timestamps();
