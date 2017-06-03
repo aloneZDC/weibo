@@ -36,6 +36,13 @@
 					<input type="text" class="form-control" name="help_message" value="{{ old('help_message') }}">
 				</div>
 				<div class="form-group">
+					<label for="filterable">filterable:</label>
+					<select name="filterable" class="form-control">
+						<option value="1" @if (old('filterable') == '1') selected="selected" @endif >{{ trans('globals.yes') }}</option>
+						<option value="0" @if (old('filterable') == '0') selected="selected" @endif >{{ trans('globals.no') }}</option>
+					</select>
+				</div>
+				<div class="form-group">
 					<label for="name">{{ trans('globals.status') }}:</label>
 					<select name="status" class="form-control">
 						<option value="1" @if (old('status') == '1') selected="selected" @endif >{{ trans('globals.active') }}</option>

@@ -18,8 +18,8 @@
 				<div class="form-group">
 					<label for="name">{{ trans('features.input_type') }}:</label>
 					<select name="input_type" class="form-control">
-						<option value="text" @if ($feature->input_type == 'text') selected="selected" @endif >{{ trans('globals.text') }}</option>
-						<option value="select" @if ($feature->input_type == 'select') selected="selected" @endif >{{ trans('globals.select') }}</option>
+						<option value="text" @if (old('input_type') == 'text' || $feature->input_type == 'text') selected="selected" @endif >{{ trans('globals.text') }}</option>
+						<option value="select" @if (old('input_type') == 'select' || $feature->input_type == 'select') selected="selected" @endif >{{ trans('globals.select') }}</option>
 					</select>
 				</div>
 
@@ -36,6 +36,13 @@
 				<div class="form-group">
 					<label for="name">{{ trans('features.help_message') }}:</label>
 					<input type="text" class="form-control" name="help_message" value="{{ $feature->help_message }}">
+				</div>
+				<div class="form-group">
+					<label for="filterable">filterable:</label>
+					<select name="filterable" class="form-control">
+						<option value="1" @if ($feature->filterable == '1') selected="selected" @endif >{{ trans('globals.yes') }}</option>
+						<option value="0" @if ($feature->filterable == '0') selected="selected" @endif >{{ trans('globals.no') }}</option>
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="name">{{ trans('globals.status') }}:</label>
