@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Company;
 use Antvel\Categories\Categories;
+use Antvel\Company\Models\Company;
 use Laravel\Dusk\DuskServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,14 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $table = 'company';
+        $table = 'companies';
 
         if (\Schema::hasTable($table)) {
-            try {
-                $main_company = Company::find(1);
-            } catch (ModelNotFoundException $e) {
-                $main_company = Company::defaultCompany();
-            }
+
+            $main_company = Company::find(1);
 
             $categories_menu = \Cache::remember('categories_parents', 25, function () {
                 return $this->app->make(Categories::class)

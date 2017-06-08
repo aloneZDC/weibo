@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
+use Antvel\User\Models\User;
 use Illuminate\Database\Seeder;
-use Antvel\User\Models\{ User, Person, Business};
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,26 +21,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Person::class)->create([
-            'user_id' => factory(User::class, 'admin')->create()->first()->id
-        ]);
+        factory(User::class)->states('admin')->create();
 
-        factory(Business::class)->create([
-            'user_id' => factory(User::class, 'admin')->create([
-                'nickname' => 'antvel',
-                'email' => 'info@antvel.com'
-            ])->first()->id
-        ]);
+        factory(User::class)->states('seller')->create();
 
-        factory(Business::class, 1)->create([
-            'user_id' => factory(User::class, 'seller', 1)->create()->first()->id
-        ]);
+        factory(User::class)->states('customer')->create();
 
-        factory(Person::class, 1)->create([
-            'user_id' => factory(User::class, 'buyer', 1)->create()->first()->id
-        ]);
-
-        factory(Person::class, 3)->create();
-        factory(Business::class, 3)->create();
+        factory(User::class, 7)->create();
     }
 }

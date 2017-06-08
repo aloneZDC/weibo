@@ -38,7 +38,14 @@
                    href="{{ $groupFeatures[0]==$product->id? 'javascript:void(0);' : 'products/'.$groupFeatures[0] }}"
                    class="btn btn-xs {{ $groupFeatures[0]==$product->id? 'btn-primary':'btn-default' }}"
                    style="margin-top: 3px;">
-                    {{ $groupFeatures[1] }}
+                   @if (is_array($groupFeatures[1]))
+                        @foreach($groupFeatures[1] as $f)
+                            {{ $f }},
+                        @endforeach
+                    @else
+                            {{ $groupFeatures[1] }}
+                    @endif
+
                 </a>
 
             @endif

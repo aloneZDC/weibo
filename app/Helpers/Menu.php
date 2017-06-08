@@ -29,9 +29,9 @@ class Menu
             ['route' => route('user.index'), 'text' => trans('user.profile'), 'icon' => 'glyphicon glyphicon-user'],
             ['route' => route('addressBook.index'), 'text' => trans('user.address_book'), 'icon' => 'glyphicon glyphicon-map-marker', 'divider' => 1],
         ];
-        //Menu para empresas
-        if (\Auth::user()->hasRole(['business', 'admin'])) {
-            $products = Product::where('user_id', \Auth::id())->get();
+
+        if (auth()->check() && auth()->user()->hasRole(['seller', 'admin'])) { //will move to the foundation panel
+            $products = Product::get();
             $productsLowStock = 0;
             foreach ($products as $row) {
                 if ($row->stock <= $row->low_stock) {
@@ -51,11 +51,11 @@ class Menu
             ]);
         }
 
-        if (\Auth::user()->hasRole(['person', 'admin'])) {
+        if (auth()->check() && auth()->user()->hasRole(['customer', 'admin'])) {
             $menu[] = ['route' => '/user/orders', 'text' => trans('user.your_orders'), 'icon' => 'glyphicon glyphicon-shopping-cart', 'divider' => 1, 'cont' => 0];
         }
 
-        if (\Auth::user()->isTrusted() && config('app.offering_free_products')) {
+        if (config('app.offering_free_products')) {
             $menu[] = ['route' => '/user/myFreeProducts', 'text' => trans('user.your_free_products'), 'icon' => 'glyphicon glyphicon-star'];
         }
 
@@ -105,7 +105,7 @@ class Menu
     public static function backend($returnArray = false)
     {
         //Menu para empresas
-        if (\Auth::user()->hasRole(['business', 'admin'])) {
+        if (\Auth::user()->hasRole(['seller', 'admin'])) {
             $menu = [
                 ['route' => '/wpanel',            'text' => trans('user.dashboard'),              'icon' => 'glyphicon glyphicon-dashboard'],
                 ['route' => '/wpanel/profile',    'text' => trans('company.store_config'),        'icon' => 'glyphicon glyphicon-cog'],

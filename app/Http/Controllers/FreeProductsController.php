@@ -91,10 +91,6 @@ class FreeProductsController extends Controller
         $user = \Auth::user();
 
         if ($user) {
-            //If a user is not trusted, send the error. Avoiding direct access routes to action by invalid user
-            if (!$user->isTrusted()) {
-                return redirect()->route('orders.show_cart', [$order->id])->withErrors(trans('freeproduct.unauthorized_access'));
-            }
 
             //You can create free product from a sort order cart or wish list
             if (($order->type != 'cart') && ($order->type != 'wishlist')) {

@@ -26,7 +26,8 @@ class VirtualProductsSeeder extends Seeder
             $stock = $faker->numberBetween(20, 50);
             $product = Product::create([
                 'category_id'  => $faker->numberBetween(1, 9),
-                'user_id'      => '3', //$businesses->random(1)->user_id,
+                'created_by' => '3',
+                'updated_by' => '3',
                 'name'         => 'VIRTUAL '.$faker->unique()->catchPhrase,
                 'description'  => $faker->text(500),
                 'price'        => $price,

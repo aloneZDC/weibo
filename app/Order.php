@@ -63,25 +63,6 @@ class Order extends Model
         return $this->belongsToMany('App\FreeProduct')->withTimestamps();
     }
 
-    // public static function create(array $options = [])
-    // {
-    //     //separate order details
-    //     $details = [];
-    //     if (isset($options['details'])) {
-    //         $details = $options['details'];
-    //     }
-    //     if (isset($options['detail'])) {
-    //         $details[] = $options['detail'];
-    //     }
-    //     unset($options['detail'], $options['details']);
-    //     $order = parent::create($options);
-    //     if (count($details)) {
-    //         $order->inDetail()->saveMany(OrderDetail::createModels($details));
-    //     }
-
-    //     return $order;
-    // }
-
     public function save(array $options = [])
     {
         $status_changed = (isset($this->original['status']) && $this->attributes['status'] != $this->original['status']) || (isset($options['status']) && $this->attributes['status'] != $options['status']);
@@ -261,7 +242,10 @@ class Order extends Model
         $seller_email = [];
         foreach ($cartDetail as $orderDetail) {
             $product = Product::find($orderDetail->product_id);
-            $seller = User::find($product->user_id);
+            $seller = User::find($product->updated_by);
+
+            // dd($product, $seller);
+
             if (!in_array($seller->email, $seller_email)) {
                 $seller_email[] = $seller->email;
             }
@@ -313,8 +297,8 @@ class Order extends Model
             //Looks for all the different sellers in the cart
             $sellers = [];
             foreach ($cartDetail as $orderDetail) {
-                if (!in_array($orderDetail->product->user_id, $sellers)) {
-                    $sellers[] = $orderDetail->product->user_id;
+                if (!in_array($orderDetail->product->updated_by, $sellers)) {
+                    $sellers[] = $orderDetail->product->updated_by;
                 }
             }
             foreach ($sellers as $seller) {
@@ -329,7 +313,7 @@ class Order extends Model
                 $newOrder->sendNotice();
                 //moves the details to the new orders
                 foreach ($cartDetail as $orderDetail) {
-                    if ($orderDetail->product->user_id == $seller) {
+                    if ($orderDetail->product->updated_by == $seller) {
                         $orderDetail->order_id = $newOrder->id;
                         $orderDetail->save();
                     }

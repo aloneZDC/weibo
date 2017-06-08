@@ -17,23 +17,19 @@ class ProductsFeaturesTableSeeder extends Seeder
     public function run()
     {
         factory(ProductFeatures::class)->create([
-            'name' => trans('globals.product_features.weight'),
-            'product_type' => 'item',
+            'name' => trans('globals.product_features.weight')
         ]);
 
         factory(ProductFeatures::class)->create([
-            'name' => trans('globals.product_features.dimensions'),
-            'product_type' => 'item',
+            'name' => trans('globals.product_features.dimensions')
         ]);
 
         factory(ProductFeatures::class)->create([
-            'name' => trans('globals.product_features.color'),
-            'product_type' => 'item',
+            'name' => trans('globals.product_features.color')
         ]);
 
         factory(ProductFeatures::class)->create([
-            'name' => trans('globals.product_features.model'),
-            'product_type' => 'item',
+            'name' => trans('globals.product_features.model')
         ]);
     }
 }

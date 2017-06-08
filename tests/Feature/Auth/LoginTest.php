@@ -1,9 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Antvel Shop package.
+ *
+ * (c) Gustavo Ocanto <gustavoocanto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use Antvel\User\Models\{ User, Person };
+use Antvel\User\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LoginTest extends TestCase

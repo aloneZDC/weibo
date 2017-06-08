@@ -9,6 +9,7 @@
  * file that was distributed with this source code.
  */
 
+use Antvel\User\Models\User;
 use Illuminate\Database\Seeder;
 use Antvel\AddressBook\Models\Address;
 
@@ -21,12 +22,8 @@ class AddressBookTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = app()->make(\Antvel\User\UsersRepository::class)->find([
-            'nickname' => 'buyer'
-        ]);
-
-        factory(Address::class, 6)->create([
-            'user_id' => $user->id
+        factory(Address::class, 3)->create([
+            'user_id' => User::where('role', 'like', 'customer')->take(1)->first()->id
         ]);
     }
 }

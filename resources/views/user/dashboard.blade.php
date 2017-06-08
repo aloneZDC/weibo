@@ -27,10 +27,10 @@
 
 			<div class="list-group">
 				<a href="javascript:void(0);" class="list-group-item active">{{ trans('user.your_products') }}</a>
-				<a href="{{ route('products.myProducts') }}" class="list-group-item">{{ trans('globals.all') }}<span class="badge">{{ $products['all'] }}</span></a>
-				<a href="{{ route('products.myProducts').'?filter=active' }}" class="list-group-item">{{ trans('globals.active') }}<span class="badge">{{ $products['active'] }}</span></a>
-				<a href="{{ route('products.myProducts').'?filter=inactive' }}" class="list-group-item">{{ trans('globals.inactive') }}<span class="badge">{{ $products['inactive'] }}</span></a>
-				<a href="{{ route('products.myProducts').'?filter=low' }}" class="list-group-item">{{ trans('product.inputs_view.low_stock') }}<span class="badge">{{ $products['lowStock'] }}</span></a>
+				<a href="{{ route('products.myProducts') }}" class="list-group-item">{{ trans('globals.all') }}<span class="badge">1</span></a>
+				<a href="{{ route('products.myProducts').'?filter=active' }}" class="list-group-item">{{ trans('globals.active') }}<span class="badge">2</span></a>
+				<a href="{{ route('products.myProducts').'?filter=inactive' }}" class="list-group-item">{{ trans('globals.inactive') }}<span class="badge">3</span></a>
+				<a href="{{ route('products.myProducts').'?filter=low' }}" class="list-group-item">{{ trans('product.inputs_view.low_stock') }}<span class="badge">4</span></a>
 			</div>
 
 			<div class="list-group">

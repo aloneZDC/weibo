@@ -9,6 +9,7 @@ namespace App;
  */
 
 use App\Eloquent\Model;
+use Antvel\Product\Models\Product;
 
 class OrderDetail extends Model
 {
@@ -44,6 +45,6 @@ class OrderDetail extends Model
 
     public function getProductAttribute()
     {
-        return $this->hasOne('App\Product', 'id', 'product_id')->first();
+        return $this->hasOne(Product::class, 'id', 'product_id')->first();
     }
 }

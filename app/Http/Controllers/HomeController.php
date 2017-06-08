@@ -103,26 +103,9 @@ class HomeController extends Controller
             'center' => ['width' => '10'],
         ];
 
-        //temporary
-        $query = auth()->user()->products()
-            ->where('type', '<>', 'freeproduct')
-            ->get();
-
-        $products = ['active' => 0, 'inactive' => 0, 'lowStock' => 0, 'all' => $query->count()];
-
-        foreach ($query as $row) {
-            if ($row->status) {
-                $products['active']++;
-            } else {
-                $products['inactive']++;
-            }
-            if ($row->stock <= $row->low_stock) {
-                $products['lowStock']++;
-            }
-        }
-        unset($query);
         $query = Order::auth()->ofType('order')->get();
         $orders = ['closed' => 0, 'open' => 0, 'cancelled' => 0, 'all' => $query->count(), 'total' => 0, 'nopRate' => 0];
+
         foreach ($query as $row) {
             if ($row->status == 'cancelled') {
                 $orders['cancelled']++;
@@ -167,6 +150,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.dashboard', compact('panel', 'products', 'orders', 'sales'));
+        return view('user.dashboard', compact('panel', 'orders', 'sales'));
     }
 }

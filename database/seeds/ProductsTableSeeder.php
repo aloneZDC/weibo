@@ -19,10 +19,7 @@ class ProductsTableSeeder extends Seeder
 {
     public function run()
     {
-        $product = factory(Product::class, 150)->create([
-            'category_id'  => Category::inRandomOrder()->first()->id,
-            'user_id' => 3,
-        ]);
+        $product = factory(Product::class, 150)->create();
 
         $this->createOfferFor(
             $product->first()

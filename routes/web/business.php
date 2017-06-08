@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['roles' => ['business', 'nonprofit', 'admin'], 'middleware' => ['auth', 'roles']], function () {
+Route::group(['roles' => ['seller', 'admin'], 'middleware' => ['auth', 'roles']], function () {
     Route::resource('productsGroup', 'ProductsGroupController');
 
     Route::get('products/create', ['uses' => 'ProductsController@create', 'as' => 'products.create']);

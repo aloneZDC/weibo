@@ -16,11 +16,36 @@
                         <i class="glyphicon glyphicon-dashboard"></i>&nbsp;{{ trans('foundation.nav.home') }}
                     </a>
                 </li>
+                <li>
+                    <a href="#">
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Sellers
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Customers
+                    </a>
+                </li>
+
+
+
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="glyphicon glyphicon-briefcase"></i>&nbsp;Products <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ route('products.list') }}">
+                                <i class="glyphicon glyphicon-menu-right"></i>&nbsp;Manager
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
                         <li>
                             <a href="{{ route('features.index') }}">
                                 <i class="glyphicon glyphicon-menu-right"></i>&nbsp;Features

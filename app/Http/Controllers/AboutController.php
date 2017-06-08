@@ -8,7 +8,7 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Company;
+use Antvel\Company\Models\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactFormRequest;
 

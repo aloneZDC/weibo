@@ -30,7 +30,7 @@
 @section('content')
     @parent
 
-    @if (Auth::id()===$product->user_id)
+    @if (in_array(auth()->user()->role, ['admin', 'seller']))
         @section('panel_left_content')
             @include('user.partial.menu_dashboard')
 

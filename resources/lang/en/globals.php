@@ -6,11 +6,11 @@ return [
         'active'   => 'Active',
         'inactive' => 'Inactive',
     ],
-    'roles' => [
-        'admin'             => 'Administrator',
-        'business'          => 'Business',
-        'nonprofit'         => 'Non Profit',
-        'person'            => 'Customer',
+
+    'roles' => [ //used
+        'admin' => 'Administrator',
+        'seller' => 'Seller',
+        'customer' => 'Customer',
     ],
 
     'verification' => [

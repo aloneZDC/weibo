@@ -143,7 +143,8 @@ class ProductsController extends Controller
         $product = new Product();
         $product->name = $request->input('name');
         $product->category_id = $request->input('category_id');
-        $product->user_id = \Auth::id();
+        $product->created_by = \Auth::id();
+        $product->updated_by = \Auth::id();
         $product->description = $request->input('description');
         $product->bar_code = $request->input('bar_code');
         $product->brand = $request->input('brand');
@@ -237,18 +238,14 @@ class ProductsController extends Controller
 
         if ($user) {
             $allWishes = Order::ofType('wishlist')
-                ->where('user_id', $user->id)
+                // ->where('user_id', $user->id)
                 ->where('description', '<>', '')
                 ->orderBy('id', 'desc')
                 ->take(5)
                 ->get();
         }
 
-        $product = Product::select([
-            'id', 'category_id', 'user_id', 'name', 'description',
-            'price', 'stock', 'features', 'condition', 'rate_val',
-            'rate_count', 'low_stock', 'status', 'type', 'tags', 'products_group', 'brand',
-        ])->with([
+        $product = Product::with([
             'group' => function ($query) {
                 $query->select(['id', 'products_group', 'features']);
             },
@@ -257,7 +254,7 @@ class ProductsController extends Controller
         if ($product) {
 
             //if there is a user in session, the admin menu will be shown
-            if ($user && $user->id == $product->user_id) {
+            if ($user && in_array($user->role, ['admin', 'seller'])) {
                 $panel = [
                     'left'   => ['width' => '2'],
                     'center' => ['width' => '10'],
@@ -315,9 +312,6 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        if (\Auth::id() != $product->user_id) {
-            return redirect('products/'.$product->user_id)->withErrors(['not_access' => [trans('globals.not_access')]]);
-        }
 
         $typeItem = $product->type;
         $disabled = '';
@@ -382,9 +376,9 @@ class ProductsController extends Controller
             ->withErrors($features)->withInput();
         }
         $product = Product::find($id);
-        if (\Auth::id() != $product->user_id) {
-            return redirect('products/'.$product->user_id)->withErrors(['feature_images' => [trans('globals.not_access')]]);
-        }
+        // if (\Auth::id() != $product->user_id) {
+        //     return redirect('products/'.$product->user_id)->withErrors(['feature_images' => [trans('globals.not_access')]]);
+        // }
         if (!$order) {
             $product->name = $request->input('name');
             $product->category_id = $request->input('category_id');
@@ -396,6 +390,7 @@ class ProductsController extends Controller
         $product->brand = $request->input('brand');
         $product->price = $request->input('price');
         $product->features = $features;
+        $product->updated_by = \Auth::id();
         if ($request->input('type') == 'item') {
             $product->stock = $request->input('stock');
             $product->low_stock = $request->input('low_stock');
@@ -468,9 +463,9 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        if (\Auth::id() != $product->user_id) {
-            return redirect('products/'.$product->user_id)->withErrors(['feature_images' => [trans('globals.not_access')]]);
-        }
+        // if (\Auth::id() != $product->user_id) {
+        //     return redirect('products/'.$product->user_id)->withErrors(['feature_images' => [trans('globals.not_access')]]);
+        // }
         $product->status = 0;
         $product->save();
         Session::flash('message', trans('product.controller.saved_successfully'));
@@ -487,10 +482,10 @@ class ProductsController extends Controller
      */
     public function changeStatus($id)
     {
-        $product = Product::select('id', 'user_id', 'features', 'status', 'type')->find($id);
-        if (\Auth::id() != $product->user_id) {
-            return redirect('products/'.$product->user_id)->withErrors(['feature_images' => [trans('globals.not_access')]]);
-        }
+        $product = Product::select('id', 'features', 'status', 'type')->find($id);
+        // if (\Auth::id() != $product->user_id) {
+        //     return redirect('products/'.$product->user_id)->withErrors(['feature_images' => [trans('globals.not_access')]]);
+        // }
         $product->status = ($product->status) ? 0 : 1;
         $product->save();
         Session::flash('message', trans('product.controller.saved_successfully'));

@@ -6,5 +6,5 @@ Route::group(['prefix' => 'wpanel', 'roles' => 'admin', 'middleware' => ['auth',
 
     Route::resource('productsdetails', 'ProductDetailsController');
 
-    Route::resource('profile', 'CompanyController');
+    // Route::resource('profile', 'CompanyController');
 });

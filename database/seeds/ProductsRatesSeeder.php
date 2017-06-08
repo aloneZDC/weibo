@@ -43,10 +43,9 @@ class ProductsRatesSeeder extends Seeder
 
         $seededProduct = factory(Product::class)->create([
             'category_id'  => $catforseed->id,
-            'user_id' => '3'
+            'created_by' => '3',
+            'updated_by' => '3'
         ])->first();
-
-
 
         for ($j = 0; $j < 5; $j++) {
             $order = Order::create([
@@ -72,12 +71,14 @@ class ProductsRatesSeeder extends Seeder
 
         $seededProduct2 = factory(Product::class)->create([
             'category_id'  => $catforseed->id,
-            'user_id'      => '3',
+            'created_by' => '3',
+            'updated_by' => '3'
         ])->first();
 
         $seededProduct3 = factory(Product::class)->create([
             'category_id'  => $catforseed->id,
-            'user_id'      => '3'
+            'created_by' => '3',
+            'updated_by' => '3'
         ])->first();
 
 

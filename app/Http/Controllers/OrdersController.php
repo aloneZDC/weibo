@@ -1337,7 +1337,7 @@ class OrdersController extends Controller
     {
         $user = \Auth::user();
 
-        $where_field = $user->role == 'person' ? 'user_id' : 'seller_id';
+        $where_field = $user->role == 'customer' ? 'user_id' : 'seller_id';
 
         $filter = $request->get('filter') ? explode('*', $request->get('filter')) : [];
 
@@ -1355,7 +1355,7 @@ class OrdersController extends Controller
 
         $openOrders = Order::
             where($where_field, $user->id)
-            ->with('user.profile')
+            ->with('user')
             ->ofType('order')
             ->whereIn('status', ['open', 'pending', 'sent'])
             ->orderBy('created_at', 'desc')
@@ -1364,7 +1364,7 @@ class OrdersController extends Controller
 
         $closedOrders = Order::
             where($where_field, $user->id)
-            ->with('user.profile')
+            ->with('user')
             ->ofType('order')
             ->ofStatus('closed')
             ->ofDates($dateFrom, $dateTo)
@@ -1372,7 +1372,7 @@ class OrdersController extends Controller
 
         $cancelledOrders = Order::
             where($where_field, $user->id)
-            ->with('user.profile')
+            ->with('user')
             ->ofType('order')
             ->ofStatus('cancelled')
             ->ofDates($dateFrom, $dateTo)
@@ -1381,7 +1381,7 @@ class OrdersController extends Controller
         $unRate = Order::
             where($where_field, $user->id)
             ->with('details')
-            ->with('user.profile')
+            ->with('user')
             ->ofType('order')
             ->whereIn('status', ['received', 'closed'])
             ->whereNull('rate')

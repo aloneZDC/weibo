@@ -21,13 +21,7 @@ class CheckRole
         if (auth()->check() && $request->user()->hasRole($roles) || !$roles) {
             return $next($request);
         }
-        // return response([
-        // 	'error' => [
-        // 		'code' => 'INSUFFICIENT_ROLE',
-        // 		'description' => trans('user.insufficient_role')
-        // 	]
-        // ], 401);
-        //
+
         return redirect()->route('home');
     }
 
@@ -42,6 +36,6 @@ class CheckRole
     {
         $actions = $route->getAction();
 
-        return isset($actions['roles']) ? $actions['roles'] : ['person'];
+        return isset($actions['roles']) ? $actions['roles'] : ['customer'];
     }
 }

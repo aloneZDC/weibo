@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->call(CompanyTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(AddressBookTableSeeder::class);
@@ -33,12 +34,5 @@ class DatabaseSeeder extends Seeder
         $this->call('ProductsRatesSeeder');
         $this->call('LogsTableSeeder');
         $this->call('CommentsTableSeeder');
-        $this->call('VirtualProductsSeeder');
-        $this->call('CompanyTableSeeder');
-        $this->call('CompanyFeaturesSeeder');
-
-        if (config('app.offering_free_products')) {
-            $this->call('FreeProductsTableSeeder');
-        }
     }
 }
