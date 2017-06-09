@@ -2,7 +2,7 @@
 @section('content')
 
 <table width = "100%"  rowspan = "0" border = "0">
-    
+
     <thead>
         <tr style="background-color: #F4F4F4; color: #A1A0A0; text-align: center">
             <th>{{ trans('store.order_label') }}</th>
@@ -20,7 +20,7 @@
         <?php $total = \Utility::totalOrder($order->details); ?>
         <tr style="text-align: center">
             <td><a href="{{ route('orders.show_order', $order->id) }}" target="_blank">#{{ \Utility::codeMasked($order->id) }}</a></td>
-            <td>{{ $order->user->profile->fullName }}</td>
+            <td>{{ $order->user->fullName }}</td>
             <td>{{ $order->status }}</td>
             <td>{{ Carbon\Carbon::parse($order->created_at)->format('F j, Y') }}</td>
             <td>{{ Carbon\Carbon::parse($order->updated_at)->format('F j, Y') }}</td>
@@ -28,8 +28,8 @@
             <td style="text-align: right">{{ \Utility::showPrice($total['total']) }}</td>
         </tr>
         @endforeach
-    </tbody>  
-    
+    </tbody>
+
 </table>
 
 <p>&nbsp;</p>

@@ -1,22 +1,22 @@
 <style>
 	.report-font-style
 	{
-		font-size: 11px; 
-		font-family: 'Lato', sans-serif; 
-		font-style: normal; 
+		font-size: 11px;
+		font-family: 'Lato', sans-serif;
+		font-style: normal;
 		font-weight: normal;
 	}
 
 	h3
 	{
-		font-family: 'Lato', sans-serif; 
+		font-family: 'Lato', sans-serif;
 		color: #299CC2;
 	}
 
 	ul
 	{
-		color: #A1A0A0; 
-		list-style: none; 
+		color: #A1A0A0;
+		list-style: none;
 		padding: 0
 	}
 
@@ -50,7 +50,7 @@
 <table border="0" width="100%" cellpadding="0" cellspacing="0" class="report-font-style">
     <tr>
         <td>
-            <a href="{{ url() }}"><img src="{{ $main_company['logo'] }}" alt="antvel"></a>
+            <a href="{{ route('home') }}"><img src="{{ $main_company['logo'] }}" alt="antvel"></a>
         </td>
         <td>
         	<span>{{ $main_company['name'] }}</span><br>

@@ -17,7 +17,7 @@
     @section('center_content')
 
         <div class="page-header">
-            @if (\Auth::user()->role == 'person')
+            @if (\Auth::user()->role == 'customer')
                 <h5>{{ trans('user.your_orders') }}</h5>
             @else
                 <h5>{{ trans('user.your_sales') }}</h5>
@@ -69,13 +69,13 @@
                                             <?php $total = \Utility::totalOrder($order->details); ?>
                                             <tr>
                                                 <td class="text-center">
-                                                    @if (\Auth::user()->role == 'person')
+                                                    @if (\Auth::user()->role == 'customer')
                                                         <a href="{{ route('orders.show_order', $order->id) }}">#{{ \Utility::codeMasked($order->id) }}</a>
                                                     @else
                                                         <a href="{{ route('orders.show_seller_order', $order->id) }}">#{{ \Utility::codeMasked($order->id) }}</a>
                                                     @endif
                                                 </td>
-                                                <td class="text-left">{{ $order->user->profile['fullName'] }}</td>
+                                                <td class="text-left">{{ $order->user->fullName }}</td>
                                                 <td class="text-center"><a href="mailto:{{ $order->user->email }}">{{ $order->user->email }}</a></td>
                                                 <td class="text-center">{{ Carbon\Carbon::parse($order->updated_at)->format('F j, Y') }}</td>
                                                 <td class="text-center">{{ $total['qty'] }}</td>
@@ -124,7 +124,7 @@
                                             <?php $total = \Utility::totalOrder($order->details); ?>
                                             <tr>
                                                 <td class="text-center">
-                                                    @if (\Auth::user()->role == 'person')
+                                                    @if (\Auth::user()->role == 'customer')
                                                         <a href="{{ route('orders.show_order', $order->id) }}">#{{ \Utility::codeMasked($order->id) }}</a>
                                                     @else
                                                         <a href="{{ route('orders.show_seller_order', $order->id) }}">#{{ \Utility::codeMasked($order->id) }}</a>
@@ -179,7 +179,7 @@
                                             <?php $total = \Utility::totalOrder($order->details); ?>
                                             <tr>
                                                 <td class="text-center">
-                                                    @if (\Auth::user()->role == 'person')
+                                                    @if (\Auth::user()->role == 'customer')
                                                         <a href="{{ route('orders.show_order', $order->id) }}">#{{ \Utility::codeMasked($order->id) }}</a>
                                                     @else
                                                         <a href="{{ route('orders.show_seller_order', $order->id) }}">#{{ \Utility::codeMasked($order->id) }}</a>
@@ -234,7 +234,7 @@
                                             <?php $total = \Utility::totalOrder($order->details); ?>
                                             <tr>
                                                 <td class="text-center">
-                                                    @if (\Auth::user()->role == 'person')
+                                                    @if (\Auth::user()->role == 'customer')
                                                         <a href="{{ route('orders.show_order', $order->id) }}">
                                                             #{{ \Utility::codeMasked($order->id) }}
                                                         </a>
