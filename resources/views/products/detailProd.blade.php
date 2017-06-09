@@ -30,7 +30,7 @@
 @section('content')
     @parent
 
-    @if (in_array(auth()->user()->role, ['admin', 'seller']))
+    @if (auth()->check() && in_array(auth()->user()->role, ['admin', 'seller']))
         @section('panel_left_content')
             @include('user.partial.menu_dashboard')
 
@@ -125,9 +125,9 @@
 	        	<div class="panel panel-default">
 		        	<div class="panel-body">
 
-	                    {!! Form::open(array('url' => route('orders.add_to_order',['cart',$product->id]), 'method' => 'put')) !!}
+	                    {!! Form::open(array('url' => route('orders.add_to_order', [ 'destination' => 'cart', 'productId' => $product->id]), 'method' => 'put')) !!}
 
-	                    @if (auth()->check() && (auth()->user()->id != $product->user_id))
+	                    {{-- @if (true || auth()->check() && (auth()->user()->id != $product->user_id)) --}}
 		                    <div class="row">
 								<div class="col-lg-12">
 									<label for = "quantity">{{ trans('store.quantity_long') }}:</label>
@@ -182,18 +182,13 @@
 			                                    </ul>
 			                                </div>
 
-		                                @else
-		                                    <a  href="/auth/login btn-sm" class="btn btn-info full-width">
-		                                    	<span class="glyphicon glyphicon-heart"></span>&nbsp;
-		                                    	{{ trans('store.addToWishList') }}
-		                                    </a>
 		                                @endif
 
 								</div>
 		                    </div>
 
 							<hr>
-						@endif
+						{{-- @endif --}}
 
 	                    <div class="row">
 	                    	<div class="col-lg-12">

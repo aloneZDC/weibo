@@ -107,7 +107,6 @@ return [
     'subject'                     => 'CONGRATULATIONS. You have been selected as a winner of a product',
     'message1'                    => 'We are pleased to tell you that thanks to your participation in our free product, you turned WINNER selected. We invite you to check out the following link to be able to contact the owner of this product and thus be able to request delivery of the same.',
     'message2'                    => 'Thank you for your participation. Remember to leave your comments about your participation. For us it is very important. It will help us serve you better.',
-    'click_here'                  => 'Click here to view your holdings in freeproducts',
     ],
 
         ];

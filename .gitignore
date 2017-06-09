@@ -8,9 +8,8 @@ Homestead.yaml
 
 /storage/*.key
 /storage/files
-/storage/files/img/profile
-/storage/files/key_code/*.*
-/storage/files/files_downloadable/*.*
+/storage/images/avatars/*.*
+/storage/framework/testing/disks/images/avatars/*.*
 
 /public/hot
 /node_modules

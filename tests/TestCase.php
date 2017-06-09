@@ -57,4 +57,20 @@ abstract class TestCase extends BaseTestCase
 
         return $this;
     }
+
+    /**
+     * Swap the storage folder for the given path.
+     *
+     * @param  string $path
+     *
+     * @return void
+     */
+    protected function swapStorageFolder($path = null)
+    {
+        $path = $path ?: storage_path('framework/testing/disks');
+
+        $this->app->make('config')->set(
+            'filesystems.disks.local.root', $path
+        );
+    }
 }

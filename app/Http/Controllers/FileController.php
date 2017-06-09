@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 
 class FileController extends Controller
 {
+    //needs to be refactored
     public function img(Request $request, $file = '')
     {
         if (!$this->valid('img', $file)) {
@@ -23,6 +24,32 @@ class FileController extends Controller
         //if you need security add it here
         //can validate here alternative default pictures
         $this->showImg("img/$file", ['w' => $request->get('w'), 'h' => $request->get('h')]);
+    }
+
+    public function image(Request $request, $file = '')
+    {
+        if (!$this->valid('img', $file)) {
+            return $this->notFound();
+        }
+
+        //if you need security add it here
+        //can validate here alternative default pictures
+        $this->showImage($file, ['w' => $request->get('w'), 'h' => $request->get('h')]);
+    }
+
+    protected function showImage($file, $resize = [])
+    {
+        $path = storage_path('images');
+
+        $pathFile = $this->imgExist($path, $file, $resize);
+
+        if (! $pathFile) {
+            $pathFile = $path . '/no-image.jpg';
+        }
+
+        $imginfo = getimagesize($pathFile);
+        header('Content-type: '.$imginfo['mime']);
+        readfile($pathFile);
     }
 
     //validation functions

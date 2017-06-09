@@ -38,9 +38,5 @@ Route::group(['roles' => ['seller', 'admin'], 'middleware' => ['auth', 'roles']]
 
     Route::get('virtualDelivery/{orderId}/{productId}', ['uses' => 'OrdersController@deliveryVirtualProduct', 'as' => 'orders.virtualDelivery']);
 
-    Route::get('freeproducts/{OrderId}/create', ['uses' => 'FreeProductsController@create', 'as' => 'freeproducts.create']);
-
-    Route::post('freeproducts', ['uses' => 'FreeProductsController@store', 'as' => 'freeproducts.store']);
-
     Route::post('/products/delete_img', ['uses' => 'ProductsController@deleteImg', 'as' => 'products.deleteImg']);
 });

@@ -55,10 +55,6 @@ class Menu
             $menu[] = ['route' => '/user/orders', 'text' => trans('user.your_orders'), 'icon' => 'glyphicon glyphicon-shopping-cart', 'divider' => 1, 'cont' => 0];
         }
 
-        if (config('app.offering_free_products')) {
-            $menu[] = ['route' => '/user/myFreeProducts', 'text' => trans('user.your_free_products'), 'icon' => 'glyphicon glyphicon-star'];
-        }
-
         return $returnArray ? $menu : json_encode($menu);
     }
 

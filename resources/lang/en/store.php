@@ -128,16 +128,6 @@ return [
         'my_search'       => 'Products related to this search result',
     ],
 
-    'paypal' => [
-        'antvel_points_bundle' => 'Store Points Bundle',
-        'item_name1'           => 'Store Points (',
-        'item_name2'           => ' each)',
-        'user_cancelled'       => 'You have canceled the purchase at PayPal',
-        'error'                => 'PayPal notified that the purchase was canceled',
-        'approved'             => 'You Have Successfully Bought',
-        'approved2'            => 'Points Through PayPal',
-    ],
-
     'addToWishList'                          => 'Add to wish list',
     'all_categories'                         => 'All Categories',
     'canceledOrders'                         => 'Canceled Orders',

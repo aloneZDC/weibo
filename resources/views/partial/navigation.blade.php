@@ -32,16 +32,18 @@
 
 				@include('user.partial.menu_top')
 
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						<span class="fui fui-heart"></span>{{ trans('store.wish_list') }}
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{ route('orders.show_wish_list') }}">{{ trans('store.wish_list') }}</a></li>
-						<li><a href="{{ route('orders.show_list_directory') }}">{{ trans('store.your_wish_lists') }}</a></li>
-					</ul>
-				</li>
+				@if (auth()->check())
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+							<span class="fui fui-heart"></span>{{ trans('store.wish_list') }}
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ route('orders.show_wish_list') }}">{{ trans('store.wish_list') }}</a></li>
+							<li><a href="{{ route('orders.show_list_directory') }}">{{ trans('store.your_wish_lists') }}</a></li>
+						</ul>
+					</li>
+				@endif
 
 				<li class="dropdown">
 					<a href="#cart" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -105,24 +107,6 @@
 							</li>
 							<li>{!! link_to('user/notices/list', trans('globals.all')) !!}</li>
 						</ul>
-					</li>
-
-					@if (config('app.offering_user_points'))
-					<li>
-						<a href="{{ route('paypal.buy_points') }}" ng-controller = "PushUsersPoints" ng-init = "pusher()">
-							<span class="badge badge-points ng-hide" ng-cloak ng-show = "points" >[[ points | thousandSuffix ]]</span>
-							<span class="fui fui-radio-unchecked"></span>{{ trans('store.price') }}
-						</a>
-					</li>
-					@endif
-				@endif
-
-				@if (config('app.offering_free_products'))
-					<li>
-						<a href="{{ route('freeproducts.search') }}">
-							<span class="fui fui-star-2"></span>{{ trans('globals.products') }}
-							<span class="badge badge-freeproducts">{{ trans('globals.free') }}</span>
-						</a>
 					</li>
 				@endif
 

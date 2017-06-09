@@ -13,7 +13,9 @@ namespace Tests\Users\Feature;
 
 use Tests\TestCase;
 use Antvel\User\Models\User;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 use Antvel\User\Events\ProfileWasUpdated;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -128,5 +130,37 @@ class ProfileTest extends TestCase
         $errors = $this->app->make('session')->get('errors');
         $response->assertStatus(302);
         $this->assertCount(1, $errors->get('nickname'));
+    }
+
+    /** @test */
+    function an_authorized_user_can_update_his_profile_picture()
+    {
+        Storage::fake('images');
+        $this->swapStorageFolder();
+
+        $this->actingAs($this->user);
+
+        $response = $this->json('PATCH', route('user.update', ['user' => $this->user]), [
+            'referral' => 'upload',
+            'file' => $file = UploadedFile::fake()->image('avatar.jpg'),
+        ]);
+
+        tap($this->user->fresh()->pic_url, function ($pic_url) use ($file) {
+            $this->assertEquals('images/avatars/' . $file->hashName(), $pic_url);
+            Storage::disk('images')->assertExists('avatars/' . $file->hashName());
+        });
+    }
+
+    /** @test */
+    function an_unauthorized_user_cannot_update_his_profile_picture()
+    {
+        $response = $this->json('PATCH', route('user.update', ['user' => $this->user]), [
+            'referral' => 'upload',
+            'file' => $file = UploadedFile::fake()->image('avatar.jpg'),
+        ]);
+
+        $this->assertEquals($this->user->pic_url, $this->user->fresh()->pic_url);
+        $this->assertArrayHasKey('error', $response->decodeResponseJson());
+        $response->assertStatus(401);
     }
 }

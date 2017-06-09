@@ -63,7 +63,7 @@
 
                                     @if(Auth::user())
 
-                                        <a href="{{ route('orders.add_to_order',['wishlist', $product[($product['type']=='freeproduct')?'parent_id':'id']]) }}" class="btn btn-default btn-sm">
+                                        <a href="{{ route('orders.add_to_order',['wishlist', $product['id']]) }}" class="btn btn-default btn-sm">
                                             <div class = "glyphicon glyphicon-heart"></div>&nbsp;{{ trans('store.add_to_wish_list') }}
                                         </a>
 

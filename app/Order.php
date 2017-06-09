@@ -58,11 +58,6 @@ class Order extends Model
         return $this->hasMany('App\OrderDetail');
     }
 
-    public function freeproducts()
-    {
-        return $this->belongsToMany('App\FreeProduct')->withTimestamps();
-    }
-
     public function save(array $options = [])
     {
         $status_changed = (isset($this->original['status']) && $this->attributes['status'] != $this->original['status']) || (isset($options['status']) && $this->attributes['status'] != $options['status']);
@@ -215,7 +210,7 @@ class Order extends Model
     {
         $cart = self::ofType($type_order)->auth()->whereStatus('open')->orderBy('id', 'desc')->first();
 
-        $show_order_route = ($type_order == 'freeproduct') ? 'freeproducts.show' : 'orders.show_cart';
+        $show_order_route = 'orders.show_cart';
 
         $cartDetail = OrderDetail::where('order_id', $cart->id)->get();
 

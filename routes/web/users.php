@@ -1,10 +1,5 @@
 <?php
 
-Route::resource('typepreferences', 'TypePreferencesController');
-
-//points push notifications
-Route::get('getPoints', 'UserController@getPoints');
-
 //notices
 Route::get('user/notices/check/{id?}', 'NoticesController@check');
 
@@ -65,9 +60,4 @@ Route::group(['prefix' => 'user', 'roles' => array_keys(trans('globals.roles')),
     Route::post('rates/seller', ['uses' => 'OrdersController@rateSeller', 'as' => 'orders.rate_seller']);
 
     Route::post('rates/product', ['uses' => 'OrdersController@rateProduct', 'as' => 'orders.rate_product']);
-
-    //Freeproducts
-    Route::put('freeproducts/subscribe/{id}', ['uses' => 'FreeProductsController@subscribe', 'as' => 'freeproducts.subscribe']);
-
-    Route::get('myFreeProducts', ['uses' => 'FreeProductsController@myFreeProducts', 'as' => 'freeproducts.my_free_products']);
 });

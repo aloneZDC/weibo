@@ -72,15 +72,6 @@
                                     </a>
                                 @endif
                             </div>
-
-                            @if(isset($user) && config('app.offering_free_products'))
-
-                                <div class="btn-group pull-right">
-                                    <a href="{{ route('freeproducts.create',[$cart->id]) }}" type="button" class="btn btn-success">{{ trans('freeproduct.create') }}</a>
-                                    &nbsp;
-                                </div>
-
-                            @endif
                         </div>
                     </div>
                 </div>

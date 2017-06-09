@@ -58,7 +58,6 @@ return [
     'source_types'            => [
         'tag'                     => 'tag',
         'order'                   => 'order',
-        'free_product'            => 'free_product',
         'order_detail'            => 'order_detail',
         'paypal'                  => 'paypal',
     ],
@@ -78,7 +77,6 @@ return [
         'software'                => 'software',
         'software_key'            => 'software_key',
         'gift_card'               => 'gift_card',
-        'freeproduct'             => 'freeproduct',
     ],
     'filters' => [
         'categories'   => 'Categories',
@@ -110,8 +108,6 @@ return [
         //Order Details
         ['id' => 4, 'source_type' => 'order_detail', 'action' => 'create'],
         ['id' => 5, 'source_type' => 'order_detail', 'action' => 'update'],
-        //Free Products
-        ['id' => 12, 'source_type' => 'free_product', 'action' => 'check out'],
         //PayPal
         ['id' => 13, 'source_type' => 'paypal', 'action' => 'buy points'],
     ],
@@ -147,7 +143,6 @@ return [
         'shipping_returns'       => 'Shipping & Returns',
         'secure_shopping'        => 'Secure Shopping',
         'international_shipping' => 'International Shipping',
-        'free_products'          => 'Free Products every day',
         'business_sellers'       => 'Business Sellers',
     ],
     //------------ Globals Traductions----------------
@@ -258,7 +253,6 @@ return [
   'delivery'               => 'Anywhere delivery',
   'events'                 => 'Upcoming Events',
   'free'                   => 'Free',
-  'freeproducts'           => 'Free Products',
   'newsletter'             => 'Newsletter',
   'top_rated'              => 'Top Rated',
   'image'                  => 'Image',
