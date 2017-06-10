@@ -538,12 +538,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "8882b252f802cae96f0315c3608faef95af6a7f2"
+                "reference": "8dfe52c2d14a68ff3dce6af82058391c6c4eb9b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/8882b252f802cae96f0315c3608faef95af6a7f2",
-                "reference": "8882b252f802cae96f0315c3608faef95af6a7f2",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/8dfe52c2d14a68ff3dce6af82058391c6c4eb9b3",
+                "reference": "8dfe52c2d14a68ff3dce6af82058391c6c4eb9b3",
                 "shasum": ""
             },
             "require": {
@@ -595,7 +595,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-05-09 09:16:44"
+            "time": "2017-06-10 19:55:42"
         },
         {
             "name": "intervention/image",
@@ -816,12 +816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "fe928fbc651c2a436346e5b540e6f8fbaf052fa8"
+                "reference": "6f2f8e6e662eb72429b125dd7f6eee9c1ebc692b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/fe928fbc651c2a436346e5b540e6f8fbaf052fa8",
-                "reference": "fe928fbc651c2a436346e5b540e6f8fbaf052fa8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6f2f8e6e662eb72429b125dd7f6eee9c1ebc692b",
+                "reference": "6f2f8e6e662eb72429b125dd7f6eee9c1ebc692b",
                 "shasum": ""
             },
             "require": {
@@ -937,7 +937,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-06-09 13:24:43"
+            "time": "2017-06-10 13:11:39"
         },
         {
             "name": "laravel/tinker",
@@ -1999,12 +1999,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "a5f315ffce45698eb607619c4e4c5e8dbf1f6c2d"
+                "reference": "bd7bf81dc914c7c7c01daad32946681c85ea16ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/a5f315ffce45698eb607619c4e4c5e8dbf1f6c2d",
-                "reference": "a5f315ffce45698eb607619c4e4c5e8dbf1f6c2d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/bd7bf81dc914c7c7c01daad32946681c85ea16ae",
+                "reference": "bd7bf81dc914c7c7c01daad32946681c85ea16ae",
                 "shasum": ""
             },
             "require": {
@@ -2061,7 +2061,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-09 13:37:35"
+            "time": "2017-06-10 12:08:03"
         },
         {
             "name": "symfony/css-selector",

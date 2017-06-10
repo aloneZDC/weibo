@@ -1674,10 +1674,13 @@ class OrdersController extends Controller
         $order_id = $request->get('order_id');
         $text = $request->get('comment_text');
         $user = \Auth::user();
+
         if ($user) {
             $order = Order::find($order_id);
+
             //Checks if the order belongs to the current user, or if the user is the seller of the order
             if (($order->user_id == $user->id) || ($order->seller_id == $user->id)) {
+
                 $data = [
                     'user_id'        => $user->id,
                     'action_type_id' => 3,
@@ -1691,11 +1694,25 @@ class OrdersController extends Controller
                     $mail_subject = trans('email.order_commented.comment_from_user');
                     $seller_user = User::find($order->seller_id);
                     $email = $seller_user->email;
+                    Notice::create([
+                       'user_id' => $order->seller_id,
+                       'sender_id' => $order->user_id,
+                       'action_type_id' => 3,
+                       'source_id' => $order->id,
+                       'status' => 'new',
+                    ]);
                 }
                 if ($order->seller_id == $user->id) {
                     $mail_subject = trans('email.order_commented.comment_from_seller');
                     $buyer_user = User::find($order->user_id);
                     $email = $buyer_user->email;
+                    Notice::create([
+                       'user_id' => $order->user_id,
+                       'sender_id' => $order->seller_id,
+                       'action_type_id' => 3,
+                       'source_id' => $order->id,
+                       'status' => 'new',
+                    ]);
                 }
 
                 $data = [
@@ -1707,15 +1724,20 @@ class OrdersController extends Controller
                     'title'         => $mail_subject,
                 ];
 
-                Mail::queue('emails.order_comment', $data, function ($message) use ($user, $data) {
+                Mail::send('emails.order_comment', $data, function ($message) use ($user, $data) {
                     $message->to($data['email'])->subject($data['subject']);
                 });
+
             } else {
                 return \Response::json(['success' => false, 'order_id' => $order_id], 200);
             }
+
+
         } else {
             return \Response::json(['success' => false, 'order_id' => $order_id], 200);
         }
+
+
         Session::push('message', trans('store.create_comment_modal.added_order_comment'));
 
         return \Response::json(['success' => true, 'order_id' => $order_id], 200);
