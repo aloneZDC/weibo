@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f720f0903ef3cd6910d84c8fcd98882d",
-    "content-hash": "950d6ac771e226ecf119def4abdb43cc",
+    "hash": "8c880fa9e0a41b6ab2733294f88abcc4",
+    "content-hash": "b2fe3efc076be3b4ff44ceb12be83891",
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.0.15",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "c38625f591d230c680f927bd31dad4e599ec6b3f"
+                "reference": "66ce8ef2c2ac1857766951b9f243faff107b64bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/c38625f591d230c680f927bd31dad4e599ec6b3f",
-                "reference": "c38625f591d230c680f927bd31dad4e599ec6b3f",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/66ce8ef2c2ac1857766951b9f243faff107b64bc",
+                "reference": "66ce8ef2c2ac1857766951b9f243faff107b64bc",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-06-03 19:22:52"
+            "time": "2017-06-10 21:44:17"
         },
         {
             "name": "barryvdh/laravel-debugbar",
