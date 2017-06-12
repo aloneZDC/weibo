@@ -1,4 +1,4 @@
-@extends('foundation.layouts.panel')
+@extends('dashboard.layouts.panel')
 
 @section('sectionTitle', trans('categories.create'))
 

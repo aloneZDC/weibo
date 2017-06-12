@@ -1,6 +1,6 @@
-@extends('foundation.layouts.panel')
+@extends('dashboard.layouts.panel')
 
-@section('sectionTitle', trans('foundation.nav.categories'))
+@section('sectionTitle', trans('dashboard.nav.categories'))
 
 @section('content')
 	<div class="row">
@@ -47,7 +47,7 @@
 								@endif
 
 								@if (! is_null($category->image))
-									@include ('foundation.sections.categories.image', [
+									@include ('dashboard.sections.categories.image', [
 										'category' => $category
 									])
 								@endif

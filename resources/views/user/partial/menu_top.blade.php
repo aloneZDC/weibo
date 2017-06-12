@@ -27,8 +27,8 @@
 			<li>
 				<form action="/logout" method="POST">
 					{{ csrf_field() }}
-					<button type="submit" class="btn btn-success btn-block">
-						<i class="glyphicon glyphicon-log-out"></i>&nbsp;{{ trans('user.logout') }}
+					<button type="submit" class="btn btn-primary btn-block btn-sm">
+						{{ trans('user.logout') }}
 					</button>
 				</form>
 			</li>

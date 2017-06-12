@@ -1,4 +1,4 @@
-@extends('foundation.layouts.panel')
+@extends('dashboard.layouts.panel')
 
 @section('content')
 	The Antvel administration panel!

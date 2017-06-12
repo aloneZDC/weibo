@@ -297,6 +297,7 @@ return [
   'updated_at' => 'Updated At', //used
   'text' => 'Text', //used
   'select' => 'Select', //used
+  'dashboard' => 'Dashboard',
 
   //----
   'submit' => 'Submit'

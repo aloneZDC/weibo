@@ -11,7 +11,7 @@
 		</div>
 		<div class="navbar-collapse collapse sidebar-navbar-collapse">
 			<ul class="nav navbar-nav list-group" >
-			<?php $menu=\Menu::dashboard(true);?>
+			<?php $menu=\Menu::summary(true);?>
 			@foreach ($menu as $item)
 			    <li class="list-group-item {{isset($item['class'])?$item['class']:''}} {{ Utility::active($item['route']) }}" >
 					<a href='{{$item['route']}}'>@if(isset($item['icon']))<span class="{{$item['icon']}}"></span>@endif {{$item['text']}} @if(isset($item['cont'])&&$item['cont']>0)<span class="badge pull-right">{{$item['cont']}}</span>@endif </a>

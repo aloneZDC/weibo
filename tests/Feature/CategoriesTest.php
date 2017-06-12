@@ -30,7 +30,7 @@ class CategoriesTest extends TestCase
 
         $category = factory(Category::class)->create(['name' => 'foo'])->first();
 
-        $response = $this->get('foundation/categories');
+        $response = $this->get('dashboard/categories');
 
         $response
             ->assertStatus(401)
@@ -46,7 +46,7 @@ class CategoriesTest extends TestCase
 
         $category = factory(Category::class)->create(['name' => 'foo'])->first();
 
-        $response = $this->get('foundation/categories');
+        $response = $this->get('dashboard/categories');
 
         $response
             ->assertSuccessful()

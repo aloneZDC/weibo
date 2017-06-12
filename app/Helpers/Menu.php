@@ -22,37 +22,24 @@ class Menu
      *               Nota: el contenido del array interno de contener al menos route y text lo demas es opcional
      *               //[route,text,cont(para badge), divider, class, icon  ]
      */
-    public static function dashboard($returnArray = false)
+    public static function summary($returnArray = false)
     {
         $menu = [
-            ['route' => '/dashboard', 'text' => trans('user.dashboard'), 'icon' => 'glyphicon glyphicon-dashboard'],
+            ['route' => '/summary', 'text' => trans('user.summary'), 'icon' => 'glyphicon glyphicon-dashboard'],
             ['route' => route('user.index'), 'text' => trans('user.profile'), 'icon' => 'glyphicon glyphicon-user'],
             ['route' => route('addressBook.index'), 'text' => trans('user.address_book'), 'icon' => 'glyphicon glyphicon-map-marker', 'divider' => 1],
         ];
 
         if (auth()->check() && auth()->user()->hasRole(['seller', 'admin'])) { //will move to the foundation panel
-            $products = Product::get();
-            $productsLowStock = 0;
-            foreach ($products as $row) {
-                if ($row->stock <= $row->low_stock) {
-                    $productsLowStock++;
-                }
-            }
-
-            $salesOpen = Order::where('seller_id', \Auth::user()->id)
-                ->ofType('order')
-                ->whereNotIn('status', ['cancelled', 'closed'])
-                ->get()
-                ->count();
-
             $menu = array_merge($menu, [
-                ['route' => route('users.products'), 'text' => trans('user.your_products'), 'icon' => 'glyphicon glyphicon-briefcase', 'cont' => $productsLowStock],
-                ['route' => '/orders/usersOrders', 'text' => trans('user.your_sales'), 'icon' => 'glyphicon glyphicon-piggy-bank', 'cont' => $salesOpen],
+                ['route' => route('dashboard.home'), 'text' => trans('globals.dashboard'), 'icon' => 'glyphicon glyphicon-cog'],
+                ['route' => route('users.products'), 'text' => trans('user.your_products'), 'icon' => 'glyphicon glyphicon-briefcase'],
+                ['route' => '/orders/usersOrders', 'text' => trans('user.your_sales'), 'icon' => 'glyphicon glyphicon-piggy-bank'],
             ]);
         }
 
         if (auth()->check() && auth()->user()->hasRole(['customer', 'admin'])) {
-            $menu[] = ['route' => '/user/orders', 'text' => trans('user.your_orders'), 'icon' => 'glyphicon glyphicon-shopping-cart', 'divider' => 1, 'cont' => 0];
+            $menu[] = ['route' => '/user/orders', 'text' => trans('user.your_orders'), 'icon' => 'glyphicon glyphicon-shopping-cart', 'divider' => 1];
         }
 
         return $returnArray ? $menu : json_encode($menu);
@@ -76,7 +63,7 @@ class Menu
                 ['route' => '/register', 'text' => trans('user.register')],
             ];
         } else {  // logeado
-            $menu = self::dashboard(true);
+            $menu = self::summary(true);
 
             //-- Web Panel(Only for admim) --
             if (\Auth::check() && \Auth::user()->isAdmin()) {

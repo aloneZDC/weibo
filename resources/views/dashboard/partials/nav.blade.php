@@ -7,13 +7,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">{{ trans('foundation.title') }}</a>
+            <a class="navbar-brand" href="/">{{ trans('dashboard.title') }}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="{{ route('foundation.home') }}">
-                        <i class="glyphicon glyphicon-dashboard"></i>&nbsp;{{ trans('foundation.nav.home') }}
+                    <a href="{{ route('dashboard.home') }}">
+                        <i class="glyphicon glyphicon-dashboard"></i>&nbsp;{{ trans('dashboard.nav.home') }}
                     </a>
                 </li>
                 <li>
@@ -53,7 +53,7 @@
                         </li>
                         <li>
                             <a href="{{ route('categories.index') }}">
-                                <i class="glyphicon glyphicon-menu-right"></i>&nbsp;{{ trans('foundation.nav.categories') }}
+                                <i class="glyphicon glyphicon-menu-right"></i>&nbsp;{{ trans('dashboard.nav.categories') }}
                             </a>
                         </li>
                     </ul>

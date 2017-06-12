@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
-	<title>@yield('title', trans('foundation.title'))</title>
+	<title>@yield('title', trans('dashboard.title'))</title>
 	{!! Html::style('/antvel-bower/bootstrap/dist/css/bootstrap.css') !!}
 	{!! Html::style('/antvel-bower/font-awesome/css/font-awesome.min.css') !!}
 	<style>
@@ -17,12 +17,12 @@
 </head>
 <body>
 	<header>
-		@include ('foundation.partials.nav')
+		@include ('dashboard.partials.nav')
 
 	</header>
 
 	<div class="container">
-		@include ('foundation.partials.alert')
+		@include ('dashboard.partials.alert')
 		<section>
 			<div class="page-header">
 				<h3>

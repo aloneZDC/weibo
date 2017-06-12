@@ -96,7 +96,7 @@ class HomeController extends Controller
     }
 
     //moved here while refactoring
-    public function dashBoard()
+    public function summary()
     {
         $panel =  [
             'left'   => ['width' => '2', 'class' => 'user-panel'],
@@ -150,6 +150,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.dashboard', compact('panel', 'orders', 'sales'));
+        return view('user.summary', compact('panel', 'orders', 'sales'));
     }
 }

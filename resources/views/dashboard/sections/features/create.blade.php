@@ -1,4 +1,4 @@
-@extends('foundation.layouts.panel')
+@extends('dashboard.layouts.panel')
 
 @section('sectionTitle', trans('features.create'))
 
@@ -23,7 +23,7 @@
 				</div>
 
 				@foreach ($allowed_rules as $rule)
-					@if (view()->exists($view = 'foundation.sections.features.validations.' . $rule))
+					@if (view()->exists($view = 'dashboard.sections.features.validations.' . $rule))
 						@include ($view, [
 							'validation_rules' => $validation_rules,
 							'rule' => $rule

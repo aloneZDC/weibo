@@ -1,6 +1,7 @@
 <?php
 
 return [
+        'summary' => 'Summary',
 
         'account'                      => 'Account',
         'facebook'                     => 'Facebook',
@@ -14,7 +15,6 @@ return [
         'address_book'                 => 'Address Book',
         'company_info'                 => 'Company Info',
         'company_profile'              => 'Company Profile',
-        'dashboard'                    => 'Dashboard',
         'email'                        => 'E-mail Address',
         'first_name'                   => 'First Name',
         'forgot_your_password'         => 'Forgot your password',

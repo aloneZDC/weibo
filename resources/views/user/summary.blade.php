@@ -1,8 +1,6 @@
 @extends('layouts/master')
 
-@section('title')@parent- {{ trans('user.dashboard') }} @stop
-
-@section('page_class') 'user-dashboard' @stop
+@section('title')@parent- {{ trans('user.summary') }} @stop
 
 @section('content')
 	@parent
@@ -12,7 +10,7 @@
 	@section('center_content')
 
 		<div class="page-header">
-			<h5>{{ trans('user.dashboard') }}</h5>
+			<h5>{{ trans('user.summary') }}</h5>
 		</div>
 
 	  	@if (\Auth::check() && \Auth::user()->hasRole(['business','admin']))

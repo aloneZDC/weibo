@@ -33,7 +33,7 @@ class ProductsFeaturesTest extends TestCase
             'product_type' => 'item',
         ]);
 
-        $response = $this->get('foundation/features');
+        $response = $this->get('dashboard/features');
 
         $response
             ->assertStatus(401)
@@ -52,7 +52,7 @@ class ProductsFeaturesTest extends TestCase
             'product_type' => 'item',
         ]);
 
-        $response = $this->get('foundation/features');
+        $response = $this->get('dashboard/features');
 
         $response
             ->assertSuccessful()
