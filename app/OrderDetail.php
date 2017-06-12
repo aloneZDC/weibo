@@ -45,6 +45,6 @@ class OrderDetail extends Model
 
     public function getProductAttribute()
     {
-        return $this->hasOne(Product::class, 'id', 'product_id')->first();
+        return $this->belongsTo(Product::class, 'product_id', 'id')->first();
     }
 }

@@ -24,7 +24,7 @@ class Comment extends Model
 
     public function action()
     {
-        return $this->hasOne(ActionType::class, 'id', 'action_type_id');
+        return $this->belongsTo(ActionType::class, 'action_type_id', 'id');
     }
 
     public function source()
