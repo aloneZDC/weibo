@@ -35,17 +35,17 @@ class Notice extends Model
 
     public function getActionAttribute()
     {
-        return $this->hasOne('App\ActionType', 'id', 'action_type_id')->first()->useAs('notice');
+        return $this->belongsTo(ActionType::class, 'action_type_id', 'id')->first()->useAs('notice');
     }
 
     public function getUserAttribute()
     {
-        return $this->hasOne('App\User', 'id', 'user_id')->first();
+        return $this->belongsTo(User::class, 'user_id', 'id')->first();
     }
 
     public function getSenderAttribute()
     {
-        return $this->hasOne('App\User', 'id', 'sender_id')->first();
+        return $this->belongsTo(User::class, 'sender_id', 'id')->first();
     }
 
     public function source()

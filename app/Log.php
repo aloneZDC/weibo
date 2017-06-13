@@ -27,7 +27,7 @@ class Log extends Model
 
     public function action()
     {
-        return $this->hasOne('App\ActionType', 'id', 'action_type_id');
+        return $this->belongsTo(ActionType::class, 'action_type_id', 'id');
     }
 
     public function source()
