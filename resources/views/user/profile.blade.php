@@ -188,13 +188,7 @@
 
                             }).success(function (data, status, headers, config) {
 
-                            		$scope.progress= '';
-                                	notify({
-                                		duration:2000,
-                                		messageTemplate: "<p>{{ trans('responses.success') }}</p>",
-                                		classes:'alert alert-danger'
-                                	});
-									generateThumb(file);
+                            	window.location = "{{ route('user.index') }}";
 
                             }).error(function(data, status, headers, config) {
 

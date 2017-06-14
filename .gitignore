@@ -7,8 +7,11 @@ Homestead.yaml
 /_ide_helper.php
 
 /storage/*.key
+
 /storage/files
 /storage/images/avatars/*.*
+/storage/images/categories/*.*
+
 /storage/framework/testing/disks/images/avatars/*.*
 
 /public/hot

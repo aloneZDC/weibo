@@ -16,24 +16,6 @@
                         <i class="glyphicon glyphicon-dashboard"></i>&nbsp;{{ trans('dashboard.nav.home') }}
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        Profile
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Sellers
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Customers
-                    </a>
-                </li>
-
-
-
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
