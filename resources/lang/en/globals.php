@@ -179,7 +179,7 @@ return [
   'home'                   => 'Home',
   'notices'                => 'Notices',
   'privacy'                => 'Privacy',
-  'products'               => 'Products',
+  'products'               => 'Products', //used
   'refine'                 => 'Refine',
   'refine_by'              => 'Refine By',
   'search'                 => 'Search',

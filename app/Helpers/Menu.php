@@ -25,14 +25,14 @@ class Menu
     public static function summary($returnArray = false)
     {
         $menu = [
-            ['route' => '/summary', 'text' => trans('user.summary'), 'icon' => 'glyphicon glyphicon-dashboard'],
+            ['route' => '/summary', 'text' => trans('user.summary'), 'icon' => 'glyphicon glyphicon-stats'],
             ['route' => route('user.index'), 'text' => trans('user.profile'), 'icon' => 'glyphicon glyphicon-user'],
             ['route' => route('addressBook.index'), 'text' => trans('user.address_book'), 'icon' => 'glyphicon glyphicon-map-marker', 'divider' => 1],
         ];
 
         if (auth()->check() && auth()->user()->hasRole(['seller', 'admin'])) { //will move to the foundation panel
             $menu = array_merge($menu, [
-                ['route' => route('dashboard.home'), 'text' => trans('globals.dashboard'), 'icon' => 'glyphicon glyphicon-cog'],
+                ['route' => route('dashboard.home'), 'text' => trans('globals.dashboard'), 'icon' => 'glyphicon glyphicon-dashboard'],
                 ['route' => route('users.products'), 'text' => trans('user.your_products'), 'icon' => 'glyphicon glyphicon-briefcase'],
                 ['route' => '/orders/usersOrders', 'text' => trans('user.your_sales'), 'icon' => 'glyphicon glyphicon-piggy-bank'],
             ]);

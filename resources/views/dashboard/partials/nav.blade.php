@@ -23,7 +23,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{ route('products.list') }}">
+                            <a href="{{ route('products_dashboard.index.dashboard') }}">
                                 <i class="glyphicon glyphicon-menu-right"></i>&nbsp;Manager
                             </a>
                         </li>

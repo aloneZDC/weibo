@@ -1,6 +1,8 @@
 <?php
 
 return [
+   'create' => 'Create new product', //dashboard
+
    //globals +2 view or controller
    'globals' => [
       'add'                   => 'Add a new product',
