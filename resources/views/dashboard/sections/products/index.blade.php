@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<a href="{{ route('products_dashboard.create') }}" class="btn btn-success">
-				{{ trans('product.create') }}
+				{{ trans('products.create') }}
 			</a>
 			<hr>
 		</div>
@@ -18,16 +18,14 @@
 				<thead>
 					<th class="text-center">{{ trans('globals.id') }}</th>
 					<th class="text-left">{{ trans('globals.name') }}</th>
-					<th class="text-left">Category</th>
-{{-- 					<th class="text-center">Created By</th>
-					<th class="text-left">Updated By</th> --}}
-					<th class="text-center">Price</th>
-					<th class="text-center">Stock</th>
-					<th class="text-center">Low Stock</th>
-					<th class="text-center">Status</th>
+					<th class="text-left">{{ trans('globals.category') }}</th>
+					<th class="text-center">{{ trans('globals.price') }}</th>
+					<th class="text-center">{{ trans('products.stock') }}</th>
+					<th class="text-center">{{ trans('products.low_stock') }}</th>
+					<th class="text-center">{{ trans('globals.status') }}</th>
 					<th class="text-center">{{ trans('globals.created_at') }}</th>
 					<th class="text-center">{{ trans('globals.updated_at') }}</th>
-					<th class="text-center">Actions</th>
+					<th class="text-center">{{ trans('globals.action') }}</th>
 				</thead>
 				<tbody>
 					@foreach ($products as $product)
@@ -35,8 +33,6 @@
 							<td class="text-center">{{ $product->id }}</td>
 							<td class="text-left">{{ str_limit($product->name, 30) }}</td>
 							<td class="text-left">{{ $product->category->name }}</td>
-{{-- 							<td class="text-center">{{ $product->creator->full_name }}</td>
-							<td class="text-center">{{ $product->updater->full_name }}</td> --}}
 							<td class="text-center">{{ $product->price }}</td>
 							<td class="text-center">{{ $product->stock }}</td>
 							<td class="text-center">{{ $product->low_stock }}</td>
