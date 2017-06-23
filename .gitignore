@@ -11,6 +11,7 @@ Homestead.yaml
 /storage/files
 /storage/images/avatars/*.*
 /storage/images/categories/*.*
+/storage/images/products/*.*
 
 /storage/framework/testing/disks/images/avatars/*.*
 

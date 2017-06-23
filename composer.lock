@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "6f030437903e3816b46d46cea5d6da03f6e10cc0"
+                "reference": "b61ee1bccbcd847acff2d468a99523e42eacc9b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/6f030437903e3816b46d46cea5d6da03f6e10cc0",
-                "reference": "6f030437903e3816b46d46cea5d6da03f6e10cc0",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/b61ee1bccbcd847acff2d468a99523e42eacc9b8",
+                "reference": "b61ee1bccbcd847acff2d468a99523e42eacc9b8",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-06-19 14:07:21"
+            "time": "2017-06-22 22:26:58"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -825,12 +825,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "43bda8441f23349086aaed239bdf1af58f2eb860"
+                "reference": "8d54d7fa3be649173745afcdf64a12989bb98d07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/43bda8441f23349086aaed239bdf1af58f2eb860",
-                "reference": "43bda8441f23349086aaed239bdf1af58f2eb860",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8d54d7fa3be649173745afcdf64a12989bb98d07",
+                "reference": "8d54d7fa3be649173745afcdf64a12989bb98d07",
                 "shasum": ""
             },
             "require": {
@@ -946,7 +946,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-06-21 21:43:10"
+            "time": "2017-06-23 14:22:07"
         },
         {
             "name": "laravel/tinker",
@@ -1758,12 +1758,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "be969b9dc89dcaefdb9a3117fa91fa38bca19f50"
+                "reference": "8dc442ddc8a5f791f5cf35f72270ca4ff3b5fd00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/be969b9dc89dcaefdb9a3117fa91fa38bca19f50",
-                "reference": "be969b9dc89dcaefdb9a3117fa91fa38bca19f50",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/8dc442ddc8a5f791f5cf35f72270ca4ff3b5fd00",
+                "reference": "8dc442ddc8a5f791f5cf35f72270ca4ff3b5fd00",
                 "shasum": ""
             },
             "require": {
@@ -1823,7 +1823,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-06-20 12:51:31"
+            "time": "2017-06-23 16:25:52"
         },
         {
             "name": "ramsey/uuid",
@@ -3633,12 +3633,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3b91adfb64264ddec5a2dee9851f354aa66327db"
+                "reference": "c0c61c97be37e1c77ab61ad73448e9208c05aade"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3b91adfb64264ddec5a2dee9851f354aa66327db",
-                "reference": "3b91adfb64264ddec5a2dee9851f354aa66327db",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c0c61c97be37e1c77ab61ad73448e9208c05aade",
+                "reference": "c0c61c97be37e1c77ab61ad73448e9208c05aade",
                 "shasum": ""
             },
             "require": {
@@ -3707,7 +3707,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-06-21 08:11:54"
+            "time": "2017-06-23 12:45:27"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
