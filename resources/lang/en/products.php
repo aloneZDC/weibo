@@ -17,7 +17,8 @@ return [
    	'picture' => 'Picture',
 
    	'validation_errors' => [
-   		'pictures_upload' => 'The picture #:i could not be processed. Check its size and dimensions!'
+         'pictures_upload' => 'The picture #:i could not be processed. Check its size and dimensions!',
+   		'condition' => 'The product condition has to be either new, used or refurbished.',
    	]
 
 ];
