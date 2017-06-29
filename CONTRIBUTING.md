@@ -1,8 +1,8 @@
-# Contributing to AntVel
+# Contributing to Antvel
 
 Thank you for your contributions!
 
-## Reporting a bug with OctoberCMS
+## Reporting a bug
 
 We work hard to process bugs that are reported, to assist with this please ensure the following details are always included:
 
@@ -12,9 +12,10 @@ We work hard to process bugs that are reported, to assist with this please ensur
 
 - **Reproduce steps**: Clearly mention the steps to reproduce the bug.
 
-- **Expected result**: How AntVel should behave on above mentioned steps.
+- **Expected result**: How Antvel should behave on above mentioned steps.
 
 - **Actual result**: What is the actual result on running above steps i.e. the bug behavior - **include any error messages**.
+
 
 #### Here's how to report a bug on GitHub
 
@@ -31,16 +32,15 @@ We work hard to process bugs that are reported, to assist with this please ensur
 If you find out your bug is actually a duplicate of another bug and only notice that after you created it, please also close your bug with a short reference to the other issue that was there before.
 
 #### Reporting security issues
-find our email on
-If you wish to contact us privately about any security exploits in AntVel you may find, you can send us a email to gustavoocanto@gmail.com
+If you wish to contact us privately about any security exploits in Antvel, you can send us a email to gustavoocanto@gmail.com
 
 ## Feature requests
 
-Only use GitHub if you are planning on contributing a new feature and developing it. If you want to discuss your idea first, before "officially" posting it anywhere, you can always join us on (https://antvel.hipchat.com/home).
+Only use GitHub if you are planning on contributing a new feature and developing it. If you want to discuss your idea first, before "officially" posting it anywhere, you can always join us on slack.
 
 #### GitHub feature requests
 
-Feature Requests submitted as GitHub Issues specifically mean *"I'd like to see this feature, I'm going to be working on some code to implement it."* It is more like a Pre-Pull Request, in which a developer signifies that he or she wants to see a feature implemented that they think would be really great, and they're committed to coding it.
+Feature Requests submitted as GitHub issues specifically mean *"I'd like to see this feature, I'm going to be working on some code to implement it."* It is more like a Pre-Pull Request, in which a developer signifies that he or she wants to see a feature implemented that they think would be really great, and they're committed to coding it.
 
 It's a great way to launch discussions on the developer side of things because both the core team and the community developer get a chance to talk about the technical side of the feature implementation. It's a great way to exchange ideas about how the logic could work in code.
 
@@ -53,7 +53,7 @@ To help us merge your Pull Request, please make sure you follow these points:
 1. Describe the problem clearly in the Pull Request description
 1. Please make your fix on the `develop` branch. This makes merging much easier.
 1. Do not edit compiled asset files such as `app.css` Instead, try to edit the LESS files inside the `less/` directory and then use a compiler.
-1. For any change that you make, **please try to also add a test case(s)** in the `tests/unit` directory. This helps us understand the issue and make sure that it will stay fixed forever.
+1. For any change that you make, **please try to also add a test case(s)** in the `tests` directory. This helps us understand the issue and make sure that it will stay fixed forever.
 
 Thank you for your contributions!
 

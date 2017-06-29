@@ -5,7 +5,7 @@
 
 
 
-**This is an alpha, experimental release of Antvel. Everything will change gradually, looking forward to get the best of this awesome product. Thank you for testing!**
+**This is a development, experimental release of Antvel. Everything will change gradually, looking forward to get the best of this awesome product. Thank you for testing!**
 
 ***Antvel*** is a eCommerce project written in Laravel 5.* intended for building a friendly eStore either for startups or big companies, and is highly opinionated towards that use case.
 
@@ -39,15 +39,11 @@ Once installed, the `antvel install` command will create a fresh copy of the pro
 * Social Media Integration
 * Unlimited Categories
 * Unlimited Products
-* Unlimited Manufacturers
 * Your Own Style
 * Multi Language
-* Multi Currency
 * Product Reviews
 * Product Ratings
-* Downloadable Products
 * Automatic Image Resizing
-* Multiple Tax Rates
 * Related Products (What other customers are looking at, Recommendations for you in our categories, Store Trending)
 * Search Engine Optimization
 * Sales Reports
@@ -57,12 +53,8 @@ Once installed, the `antvel install` command will create a fresh copy of the pro
 * Addresses Book
 * User Profiles (Sellers & Buyers)
 * Products barcode
-* Administrative Panel - (http://antvel.com/wpanel)
+* Administrative Panel - (http://antvel.com/dashboard)
 * Users Orders list with action status (process, Placed, Cancel, Rated)
-* Virtual Products (products key download integrated)
-* Free Products Module
-* Users Points
-* Virtual Products Delivery
 * Dynamic Products Features
 * Company Profile
 * Shopping Cart
@@ -73,15 +65,13 @@ Once installed, the `antvel install` command will create a fresh copy of the pro
 * Dynamic Breadcrumbs
 
 
-## Foundation Panel
+## Dashboard
 
-The foundation panel is the e-commerce ***dashboard*** administration. Here, you will be able to manage the base information of your store, such as categories, products features and more. 
+Here, you will be able to manage the base information of your store, such as categories, products features and more. 
 
-At the moment, the panel just has the module to manage the store categories. However, it is intended to be the replacement for ***wpanel***.
+At the moment, the panel just has the module to manage the store categories, products and products features. However, it is intended to be the replacement for ***wpanel***.
 
-You will be able to visit this section by typing this address within your installed app, as so ```http://app.dev/foundation```. Once the whole ***wpanel*** is migrated to it, we will be updating the references in the app.
-
-To visit the foundation panel, you will have to be logged in as <a href="antvel.com">admin@antvel.com</a>
+You will be able to visit this section by typing this address within your installed app, as so ```http://app.dev/dashboard```. Once the whole ***wpanel*** is migrated to it, we will be updating the references in the app. Remember, you will have to be logged in either as seller or admin.
 
 
 
@@ -120,7 +110,7 @@ The MIT License (MIT). Please see [License File](https://github.com/ant-vel/App/
 
 
 ## How can I thank you?
-Why not star the github repo and share the link for this repository on Twitter? Spread the word!
+Why not star the github repo and share the link for this repository on Twitter?
 
 
 Don't forget to [follow me on twitter](https://twitter.com/gocanto)!
