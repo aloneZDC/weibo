@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.panel')
 
-@section('sectionTitle', trans('products.create'))
+@section('sectionTitle', trans('products.edit'))
 
 @section('content')
 

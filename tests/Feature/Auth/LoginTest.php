@@ -61,10 +61,7 @@ class LoginTest extends TestCase
 			'password' => ''
 		]);
 
-		$response
-			->assertSessionHasErrors([
-				'email', 'password'
-			]);
+		$response->assertSessionHasErrors(['email', 'password']);
 	}
 
 }

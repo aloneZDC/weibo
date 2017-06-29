@@ -5,7 +5,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-lg-12">
-			<a href="{{ route('products_dashboard.create') }}" class="btn btn-success">
+			<a href="{{ route('items.create') }}" class="btn btn-success">
 				{{ trans('products.create') }}
 			</a>
 			<hr>
@@ -46,7 +46,7 @@
 							<td class="text-center">{{ $product->created_at->diffForHumans() }}</td>
 							<td class="text-center">{{ $product->updated_at->diffForHumans() }}</td>
 							<td class="text-center">
-								<a href="#" class="btn btn-primary btn-sm">
+								<a href="{{ route('items.edit', ['item' => $product->id]) }}" class="btn btn-primary btn-sm">
 									<i class="glyphicon glyphicon-edit"></i>
 								</a>
 							</td>

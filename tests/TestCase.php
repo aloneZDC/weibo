@@ -13,6 +13,8 @@
 namespace Tests;
 
 use App\Exceptions\Handler;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -72,5 +74,20 @@ abstract class TestCase extends BaseTestCase
         $this->app->make('config')->set(
             'filesystems.disks.local.root', $path
         );
+    }
+
+    /**
+     * Creates a fake file.
+     *
+     * @param  string $disk
+     * @param  string $file
+     *
+     * @return UploadedFile
+     */
+    public function uploadFile($disk = 'avatars', $file = 'antvel.jpg')
+    {
+        Storage::fake($disk);
+
+        return UploadedFile::fake()->image($file);
     }
 }

@@ -6,7 +6,7 @@
 			<label for="name">{{ trans('globals.category') }}:</label>
 			<select name="category" class="form-control">
 				@foreach ($categories as $category)
-					<option value="{{ $category->id }}" @if (isset($product) && old('category') == $product->category_id) selected="selected" @endif >
+					<option value="{{ $category->id }}" @if (old('category') == $category->id) selected="selected" @endif >
 						{{ is_null($category->category_id) ? '&bull;' : '&nbsp;&nbsp;&nbsp;-' }}
 						&nbsp;
 						{{ ucfirst($category->name) }}
