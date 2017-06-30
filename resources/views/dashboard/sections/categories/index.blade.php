@@ -47,8 +47,9 @@
 								@endif
 
 								@if (! is_null($category->image))
-									@include ('dashboard.sections.categories.image', [
-										'category' => $category
+									@include ('dashboard.partials.image', [
+										'modalId' => $category->id,
+										'image' => $category->image,
 									])
 								@endif
 							</td>

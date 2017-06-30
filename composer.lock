@@ -611,12 +611,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "4505885ff5d63ec55776ea69abf4ee000114a9d5"
+                "reference": "ef5d12c048f07d901d137597a5256c14523c9710"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/4505885ff5d63ec55776ea69abf4ee000114a9d5",
-                "reference": "4505885ff5d63ec55776ea69abf4ee000114a9d5",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/ef5d12c048f07d901d137597a5256c14523c9710",
+                "reference": "ef5d12c048f07d901d137597a5256c14523c9710",
                 "shasum": ""
             },
             "require": {
@@ -659,8 +659,8 @@
             "authors": [
                 {
                     "name": "Oliver Vogel",
-                    "email": "oliver@olivervogel.net",
-                    "homepage": "http://olivervogel.net/"
+                    "email": "oliver@olivervogel.com",
+                    "homepage": "http://olivervogel.com/"
                 }
             ],
             "description": "Image handling and manipulation library with support for Laravel integration",
@@ -673,7 +673,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2017-06-28 17:21:58"
+            "time": "2017-06-30 15:52:27"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -824,12 +824,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ce7251c46d116761d3f35d4aebdd1b3d905dc1c1"
+                "reference": "6eaba45465fa277fefdcd15ca44cbae4608eae3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ce7251c46d116761d3f35d4aebdd1b3d905dc1c1",
-                "reference": "ce7251c46d116761d3f35d4aebdd1b3d905dc1c1",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6eaba45465fa277fefdcd15ca44cbae4608eae3a",
+                "reference": "6eaba45465fa277fefdcd15ca44cbae4608eae3a",
                 "shasum": ""
             },
             "require": {
@@ -945,7 +945,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-06-29 16:28:11"
+            "time": "2017-06-30 16:34:43"
         },
         {
             "name": "laravel/tinker",
@@ -953,12 +953,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "c110eacfc5bc08447af2176dbe188b25932c8cf3"
+                "reference": "90ca075a5b7cbf8515d73a3cd7cb20ebb7e8d40b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/c110eacfc5bc08447af2176dbe188b25932c8cf3",
-                "reference": "c110eacfc5bc08447af2176dbe188b25932c8cf3",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/90ca075a5b7cbf8515d73a3cd7cb20ebb7e8d40b",
+                "reference": "90ca075a5b7cbf8515d73a3cd7cb20ebb7e8d40b",
                 "shasum": ""
             },
             "require": {
@@ -1008,7 +1008,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2017-06-29 14:23:38"
+            "time": "2017-06-30 13:37:32"
         },
         {
             "name": "laravelcollective/html",
@@ -1757,12 +1757,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "89b02be882a71386b10e488caa07c1037c616dca"
+                "reference": "99acb317e288a2a53ba92312975fb926f75da7c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/89b02be882a71386b10e488caa07c1037c616dca",
-                "reference": "89b02be882a71386b10e488caa07c1037c616dca",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/99acb317e288a2a53ba92312975fb926f75da7c1",
+                "reference": "99acb317e288a2a53ba92312975fb926f75da7c1",
                 "shasum": ""
             },
             "require": {
@@ -1822,7 +1822,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-06-24 06:17:37"
+            "time": "2017-06-30 13:50:23"
         },
         {
             "name": "ramsey/uuid",
@@ -3714,12 +3714,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "4001a301f86fc006c32f532a741ab613f2bd8990"
+                "reference": "a23b761686d50a560cc56233b9ecf49597cc9118"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/4001a301f86fc006c32f532a741ab613f2bd8990",
-                "reference": "4001a301f86fc006c32f532a741ab613f2bd8990",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/a23b761686d50a560cc56233b9ecf49597cc9118",
+                "reference": "a23b761686d50a560cc56233b9ecf49597cc9118",
                 "shasum": ""
             },
             "require": {
@@ -3765,7 +3765,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2017-03-07 08:47:31"
+            "time": "2017-06-30 09:13:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -4440,12 +4440,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "1faeaf2aa8180967d80329213f77c1bcb75fe4fa"
+                "reference": "f46d917c00519312152720916760ab18550c0ce5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/1faeaf2aa8180967d80329213f77c1bcb75fe4fa",
-                "reference": "1faeaf2aa8180967d80329213f77c1bcb75fe4fa",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/f46d917c00519312152720916760ab18550c0ce5",
+                "reference": "f46d917c00519312152720916760ab18550c0ce5",
                 "shasum": ""
             },
             "require": {
@@ -4487,7 +4487,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-24 09:47:31"
+            "time": "2017-06-30 09:07:51"
         },
         {
             "name": "webmozart/assert",
