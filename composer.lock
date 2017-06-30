@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "b61ee1bccbcd847acff2d468a99523e42eacc9b8"
+                "reference": "4137f90fce1c4a99fcfd2587f905930ced99129d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/b61ee1bccbcd847acff2d468a99523e42eacc9b8",
-                "reference": "b61ee1bccbcd847acff2d468a99523e42eacc9b8",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/4137f90fce1c4a99fcfd2587f905930ced99129d",
+                "reference": "4137f90fce1c4a99fcfd2587f905930ced99129d",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-06-22 22:26:58"
+            "time": "2017-06-29 21:11:06"
         },
         {
             "name": "barryvdh/laravel-debugbar",

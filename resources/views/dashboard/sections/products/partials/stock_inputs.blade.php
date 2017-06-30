@@ -5,11 +5,11 @@
 		<div class="row">
 			<div class="form-group col-lg-6">
 				<label for="stock">{{ trans('products.stock') }}:</label>
-				<input type="text" class="form-control" name="stock" value="{{ old('stock') }}">
+				<input type="text" class="form-control" name="stock" value="{{ $item->stock ?? old('stock') }}">
 			</div>
 			<div class="form-group col-lg-6">
 				<label for="low_stock">{{ trans('products.low_stock') }}:</label>
-				<input type="text" class="form-control" name="low_stock" value="{{ old('low_stock') }}">
+				<input type="text" class="form-control" name="low_stock" value="{{ $item->low_stock ?? old('low_stock') }}">
 			</div>
 		</div>
 

@@ -6,7 +6,7 @@
 			<label for="name">{{ trans('globals.category') }}:</label>
 			<select name="category" class="form-control">
 				@foreach ($categories as $category)
-					<option value="{{ $category->id }}" @if (old('category') == $category->id) selected="selected" @endif >
+					<option value="{{ $category->id }}" @if (($item->category_id ?? old('category')) == $category->id) selected="selected" @endif >
 						{{ is_null($category->category_id) ? '&bull;' : '&nbsp;&nbsp;&nbsp;-' }}
 						&nbsp;
 						{{ ucfirst($category->name) }}
@@ -18,14 +18,14 @@
 		<div class="row">
 			<div class="form-group col-lg-6">
 				<label for="brand">{{ trans('globals.brand') }}:</label>
-				<input type="text" class="form-control" name="brand" value="{{ old('brand') }}">
+				<input type="text" class="form-control" name="brand" value="{{ $item->brand ?? old('brand') }}">
 			</div>
 
 			<div class="form-group col-lg-6">
 				<label for="condition">{{ trans('products.condition_label') }}:</label>
 				<select name="condition" class="form-control">
 					@foreach ($conditions as $key => $condition)
-						<option value="{{ $key }}" @if ($key == 'new' || old('condition') == $key) selected="selected" @endif >
+						<option value="{{ $key }}" @if (($item->condition ?? old('condition')) == $key) selected="selected" @endif >
 							{{ trans($condition) }}
 						</option>
 					@endforeach

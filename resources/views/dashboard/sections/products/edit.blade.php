@@ -4,7 +4,7 @@
 
 @section('content')
 
-		<form action="{{ route('items.store') }}" method="POST" role="form" enctype="multipart/form-data">
+		<form action="{{ route('items.update', ['item' => $item->id]) }}" method="POST" role="form" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-lg-6">
 					{{ csrf_field() }}
