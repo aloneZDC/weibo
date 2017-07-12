@@ -62,7 +62,7 @@ class OrdersController extends Controller
 
         $this->order = $order;
         $suggestions = $products->suggestForPreferences(['product_purchased']);
-        $this->suggestions = $suggestions['product_purchased']->toArray();
+        $this->suggestions = $suggestions['product_purchased'];
     }
 
     /**

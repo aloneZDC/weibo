@@ -62,7 +62,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2 col-xs-4 text-center">
-                                    <img  class="img-rounded" src='{{ $detail->product->features['images'][0] }}' alt="{{ $detail->product->name }}" width="90" height="90">
+                                    <img  class="img-rounded" src='{{ $detail->product->default_picture }}' alt="{{ $detail->product->name }}" width="90" height="90">
                                 </div>
 
                                 <div class="col-sm-7 col-xs-8 text-left">
@@ -114,7 +114,7 @@
 
                             <div class="row">
                                 <div class="col-lg-2 text-center">
-                                    <img  class="img-rounded" src='{{ $detail->product->features['images'][0] }}' alt="{{ $detail->product->name }}" width="90" height="90">
+                                    <img  class="img-rounded" src='{{ $detail->product->default_picture }}' alt="{{ $detail->product->name }}" width="90" height="90">
                                 </div>
                                 <div class="col-lg-7 text-left">
                                     <h6>

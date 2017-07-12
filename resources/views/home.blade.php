@@ -241,7 +241,7 @@
                                         <li class="list-group-item clearfix" style="font-size: 12px;">
                                             @foreach ($event['products'] as $product)
                                                 <a href="{{ route('products.show',[$product['id']]) }}" class="thumbnail col-xs-4 col-md-2 " style="margin: 0 5px 5px 0">
-                                                    <img src='{{ $product["features"]["images"][0] }}' class="img-rounded" alt="{{ $product['name'] }}">
+                                                    <img src='{{ $product["features"]["default_picture"] }}' class="img-rounded" alt="{{ $product['name'] }}">
                                                 </a>
                                             @endforeach
                                         </li>

@@ -300,7 +300,8 @@ return [
   'dashboard' => 'Dashboard', //used
   'price' => 'Price', //used
   'cost' => 'Cost', //used
-  'details' => 'Details',
+  'details' => 'Details', //used
+  'default' => 'Default', //used
 
   //----
   'submit' => 'Submit'

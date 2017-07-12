@@ -15,11 +15,11 @@
 		<div class="row">
 			<div class="form-group col-lg-6">
 				<label for="cost">{{ trans('globals.cost') }}:</label>
-				<input type="text" class="form-control" name="cost" value="{{ $item->cost ?? old('cost') }}">
+				<input type="text" class="form-control" name="cost" value="{{ $item->cost_in_dollars ?? old('cost') }}">
 			</div>
 			<div class="form-group col-lg-6">
 				<label for="price">{{ trans('globals.price') }}:</label>
-				<input type="text" class="form-control" name="price" value="{{ $item->price ?? old('price') }}">
+				<input type="text" class="form-control" name="price" value="{{ $item->price_in_dollars ?? old('price') }}">
 			</div>
 		</div>
 

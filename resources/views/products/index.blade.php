@@ -213,7 +213,7 @@
         <div class="container-fluid marketing">
             @if (count($products) > 0)
                 <div class="row">
-                    @foreach ($products->toArray()['data'] as $product)
+                    @foreach ($products as $product)
                         @include('products.partial.productBox', $product)
                     @endforeach
                 </div>
@@ -249,7 +249,7 @@
                             <div class="container-fluid marketing">
                                 <div class="row">
                                     @foreach ($suggestions['my_searches'] as $productSuggestion)
-                                        @include('products.partial.productBox', $productSuggestion)
+                                        @include('products.partial.productBox', ['product' => $productSuggestion])
                                     @endforeach
                                 </div>
                             </div>

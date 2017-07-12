@@ -45,11 +45,7 @@ class ProductsTest extends TestCase
 	/** @test */
 	function an_authorized_user_can_create_new_products()
 	{
-		$this->actingAs($this->seller);
-
-        $response = $this->get(route('items.create'));
-
-        $response->assertSuccessful();
+		//
 	}
 
 	/** @test */

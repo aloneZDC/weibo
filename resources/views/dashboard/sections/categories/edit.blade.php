@@ -50,14 +50,13 @@
 						<div class="col-lg-12">
 							<label for="name">{{ trans('categories.background') }}:</label>
 								@if (is_null($category->image))
-									<input type="file" class="form-control" name="_pictures_file">
+									<input type="file" class="form-control" name="pictures[storing]">
 								@else
 									<div class="input-group">
 										<span class="input-group-addon">
-											<input type="checkbox" name="_pictures_delete">&nbsp;<span class="label label-danger">{{ trans('globals.delete') }}</span>
-											<input type="hidden" name="_pictures_current" value="{{ $category->image }}">
+											<input type="checkbox" name="pictures[deleting]">&nbsp;<span class="label label-danger">{{ trans('globals.delete') }}</span>
 										</span>
-										<input type="file" class="form-control" name="_pictures_file">
+										<input type="file" class="form-control" name="pictures[storing]">
 										<div class="input-group-btn">
 											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#image_{{ $category->id }}">
 												<i class="glyphicon glyphicon-search"></i>

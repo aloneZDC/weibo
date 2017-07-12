@@ -43,7 +43,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="name">{{ trans('categories.background') }}:</label>
-							<input type="file" class="form-control" name="_pictures_file">
+							<input type="file" class="form-control" name="pictures[storing]">
 						</div>
 					</div>
 				</div>

@@ -8,6 +8,7 @@
 			<div class="row">
 				<div class="col-lg-6">
 					{{ csrf_field() }}
+					{{ method_field('PATCH') }}
 					@include ('dashboard.sections.products.partials.detail_inputs')
 					@include ('dashboard.sections.products.partials.classification_inputs')
 					@include ('dashboard.sections.products.partials.stock_inputs')

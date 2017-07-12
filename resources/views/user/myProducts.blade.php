@@ -54,9 +54,9 @@
                             @endif
 
                             <a href="{{ route('products.index') }}/{{ $product->id }}">
-                                @if (isset($product->features['images'][0]))
+                                @if (isset($product->default_picture))
                                     <img class="thumbnail"
-                                         src="{{ $product->features['images'][0] }}?w=100" alt="{{ $product->name }}"
+                                         src="{{ $product->default_picture }}?w=100" alt="{{ $product->name }}"
                                          width="100" height="100">
                                 @else
                                     <img class="thumbnail" src="/img/no-image.jpg" alt="{{ $product->name }}" width="100" height="100">

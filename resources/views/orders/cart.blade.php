@@ -85,8 +85,8 @@
                     <div class="text-small col-lg-6">
 
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <a ng-controller="ModalCtrl" ng-init='data={"data":"{{ $item["product"]["id"] }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">
-                                <img class="thumbnail" src='{{ $item["product"]["features"]["images"][0] }}' alt="{{ $item['product']['name'] }}" height="150" width="150">
+                            <a ng-controller="ModalCtrl" ng-init='data={"data":"{{ $item->product->id }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">
+                                <img class="thumbnail" src='{{ $item->product->default_picture }}' alt="{{ $item->product->name }}" height="150" width="150">
                             </a>
                         </div>
 
@@ -139,7 +139,7 @@
                             <a href="{{ action('OrdersController@removeFromOrder', ['cart', $item['product']['id']]) }}">{{ trans('store.delete') }}</a>
                             @if(isset($user))
                                 | <a href="{{ action('OrdersController@moveFromOrder', ['cart', 'later', $item['product']['id']]) }}">{{ trans('store.saveForLater') }}</a>
-                                | <a ng-controller="ModalCtrl" href="javascript:void(0)" ng-init='data={"data":"{{ $item["product"]["id"] }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">{{ trans('product.globals.view_details') }}</a>
+                                | <a href="{{ route('products.show',[$item['product']['id']]) }}">{{ trans('product.globals.view_details') }}</a>
                             @endif
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><hr/></div>
@@ -193,8 +193,8 @@
                         <div class="text-small col-lg-6">
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <a ng-controller="ModalCtrl" ng-init='data={"data":"{{ $item["product"]["id"] }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">
-                                    <img class="thumbnail" src='{{ $item["product"]["features"]["images"][0] }}' alt="{{ $item['product']['name'] }}" height="150" width="150">
+                                <a ng-controller="ModalCtrl" ng-init='data={"data":"{{ $item->product->id }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">
+                                    <img class="thumbnail" src='{{ $item->product->default_picture }}' alt="{{ $item->product->name }}" height="150" width="150">
                                 </a>
                             </div>
 
@@ -238,7 +238,7 @@
                                 <a href="{{ action('OrdersController@removeFromOrder', ['later', $item['product']['id']]) }}">{{ trans('store.delete') }}</a>
                                 @if(isset($user))
                                     | <a href="{{ action('OrdersController@moveFromOrder', ['later','cart', $item['product']['id']]) }}">{{ trans('store.moveToCart') }}</a>
-                                    | <a ng-controller="ModalCtrl" href="javascript:void(0)" ng-init='data={"data":"{{ $item["product"]["id"] }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">{{ trans('product.globals.view_details') }}</a>
+                                    | <a href="{{ route('products.show',[$item['product']['id']]) }}">{{ trans('product.globals.view_details') }}</a>
                                 @endif
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><hr/></div>
@@ -251,7 +251,7 @@
 
     @endif
 
-    @if(isset($suggestions) && is_array($suggestions))
+    @if(isset($suggestions))
         <div class="row">&nbsp;</div>
         <div class="page-header">
             <h5>{{ trans('store.suggestions.cart') }}</h5>
@@ -259,8 +259,9 @@
         <section class="products_view">
             <div class="container-fluid marketing">
                 <div class="row">
-                    @foreach ($suggestions as $productSuggestion)
-                        @include('products.partial.productBox', $productSuggestion)
+                    @foreach ($suggestions as $product)
+                        @include('products.partial.productBox', $product)
+
                     @endforeach
                 </div>
             </div>

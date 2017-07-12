@@ -16,7 +16,7 @@
                     @foreach ($data['order']['details'] as $detail)
                     <tr style="text-align:left; font-size:14px; padding:0; color: #000000;">
                         <td>
-                            <img class="thumbnail" height="50" width="50"  src="{{ env('MAIN_SERVER').$detail['product']['features']['images'][0]}}">
+                            <img class="thumbnail" height="50" width="50"  src="{{ env('MAIN_SERVER').$detail['product']['default_picture']}}">
                         </td>
                         <td width="65%">
                             <small>
@@ -27,22 +27,6 @@
                         <td align="right">{!! \Utility::showPrice($detail['price']) !!}</td>
                     </tr>
                     @endforeach
-            {{--
-                @foreach ($data['order']->details as $detail)
-                    <tr style="text-align:left; font-size:14px; padding:0; color: #000000;">
-                        <td>
-                            <img class="thumbnail" height="50" width="50"  src="{{ url().$detail->product->firstImage}}">
-                        </td>
-                        <td width="65%">
-                            <small>
-                                <a href="{{ route('products.show',$detail->product->id) }}">{{$detail->product->name}}</a>
-                            </small>
-                        </td>
-                        <td align="right">{{$detail->quantity}}</td>
-                        <td align="right">{!! \Utility::showPrice($detail->price) !!}</td>
-                    </tr>
-                    @endforeach
-             --}}
                 </tbody>
             </table>
 

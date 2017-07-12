@@ -16,7 +16,7 @@
                     @foreach ($data['order']['details'] as $detail)
                     <tr style="text-align:left; font-size:14px; padding:0; color: #000000;">
                         <td>
-                            <img class="thumbnail" height="50" width="50"  src="{{ env('MAIN_SERVER').$detail['product']['features']['images'][0]}}">
+                            <img class="thumbnail" height="50" width="50"  src="{{ env('MAIN_SERVER').$detail['product']['default_picture']}}">
                         </td>
                         <td width="65%">
                             <small>

@@ -6,13 +6,13 @@
 @section('metaLabels')
     @parent
     @include('partial.social_tags', [
-        'title' => $product->name,
-        'image' => isset($product->features['images'][0]) ? URL::to('/').$product->features['images'][0] : URL::to('/').'/img/no-image.jpg',
         'description' => $product->description,
-        'id' =>$product->id,
-        'brand' => isset($product->features['brand'])?$product->features['brand']:'',
+        'image' => $product->default_picture,
+        'rate_count' => $product->rate_count,
         'rate_val' => $product->rate_val,
-        'rate_count' => $product->rate_count
+        'brand' => $product->brand,
+        'title' => $product->name,
+        'id' =>$product->id,
     ])
 @stop
 
@@ -75,20 +75,20 @@
 
 			{{-- Gallery --}}
 			<div class="col-md-6" ng-controller = "ProductsGallery">
-				<img src = "img/no-image.jpg" lazy-img = '[[getPortrait()]]' ng-init = "setPortrait('{{ $product->features['images'][0] }}?w=450')" class = "img-responsive img-rounded" >
+				<img src = "img/no-image.jpg" lazy-img = '[[getPortrait()]]' ng-init = "setPortrait('{{ $product->default_picture }}?w=450')" class = "img-responsive img-rounded" >
 				<hr>
 				{{-- Thumbnails --}}
 				<div class="row">
 					<div class="col-md-12">
 					<ul class="list-inline" ng-controller = "ProductsGallery">
 					<?php $selector = 0; $gallery = ''; ?>
-					@foreach($product->features['images'] as $image)
+					@foreach($product->pictures as $picture)
 						<li>
 							<a class="thumbnail">
-								<img src = "img/no-image.jpg?h=60" lazy-img = "{{ $image }}?h=60" class="img-responsive img-rounded" ng-click = "setPortrait('{{ $image }}?w=450')">
+								<img src = "img/no-image.jpg?h=60" lazy-img = "{{ $picture->path }}?h=60" class="img-responsive img-rounded" ng-click = "setPortrait('{{ $picture->path }}?w=450')">
 							</a>
 						</li>
-						<?php $gallery .= $image.'?w=450,'; ?>
+						<?php $gallery .= $picture->path . '?w=450,'; ?>
 					@endforeach
 		        	</ul>
 		        	</div>
@@ -104,9 +104,7 @@
 					<li><label class="black_color">{{ trans('store.condition') }}:</label>&nbsp;{{ ucwords($product->condition) }}</li>
 					<li><label class="black_color">{{ trans('globals.brand') }}:</label>&nbsp;{{ ucwords($product->brand) }}</li>
 					@foreach ($product->features as $key => $feature)
-						@if ($key != 'images')
-							<li><label class="black_color">{{ ucwords($key) }}:</label>&nbsp;{{  ucwords( is_array($feature) ? implode(' ', $feature) : $feature ) }}</li>
-						@endif
+						<li><label class="black_color">{{ ucwords($key) }}:</label>&nbsp;{{  ucwords( is_array($feature) ? implode(' ', $feature) : $feature ) }}</li>
 					@endforeach
 					<li>
 						@if ($product->stock <= $product->low_stock)
@@ -266,8 +264,8 @@
 	            <section class="products_view">
                     <div class="container-fluid marketing">
                         <div class="row">
-                            @foreach ($suggestions as $productSuggestion)
-                                @include('products.partial.productBox', $productSuggestion)
+                            @foreach ($suggestions as $product)
+                            	@include('products.partial.productBox', $product)
                             @endforeach
                         </div>
                     </div>

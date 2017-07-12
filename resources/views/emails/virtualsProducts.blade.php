@@ -15,9 +15,7 @@
                     <h2>{{ $user['nickname'].' '.trans('email.delivery_virtuals_products.message1') }}.</h2>
                 @endif
                 <br/><br/>
-                <h3>
-                    {{-- <img src="/img{{ $product['features']['images'][0] }}" width="140" height="140"/> --}}
-                    {{ $product['name'] }}</h3>
+                <h3>{{ $product['name'] }}</h3>
                 <p>{{ $product['description'] }}</p><br/>
                 @if($product['type']=='key')
                     <strong>{{  trans('email.delivery_virtuals_products.message3').': '.$row['key']  }}</strong>

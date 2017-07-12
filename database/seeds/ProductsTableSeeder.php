@@ -11,36 +11,18 @@
 
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use Antvel\Product\Models\Product;
-use App\ProductOffer as ProductOffer;
-use Antvel\Categories\Models\Category;
+use Antvel\Product\Models\{ Product, ProductPictures };
 
 class ProductsTableSeeder extends Seeder
 {
     public function run()
     {
-        $product = factory(Product::class, 150)->create();
+        for ($i=1; $i < 150; $i++) {
+            $product = factory(Product::class)->create();
 
-        $this->createOfferFor(
-            $product->first()
-        );
-    }
-
-    protected function createOfferFor($product)
-    {
-        $faker = Faker::create();
-
-        $price = $faker->numberBetween(1, 99);
-        $stock = $faker->numberBetween(20, 50);
-        $percentage = $faker->randomElement([10, 15, 25, 35, 50]);
-
-        ProductOffer::create([
-            'day_end' => $faker->dateTimeBetween('now', '+1 years'),
-            'price' => (($percentage * $price) / 100),
-            'day_start' => $faker->dateTime(),
-            'quantity' => round($stock / 2),
-            'product_id' => $product->id,
-            'percentage' => $percentage,
-        ]);
+            factory(ProductPictures::class, 5)->create([
+                'product_id' => $product->id
+            ]);
+        }
     }
 }

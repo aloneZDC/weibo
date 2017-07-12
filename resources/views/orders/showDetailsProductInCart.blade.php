@@ -10,7 +10,7 @@
             </div>
 			<div class="row" ng-show="per">
                 <div class="col-md-3">
-                	<img class="thumbnail" ng-src="[[ product.features.images[0] ]]" alt="[[ product.name ]]" >
+                	<img class="thumbnail" ng-src="[[ product.features.default_picture ]]" alt="[[ product.name ]]" >
                 </div>
                 <div class="col-md-9">
                     <a href="{{ route('products.index') }}/[[ product.id ]]">

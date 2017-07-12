@@ -53,7 +53,7 @@
 						<div class="media">
 							<div class="media-left media-middle">
 								<a href="#">
-									<img class="img-rounded thumbnail media-object" src="{{ $product['product']['features']['images'][0] }}" alt="{{ $product['product']['name'] }}" width="100" height="100" >
+									<img class="img-rounded thumbnail media-object" src="{{ $product['product']['default_picture'] }}" alt="{{ $product['product']['name'] }}" width="100" height="100" >
 								</a>
 							</div>
 							<div class="media-body">

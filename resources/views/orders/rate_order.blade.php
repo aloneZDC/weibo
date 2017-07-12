@@ -8,7 +8,7 @@
         </h6>
         <small ng-hide = "processing_petition == ''">[[processing_petition]]</small>
     </div>
-    
+
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12 col-xs-12">
@@ -21,7 +21,7 @@
                 </div>
 
                 {{-- rate order form --}}
-                    
+
                 @if ($order->rate == '' || $order->rate == 0)
                     <div class="row">
                          <div class="col-md-12">
@@ -35,7 +35,7 @@
                             ></rating>
                         </div>
                     </div>
-                
+
                     <div class="row">
                         <div class="col-md-12">
                             <label>{{ trans('store.order_rate_view.leave_comment') }}:</label>&nbsp;
@@ -46,7 +46,7 @@
                                 ng-model = "busissnes.comment"></textarea>
                         </div>
                     </div>
-                
+
                     <div class="row">&nbsp;</div>
 
                     <div class="row">
@@ -54,8 +54,8 @@
                             <button type="button" class="btn btn-primary pull-right" ng-init="isDisabled = false" ng-disabled="isDisabled" ng-click="rateSeller('{{$order->id}}')">{{ trans('store.order_rate_view.save_rate') }}</button>
                         </div>
                     </div>
-                
-            
+
+
                     <div class="row">
                         <div class="col-md-12">
                             <h6>
@@ -63,16 +63,16 @@
                             </h6>
                         </div>
                     </div>
-                    
+
                     <hr>
-                    
+
                     <div class="row">
                          @foreach ($order->details as $detail)
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 clearfix">
                                 <div class="media">
                                     <div class="media-left">
                                         <a href="#">
-                                            <img class="media-object img-rounded" style ="width: 50px; height: 50px;" ng-src="{{ $detail->product->features['images'][0] }}" alt="{{ $detail->product->name }}">
+                                            <img class="media-object img-rounded" style ="width: 50px; height: 50px;" ng-src="{{ $detail->product->default_picture }}" alt="{{ $detail->product->name }}">
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -110,7 +110,7 @@
                         @endforeach
                     </div>
                 @endif
-                
+
             </div>
         </div>
     </div>
