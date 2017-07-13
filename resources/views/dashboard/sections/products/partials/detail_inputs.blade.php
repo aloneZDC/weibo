@@ -23,5 +23,13 @@
 			</div>
 		</div>
 
+		<div class="form-group">
+			<label for="name">{{ trans('globals.status') }}:</label>
+			<select name="status" class="form-control">
+				<option value="1" @if (isset($item) && $item->status) selected="selected" @endif>{{ trans('globals.active') }}</option>
+				<option value="0" @if (isset($item) && ! $item->status) selected="selected" @endif>{{ trans('globals.inactive') }}</option>
+			</select>
+		</div>
+
 	</div>
 </div>
