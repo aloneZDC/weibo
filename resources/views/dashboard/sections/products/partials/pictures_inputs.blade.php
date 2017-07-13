@@ -7,7 +7,7 @@
 			@foreach ($item->pictures as $picture)
 				<div class="input-group">
 					<span class="input-group-addon">
-						<input type="radio" name="default_picture" value="{{ $picture->id }}" @if ($picture->default) checked="true" @endif >&nbsp;{{ $picture->id }}
+						<input type="radio" name="default_picture" value="{{ $picture->id }}" @if ($picture->default) checked="true" @endif >
 						<span class="label label-primary">{{ trans('globals.default') }}</span>
 					</span>
 					<span class="input-group-addon" style="border-right: none">
@@ -39,5 +39,12 @@
 			</div>
 		@endfor
 
+	</div>
 
+	<div class="panel-footer">
+		<small class="text-danger">
+			<i class="glyphicon glyphicon-warning-sign"></i>&nbsp;
+			{{ trans('products.pictures_warning') }}
+		</small>
+	</div>
 </div>
