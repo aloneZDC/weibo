@@ -824,12 +824,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "77d8c23fed764e6a38cc8608c28f0ad7c39deee4"
+                "reference": "f94fc026c64471ca5a5b42919c9b5795021d783c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/77d8c23fed764e6a38cc8608c28f0ad7c39deee4",
-                "reference": "77d8c23fed764e6a38cc8608c28f0ad7c39deee4",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f94fc026c64471ca5a5b42919c9b5795021d783c",
+                "reference": "f94fc026c64471ca5a5b42919c9b5795021d783c",
                 "shasum": ""
             },
             "require": {
@@ -945,7 +945,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-07-13 13:22:26"
+            "time": "2017-07-14 13:52:39"
         },
         {
             "name": "laravel/tinker",
@@ -1070,12 +1070,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "9c2f254c0fc5c0b0790956cd749fac1a497df0e4"
+                "reference": "0b657b1580dbb063c1fe979e693dd8e7a1f6883e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/9c2f254c0fc5c0b0790956cd749fac1a497df0e4",
-                "reference": "9c2f254c0fc5c0b0790956cd749fac1a497df0e4",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/0b657b1580dbb063c1fe979e693dd8e7a1f6883e",
+                "reference": "0b657b1580dbb063c1fe979e693dd8e7a1f6883e",
                 "shasum": ""
             },
             "require": {
@@ -1145,7 +1145,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-07-13 21:37:47"
+            "time": "2017-07-13 22:37:58"
         },
         {
             "name": "maximebf/debugbar",
@@ -1153,12 +1153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "44e9d50210c82bcda00f8d425bec7a033576f528"
+                "reference": "abb2a4cfda971f81d1da24e549444a2b04a562fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/44e9d50210c82bcda00f8d425bec7a033576f528",
-                "reference": "44e9d50210c82bcda00f8d425bec7a033576f528",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/abb2a4cfda971f81d1da24e549444a2b04a562fe",
+                "reference": "abb2a4cfda971f81d1da24e549444a2b04a562fe",
                 "shasum": ""
             },
             "require": {
@@ -1206,7 +1206,7 @@
                 "debug",
                 "debugbar"
             ],
-            "time": "2017-07-13 20:23:46"
+            "time": "2017-07-14 08:36:10"
         },
         {
             "name": "milon/barcode",
