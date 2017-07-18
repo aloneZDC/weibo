@@ -54,7 +54,7 @@
         '    <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>' +
         '    <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>' +
         '    <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)"'+
-        '         ng-mouseenter="hoverRow($index)" ng-class="{\'angucomplete-selected-row\': $index == currentIndex, \'angucomplete-divider\' : result.divider && $index!= 0}">' +       
+        '         ng-mouseenter="hoverRow($index)" ng-class="{\'angucomplete-selected-row\': $index == currentIndex, \'angucomplete-divider\' : result.divider && $index!= 0}">' +
         '      <div ng-if="imageField" class="angucomplete-image-holder">' +
         '        <img ng-if="result.image && result.image != \'\'" ng-src="[[result.image]]" class="angucomplete-image"/>' +
         '        <div ng-if="!result.image && result.image != \'\'" class="angucomplete-image-default"></div>' +
@@ -211,11 +211,11 @@
           var result='', matches, re;
           // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
           // Escape user input to be treated as a literal string within a regular expression
-          // 
+          //
           if (!target) { return; }
 
           re = new RegExp(str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
-          
+
           matches = target.match(re);
           if (matches) {
             result = target.replace(re,
@@ -552,10 +552,10 @@
 
           if (typeof responseData === 'object') {
             var i=0, divider='';
-            for (var index in responseData) {  
+            for (var index in responseData) {
               if( index.indexOf("_title") == -1 ){
 
-                  if (typeof responseData[index] === 'object') { 
+                  if (typeof responseData[index] === 'object') {
                       for (var indej in responseData[index]) {
                           scope.results[i++] = procesingResults(responseData[index][indej], str);
                           scope.results[i-1].kind=index;
@@ -563,7 +563,7 @@
                               divider = index;
                               scope.results[i-1].divider='<small>'+responseData[index+'_title']+'</small>';
                           }
-                      }  
+                      }
 
                   }else{
                     scope.results[i++] = procesingResults(responseData[index], str);
@@ -579,7 +579,7 @@
         function procesingResults(responseData, str) {
           var i, description, image, text, formattedText, formattedDesc;
           var results = [];
-          if (responseData ) { 
+          if (responseData ) {
             // scope.results = [];
 
             //for (i = 0; i < responseData.length; i++) {
@@ -596,7 +596,7 @@
 
               image = '';
               if (scope.imageField && responseData.features) {
-                image = responseData.features.images[0];
+                image = responseData.default_picture;
               }
 
               if (scope.matchClass) {
@@ -610,7 +610,7 @@
                 image: image,
                 originalObject: responseData
               };
-                
+
               if (scope.autoMatch) {
                 checkExactMatch(results[results.length-1],
                     {title: text, desc: description || ''}, scope.searchStr);
@@ -754,7 +754,7 @@
         // set strings for "Searching..." and "No results"
         scope.textSearching = attrs.textSearching ? attrs.textSearching : TEXT_SEARCHING;
         scope.textNoResults = attrs.textNoResults ? attrs.textNoResults : TEXT_NORESULTS;
-        
+
         // set max length (default to maxlength deault from html
         scope.maxlength = attrs.maxlength ? attrs.maxlength : MAX_LENGTH;
 

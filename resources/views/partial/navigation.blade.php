@@ -63,7 +63,7 @@
                                 <li>
                                     <a href="{{ route('products.show',[$orderDetail->product->id]) }}" >
 
-                                            <img src="{{ $orderDetail->product->FirstImage }}" alt="{{ $orderDetail->product->name }}" width="32" height="32" style="float: left; margin-right: 2px"/>
+                                            <img src="{{ $orderDetail->product->default_picture }}" alt="{{ $orderDetail->product->name }}" width="32" height="32" style="float: left; margin-right: 2px"/>
                                             {{ $orderDetail->product->name }}
                                              - {{ trans('store.quantity') }}: {{ $orderDetail->quantity }}
 

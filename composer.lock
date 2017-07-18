@@ -271,12 +271,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "4af64e1756e2bd765ff5e7c36dbcf5ea47e8e576"
+                "reference": "e08050dd5075bc75e502d654c5415f6d85640103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/4af64e1756e2bd765ff5e7c36dbcf5ea47e8e576",
-                "reference": "4af64e1756e2bd765ff5e7c36dbcf5ea47e8e576",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/e08050dd5075bc75e502d654c5415f6d85640103",
+                "reference": "e08050dd5075bc75e502d654c5415f6d85640103",
                 "shasum": ""
             },
             "require": {
@@ -330,7 +330,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2017-07-06 08:23:43"
+            "time": "2017-07-17 13:44:44"
         },
         {
             "name": "dompdf/dompdf",
@@ -546,12 +546,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "526d8ef63e8701e02216b621e4a3a16085e2286f"
+                "reference": "811b676fbab9c99e359885032e5ebc70e442f5b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/526d8ef63e8701e02216b621e4a3a16085e2286f",
-                "reference": "526d8ef63e8701e02216b621e4a3a16085e2286f",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/811b676fbab9c99e359885032e5ebc70e442f5b8",
+                "reference": "811b676fbab9c99e359885032e5ebc70e442f5b8",
                 "shasum": ""
             },
             "require": {
@@ -603,7 +603,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-06-19 13:30:27"
+            "time": "2017-07-17 09:11:21"
         },
         {
             "name": "intervention/image",
@@ -824,12 +824,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f94fc026c64471ca5a5b42919c9b5795021d783c"
+                "reference": "c2c917c5f773d3df7f59242768f921af95309bcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f94fc026c64471ca5a5b42919c9b5795021d783c",
-                "reference": "f94fc026c64471ca5a5b42919c9b5795021d783c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c2c917c5f773d3df7f59242768f921af95309bcc",
+                "reference": "c2c917c5f773d3df7f59242768f921af95309bcc",
                 "shasum": ""
             },
             "require": {
@@ -945,7 +945,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-07-14 13:52:39"
+            "time": "2017-07-18 13:20:30"
         },
         {
             "name": "laravel/tinker",
@@ -1153,12 +1153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "abb2a4cfda971f81d1da24e549444a2b04a562fe"
+                "reference": "22cb245c6a4315f72c5d8ce68d0b9b0a77c019e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/abb2a4cfda971f81d1da24e549444a2b04a562fe",
-                "reference": "abb2a4cfda971f81d1da24e549444a2b04a562fe",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/22cb245c6a4315f72c5d8ce68d0b9b0a77c019e1",
+                "reference": "22cb245c6a4315f72c5d8ce68d0b9b0a77c019e1",
                 "shasum": ""
             },
             "require": {
@@ -1206,7 +1206,7 @@
                 "debug",
                 "debugbar"
             ],
-            "time": "2017-07-14 08:36:10"
+            "time": "2017-07-15 09:12:08"
         },
         {
             "name": "milon/barcode",
@@ -1758,12 +1758,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "216d86ab9221b2f59b0e84c6e31bc8ebe8dc70fb"
+                "reference": "960179af9b3c8ecd36354e3f484fd33be9ce12ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/216d86ab9221b2f59b0e84c6e31bc8ebe8dc70fb",
-                "reference": "216d86ab9221b2f59b0e84c6e31bc8ebe8dc70fb",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/960179af9b3c8ecd36354e3f484fd33be9ce12ac",
+                "reference": "960179af9b3c8ecd36354e3f484fd33be9ce12ac",
                 "shasum": ""
             },
             "require": {
@@ -1823,7 +1823,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-07-12 12:03:52"
+            "time": "2017-07-18 15:08:43"
         },
         {
             "name": "ramsey/uuid",
@@ -2008,12 +2008,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "fd3a67818569fc29a5f8fb977912a242f7318cd4"
+                "reference": "4820f8e1b3c03aab46a655518d078a7ffc8df4ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/fd3a67818569fc29a5f8fb977912a242f7318cd4",
-                "reference": "fd3a67818569fc29a5f8fb977912a242f7318cd4",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4820f8e1b3c03aab46a655518d078a7ffc8df4ef",
+                "reference": "4820f8e1b3c03aab46a655518d078a7ffc8df4ef",
                 "shasum": ""
             },
             "require": {
@@ -2070,7 +2070,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-12 09:59:19"
+            "time": "2017-07-17 12:21:21"
         },
         {
             "name": "symfony/css-selector",
@@ -2299,12 +2299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "f270b0d8660a53a082589d8a8e1a932408268082"
+                "reference": "05871b5b3289892ad560bfec0fc5300628afb7b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/f270b0d8660a53a082589d8a8e1a932408268082",
-                "reference": "f270b0d8660a53a082589d8a8e1a932408268082",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/05871b5b3289892ad560bfec0fc5300628afb7b0",
+                "reference": "05871b5b3289892ad560bfec0fc5300628afb7b0",
                 "shasum": ""
             },
             "require": {
@@ -2344,7 +2344,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-12 14:42:11"
+            "time": "2017-07-17 14:07:19"
         },
         {
             "name": "symfony/http-kernel",
@@ -2352,12 +2352,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "c52f90c212e289b4ae15e64bcaa096bb6434656d"
+                "reference": "8913930a3f122b4b223bc41700fde77a815d87ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/c52f90c212e289b4ae15e64bcaa096bb6434656d",
-                "reference": "c52f90c212e289b4ae15e64bcaa096bb6434656d",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/8913930a3f122b4b223bc41700fde77a815d87ac",
+                "reference": "8913930a3f122b4b223bc41700fde77a815d87ac",
                 "shasum": ""
             },
             "require": {
@@ -2429,7 +2429,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-12 13:09:21"
+            "time": "2017-07-15 08:52:56"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2496,12 +2496,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "2695aab6520a632522311c7baa938d6153a9d9dc"
+                "reference": "aeea12fe8abbf2f6ccb917c0037a7664d0e20b51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/2695aab6520a632522311c7baa938d6153a9d9dc",
-                "reference": "2695aab6520a632522311c7baa938d6153a9d9dc",
+                "url": "https://api.github.com/repos/symfony/process/zipball/aeea12fe8abbf2f6ccb917c0037a7664d0e20b51",
+                "reference": "aeea12fe8abbf2f6ccb917c0037a7664d0e20b51",
                 "shasum": ""
             },
             "require": {
@@ -2537,7 +2537,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-12 13:09:21"
+            "time": "2017-07-15 08:52:56"
         },
         {
             "name": "symfony/routing",
@@ -2690,12 +2690,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "147e2141f34043d0bf1fd2aa28cc1f5c36c4d900"
+                "reference": "3fbb6b03859b2933571737ec28e3b13147810791"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/147e2141f34043d0bf1fd2aa28cc1f5c36c4d900",
-                "reference": "147e2141f34043d0bf1fd2aa28cc1f5c36c4d900",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/3fbb6b03859b2933571737ec28e3b13147810791",
+                "reference": "3fbb6b03859b2933571737ec28e3b13147810791",
                 "shasum": ""
             },
             "require": {
@@ -2750,7 +2750,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-07-12 13:09:21"
+            "time": "2017-07-15 07:44:49"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -3227,22 +3227,22 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.1",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
+                "reference": "46f7e8bb075036c92695b15a1ddb6971c751e585"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
-                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/46f7e8bb075036c92695b15a1ddb6971c751e585",
+                "reference": "46f7e8bb075036c92695b15a1ddb6971c751e585",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
                 "phpdocumentor/reflection-common": "^1.0@dev",
-                "phpdocumentor/type-resolver": "^0.2.0",
+                "phpdocumentor/type-resolver": "^0.4.0",
                 "webmozart/assert": "^1.0"
             },
             "require-dev": {
@@ -3268,24 +3268,24 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-09-30 07:12:33"
+            "time": "2017-07-15 11:38:20"
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "0.2.1",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb"
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
-                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/9c977708995954784726e25d0cd1dddf4e65b0f7",
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
+                "php": "^5.5 || ^7.0",
                 "phpdocumentor/reflection-common": "^1.0"
             },
             "require-dev": {
@@ -3315,7 +3315,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2016-11-25 06:54:22"
+            "time": "2017-07-14 14:27:02"
         },
         {
             "name": "phpspec/prophecy",
@@ -4394,12 +4394,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "052ff63e5d9d8533bd76e326f5f4ea5f67893666"
+                "reference": "97adcb4f8492f974f689cd36aafeca684902b258"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/052ff63e5d9d8533bd76e326f5f4ea5f67893666",
-                "reference": "052ff63e5d9d8533bd76e326f5f4ea5f67893666",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/97adcb4f8492f974f689cd36aafeca684902b258",
+                "reference": "97adcb4f8492f974f689cd36aafeca684902b258",
                 "shasum": ""
             },
             "require": {
@@ -4435,7 +4435,7 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-06 09:14:58"
+            "time": "2017-07-17 07:33:44"
         },
         {
             "name": "symfony/yaml",

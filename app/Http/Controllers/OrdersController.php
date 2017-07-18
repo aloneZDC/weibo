@@ -61,8 +61,8 @@ class OrdersController extends Controller
         $this->middleware('auth');
 
         $this->order = $order;
-        $suggestions = $products->suggestForPreferences(['product_purchased']);
-        $this->suggestions = $suggestions['product_purchased'];
+
+        $this->suggestions = $products->suggestForPreferences('product_purchased');
     }
 
     /**
@@ -1456,8 +1456,8 @@ class OrdersController extends Controller
         if (!$order) {
             return json_encode(['message' => trans('globals.error_not_available')]);
         }
-        $seller = User::select('nickname')->find($product->user_id);
-        $product->seller = $seller->nickname;
+        $seller = User::select('nickname')->find($product->created_by);
+
         $return = ['product' => $product, 'order' => $order];
         if ($product->type != 'item') {
             $virtual = VirtualProduct::where('product_id', $product->id)->first();

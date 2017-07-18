@@ -288,8 +288,7 @@ class ProductsController extends Controller
 
             $freeproductId = isset($freeproduct) ? $freeproduct->freeproduct_id : 0;
 
-            $suggestions = $this->products->suggestForPreferences(['product_viewed']);
-            $suggestions = $suggestions['product_viewed'];
+            $suggestions = $this->products->suggestForPreferences('product_viewed');
 
             //retrieving products groups of the product shown
             if (count($product->group)) {
