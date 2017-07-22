@@ -43,9 +43,39 @@ class ProductsTest extends TestCase
 	}
 
 	/** @test */
-	function an_authorized_user_can_create_new_products()
+	function it_can_show_a_given_product()
 	{
-		//
+		$product = factory(Product::class)->create();
+
+		$response = $this->get('/products/' . $product->id);
+
+		$response
+			->assertSuccessful()
+			->assertSeeText($product->name)
+			->assertSeeText($product->description);
+	}
+
+	/** @test */
+	function it_can_show_a_given_product_and_update_user_preferences_with_its_tags()
+	{
+		$this->actingAs($this->seller);
+
+		$this->assertSame('', trim($this->seller->preferences['product_viewed']));
+
+		$product = factory(Product::class)->create();
+
+		$response = $this->get('/products/' . $product->id);
+
+		$response
+			->assertSuccessful()
+			->assertSeeText($product->name)
+			->assertSeeText($product->description);
+
+		$this->assertSame($this->seller->preferences['product_viewed'], $product->tags);
+		$this->assertSame('', trim($this->seller->preferences['product_purchased']));
+		$this->assertSame('', trim($this->seller->preferences['product_shared']));
+		$this->assertSame('', trim($this->seller->preferences['my_searches']));
+		$this->assertSame('', trim($this->seller->preferences['product_categories']));
 	}
 
 	/** @test */
@@ -78,19 +108,5 @@ class ProductsTest extends TestCase
         ]);
 
         $response->assertStatus(302);
-	}
-
-		/** @test */
-	function an_authorized_user_can_edit_products()
-	{
-		$product = factory(Product::class)->create();
-
-        $this->actingAs($this->seller);
-
-        $response = $this->get(route('items.edit', [
-        	'item' => $product->id
-        ]));
-
-        $response->assertSuccessful();
 	}
 }

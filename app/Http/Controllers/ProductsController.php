@@ -25,10 +25,9 @@ use Illuminate\Support\Facades\Validator;
 
 //shop components.
 use App\User;
-use Antvel\Product\Products;
 use Antvel\Product\Models\Product;
 use Antvel\Categories\Models\Category;
-use Antvel\User\UsersRepository as Users;
+use Antvel\Product\Suggestions\Suggest;
 
 class ProductsController extends Controller
 {
@@ -52,23 +51,6 @@ class ProductsController extends Controller
         'left'   => ['width' => '2'],
         'center' => ['width' => '10'],
     ];
-
-    /**
-     * The Antvel products component.
-     *
-     * @var Products
-     */
-    protected $products = null;
-
-    /**
-     * Creates a new instance.
-     *
-     * @param Products $products
-     */
-    public function __construct(Products $products)
-    {
-        $this->products = $products;
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -268,8 +250,8 @@ class ProductsController extends Controller
             $this->setCounters($product, ['view_counts' => trans('globals.product_value_counters.view')], 'viewed');
 
             //saving the product tags into users preferences
-            if (trim($product->tags) != '') {
-                Users::updatePreferences('product_viewed', $product->tags);
+            if (trim($product->tags) != '' && auth()->check()) {
+                auth()->user()->updatePreferences('product_viewed', $product->tags);
             }
 
             //receiving products user reviews & comments
@@ -288,7 +270,7 @@ class ProductsController extends Controller
 
             $freeproductId = isset($freeproduct) ? $freeproduct->freeproduct_id : 0;
 
-            $suggestions = $this->products->suggestForPreferences('product_viewed');
+            $suggestions = Suggest::for('product_viewed')->shake()->get('product_viewed');
 
             //retrieving products groups of the product shown
             if (count($product->group)) {

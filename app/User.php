@@ -38,12 +38,13 @@ class User extends BaseUser
 
     public function getCartContent()
     {
-        $basicCart = Order::ofType('cart')->where('user_id', $this->id)->first();
-        if (!($basicCart)) {
-            return [];
-        } else {
-            return $basicCart->details;
+        $shoppingCart = Order::ofType('cart')->where('user_id', $this->id)->first();
+
+        if ($shoppingCart) {
+            return $shoppingCart->details->sortByDesc('created_at')->take(5);
         }
+
+        return [];
     }
 
     public function modifyPoints($points, $actionTypeId, $sourceId)

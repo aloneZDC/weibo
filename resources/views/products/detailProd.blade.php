@@ -261,15 +261,19 @@
 			@if (count($product->group))
                 @include('products.group')
             @else
-	            <section class="products_view">
-                    <div class="container-fluid marketing">
-                        <div class="row">
-                            @foreach ($suggestions as $product)
-                            	@include('products.partial.productBox', $product)
-                            @endforeach
-                        </div>
-                    </div>
-	            </section>
+            	@if ($suggestions)
+		            <section class="products_view">
+	                    <div class="container-fluid marketing">
+	                        <div class="row">
+	                            @foreach ($suggestions as $product)
+	                            	@include('products.partial.productBox', $product)
+	                            @endforeach
+	                        </div>
+	                    </div>
+		            </section>
+		        @else
+		        	&nbsp;
+	            @endif
             @endif
 		</div>
 

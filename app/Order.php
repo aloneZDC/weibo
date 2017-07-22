@@ -20,7 +20,6 @@ use App\Http\Controllers\ProductsController as ProductsController;
 //shop components.
 use Antvel\Product\Models\Product;
 use Antvel\AddressBook\Models\Address;
-use Antvel\User\UsersRepository as Users;
 
 class Order extends Model
 {
@@ -208,7 +207,7 @@ class Order extends Model
      */
     public static function placeOrders($type_order)
     {
-        $cart = self::ofType($type_order)->auth()->whereStatus('open')->orderBy('id', 'desc')->first();
+        $cart = self::ofType($type_order)->auth()->orderBy('id', 'desc')->first();
 
         $show_order_route = 'orders.show_cart';
 
@@ -317,8 +316,8 @@ class Order extends Model
                     ProductsController::setCounters($orderDetail->product, ['sale_counts' => trans('globals.product_value_counters.sale')], 'orders');
 
                     //saving tags in users preferences
-                    if (trim($orderDetail->product->tags) != '') {
-                        Users::updatePreferences('product_purchased', $product->tags);
+                    if (trim($orderDetail->product->tags) != '' && auth()->check()) {
+                        auth()->user()->updatePreferences('product_purchased', $product->tags);
                     }
                 }
             }

@@ -9,37 +9,19 @@ namespace App\Http\Controllers;
  */
 
 use App\Order;
-use Antvel\Product\Products;
 use App\Http\Controllers\Controller;
+use Antvel\Product\Suggestions\Suggest;
 
 class HomeController extends Controller
 {
-   /**
-     * The products repository.
-     *
-     * @var Products
-     */
-    protected $products = null;
-
-    /**
-     * The suggestion keys.
-     *
-     * @var array
-     */
-    protected $listing = ['product_viewed', 'product_purchased' , 'product_categories'];
-
     /**
      * Creates a new instance.
      *
-     * @param Products $products
-     *
      * @return void
      */
-    public function __construct(Products $products)
+    public function __construct()
     {
         $this->middleware('auth')->only('dashboard');
-
-        $this->products = $products;
     }
 
     /**
@@ -49,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $suggestion = $this->products->suggestForPreferences($this->listing);
+        $suggestion = Suggest::for('product_viewed', 'product_purchased' , 'product_categories')->shake();
 
         $suggestion['carousel'] = $suggestion['product_purchased'];
 

@@ -182,15 +182,15 @@
 
         @endif {{-- if there is something in the wishes --}}
 
-        @if(isset($suggestions) && is_array($suggestions))
+        @if(isset($suggestions))
             <div class="page-header">
                 <h5>{{ trans('store.suggestions.wish') }}</h5>
             </div>
             <section class="products_view">
                 <div class="container-fluid marketing">
                     <div class="row">
-                        @foreach ($suggestions as $productSuggestion)
-                            @include('products.partial.productBox', $productSuggestion)
+                        @foreach ($suggestions as $product)
+                            @include('products.partial.productBox', $product)
                         @endforeach
                     </div>
                 </div>

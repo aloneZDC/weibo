@@ -24,7 +24,9 @@
 
     @section('center_content')
 
-    <div class="panel panel-default" ng-controller = "ShoppingCart" >
+    <div ng-controller = "ShoppingCart" >
+
+    <div class="panel panel-default">
 
         <div class="panel-heading">
             <h6><span class="glyphicon glyphicon-shopping-cart"></span> {{ trans('store.cart_view.your_shopping_cart') }}</h6>
@@ -40,10 +42,10 @@
                 </div>
             @endif
 
-            @if (count($cart['details']) == 0)
+            @if ($cart->details->count() == 0)
                 <div class="alert alert-warning text-center text-small">
                     <h6>{{ trans('store.noCart') }}</h6>
-                    @if(!$user)
+                    @if (! auth()->check())
                         <small>{{ trans('store.cart_view.not_logged_disclaimer') }}</small>
                     @endif
                     <p>&nbsp;</p>
@@ -52,7 +54,7 @@
             @endif
 
             {{-- Cart Totals --}}
-            @if (count($cart['details']) > 0)
+            @if ($cart->details->count() > 0)
                 <div class="row">
                     <div class="col-xs-12 col-md-7 col-lg-8 text-left text-small">
                        {{ trans('store.productsInCart') }} <span class="ng-cloak">[[totalItems]]</span> {{ trans('store.items') }}: <strong class="ng-cloak">[[ totalAmount | currency:"{{ config('app.payment_method') }} " ]]</strong>
@@ -110,24 +112,13 @@
                                         @if ($item['product']['type'] != 'item')
                                             <span>{{ $item['quantity'] }}</span>
                                         @else
-
-                                            @if ($user)
-                                                <select class="form-control col-lg-6" name="cartQty" id="cartQty" ng-init = "cart['{{ $item['product']['id'] }}'] = '{{ $item['quantity'] }}'" ng-model = "cart['{{ $item['product']['id'] }}']" ng-change = "changeQuantity('{{ $cart['id'] }}', '{{ $item['id'] }}', cart['{{ $item['product']['id'] }}'])" >
-
-                                                    @for ($i=1; $i<$item['product']['stock']; $i++)
-
-                                                    <option ng-selected="'{{ $i }}' == '{{ $item['quantity'] }}' " value="{{ $i }}">{{ $i }}</option>
-
-                                                    @endfor
-
-
-                                                </select>
-                                            @else
-                                                 <span>{{ $item['quantity'] }}</span>
-                                            @endif
-
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Qty" ng-init = "cart['{{ $item['product']['id'] }}'] = '{{ $item['quantity'] }}'" ng-model = "cart['{{ $item['product']['id'] }}']" value="{{ $item['quantity'] }}">
+                                                <span class="input-group-btn">
+                                                    <button ng-click="changeQuantity('{{ $cart['id'] }}', '{{ $item['id'] }}', cart['{{ $item['product']['id'] }}'])" class="btn btn-default btn" type="button">Update</button>
+                                                </span>
+                                            </div>
                                             <small>{{ trans('store.items') }}</small>
-
                                         @endif
                                     </strong>
                                 @endif
@@ -136,11 +127,9 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-small">
-                            <a href="{{ action('OrdersController@removeFromOrder', ['cart', $item['product']['id']]) }}">{{ trans('store.delete') }}</a>
-                            @if(isset($user))
-                                | <a href="{{ action('OrdersController@moveFromOrder', ['cart', 'later', $item['product']['id']]) }}">{{ trans('store.saveForLater') }}</a>
-                                | <a href="{{ route('products.show',[$item['product']['id']]) }}">{{ trans('product.globals.view_details') }}</a>
-                            @endif
+                            <a href="{{ action('OrdersController@removeFromOrder', ['cart', $item['product']['id']]) }}">{{ trans('store.delete') }}</a> |
+                            <a href="{{ action('OrdersController@moveFromOrder', ['cart', 'later', $item['product']['id']]) }}">{{ trans('store.saveForLater') }}</a> |
+                            <a href="{{ route('products.show',[$item['product']['id']]) }}">{{ trans('product.globals.view_details') }}</a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><hr/></div>
                     </div>
@@ -148,7 +137,7 @@
             </div>
 
             <!-- Address -->
-            @if(isset($isResume) && count($cart['details']) > 0)
+            @if(isset($isResume) && $cart->details->count() > 0)
                 <div class="row">
                     <div class="col-xs-8 col-sm-9 col-md-6 col-lg-4">
                         <div class="panel panel-success">
@@ -171,7 +160,7 @@
 
         </div> {{-- panel-body --}}
 
-        @if (count($cart['details']) > 0)
+        @if ($cart->details->count() > 0)
             <div class="panel-footer">{{ trans('store.priceDisclaimer') }}</div>
         @endif
 
@@ -180,7 +169,7 @@
 
     {{-- later cart details --}}
 
-    @if($user && isset($laterCart) && count($laterCart['details']) > 0)
+    @if(isset($laterCart) && count($laterCart['details']) > 0)
 
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -189,7 +178,7 @@
             <div class="panel-body">
                 <div class="row">
                     @foreach ($laterCart['details'] as $item)
-
+{{-- {{ dd($item) }} --}}
                         <div class="text-small col-lg-6">
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -207,7 +196,7 @@
                                 </h6>
 
                                 <div>
-                                    <strong>{{ Utility::showPrice($item['price']) }}</strong>
+                                    <strong>{{ Utility::showPrice($item['price']) }}-{{ $item['id'] }}</strong>
                                 </div>
 
                                 <div>
@@ -218,15 +207,15 @@
                                             @if ($item['product']['type'] != 'item')
                                                 <span>{{ $item['quantity'] }}</span>
                                             @else
-                                                <select class="form-control col-lg-6" name="quantity" id="quantity">
 
-                                                    @for ($i=0; $i<$item['product']['stock']; $i++)
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Qty" ng-init = "cart['{{ $item['product']['id'] }}'] = '{{ $item['quantity'] }}'" ng-model = "cart['{{ $item['product']['id'] }}']" value="{{ $item['quantity'] }}">
+                                                    <span class="input-group-btn">
+                                                        <button ng-click="changeQuantity('{{ $item['order_id'] }}', '{{ $item['id'] }}', cart['{{ $item['product']['id'] }}'])" class="btn btn-default btn" type="button">Update</button>
+                                                    </span>
+                                                </div>
 
-                                                    <option value="{{ $i }}" {{ ($item['quantity'] == $i) ? 'selected' : '' }}>{{ $i }}</option>
-
-                                                    @endfor
-
-                                                </select> <small>{{ trans('store.items') }}</small>
+                                                <small>{{ trans('store.items') }}</small>
                                             @endif
                                         </strong>
                                     @endif
@@ -235,11 +224,9 @@
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-small">
-                                <a href="{{ action('OrdersController@removeFromOrder', ['later', $item['product']['id']]) }}">{{ trans('store.delete') }}</a>
-                                @if(isset($user))
-                                    | <a href="{{ action('OrdersController@moveFromOrder', ['later','cart', $item['product']['id']]) }}">{{ trans('store.moveToCart') }}</a>
-                                    | <a href="{{ route('products.show',[$item['product']['id']]) }}">{{ trans('product.globals.view_details') }}</a>
-                                @endif
+                                <a href="{{ action('OrdersController@removeFromOrder', ['later', $item['product']['id']]) }}">{{ trans('store.delete') }}</a> |
+                                <a href="{{ action('OrdersController@moveFromOrder', ['later','cart', $item['product']['id']]) }}">{{ trans('store.moveToCart') }}</a> |
+                                <a href="{{ route('products.show',[$item['product']['id']]) }}">{{ trans('product.globals.view_details') }}</a>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><hr/></div>
                         </div>
@@ -250,6 +237,7 @@
         </div> {{-- panel --}}
 
     @endif
+    </div>
 
     @if(isset($suggestions))
         <div class="row">&nbsp;</div>
@@ -260,6 +248,7 @@
             <div class="container-fluid marketing">
                 <div class="row">
                     @foreach ($suggestions as $product)
+
                         @include('products.partial.productBox', $product)
 
                     @endforeach
@@ -279,7 +268,7 @@
             app.controller('ShoppingCart', ['$scope','$http', function($scope, $http)
             {
                 $scope.totalAmount = '{{ $totalAmount }}';
-                $scope.totalItems = '{{ $totalItems }}';
+                $scope.totalItems = '{{ $cart->details->count() }}';
 
                 $scope.changeQuantity = function(orderId, detailId, newValue)
                 {

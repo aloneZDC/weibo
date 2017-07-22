@@ -32,6 +32,7 @@ use Antvel\Product\Products;
 use Antvel\User\Models\Business;
 use Antvel\Product\Models\Product;
 use Antvel\AddressBook\Models\Address;
+use Antvel\Product\Suggestions\Suggest;
 
 class OrdersController extends Controller
 {
@@ -43,26 +44,17 @@ class OrdersController extends Controller
     protected $order;
 
     /**
-     * Products suggestions based on user's preferences.
-     *
-     * @var array
-     */
-    protected $suggestions;
-
-    /**
      * Create a new controller instance.
      *
      * @param OrderRepository $order
      *
      * @return void
      */
-    public function __construct(OrderRepository $order, Products $products)
+    public function __construct(OrderRepository $order)
     {
         $this->middleware('auth');
 
         $this->order = $order;
-
-        $this->suggestions = $products->suggestForPreferences('product_purchased');
     }
 
     /**
@@ -492,7 +484,7 @@ class OrdersController extends Controller
         ];
 
 
-        $suggestions = $this->suggestions;
+        $suggestions = Suggest::for('product_purchased')->shake()->get('product_purchased');
 
         return view('orders.wish',
             compact(
@@ -533,7 +525,7 @@ class OrdersController extends Controller
             'center' => ['width' => '12'],
         ];
 
-        $suggestions = $this->suggestions;
+        $suggestions = Suggest::for('product_purchased')->shake()->get('product_purchased');
 
         return view('orders.wishListsDirectory', compact('orders', 'panel', 'suggestions'));
     }
@@ -545,152 +537,43 @@ class OrdersController extends Controller
      */
     public function showCart()
     {
-        $user = \Auth::user();
+        $cart = Order::where('type', 'cart')
+            ->where('user_id', auth()->user()->id)
+            ->with('details')
+            ->first();
 
-        /*
-         * $suggest-listed keeps tracking listed products to control the suggestion view
-         */
-        // Session::forget('suggest-listed');
+        $laterCart = Order::with('details')->ofType('later')->where('user_id', auth()->user()->id)->first();
 
-        /**
-         * $totalAmount saves the shopping cart total amount.
-         *
-         * @var decimal
-         */
-        $totalAmount = 0;
+        $validation_message = [];
 
-        /**
-         * $totalItems saves the shopping cart total items.
-         *
-         * @var int
-         */
-        $totalItems = 0;
+        if ($cart->exists()) {
 
-        if ($user) {
-            /**
-             * $cart has all the shopping cart information, which comes from an type of order called "cart".
-             *
-             * @var [type]
-             */
-            $cart = Order::ofType('cart')->where('user_id', $user->id)->with('details')->first();
+            foreach ($cart->details as $detail) {
 
-            /**
-             * $laterCart has all the shopping cart (saved for later) information, which comes from an type of order called "later".
-             *
-             * @var [type]
-             */
-            $laterCart = Order::ofType('later')->where('user_id', $user->id)->with('details')->first();
-
-            /**
-             * $validation_message keeps the message for those items that has a different stock since they were added to a shopping cart.
-             *
-             * @var array
-             */
-            $validation_message = [];
-
-            if ($cart) {
-                foreach ($cart->details as $detail) {
-                    $totalItems += $detail->quantity;
-                    $totalAmount += ($detail->quantity * $detail->price);
-
-                    if ($detail->quantity > $detail->product->stock) {
-                        $detail->quantity = $detail->product->stock;
-                        $detail->save();
-                        $validation_message[] = trans('store.cart_view.item_changed_stock1').' '.$detail->product->name.' '.trans('store.cart_view.item_changed_stock2');
-                    }
-
-                    //saving the product listed to not show it on suggestion view
-                    Session::push('suggest-listed', $detail->product_id);
+                if ($detail->quantity > $detail->product->stock) {
+                    $detail->quantity = $detail->product->stock;
+                    $detail->save();
+                    $validation_message[] = trans('store.cart_view.item_changed_stock1').' '.$detail->product->name.' '.trans('store.cart_view.item_changed_stock2');
                 }
-
-                //saving the changes made to suggest-listed session var
-                Session::save();
             }
-
-            //if there are validation messages to show, they'll be saved in message session var
-
-            if (count($validation_message) > 0) {
-                Session::push('message', $validation_message);
-            }
-        } else {
-            /**
-             * $session_cart keeps saved all the items added to the shopping cart befor the user ins logged.
-             *
-             * @var [array]
-             */
-            $session_cart = Session::get('user.cart');
-
-            if (is_array($session_cart)) {
-                $session_details = Session::get('user.cart_content');
-
-                $cart_details = [];
-
-                $validation_message = [];
-
-                foreach ($session_details as $id => $quantity) {
-                    $product = Product::find($id);
-
-                    $totalAmount += $product->price;
-
-                    if ($quantity > $product->stock) {
-                        $quantity = $product->stock;
-
-                        $validation_message[] = trans('store.cart_view.item_changed_stock1').' '.$product->name.' '.trans('store.cart_view.item_changed_stock2');
-                    }
-
-                    $cart_details[] = [
-                        'id'         => 0,
-                        'order_id'   => 0,
-                        'product_id' => $product->id,
-                        'price'      => $product->price,
-                        'quantity'   => $quantity,
-                        'product'    => [
-                            'id'          => $product->id,
-                            'name'        => $product->name,
-                            'description' => $product->description,
-                            'price'       => $product->price,
-                            'stock'       => $product->stock,
-                            'type'        => $product->type,
-                            'features'    => [
-                                'images' => [
-                                    $product->FirstImage,
-                                ],
-                            ],
-                        ],
-                    ];
-
-                    Session::push('suggest-listed', $product->id);
-                }
-
-                if (count($validation_message) > 0) {
-                    Session::push('message', $validation_message);
-                }
-
-                $cart = [
-                    'id'      => 0,
-                    'user_id' => 0,
-                    'details' => $cart_details,
-                ];
-
-                $totalItems = count($cart_details);
-            } else {
-                $cart = [
-                    'id'      => 0,
-                    'user_id' => 0,
-                    'details' => [],
-                ];
-            }
-
-            $laterCart = [];
         }
 
-        $panel = [
-            'center' => ['width' => '12'],
-        ];
+        if (count($validation_message) > 0) {
+            Session::push('message', $validation_message);
+        }
 
-        $suggestions = $this->suggestions;
+        $totalAmount = $cart->details->flatMap(function ($item, $key) {
+            $results[] = $item->price * $item->quantity;
+            return $results;
+        })->sum();
 
-        return view('orders.cart', compact('cart', 'user', 'panel', 'laterCart', 'suggestions', 'totalItems', 'totalAmount'));
+        return view('orders.cart', [
+            'panel' => ['center' => ['width' => '12']],
+            'suggestions' => Suggest::for('product_purchased')->shake()->get('product_purchased'),
+            'totalAmount' => $totalAmount,
+            'laterCart' => $laterCart,
+            'cart' => $cart,
+        ]);
     }
 
     /**
@@ -1757,16 +1640,11 @@ class OrdersController extends Controller
         if ($user) {
             //Finds the order to be rated and checks if it belongs to the current user
             $order = Order::where('id', $order_id)->where('user_id', $user->id)->first();
-            // dd($order->details);
+
             if ($order) {
                 $address = Address::find($order->address_id);
                 $seller = User::find($order->seller_id);
-                $business = Business::where('user_id', $order->seller_id)->first();
-                // $jsonOrder = json_encode($order->toArray());
-                // $jsonOrderAddress = json_encode($address->toArray());
-                // $jsonBusiness = json_encode($business->toArray());
-                return view('orders.rate_order', compact('order', 'seller', 'business'));
-                // return view('orders.rate_order', compact('order', 'seller', 'business', 'jsonOrder', 'jsonOrderAddress', 'jsonBusiness'));
+                return view('orders.rate_order', compact('order', 'seller'));
             } else {
                 return redirect('/user/orders');
             }
@@ -1788,7 +1666,7 @@ class OrdersController extends Controller
                 ->first();
 
             if ($order && $order->rate == '') {
-                $seller = Business::where('user_id', $order->seller_id)->first();
+                $seller = User::where('id', $order->seller_id)->first();
 
                 $seller_old_rate_val = $seller->rate_val ?: 0;
 
@@ -1821,8 +1699,7 @@ class OrdersController extends Controller
                     }
                 }
 
-                $seller_user = User::find($order->seller_id);
-                $email = $seller_user->email;
+                $email = $seller->email;
                 $mail_subject = trans('email.order_rated.subject');
                 $data = [
                     'order_id'      => $order_id,
@@ -1830,7 +1707,7 @@ class OrdersController extends Controller
                     'email_message' => $mail_subject,
                     'email'         => $email,
                 ];
-                Mail::queue('emails.order_rated', $data, function ($message) use ($user, $data) {
+                Mail::send('emails.order_rated', $data, function ($message) use ($user, $data) {
                     $message->to($data['email'])->subject($data['subject']);
                 });
 
@@ -1842,7 +1719,7 @@ class OrdersController extends Controller
                 $noticeType = (trim($seller_comment) != '') ? '3' : '14';
 
                 Notice::create([
-                    'user_id'        => $seller->user_id,
+                    'user_id'        => $seller->id,
                     'sender_id'      => $user->id,
                     'action_type_id' => 14,
                     'source_id'      => $order->id,
@@ -1913,7 +1790,7 @@ class OrdersController extends Controller
                         'email_message' => $mail_subject,
                         'email'         => $email,
                     ];
-                    Mail::queue('emails.product_rated', $data, function ($message) use ($user, $data) {
+                    Mail::send('emails.product_rated', $data, function ($message) use ($user, $data) {
                         $message->to($data['email'])->subject($data['subject']);
                     });
 

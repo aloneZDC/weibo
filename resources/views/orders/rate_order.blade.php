@@ -4,7 +4,7 @@
         <h6 class="modal-title">
             {{ str_replace('[order]', $order->id, trans('store.order_rate_view.title_modal')) }}
             &nbsp;-&nbsp;
-            {{ trans('store.order_rate_view.sold_by') }}:&nbsp;{{ ucwords($business->business_name)  }}
+            {{ trans('store.order_rate_view.sold_by') }}:&nbsp;{{ ucwords($seller->full_name)  }}
         </h6>
         <small ng-hide = "processing_petition == ''">[[processing_petition]]</small>
     </div>
