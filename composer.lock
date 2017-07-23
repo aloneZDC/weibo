@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8c880fa9e0a41b6ab2733294f88abcc4",
-    "content-hash": "b2fe3efc076be3b4ff44ceb12be83891",
+    "hash": "ee3ce7789b2a2815d9dd4e763d89df21",
+    "content-hash": "fa6ceb3171fc6bba1e961579dd6beb2e",
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.1.9",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "7faf3989cd9aa99407be08fdc1307d89d1a55bb2"
+                "reference": "59165366d5849ac08a0a5f5c7ff86a16e28b8baa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/7faf3989cd9aa99407be08fdc1307d89d1a55bb2",
-                "reference": "7faf3989cd9aa99407be08fdc1307d89d1a55bb2",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/59165366d5849ac08a0a5f5c7ff86a16e28b8baa",
+                "reference": "59165366d5849ac08a0a5f5c7ff86a16e28b8baa",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-07-18 20:21:18"
+            "time": "2017-07-22 21:37:06"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -811,12 +811,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a61a234a69079b9509757b19133c7f4c358b7be1"
+                "reference": "6b0376e9a9d50915a7155e337ad97e6c3e214adb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a61a234a69079b9509757b19133c7f4c358b7be1",
-                "reference": "a61a234a69079b9509757b19133c7f4c358b7be1",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6b0376e9a9d50915a7155e337ad97e6c3e214adb",
+                "reference": "6b0376e9a9d50915a7155e337ad97e6c3e214adb",
                 "shasum": ""
             },
             "require": {
@@ -932,7 +932,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-07-20 19:12:26"
+            "time": "2017-07-23 11:36:20"
         },
         {
             "name": "laravel/tinker",
@@ -1745,12 +1745,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "54b77e3e1e6bc7b26f16cc798506b663048eeba9"
+                "reference": "e3186c3c61cbb1c49eb12a0301acc32f5d0a6b86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/54b77e3e1e6bc7b26f16cc798506b663048eeba9",
-                "reference": "54b77e3e1e6bc7b26f16cc798506b663048eeba9",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/e3186c3c61cbb1c49eb12a0301acc32f5d0a6b86",
+                "reference": "e3186c3c61cbb1c49eb12a0301acc32f5d0a6b86",
                 "shasum": ""
             },
             "require": {
@@ -1810,7 +1810,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-07-22 15:14:28"
+            "time": "2017-07-23 05:06:13"
         },
         {
             "name": "ramsey/uuid",

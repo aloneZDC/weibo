@@ -22,8 +22,13 @@ class AddressBookTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Address::class, 3)->create([
-            'user_id' => User::where('role', 'like', 'customer')->take(1)->first()->id
+        $user = User::where('role', 'like', 'customer')->first();
+
+        factory(Address::class)->create(['user_id' => $user->id]);
+
+        factory(Address::class, 2)->create([
+            'default' => false,
+            'user_id' => $user->id
         ]);
     }
 }
