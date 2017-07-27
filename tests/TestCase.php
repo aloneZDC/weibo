@@ -13,7 +13,6 @@
 namespace Tests;
 
 use App\Exceptions\Handler;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -25,7 +24,8 @@ abstract class TestCase extends BaseTestCase
 	protected function setUp()
     {
         parent::setUp();
-        // $this->disableExceptionHandling();
+
+        $this->app->make('config')->set('filesystems.default', 'testing');
     }
 
     /**
@@ -58,36 +58,5 @@ abstract class TestCase extends BaseTestCase
         $this->app->instance(ExceptionHandler::class, $this->oldExceptionHandler);
 
         return $this;
-    }
-
-    /**
-     * Swap the storage folder for the given path.
-     *
-     * @param  string $path
-     *
-     * @return void
-     */
-    protected function swapStorageFolder($path = null)
-    {
-        $path = $path ?: storage_path('framework/testing/disks');
-
-        $this->app->make('config')->set(
-            'filesystems.disks.local.root', $path
-        );
-    }
-
-    /**
-     * Creates a fake file.
-     *
-     * @param  string $disk
-     * @param  string $file
-     *
-     * @return UploadedFile
-     */
-    public function uploadFile($disk = 'avatars', $file = 'antvel.jpg')
-    {
-        Storage::fake($disk);
-
-        return UploadedFile::fake()->image($file);
     }
 }

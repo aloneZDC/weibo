@@ -34,7 +34,7 @@
 
         		<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'{{ route("addressBook.create") }}',controller:'AddressesControllerModal', size: 'md'})" class="btn  btn-sm btn-info"><span class="glyphicon glyphicon-plus"></span>&nbsp;{{ trans('address.add') }}</button>
 
-				@if(isset($defaultId) && $defaultId != '')
+				@if(isset($cart) && $addresses->count() > 0)
                 	<a class="btn btn-success btn-sm" href="/user/orders/checkOut/address/{{ $defaultId }}">
 						<span class="glyphicon glyphicon-ok"></span>&nbsp;
                 		{{ trans('address.use_selected') }}
@@ -101,18 +101,20 @@
 										<span class="glyphicon glyphicon-trash"></span>&nbsp;
 										{{ trans('globals.delete') }}
 									</button>
-									<button ng-click="setDefaultAddress('{{ $address->id }}')" class="btn btn-info btn-sm">
-										<span class="glyphicon glyphicon-pushpin"></span>&nbsp;
-										{{ trans('address.make_default_1') }}
-									</button>
+									@if (empty($cart))
+										<button ng-click="setDefaultAddress('{{ $address->id }}')" class="btn btn-info btn-sm">
+											<span class="glyphicon glyphicon-pushpin"></span>&nbsp;
+											{{ trans('address.make_default_1') }}
+										</button>
+									@endif
 								@endif
 
-								<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'{{ route("addressBook.edit", ["id" => $address->id]) }}', size: 'md', controller:'AddressesControllerModal' })" class="btn btn-success btn-sm">
+								<button ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'{{ route("addressBook.edit", ["addressBook" => $address->id]) }}', size: 'md', controller:'AddressesControllerModal' })" class="btn btn-success btn-sm">
 									<span class="glyphicon glyphicon-edit"></span>&nbsp;
 									{{ trans('globals.edit') }}
 								</button>
 
-								@if(isset($defaultId) && $defaultId != '')
+								@if(isset($cart))
                                     <a class="btn btn-primary btn-sm" href="/user/orders/checkOut/address/{{ $address->id  }}">
 										<span class="glyphicon glyphicon-pushpin"></span>&nbsp;
                                     	{{ trans('address.use_this') }}
@@ -156,7 +158,7 @@
 
 				$scope.deleteAddress = function(id)
 				{
-		  			$http.post('{{ route("addressBook.delete") }}', { 'id': id }).
+		  			$http.delete('addressBook/' + id, { 'id': id }).
 					success(function(data, status, headers, config) {
 						@if (isset($callBackUrl))
 							$window.location.href = '{{ $callBackUrl }}';

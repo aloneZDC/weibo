@@ -42,19 +42,15 @@
                 </div>
             @endif
 
-            @if ($cart->details->count() == 0)
+            @if (empty($cart))
                 <div class="alert alert-warning text-center text-small">
                     <h6>{{ trans('store.noCart') }}</h6>
-                    @if (! auth()->check())
-                        <small>{{ trans('store.cart_view.not_logged_disclaimer') }}</small>
-                    @endif
-                    <p>&nbsp;</p>
                     <a class="btn btn-primary" href="{{ route('products.index') }}">{{trans('store.continue_shopping')}}</a>
                 </div>
             @endif
 
             {{-- Cart Totals --}}
-            @if ($cart->details->count() > 0)
+            @if (isset($cart) && $cart->details->count() > 0)
                 <div class="row">
                     <div class="col-xs-12 col-md-7 col-lg-8 text-left text-small">
                        {{ trans('store.productsInCart') }} <span class="ng-cloak">[[totalItems]]</span> {{ trans('store.items') }}: <strong class="ng-cloak">[[ totalAmount | currency:"{{ config('app.payment_method') }} " ]]</strong>
@@ -82,58 +78,60 @@
 
             {{-- cart details --}}
             <div class="row">
-                @foreach ($cart['details'] as $item)
+                @if (isset($cart))
+                    @foreach ($cart['details'] as $item)
 
-                    <div class="text-small col-lg-6">
+                        <div class="text-small col-lg-6">
 
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <a ng-controller="ModalCtrl" ng-init='data={"data":"{{ $item->product->id }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">
-                                <img class="thumbnail" src='{{ $item->product->default_picture }}' alt="{{ $item->product->name }}" height="150" width="150">
-                            </a>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-
-                            <h6>
-                                <a ng-controller="ModalCtrl" ng-init='data={"data":"{{ $item["product"]["id"] }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">
-                                    {{ $item['product']['name'] }}
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <a ng-controller="ModalCtrl" ng-init='data={"data":"{{ $item->product->id }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">
+                                    <img class="thumbnail" src='{{ $item->product->default_picture }}' alt="{{ $item->product->name }}" height="150" width="150">
                                 </a>
-                            </h6>
-
-                            <div>
-                                <strong>{{ Utility::showPrice($item['price']) }}</strong>
                             </div>
 
-                            <div>
-                                @if(isset($isResume))
-                                    {{ $item['quantity'].' '.trans('store.items') }}
-                                @else
-                                    <strong>
-                                        @if ($item['product']['type'] != 'item')
-                                            <span>{{ $item['quantity'] }}</span>
-                                        @else
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Qty" ng-init = "cart['{{ $item['product']['id'] }}'] = '{{ $item['quantity'] }}'" ng-model = "cart['{{ $item['product']['id'] }}']" value="{{ $item['quantity'] }}">
-                                                <span class="input-group-btn">
-                                                    <button ng-click="changeQuantity('{{ $cart['id'] }}', '{{ $item['id'] }}', cart['{{ $item['product']['id'] }}'])" class="btn btn-default btn" type="button">Update</button>
-                                                </span>
-                                            </div>
-                                            <small>{{ trans('store.items') }}</small>
-                                        @endif
-                                    </strong>
-                                @endif
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+                                <h6>
+                                    <a ng-controller="ModalCtrl" ng-init='data={"data":"{{ $item["product"]["id"] }}"}' ng-click="modalOpen({templateUrl:'/modalDetailsProductCart',controller:'getDetailsProductInCart',resolve:'data'})">
+                                        {{ $item['product']['name'] }}
+                                    </a>
+                                </h6>
+
+                                <div>
+                                    <strong>{{ Utility::showPrice($item['price']) }}</strong>
+                                </div>
+
+                                <div>
+                                    @if(isset($isResume))
+                                        {{ $item['quantity'].' '.trans('store.items') }}
+                                    @else
+                                        <strong>
+                                            @if ($item['product']['type'] != 'item')
+                                                <span>{{ $item['quantity'] }}</span>
+                                            @else
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Qty" ng-init = "cart['{{ $item['product']['id'] }}'] = '{{ $item['quantity'] }}'" ng-model = "cart['{{ $item['product']['id'] }}']" value="{{ $item['quantity'] }}">
+                                                    <span class="input-group-btn">
+                                                        <button ng-click="changeQuantity('{{ $cart['id'] }}', '{{ $item['id'] }}', cart['{{ $item['product']['id'] }}'])" class="btn btn-default btn" type="button">Update</button>
+                                                    </span>
+                                                </div>
+                                                <small>{{ trans('store.items') }}</small>
+                                            @endif
+                                        </strong>
+                                    @endif
+                                </div>
+
                             </div>
 
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-small">
+                                <a href="{{ action('OrdersController@removeFromOrder', ['cart', $item['product']['id']]) }}">{{ trans('store.delete') }}</a> |
+                                <a href="{{ action('OrdersController@moveFromOrder', ['cart', 'later', $item['product']['id']]) }}">{{ trans('store.saveForLater') }}</a> |
+                                <a href="{{ route('products.show',[$item['product']['id']]) }}">{{ trans('product.globals.view_details') }}</a>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><hr/></div>
                         </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-small">
-                            <a href="{{ action('OrdersController@removeFromOrder', ['cart', $item['product']['id']]) }}">{{ trans('store.delete') }}</a> |
-                            <a href="{{ action('OrdersController@moveFromOrder', ['cart', 'later', $item['product']['id']]) }}">{{ trans('store.saveForLater') }}</a> |
-                            <a href="{{ route('products.show',[$item['product']['id']]) }}">{{ trans('product.globals.view_details') }}</a>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><hr/></div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
 
             <!-- Address -->
@@ -160,7 +158,7 @@
 
         </div> {{-- panel-body --}}
 
-        @if ($cart->details->count() > 0)
+        @if (isset($cart) && $cart->details->count() > 0)
             <div class="panel-footer">{{ trans('store.priceDisclaimer') }}</div>
         @endif
 
@@ -268,7 +266,7 @@
             app.controller('ShoppingCart', ['$scope','$http', function($scope, $http)
             {
                 $scope.totalAmount = '{{ $totalAmount }}';
-                $scope.totalItems = '{{ $cart->details->count() }}';
+                $scope.totalItems = '{{ isset($cart) ? $cart->details->count() : 0 }}';
 
                 $scope.changeQuantity = function(orderId, detailId, newValue)
                 {

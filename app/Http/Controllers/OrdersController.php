@@ -546,7 +546,8 @@ class OrdersController extends Controller
 
         $validation_message = [];
 
-        if ($cart->exists()) {
+        $totalAmount = 0;
+        if (isset($cart) && $cart->exists()) {
 
             foreach ($cart->details as $detail) {
 
@@ -556,16 +557,16 @@ class OrdersController extends Controller
                     $validation_message[] = trans('store.cart_view.item_changed_stock1').' '.$detail->product->name.' '.trans('store.cart_view.item_changed_stock2');
                 }
             }
+
+            $totalAmount = $cart->details->flatMap(function ($item, $key) {
+                $results[] = $item->price * $item->quantity;
+                return $results;
+            })->sum();
         }
 
         if (count($validation_message) > 0) {
             Session::push('message', $validation_message);
         }
-
-        $totalAmount = $cart->details->flatMap(function ($item, $key) {
-            $results[] = $item->price * $item->quantity;
-            return $results;
-        })->sum();
 
         return view('orders.cart', [
             'panel' => ['center' => ['width' => '12']],

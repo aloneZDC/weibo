@@ -14,13 +14,11 @@ use Antvel\Product\Models\Product;
 class Menu
 {
     /**
-     * [Menu Dashboard ].
+     * Sidebar menu.
      *
-     * @param  bool para indicar el tipo de salida, json o array
+     * @param  boolean $returnArray
      *
-     * @return [json o array]
-     *               Nota: el contenido del array interno de contener al menos route y text lo demas es opcional
-     *               //[route,text,cont(para badge), divider, class, icon  ]
+     * @return mixed
      */
     public static function summary($returnArray = false)
     {
@@ -30,7 +28,7 @@ class Menu
             ['route' => route('addressBook.index'), 'text' => trans('user.address_book'), 'icon' => 'glyphicon glyphicon-map-marker', 'divider' => 1],
         ];
 
-        if (auth()->check() && auth()->user()->hasRole(['seller', 'admin'])) { //will move to the foundation panel
+        if (auth()->check() && auth()->user()->hasRole(['seller', 'admin'])) {
             $menu = array_merge($menu, [
                 ['route' => route('dashboard.home'), 'text' => trans('globals.dashboard'), 'icon' => 'glyphicon glyphicon-dashboard'],
                 ['route' => route('users.products'), 'text' => trans('user.your_products'), 'icon' => 'glyphicon glyphicon-briefcase'],
@@ -46,80 +44,42 @@ class Menu
     }
 
     /**
-     * [Menu Top ].
+     * Top menu
      *
-     * @param  bool para indicar el tipo de salida, json o array
+     * @param  boolean $returnArray
      *
-     * @return [json o array]
-     *               Nota: el contenido del array interno de contener al menos route y text lo demas es opcional
-     *               //[route,text,cont(para badge), divider, class, icon  ]
-     *               Este menu carga el menu del Dashboard
+     * @return mixed
      */
     public static function top($returnArray = false)
     {
-        if (\Auth::guest()) { // invidados
+        if (\Auth::guest()) {
             $menu = [
                 ['route' => '/login', 'text' => trans('user.login'), 'divider' => 1],
                 ['route' => '/register', 'text' => trans('user.register')],
             ];
-        } else {  // logeado
+        } else {
             $menu = self::summary(true);
-
-            //-- Web Panel(Only for admim) --
-            if (\Auth::check() && \Auth::user()->isAdmin()) {
-                $menu = array_merge($menu, [
-                    ['route' => '/wpanel', 'text' => trans('user.wpanel'), 'icon' => 'glyphicon glyphicon-cog', 'divider' => 1],
-                ]);
-            }
         }
 
         return $returnArray ? $menu : json_encode($menu);
     }
 
     /**
-     * [Menu backend ].
+     * Help menu.
      *
-     * @param  bool para indicar el tipo de salida, json o array
+     * @param  boolean $returnArray
      *
-     * @return [json o array]
-     *               Nota: el contenido del array interno de contener al menos route y text lo demas es opcional
-     *               //[route,text,cont(para badge), divider, class, icon  ]
-     */
-    public static function backend($returnArray = false)
-    {
-        //Menu para empresas
-        if (\Auth::user()->hasRole(['seller', 'admin'])) {
-            $menu = [
-                ['route' => '/wpanel',            'text' => trans('user.dashboard'),              'icon' => 'glyphicon glyphicon-dashboard'],
-                ['route' => '/wpanel/profile',    'text' => trans('company.store_config'),        'icon' => 'glyphicon glyphicon-cog'],
-                ['route' => '/wpanel/productsdetails',   'text' => trans('features.product_features'),   'icon' => 'glyphicon glyphicon-th-list'],
-            ];
-        }
-
-        return $returnArray ? $menu : json_encode($menu);
-    }
-
-    /**
-     * [Menu help ].
-     *
-     * @param  bool para indicar el tipo de salida, json o array
-     *
-     * @return [json o array]
-     *               Nota: el contenido del array interno de contener al menos route y text lo demas es opcional
-     *               //[route,text,cont(para badge), divider, class, icon  ]
+     * @return mixed
      */
     public static function help($returnArray = false)
     {
-        //Menu para empresas
-
-            $menu = [
-                // ['route' =>'#',      'text'=> trans('globals.faq'),   ],
-                ['route' => '/about', 'text' => trans('company.about_us')],
-                ['route' => '/refunds', 'text' => trans('company.refund_policy')],
-                ['route' => '/privacy', 'text' => trans('company.privacy_policy')],
-                ['route' => '/terms', 'text' => trans('company.terms_of_service'), 'divider' => 1],
-                ['route' => '/contact', 'text' => trans('about.contact_us')],
-            ];
+        $menu = [
+            ['route' => '/about', 'text' => trans('company.about_us')],
+            ['route' => '/refunds', 'text' => trans('company.refund_policy')],
+            ['route' => '/privacy', 'text' => trans('company.privacy_policy')],
+            ['route' => '/terms', 'text' => trans('company.terms_of_service'), 'divider' => 1],
+            ['route' => '/contact', 'text' => trans('about.contact_us')],
+        ];
 
         return $returnArray ? $menu : json_encode($menu);
     }

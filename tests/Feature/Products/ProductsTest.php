@@ -13,33 +13,24 @@ namespace Tests\Feature\Products;
 
 use Tests\TestCase;
 use Antvel\Product\Models\Product;
-use Antvel\Categories\Models\Category;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProductsTest extends TestCase
 {
 	use DatabaseMigrations;
 
-	public function setUp()
+	/** @test */
+	function it_shows_the_products_listing()
 	{
-		parent::setUp();
+		$productA = factory(Product::class)->create(['name' => 'foo','description' => 'bar'])->first();
+		$productB = factory(Product::class)->create(['name' => 'biz','description' => 'sas'])->first();
 
-		$this->seller = factory('Antvel\User\Models\User')->states('seller')->create()->first();
-	}
-
-	public function tests_it_shows_the_products_listing()
-	{
-		$products = factory(Product::class, 2)->create([
-			'name' => 'iPhone 7',
-			'description' => 'Phone Case',
-		])->first();
-
-		$response = $this->get('/products');
-
-		$response
+		$this->get('/products')
 			->assertSuccessful()
-			->assertSeeText($products->name)
-			->assertSeeText($products->description);
+			->assertSeeText($productA->name)
+			->assertSeeText($productA->description)
+			->assertSeeText($productB->name)
+			->assertSeeText($productB->description);
 	}
 
 	/** @test */
@@ -56,57 +47,22 @@ class ProductsTest extends TestCase
 	}
 
 	/** @test */
-	function it_can_show_a_given_product_and_update_user_preferences_with_its_tags()
+	function update_signed_user_preferences_when_showing_a_given_product_details()
 	{
-		$this->actingAs($this->seller);
+		$this->actingAs(
+			$user =  factory('Antvel\User\Models\User')->create()->first()
+		);
 
-		$this->assertSame('', trim($this->seller->preferences['product_viewed']));
+		$this->assertSame('', trim($user->preferences['product_viewed']));
 
 		$product = factory(Product::class)->create();
 
-		$response = $this->get('/products/' . $product->id);
+		$this->get('/products/' . $product->id)->assertSuccessful();
 
-		$response
-			->assertSuccessful()
-			->assertSeeText($product->name)
-			->assertSeeText($product->description);
-
-		$this->assertSame($this->seller->preferences['product_viewed'], $product->tags);
-		$this->assertSame('', trim($this->seller->preferences['product_purchased']));
-		$this->assertSame('', trim($this->seller->preferences['product_shared']));
-		$this->assertSame('', trim($this->seller->preferences['my_searches']));
-		$this->assertSame('', trim($this->seller->preferences['product_categories']));
-	}
-
-	/** @test */
-	function an_authorized_user_can_store_new_products()
-	{
-		$category = factory(Category::class)->create()->first();
-
-        $this->actingAs($this->seller);
-
-        $response = $this->post(route('items.store'), [
-			'category' => $category->id,
-			'name' => 'iPhone Seven',
-			'description' => 'The iPhone 7',
-			'cost' => 649,
-			'price' => 749,
-			'stock' => 5,
-			'low_stock' => 1,
-			'brand' => 'apple',
-			'condition' => 'new',
-			'features' => [
-				'weight' => '10',
-				'dimensions' => '5x5x5',
-				'color' => 'black',
-			],
-			'pictures' => [
-				$this->uploadFile('images/products'),
-				$this->uploadFile('images/products'),
-				$this->uploadFile('images/products'),
-			],
-        ]);
-
-        $response->assertStatus(302);
+		$this->assertSame($user->preferences['product_viewed'], $product->tags);
+		$this->assertSame('', trim($user->preferences['product_categories']));
+		$this->assertSame('', trim($user->preferences['product_purchased']));
+		$this->assertSame('', trim($user->preferences['product_shared']));
+		$this->assertSame('', trim($user->preferences['my_searches']));
 	}
 }

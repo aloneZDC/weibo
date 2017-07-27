@@ -400,7 +400,7 @@ app.controller('AddressesControllerModal', function($scope, $http, $rootScope, $
 
 	$scope.create = function()
 	{
-		$http.put('/addressBook/store', $scope._address).
+		$http.post('/addressBook', $scope._address).
 			success(function(data, status)
 			{
 				if (data.success)

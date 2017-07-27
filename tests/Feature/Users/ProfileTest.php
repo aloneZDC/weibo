@@ -136,7 +136,6 @@ class ProfileTest extends TestCase
     function an_authorized_user_can_update_his_profile_picture()
     {
         Storage::fake('images');
-        $this->swapStorageFolder();
 
         $this->actingAs($this->user);
 
