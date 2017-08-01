@@ -65,7 +65,15 @@ class ProductsFeaturesTest extends TestCase
     }
 
     /** @test */
-    function an_unauthorized_user_can_store_new_features()
+    function an_unauthorized_user_cannot_create_new_features()
+    {
+        $user = factory(User::class)->states('customer')->create();
+
+        $this->actingAs($user)->get(route('features.create'))->assertStatus(401);
+    }
+
+    /** @test */
+    function an_unauthorized_user_cannot_store_new_features()
     {
         $this->post(route('features.store'), $this->validData())
             ->assertStatus(302)
@@ -139,6 +147,37 @@ class ProductsFeaturesTest extends TestCase
             $this->assertEquals('Updated message', $feature->help_message);
             $this->assertTrue((bool) $feature->status);
             $this->assertEquals('', $feature->validation_rules);
+        });
+    }
+
+     /** @test */
+    function an_unauthorized_user_cannot_update_a_given_features()
+    {
+        $user = factory(User::class)->states('customer')->create();
+
+        $feature = factory(ProductFeatures::class)->create([
+            'name' => 'Old name',
+            'help_message' => 'Old message',
+            'status' => true,
+            'validation_rules' => 'required'
+        ]);
+
+        $data = [
+            'name' => 'Updated name',
+            'help_message' => 'Updated message',
+            'status' => true,
+            'validation_rules' => [
+                'required' => false
+            ]
+        ];
+
+        $this->actingAs($user)->put(route('features.update', $feature), $data)->assertStatus(401);
+
+        tap($feature->fresh(), function ($feature) {
+            $this->assertEquals('Old name', $feature->name);
+            $this->assertEquals('Old message', $feature->help_message);
+            $this->assertTrue((bool) $feature->status);
+            $this->assertEquals('required', $feature->validation_rules);
         });
     }
 }

@@ -66,6 +66,13 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-lg-12">
+			<hr>
+        	{!! $features->render() !!}
+        </div>
+    </div>
+
 
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">

@@ -13,34 +13,6 @@ return [
         'customer' => 'Customer',
     ],
 
-    'verification' => [
-        'yes' => 'yes',
-        'no'  => 'no',
-    ],
-
-    'type_user'               => [
-        'normal'        => 'Normal',
-        'trusted'       => 'Trusted',
-    ],
-    'type_preferences'        => [
-        'string'             => 'String',
-        'date'               => 'Date',
-        'json'               => 'Json',
-        'number'             => 'Number',
-    ],
-    'person_sex'            => [
-        'female'          => 'Female',
-        'male'            => 'Male',
-    ],
-    'type_categories'        => [
-        'group'                 => 'Group',
-        'store'                 => 'Store',
-    ],
-    'product_conditions'    => [
-        'new'                    => 'New',
-        'refurbished'            => 'Refurbished',
-        'used'                   => 'Used',
-    ],
     'order_status'            => [
         'cancelled'             => 'Cancelled', /*orden eliminada por el usuario*/
         'closed'                => 'Closed', /**/
@@ -61,6 +33,7 @@ return [
         'order_detail'            => 'order_detail',
         'paypal'                  => 'paypal',
     ],
+
     'product_features'        => [ //used
         'color'                 => 'color',
         'weight'                => 'weight',
@@ -71,6 +44,7 @@ return [
         'model'                 => 'model',
         'size'                  => 'size',
     ],
+
     'product_types'                => [
         'item'                    => 'item',
         'key'                     => 'key',
@@ -78,7 +52,8 @@ return [
         'software_key'            => 'software_key',
         'gift_card'               => 'gift_card',
     ],
-    'filters' => [
+
+    'filters' => [ //used
         'categories'   => 'Categories',
         'category'     => 'Categories',
         'brand'        => 'Brand',
@@ -86,6 +61,8 @@ return [
         'color'        => 'Color',
         'conditions'   => 'Conditions',
         'condition'    => 'Condition',
+        'weight'       => 'Weight',
+        'dimensions'   => 'Dimensions',
         'model'        => 'Model',
         'price'        => 'price',
         'price_range'  => 'Price Range',
