@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Antvel\Categories\Categories;
 use Antvel\Company\Models\Company;
 use Laravel\Dusk\DuskServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Antvel\Categories\CategoriesRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,9 +23,7 @@ class AppServiceProvider extends ServiceProvider
             $main_company = Company::find(1);
 
             $categories_menu = \Cache::remember('categories_parents', 25, function () {
-                return $this->app->make(Categories::class)
-                    ->havingProducts()
-                    ->toArray();
+                return (new CategoriesRepository)->categoriesWithProducts()->toArray();
             });
 
             $menu = [];

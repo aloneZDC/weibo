@@ -14,6 +14,7 @@ namespace Tests;
 
 use App\Exceptions\Handler;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -26,6 +27,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->app->make('config')->set('filesystems.default', 'testing');
+        $this->registerMacros();
     }
 
     /**
@@ -58,5 +60,17 @@ abstract class TestCase extends BaseTestCase
         $this->app->instance(ExceptionHandler::class, $this->oldExceptionHandler);
 
         return $this;
+    }
+
+    /**
+     * Register the tests suit macros.
+     *
+     * @return void
+     */
+    protected function registerMacros()
+    {
+        TestResponse::macro('data', function ($key) {
+            return $this->original->getData()[$key];
+        });
     }
 }

@@ -61,10 +61,7 @@ class ProductsController extends Controller
     {
         $product = Product::find(-50);
         $features = ProductDetail::all()->toArray();
-        $arrayCategories = Category::actives()
-           ->lightSelection()
-           ->get()
-           ->toArray();
+        $arrayCategories = Category::actives()->get()->toArray();
 
         $categories = [
             '' => trans('product.controller.select_category'),
@@ -307,7 +304,7 @@ class ProductsController extends Controller
 
         $features = ProductDetail::all()->toArray();
 
-        $allCategoriesStore = Category::actives()->lightSelection()->get()->toArray();
+        $allCategoriesStore = Category::actives()->get()->toArray();
 
         $categories = ['' => trans('product.controller.select_category')];
 
