@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Antvel\Company\Models\Company;
+use Illuminate\Support\Facades\View;
 use Laravel\Dusk\DuskServiceProvider;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Antvel\Categories\CategoriesRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,25 +16,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $table = 'companies';
-
-        if (\Schema::hasTable($table)) {
-
-            $main_company = Company::find(1);
-
-            $categories_menu = \Cache::remember('categories_parents', 25, function () {
-                return (new CategoriesRepository)->categoriesWithProducts()->toArray();
-            });
-
-            $menu = [];
-
-            foreach ($categories_menu as $value) {
-                $menu[$value['id']] = $value;
-            }
-
-            \View::share('main_company', $main_company);
-            \View::share('categories_menu', $menu);
+        if (Schema::hasTable('companies')) {
+            $this->bootCompanyMenu();
         }
+    }
+
+    /**
+     * Boot antvel menu.
+     *
+     * @return void
+     */
+    protected function bootCompanyMenu()
+    {
+        $menu = [];
+
+        foreach ($this->app->make('category.repository.cahe')->categoriesWithProducts() as $value) {
+            $menu[$value['id']] = $value;
+        }
+
+        View::share('categories_menu', $menu);
+        View::share('main_company', \Antvel\Company\Models\Company::find(1));
     }
 
     /**
