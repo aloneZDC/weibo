@@ -17,25 +17,25 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (Schema::hasTable('companies')) {
-            $this->bootCompanyMenu();
+            View::share('categories_menu', $this->categoriesMenu());
+            View::share('main_company', \Antvel\Company\Models\Company::find(1));
         }
     }
 
     /**
-     * Boot antvel menu.
+     * Returns the categories menu.
      *
-     * @return void
+     * @return array
      */
-    protected function bootCompanyMenu()
+    protected function categoriesMenu() : array
     {
-        $menu = [];
-
-        foreach ($this->app->make('category.repository.cahe')->categoriesWithProducts() as $value) {
-            $menu[$value['id']] = $value;
+        if (! $this->app->bound($repository = 'category.repository.cahe')) {
+            return [];
         }
 
-        View::share('categories_menu', $menu);
-        View::share('main_company', \Antvel\Company\Models\Company::find(1));
+        return $this->app->make($repository)->categoriesWithProducts()->mapWithKeys(function ($item) {
+            return [$item->id => $item];
+        })->all();
     }
 
     /**
