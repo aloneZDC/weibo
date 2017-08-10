@@ -2,10 +2,11 @@
 
 return [
 
-   'create' => 'Create new feature',
-   'edit' => 'Edit feature',
-   'input_type' => 'Type of Input',
-   'help_message' => 'Help message',
+   'warning_message' => 'Remember to clear the store cache if you are changing the feature name because all its references in products features will be updated as well.',
+   'create' => 'Create new feature', //used
+   'edit' => 'Edit feature', //used
+   'input_type' => 'Type of Input', //used
+   'help_message' => 'Help message', //used
 
    //////////////////////////////////////////////
    'one_is_required'           => '(at less one image is required)',

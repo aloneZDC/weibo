@@ -10,32 +10,32 @@
  */
 
 use Illuminate\Database\Seeder;
-use Antvel\Product\Models\ProductFeatures;
+use Antvel\Features\Models\Feature;
 
-class ProductsFeaturesTableSeeder extends Seeder
+class FeaturesTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(ProductFeatures::class)->create([
+        factory(Feature::class)->create([
             'name' => trans('globals.product_features.weight'),
             'help_message' => 'The item weight',
             'filterable' => true,
         ]);
 
-        factory(ProductFeatures::class)->create([
+        factory(Feature::class)->create([
             'name' => trans('globals.product_features.dimensions'),
             'help_message' => 'The item dimensions',
             'filterable' => true,
         ]);
 
-        factory(ProductFeatures::class)->create([
+        factory(Feature::class)->create([
             'name' => trans('globals.product_features.color'),
             'help_message' => 'The item color',
             'validation_rules' => 'required',
             'filterable' => true,
         ]);
 
-        factory(ProductFeatures::class)->create([
+        factory(Feature::class)->create([
             'name' => trans('globals.product_features.model')
         ]);
     }

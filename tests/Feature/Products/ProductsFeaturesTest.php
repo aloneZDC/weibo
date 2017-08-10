@@ -14,7 +14,8 @@ namespace Tests\Feature\Products;
 
 use Tests\TestCase;
 use Antvel\User\Models\User;
-use Antvel\Product\Models\ProductFeatures;
+use Antvel\Features\Models\Feature;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProductsFeaturesTest extends TestCase
@@ -53,7 +54,7 @@ class ProductsFeaturesTest extends TestCase
     /** @test */
     function an_authorized_user_is_allowed_to_manage_products_features()
     {
-        factory(ProductFeatures::class)->create(['name' => 'foo']);
+        factory(Feature::class)->create(['name' => 'foo']);
 
         $this->actingAs($this->admin)->get(route('features.index'))->assertSuccessful()->assertSeeText('Foo');
     }
@@ -79,15 +80,17 @@ class ProductsFeaturesTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect(route('login'));
 
-        $this->assertCount(0, ProductFeatures::get());
+        $this->assertCount(0, Feature::get());
     }
 
     /** @test */
     function an_authorized_user_can_store_new_features()
     {
+        $this->disableExceptionHandling();
+
         $this->actingAs($this->admin)->post(route('features.store'), $this->validData())->assertStatus(302);
 
-        tap(ProductFeatures::get()->first(), function ($feature) {
+        tap(Feature::get()->first(), function ($feature) {
             $this->assertEquals('New name', $feature->name);
             $this->assertEquals('New message', $feature->help_message);
             $this->assertEquals('required', $feature->validation_rules);
@@ -97,7 +100,7 @@ class ProductsFeaturesTest extends TestCase
     /** @test */
     function an_authorized_user_can_edit_new_features()
     {
-        $feature = factory(ProductFeatures::class)->create(['name' => 'foo', 'help_message' => 'bar']);
+        $feature = factory(Feature::class)->create(['name' => 'foo', 'help_message' => 'bar']);
 
         $this->actingAs($this->admin)
             ->get(route('features.edit', $feature))
@@ -109,7 +112,7 @@ class ProductsFeaturesTest extends TestCase
     /** @test */
     function an_unauthorized_user_cannot_edit_new_features()
     {
-        $feature = factory(ProductFeatures::class)->create(['name' => 'foo', 'help_message' => 'bar']);
+        $feature = factory(Feature::class)->create(['name' => 'foo', 'help_message' => 'bar']);
 
         $this->get(route('features.edit', $feature))
             ->assertStatus(302)
@@ -122,7 +125,9 @@ class ProductsFeaturesTest extends TestCase
     /** @test */
     function an_authorized_user_can_update_a_given_features()
     {
-        $feature = factory(ProductFeatures::class)->create([
+        Event::fake();
+
+        $feature = factory(Feature::class)->create([
             'name' => 'Old name',
             'help_message' => 'Old message',
             'status' => true,
@@ -143,10 +148,14 @@ class ProductsFeaturesTest extends TestCase
             ->assertRedirect(route('features.edit', $feature));
 
         tap($feature->fresh(), function ($feature) {
-            $this->assertEquals('Updated name', $feature->name);
             $this->assertEquals('Updated message', $feature->help_message);
             $this->assertTrue((bool) $feature->status);
             $this->assertEquals('', $feature->validation_rules);
+        });
+
+        Event::assertDispatched('Antvel\Features\Events\FeatureNameWasUpdated', function ($e) use ($feature) {
+            return $e->feature->id === $feature->id
+                && $e->updatedName === 'Updated name';
         });
     }
 
@@ -155,7 +164,7 @@ class ProductsFeaturesTest extends TestCase
     {
         $user = factory(User::class)->states('customer')->create();
 
-        $feature = factory(ProductFeatures::class)->create([
+        $feature = factory(Feature::class)->create([
             'name' => 'Old name',
             'help_message' => 'Old message',
             'status' => true,
