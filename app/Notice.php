@@ -8,7 +8,7 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Notice extends Model

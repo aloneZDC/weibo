@@ -1,6 +1,6 @@
 <?php
 
-Route::get('img/{file?}', 'FileController@img')->where('file', '(.*)')->name('images');
+Route::get('img/{file?}', 'FileController@img')->where('file', '(.*)')->name('images'); //while refactoring
 
 Route::get('logs', 'LogController@index');
 

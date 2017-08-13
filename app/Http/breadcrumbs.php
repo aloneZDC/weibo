@@ -22,10 +22,7 @@ Breadcrumbs::register('products', function ($breadcrumbs) {
 //products detail
 Breadcrumbs::register('productDetail', function ($breadcrumbs, $product) {
     $breadcrumbs->parent('products');
-
-    $catProd = Category::find($product->category->id); //while refactoring
-
-    $breadcrumbs->push($catProd->name, 'products?category='.urlencode($catProd->id.'|'.$catProd->name));
+    $breadcrumbs->push($product->category->name, 'products?category='.urlencode($product->category->id.'|'.$product->category->name));
     $breadcrumbs->push($product->name, route('products.index', $product->id));
 });
 

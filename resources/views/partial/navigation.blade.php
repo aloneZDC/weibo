@@ -47,7 +47,7 @@
 
 				<li class="dropdown">
 					<a href="#cart" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						@if(Auth::user() && Auth::user()->getCartCount())
+						@if(Auth::check() && Auth::user()->getCartCount())
 						<span class="badge badge-cart">{{ Auth::user()->getCartCount() }} </span>
 						@elseif(!Auth::user() && is_array(Session::get('user.cart_content')) && array_sum(Session::get('user.cart_content')))
 						<span class="badge badge-cart">{{ array_sum(Session::get('user.cart_content')) }} </span>
@@ -57,7 +57,7 @@
 						<span class="caret"></span>
 					</a>
 
-                    @if(Auth::user() && Auth::user()->getCartCount() > 0)
+                    @if(Auth::check() && Auth::user()->getCartCount() > 0)
                         <ul class="dropdown-menu cart" role="menu">
                             @foreach(Auth::user()->getCartContent() as $orderDetail)
                                 <li>

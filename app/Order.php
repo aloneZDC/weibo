@@ -11,15 +11,14 @@ namespace App;
 use App\Log;
 use App\Notice;
 use App\OrderDetail;
-use App\VirtualProduct;
-use App\Eloquent\Model;
-use App\VirtualProductOrder;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\ProductsController as ProductsController;
 
 //shop components.
 use Antvel\Product\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Antvel\AddressBook\Models\Address;
+use Illuminate\Database\Eloquent\Model;
+use Antvel\Product\Repositories\ProductsRepository;
 
 class Order extends Model
 {
@@ -207,7 +206,10 @@ class Order extends Model
      */
     public static function placeOrders($type_order)
     {
-        $cart = self::ofType($type_order)->auth()->orderBy('id', 'desc')->first();
+        $cart = self::ofType($type_order)
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->first();
 
         $show_order_route = 'orders.show_cart';
 
@@ -248,26 +250,8 @@ class Order extends Model
                 $orderDetail->price = $product->price;
                 $orderDetail->save();
             }
-            if ($product->type != 'item') {
-                $virtual = VirtualProduct::where('product_id', $orderDetail->product_id)->get();
-                $first = $virtual->first();
-                //$first=null;
-                //foreach ($virtual as $row){
-                    //$first=$row;
-                    //break;
-                //}
-                switch ($product->type) {
-                    case 'key': case 'software_key':
-                        $virtualOrder = VirtualProductOrder::where('virtual_product_id', $first->id)
-                                                         ->where('order_id', $orderDetail->order_id)
-                                                         ->where('status', 1)->get();
-                        if ((count($virtual) - 1) < count($virtualOrder)) {
-                            return trans('store.insufficientStock');
-                        }
-                    break;
-                    default: break;
-                }
-            } elseif ($product->stock < $orderDetail->quantity) {
+
+            if ($product->stock < $orderDetail->quantity) {
                 return trans('store.insufficientStock');
             }
         }
@@ -281,7 +265,8 @@ class Order extends Model
         if (config('app.payment_method') == 'Points') {
             $negativeTotal = -1 * $total_points;
             //7 is the action type id for order checkout
-            $pointsModified = $user->modifyPoints($negativeTotal, 7, $cart->id);
+            // $pointsModified = $user->modifyPoints($negativeTotal, 7, $cart->id);
+            // while refactoring
         } else {
             $pointsModified = true;
         }
@@ -313,7 +298,7 @@ class Order extends Model
                     }
 
                     //Increasing product counters.
-                    ProductsController::setCounters($orderDetail->product, ['sale_counts' => trans('globals.product_value_counters.sale')], 'orders');
+                    (new ProductsRepository)->increment('sale_counts', $orderDetail->product);
 
                     //saving tags in users preferences
                     if (trim($orderDetail->product->tags) != '' && auth()->check()) {
@@ -322,34 +307,11 @@ class Order extends Model
                 }
             }
 
-            //virtual products
             //Changes the stock of each product in the order
             foreach ($cartDetail as $orderDetail) {
                 $product = Product::find($orderDetail->product_id);
                 $product->stock = $product->stock - $orderDetail->quantity;
                 $product->save();
-                if ($product->type != 'item') {
-                    $virtual = VirtualProduct::where('product_id', $orderDetail->product_id)->where('status', 'open')->get();
-                    switch ($product->type) {
-                        case 'key':
-                            $first = VirtualProduct::where('product_id', $orderDetail->product_id)->where('status', 'cancelled')->first();
-                            foreach ($virtual as $row) {
-                                $virtualOrder = VirtualProductOrder::where('order_id', $cart->id)->where('virtual_product_id', $first->id)->where('status', 1)->first();
-                                if ($virtualOrder) {
-                                    $virtualOrder->virtual_product_id = $row->id;
-                                    $virtualOrder->order_id = $orderDetail->order_id;
-                                    $virtualOrder->status = 2;
-                                    $virtualOrder->save();
-                                    $row->status = 'paid';
-                                    $row->save();
-                                } else {
-                                    break;
-                                }
-                            }
-                        break;
-                        default: break;
-                    }
-                }
             }
             foreach ($seller_email as $email) {
                 $mailed_order = self::where('id', $newOrder->id)->with('details')->get()->first();
@@ -375,6 +337,19 @@ class Order extends Model
         } else {
             return trans('store.insufficientFunds');
         }
+    }
+
+    public function scopeForSignedUser($query, $type)
+    {
+        if (Auth::guest()) {
+            return [];
+        }
+
+        return $query->where([
+            'user_id' => Auth::user()->id,
+            ['description', '<>', ''],
+            'type' => $type,
+        ])->take(5)->get();
     }
 
     public function scopeOfType($query, $type)

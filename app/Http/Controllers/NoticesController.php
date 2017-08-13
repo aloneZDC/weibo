@@ -26,6 +26,27 @@ class NoticesController extends Controller
         }
     }
 
+    private function createIdArray($old) //while refactoring
+    {
+        if (!is_array($old) || !count($old)) {
+            return $old;
+        }
+        $new = [];
+        foreach ($old as $value) {
+            $id = $value['id'];
+            unset($value['id']);
+            foreach ($value as &$repeat) {
+                if (is_array($repeat)) {
+                    $repeat = $this->createIdArray($repeat);
+                }
+            }
+            $new[$id] = $value;
+        }
+
+        return $new;
+    }
+
+
     protected function getActions($notices)
     {
         $actions = [];
@@ -33,9 +54,11 @@ class NoticesController extends Controller
             $actions[] = $notice['action_type_id'];
         }
 
-        return ActionType::unique($actions)->get()->each(function ($action) {
+        $actions =  ActionType::unique($actions)->get()->each(function ($action) {
             $action->useAs('notice');
-        })->toIdArray();
+        });
+
+        return $this->createIdArray($actions->toArray());
     }
 
     /**

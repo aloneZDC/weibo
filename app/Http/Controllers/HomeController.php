@@ -85,7 +85,7 @@ class HomeController extends Controller
             'center' => ['width' => '10'],
         ];
 
-        $query = Order::auth()->ofType('order')->get();
+        $query = Order::where('user_id', auth()->user()->id)->ofType('order')->get();
         $orders = ['closed' => 0, 'open' => 0, 'cancelled' => 0, 'all' => $query->count(), 'total' => 0, 'nopRate' => 0];
 
         foreach ($query as $row) {

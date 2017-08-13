@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-lg-1">
-                <a class="btn btn-primary btn-sm pull-right" href="{{ route('products.create') }}">
+                <a class="btn btn-primary btn-sm pull-right" href="{{ route('items.create') }}">
                     <span class="glyphicon glyphicon-plus"></span>&nbsp;
                     {{ trans('product.globals.add') }}
                 </a>
@@ -80,7 +80,7 @@
                             </p>
                             <p>
                                 <strong>{{ Utility::showPrice($product->price) }}</strong>
-                                <a class="btn-xs btn-primary" href="{{ route('products.index') }}/{{ $product->id }}/edit" role="button">{{ trans('globals.edit') }}</a>
+                                <a class="btn-xs btn-primary" href="{{ route('items.edit', $product) }}" role="button">{{ trans('globals.edit') }}</a>
                                 <a class="btn-xs btn-default" href="{{ route('products.index') }}/{{ $product->id }}" role="button">{{ trans('product.globals.view_details') }} &raquo;</a>
                             </p>
                         </div>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Eloquent\Model;
-use App\Eloquent\Collection;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;

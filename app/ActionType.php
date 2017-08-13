@@ -8,7 +8,7 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class ActionType extends Model
 {

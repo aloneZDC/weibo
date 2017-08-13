@@ -14,9 +14,7 @@ use App\Notice;
 use App\Comment;
 use Carbon\Carbon;
 use App\OrderDetail;
-use App\VirtualProduct;
 use Illuminate\Http\Request;
-use App\VirtualProductOrder;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -112,11 +110,6 @@ class OrdersController extends Controller
                 }
             } else {
                 $email = $user->email;
-            }
-
-            //creating visrtual order
-            if ($destination != 'wishlist') {
-                $this->addToCartVirtualsProduct($product, $email, $basicCart->id, $quantity);
             }
 
             //checking if the user already has a product so it can be added
@@ -314,7 +307,7 @@ class OrdersController extends Controller
         if ($user) {
             //checking if the default wish list exists, otherwise, it is created automatically
             $defaultList = Order::ofType('wishlist')
-                ->ofUser($user->id)
+                ->where('user_id', $user->id)
                 ->select(['id', 'type', 'description', 'status'])
                 ->first();
 
@@ -330,7 +323,7 @@ class OrdersController extends Controller
 
             //checking if the wish list requested is not in our records
             $newList = Order::ofType('wishlist')
-                ->ofUser($user->id)
+                ->where('user_id', $user->id)
                 ->where('description', $description)
                 ->select(['id', 'type', 'description', 'status'])
                 ->first();
@@ -609,14 +602,6 @@ class OrdersController extends Controller
         if (!($basicCart)) {
             Session::push('message', trans('store.productNotFound'));
         } else {
-            if ($product->type != 'item') {
-                switch ($product->type) {
-                    case 'key':
-                        $idVirtual = VirtualProduct::where('product_id', $product->id)->where('status', 'cancelled')->first();
-                        VirtualProductOrder::where('virtual_product_id', $idVirtual->id)->where('order_id', $basicCart->id)->delete();
-                    break;
-                }
-            }
             $orderDetail = OrderDetail::where('order_id', $basicCart->id)->where('product_id', $product->id)->first();
             $orderDetail->delete();
 
@@ -736,15 +721,6 @@ class OrdersController extends Controller
         //save new order
         $orderMoved->save();
 
-        if ($product->type != 'item') {
-            $virtual = VirtualProduct::where('product_id', $product->id)->first();
-
-            //updating the virtual product order
-            VirtualProductOrder::where('virtual_product_id', $virtual->id)
-                ->where('order_id', $basicCart->id)
-                ->update(['order_id' => $destinationOrder->id]);
-        }
-
         if ($destination == 'later') {
             Session::push('message', trans('store.productSavedForLater'));
         } elseif ($destination == 'cart') {
@@ -771,12 +747,6 @@ class OrdersController extends Controller
                 ->where('order_id', $orderId)
                 ->select(['id', 'order_id', 'product_id', 'quantity', 'price'])
                 ->first();
-
-            $virtual = VirtualProduct::where('product_id', $orderDetail->product_id)->first();
-
-            if ($virtual) {
-                return \Response::json(['success' => false], 404);
-            }
 
             if ($orderDetail) {
                 $oldQuantity = $orderDetail->quantity;
@@ -807,7 +777,7 @@ class OrdersController extends Controller
     {
         $user = \Auth::user();
 
-        $cart = Order::ofType('cart')->ofUser($user->id)->select('id')->first();
+        $cart = Order::ofType('cart')->where('user_id', $user->id)->select('id')->first();
 
         $cartDetail = $cart ? OrderDetail::where('order_id', $cart->id)->get() : [];
 
@@ -1003,23 +973,12 @@ class OrdersController extends Controller
         //checking if it is our order
         if ($order) {
             $order->status = 'cancelled';
-            $existsVirtual = false;
 
             //Returning the stock to products
             foreach ($order->details as $detail) {
                 $product = Product::find($detail->product_id);
                 $product->stock += $detail->quantity;
                 $product->save();
-
-                if ($product->type != 'item') {
-                    $existsVirtual = true;
-                }
-            }
-
-            if ($existsVirtual) {
-                $virtualProductsId = VirtualProductOrder::select('virtual_product_id')->where('order_id', $order->id)->get()->toArray();
-                VirtualProduct::whereIn('id', $virtualProductsId)->update(['status' => 'open']);
-                VirtualProductOrder::where('order_id', $order->id)->delete();
             }
 
             $order->save();
@@ -1100,12 +1059,7 @@ class OrdersController extends Controller
 
             $order_content = OrderDetail::where('order_id', $order->id)->get();
             $band = false;
-            foreach ($order_content as $row) {
-                if ($row->product->type != 'item') {
-                    $band = $this->deliveryVirtualProduct($order->id, $row->product_id, new Request(), false);
-                    $band = $band === 'closed' ? true : false;
-                }
-            }
+
             Session::push('message', trans('store.orders_index.order_sent').' (#'.$order->id.')'.(!$band ? '' : trans('store.order_closed_message')));
 
             return redirect(route('orders.pendingOrders'));
@@ -1151,16 +1105,7 @@ class OrdersController extends Controller
                         $order_detail->status = 0;
                         $order_detail->delivery_date = DB::raw('NOW()');
                         $order_detail->save();
-                        if ($order_detail->product->type != 'item') {
-                            switch ($order_detail->product->type) {
-                                case 'key':
-                                    $virtualProductsId = VirtualProductOrder::select('virtual_product_id')->where('order_id', $order->id)->get()->toArray();
-                                    VirtualProduct::where('product_id', $order_detail->product_id)->whereIn('id', $virtualProductsId)->update(['status' => 'closed']);
-                                break;
-                            }
-                        }
                     }
-                    $seller->modifyPoints($total_points, 8, $order->id);
                 }
             }
 
@@ -1343,26 +1288,6 @@ class OrdersController extends Controller
         $seller = User::select('nickname')->find($product->created_by);
 
         $return = ['product' => $product, 'order' => $order];
-        if ($product->type != 'item') {
-            $virtual = VirtualProduct::where('product_id', $product->id)->first();
-            $arrayV = ['type' => $product->type, 'title' => trans('product.globals.digital_item').' '.trans('product.'.$product->type)];
-            switch ($product->type) {
-                case 'key':
-                    $virtualOrder = VirtualProductOrder::where('virtual_product_id', $virtual->id)->where('order_id', $order->order_id)->where('status', 1)->get();
-                    $email = [];
-                    foreach ($virtualOrder as $row) {
-                        if (isset($email[$row->email])) {
-                            $email[$row->email]['num']++;
-                        } else {
-                            $email[$row->email]['num'] = 1;
-                            $email[$row->email]['email'] = $row->email;
-                        }
-                    }
-                    $arrayV['data'] = $email;
-                break;
-            }
-            $return['virtual'] = $arrayV;
-        }
 
         return json_encode($return);
     }
@@ -1446,113 +1371,11 @@ class OrdersController extends Controller
         return view('orders.detail', compact('user', 'is_seller', 'panel', 'orderAddress', 'order', 'order_comments', 'totalItems', 'grandTotal'));
     }
 
-    /**
-     *   @return view
-     */
-    private function addToCartVirtualsProduct($product, $email, $orderId, $quantity = 0)
-    {
-        if ($product->type != 'item') {
-            $virtual = VirtualProduct::where('product_id', $product->id)->first();
-            switch ($product->type) {
-                case 'key':
-                    for ($i = 0; $i < $quantity; $i++) {
-                        $VirtualProductOrder = new VirtualProductOrder();
-                        $VirtualProductOrder->order_id = $orderId;
-                        $VirtualProductOrder->status = 1;
-                        $VirtualProductOrder->email = $email;
-                        $VirtualProductOrder->virtual_product_id = $virtual->id;
-                        $VirtualProductOrder->save();
-                    }
-                break;
-            }
-        }
-    }
-
-    /**
-     *   function to action to deliver virtual products.
-     *
-     *   @param  $orderId    int|string  id order
-     *   @param  $productId  int|string  id product
-     *   @param  $request    Request     object to validate the type of request
-     *
-     *   @return json    message error or message success
-     */
-    public function deliveryVirtualProduct($orderId, $productId, Request $request, $ajax = true)
-    {
-        if ($ajax && !$request->wantsJson()) {
-            return json_encode(['message' => trans('globals.error_not_available'), 'json' => false]);
-        }
-        $Order = Order::find($orderId);
-        $product = Product::find($productId);
-        if (!$Order || !$product) {
-            return json_encode(['message' => trans('globals.error_not_available'), 'id' => false]);
-        }
-        if ($Order->status != 'pending' && $Order->status != 'sent') {
-            return json_encode(['message' => trans('globals.error_not_available'), 'status' => false]);
-        }
-        $virtuals = VirtualProduct::where('product_id', $product->id)->where('status', 'paid')->get();
-        if (!count($virtuals->toArray())) {
-            return json_encode(['message' => trans('globals.error_not_available'), 'virtual' => false]);
-        }
-        $detail = OrderDetail::where('order_id', $Order->id)->where('product_id', $product->id)->first();
-        $user = User::find($Order->user_id);
-        foreach ($virtuals as $row) {
-            $virtualOrders = VirtualProductOrder::where('virtual_product_id', $row->id)->where('order_id', $Order->id)->first();
-            if ($virtualOrders) {
-                if ($virtualOrders->email) {
-                    Mail::queue('emails.virtualsProducts', ['product' => $product, 'row' => $row, 'order' => $virtualOrders, 'user' => $user], function ($message) use ($virtualOrders) {
-                        $message->to($virtualOrders->email)->subject(trans('email.delivery_virtuals_products.subject'));
-                    });
-                }
-                $row->status = 'Sent';
-                $row->save();
-                $virtualOrders->status = 0;
-                $virtualOrders->save();
-            }
-        }
-        $detail->status = 0;
-        $detail->delivery_date = DB::raw('NOW()');
-        $detail->save();
-        if ($ajax) {
-            $detail = OrderDetail::where('order_id', $Order->id)->where('status', 1)->first();
-        }
-        if ($ajax && !$detail) {
-            $Order->end_date = DB::raw('NOW()');
-            $Order->status = 'Sent';
-            $Order->save();
-            if (!$ajax) {
-                return 'Sent';
-            } else {
-                return json_encode(['message' => trans('store.delivery_successfully').' '.trans('store.closedOrders'), 'success' => true, 'closed' => true]);
-            }
-        } else {
-            if (!$ajax) {
-                return 'success';
-            } else {
-                return json_encode(['message' => trans('store.delivery_successfully'), 'success' => true]);
-            }
-        }
-    }
-
-    /**
-     *   function to action to deliver virtual products.
-     *
-     *   @param  $order_id    int
-     *
-     *   @return json    message error or message success
-     */
     public function commentOrder($order_id)
     {
         return view('orders.partial.comment_input', compact('order_id'));
     }
 
-    /**
-     *   function to action to deliver virtual products.
-     *
-     *   @param  $order_id    int
-     *
-     *   @return json    message error or message success
-     */
     public function storeComment(Request $request)
     {
         $order_id = $request->get('order_id');

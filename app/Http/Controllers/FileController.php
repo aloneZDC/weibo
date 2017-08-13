@@ -12,7 +12,7 @@ use App\Helpers\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class FileController extends Controller
+class FileController extends Controller //while refactoring
 {
     //needs to be refactored
     public function img(Request $request, $file = '')

@@ -30,6 +30,12 @@ class ProfileTest extends TestCase
         $this->user = factory(User::class)->create()->first();
     }
 
+    /** @test */
+    function an_authorized_can_see_his_profile_page()
+    {
+        $this->actingAs($this->user)->get(route('user.index'))->assertSuccessful();
+    }
+
     protected function submit($request)
     {
         return $this->patch('user/' . $this->user->id, $request);

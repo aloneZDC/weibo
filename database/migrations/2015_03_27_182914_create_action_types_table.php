@@ -24,8 +24,6 @@ class CreateActionTypesTable extends Migration
             $table->enum('source_type', array_keys(trans('globals.source_types')));
             $table->string('action', 50);
         });
-
-        ActionType::createMany(trans('globals.action_types'));
     }
 
     /**

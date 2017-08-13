@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "4649eff1da1730a52af0fada58ce9b0fa6f218b7"
+                "reference": "f9ed13d27966b0fb323cce81011b9c5cdde5a076"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/4649eff1da1730a52af0fada58ce9b0fa6f218b7",
-                "reference": "4649eff1da1730a52af0fada58ce9b0fa6f218b7",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/f9ed13d27966b0fb323cce81011b9c5cdde5a076",
+                "reference": "f9ed13d27966b0fb323cce81011b9c5cdde5a076",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-08-06 18:37:08"
+            "time": "2017-08-10 22:32:46"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -811,12 +811,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f0d417bfa7a2e78d70c7382bfc51fe02321f0a3e"
+                "reference": "23b8d992ea1f35b346a62024ebeb4af6969b161a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f0d417bfa7a2e78d70c7382bfc51fe02321f0a3e",
-                "reference": "f0d417bfa7a2e78d70c7382bfc51fe02321f0a3e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/23b8d992ea1f35b346a62024ebeb4af6969b161a",
+                "reference": "23b8d992ea1f35b346a62024ebeb4af6969b161a",
                 "shasum": ""
             },
             "require": {
@@ -932,7 +932,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-08 16:36:51"
+            "time": "2017-08-12 11:58:09"
         },
         {
             "name": "laravel/tinker",
@@ -1003,12 +1003,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "9b8f51e7a2368911c896f5d42757886bae0717b5"
+                "reference": "f04965dc688254f4c77f684ab0b42264f9eb9634"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/9b8f51e7a2368911c896f5d42757886bae0717b5",
-                "reference": "9b8f51e7a2368911c896f5d42757886bae0717b5",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/f04965dc688254f4c77f684ab0b42264f9eb9634",
+                "reference": "f04965dc688254f4c77f684ab0b42264f9eb9634",
                 "shasum": ""
             },
             "require": {
@@ -1049,7 +1049,7 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
-            "time": "2017-05-22 06:35:07"
+            "time": "2017-08-12 15:52:38"
         },
         {
             "name": "league/flysystem",
@@ -2954,12 +2954,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "e70d9612d9108ec07476f7c304f14b8e583b6494"
+                "reference": "2d9813dbd31509dfaa1df5b78947fd19755e3c84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/e70d9612d9108ec07476f7c304f14b8e583b6494",
-                "reference": "e70d9612d9108ec07476f7c304f14b8e583b6494",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2d9813dbd31509dfaa1df5b78947fd19755e3c84",
+                "reference": "2d9813dbd31509dfaa1df5b78947fd19755e3c84",
                 "shasum": ""
             },
             "require": {
@@ -2996,7 +2996,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-08-10 09:58:44"
+            "time": "2017-08-11 09:58:57"
         },
         {
             "name": "hamcrest/hamcrest-php",

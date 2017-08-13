@@ -67,12 +67,6 @@ return [
       'software_key'       => '软件（带注册码）',
       'used'               => '二手',
    ],
-   'virtualProductsController_controller' => [
-      'key_been_sold'      => '该注册码已被售出。.',
-   ],
-   'virtualProductOrdersController_controller' => [
-      'no_stock'           => '该商品没有库存',
-   ],
    //no specific
    'brand'             => '品牌',
    'color'             => '颜色',

@@ -8,8 +8,8 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Eloquent\Model;
 use Antvel\Product\Models\Product;
+use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
 {
@@ -46,5 +46,15 @@ class OrderDetail extends Model
     public function getProductAttribute()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id')->first();
+    }
+
+    public function scopeReviewsFor($query, $product_id)
+    {
+        return $query->where('product_id', $product_id)
+            ->whereNotNull('rate_comment')
+            ->select('rate', 'rate_comment', 'updated_at')
+            ->orderBy('updated_at', 'desc')
+            ->take(5)
+            ->get();
     }
 }

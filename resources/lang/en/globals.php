@@ -6,7 +6,10 @@ return [
         'active'   => 'Active',
         'inactive' => 'Inactive',
     ],
-
+    'person_sex'            => [ //used
+        'female'          => 'Female',
+        'male'            => 'Male',
+    ],
     'roles' => [ //used
         'admin' => 'Administrator',
         'seller' => 'Seller',

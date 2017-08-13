@@ -1,4 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.master', [
+	'panel' => auth()->check() && auth()->user()->isAdmin()
+		? ['left' => ['width' => '2'], 'center' => ['width' => '10']]
+		: ['center' => ['width' => '12']]
+])
+
+
 @section('title')@parent- {{ $product->name }} @stop
 
 @include('partial.message')
@@ -36,28 +42,10 @@
 
 			<div class="row hidden-xs">
 	            <div class="col-md-12">
-	        		{!! Form::open(['route' => ['products.change_status', $product->id], 'method' => 'post', 'class' => 'form-inline']) !!}
-	                    <a href="{{ route('products.edit',[$product->id]) }}" class="btn btn-success btn-sm full-width">
-							<span class="glyphicon glyphicon-edit"></span>&nbsp;
-	                    	{{ trans('globals.edit') }}
-	                    </a>
-
-						<div class="row">&nbsp;</div>
-
-	                    <button type="submit" class="btn btn-primary btn-danger btn-sm full-width">
-							<span class="glyphicon @if ($product->status) glyphicon-ban-circle @else glyphicon-ok-circle @endif"></span>&nbsp;
-	                    	{{ $product->status ? trans('globals.disable') : trans('globals.enable') }}
-	                    </button>
-
-						<div class="row">&nbsp;</div>
-
-	                    @if ($product->type=='key')
-	                        <button type="button" ng-controller="ModalCtrl" ng-init="data={'data':{{ $product->id }}}" ng-click="modalOpen({templateUrl:'/modalAllKeys',controller:'getKeysVirtualProducts',resolve:'data'})" class="btn btn-primary btn-sm full-width">
-								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;
-	                        	{{ trans('product.globals.see_keys') }}
-	                        </button>
-	                    @endif
-	                {!! Form::close() !!}
+                    <a href="{{ route('items.edit', $product->id) }}" class="btn btn-success btn-sm full-width">
+						<span class="glyphicon glyphicon-edit"></span>&nbsp;
+                    	{{ trans('globals.edit') }}
+                    </a>
 	            </div>
 	        </div>
 
@@ -254,28 +242,22 @@
 
 		<div class="row">&nbsp;</div>
 
-		<div class="page-header">
-            <h5>{{ trans('store.suggestions.product') }}</h5>
-        </div>
-		<div class="row">
-			@if (count($product->group))
-                @include('products.group')
-            @else
-            	@if ($suggestions)
-		            <section class="products_view">
-	                    <div class="container-fluid marketing">
-	                        <div class="row">
-	                            @foreach ($suggestions as $product)
-	                            	@include('products.partial.productBox', $product)
-	                            @endforeach
-	                        </div>
+		@if ($product->group->count() > 0 || $suggestions->count() > 0)
+			<div class="page-header">
+	            <h5>{{ trans('store.suggestions.product') }}</h5>
+	        </div>
+			<div class="row">
+				<section class="products_view">
+	                <div class="container-fluid marketing">
+	                    <div class="row">
+	                        @foreach ($product->group->count() > 0 ? $product->group : $suggestions as $product)
+	                        	@include('products.partial.productBox', $product)
+	                        @endforeach
 	                    </div>
-		            </section>
-		        @else
-		        	&nbsp;
-	            @endif
-            @endif
-		</div>
+	                </div>
+	            </section>
+			</div>
+		@endif
 
 	 @stop
 @stop

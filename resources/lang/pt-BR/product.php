@@ -67,12 +67,6 @@ return [
       'software_key'       => 'Software com chave',
       'used'               => 'Usado',
    ],
-   'virtualProductsController_controller' => [
-      'key_been_sold'      => 'Está chave já foi vendida',
-   ],
-   'virtualProductOrdersController_controller' => [
-      'no_stock'           => 'Este produto não está em estoque',
-   ],
    //no specific
    'brand'             => 'Marca',
    'color'             => 'Cor',
