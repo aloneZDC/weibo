@@ -12,16 +12,12 @@
 use Illuminate\Database\Seeder;
 use Antvel\Product\Models\{ Product, ProductPictures };
 
-class ProductsTableSeeder extends Seeder
+class GroupingSeeder extends Seeder
 {
     public function run()
     {
-        for ($i=1; $i < 150; $i++) {
-            $product = factory(Product::class)->create();
+    	$products = Product::whereIn('id', [2, 3, 4, 5])->get();
 
-            factory(ProductPictures::class, 5)->create([
-                'product_id' => $product->id
-            ]);
-        }
+    	Product::first()->groupWith($products);
     }
 }
