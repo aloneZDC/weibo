@@ -5,9 +5,11 @@
 
 
 
-**This is a development, experimental release of Antvel. Everything will change gradually, looking forward to get the best of this awesome product. Thank you for testing!**
+***Antvel*** is an ecommerce project written in Laravel 5.* intended for building a friendly eStore either for startups or big companies. 
 
-***Antvel*** is a eCommerce project written in Laravel 5.* intended for building a friendly eStore either for startups or big companies, and is highly opinionated towards that use case.
+In spite of ***Antvel*** seems to be a whole couple app, it is powered by its <a href="https://github.com/ant-vel/Shop" target="_blank">core shop</a> which is a package that allows you to build a complete e-commerce based application for your needs.
+
+***Antvel*** is in current development, receiving a ```whole rewrite``` from top to bottom toward a more stable platform where you might feel comfortable to walk along with.
 
 
 <a name="installation"></a>
