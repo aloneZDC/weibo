@@ -8,7 +8,6 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Log;
 use App\Order;
 use Antvel\User\Models\User as BaseUser;
 

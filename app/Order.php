@@ -8,14 +8,12 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Log;
-use App\Notice;
-use App\OrderDetail;
-use Illuminate\Support\Facades\Mail;
+use App\ { Notice, OrderDetail };
 
 //shop components.
 use Antvel\Product\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Antvel\AddressBook\Models\Address;
 use Illuminate\Database\Eloquent\Model;
 use Antvel\Product\Repositories\ProductsRepository;
@@ -61,7 +59,6 @@ class Order extends Model
         $status_changed = (isset($this->original['status']) && $this->attributes['status'] != $this->original['status']) || (isset($options['status']) && $this->attributes['status'] != $options['status']);
         $saved = parent::save($options);
         if ($saved) {
-            $this->createLog();
             if ($status_changed) {
                 $this->sendNotice();
             }
@@ -83,27 +80,6 @@ class Order extends Model
     public function inDetail()
     {
         return $this->hasMany('App\OrderDetail');
-    }
-
-    public function createLog()
-    {
-        $actions = [];
-        foreach (trans('globals.action_types') as $value) {
-            if ($value['source_type'] == 'order') {
-                $actions[$value['action']] = $value['id'];
-            }
-        }
-
-        if (isset($actions[$this->status])) {
-            Log::create([
-            'action_type_id' => $actions[$this->status],
-            'source_id'      => $this->id,
-            'user_id'        => $this->user_id,
-            'details'        => "Order #$this->id $this->status",
-        ]);
-        }
-
-        return $this;
     }
 
     public function sendNotice()

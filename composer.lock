@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.2.8",
+            "version": "1.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "8132f7bd92df809d221eb23e7df77e2007816315"
+                "reference": "4688f67d27da999b89896417cc501ece37263614"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/8132f7bd92df809d221eb23e7df77e2007816315",
-                "reference": "8132f7bd92df809d221eb23e7df77e2007816315",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/4688f67d27da999b89896417cc501ece37263614",
+                "reference": "4688f67d27da999b89896417cc501ece37263614",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-08-13 21:51:39"
+            "time": "2017-08-17 22:16:48"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -811,12 +811,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "08b7e15676af320382949a29981ed7fabd72a3a8"
+                "reference": "ef6177ffa39f107bb005739239be158944d40359"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/08b7e15676af320382949a29981ed7fabd72a3a8",
-                "reference": "08b7e15676af320382949a29981ed7fabd72a3a8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ef6177ffa39f107bb005739239be158944d40359",
+                "reference": "ef6177ffa39f107bb005739239be158944d40359",
                 "shasum": ""
             },
             "require": {
@@ -932,7 +932,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-16 13:10:04"
+            "time": "2017-08-19 14:49:55"
         },
         {
             "name": "laravel/tinker",
@@ -1745,12 +1745,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "342d4d855ee83130e59fbff5875a7f9496c3fc4f"
+                "reference": "8ba576394268e77768556a4f2cb7be1d02d9e8dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/342d4d855ee83130e59fbff5875a7f9496c3fc4f",
-                "reference": "342d4d855ee83130e59fbff5875a7f9496c3fc4f",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/8ba576394268e77768556a4f2cb7be1d02d9e8dd",
+                "reference": "8ba576394268e77768556a4f2cb7be1d02d9e8dd",
                 "shasum": ""
             },
             "require": {
@@ -1810,7 +1810,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-08-07 20:41:08"
+            "time": "2017-08-18 06:12:53"
         },
         {
             "name": "ramsey/uuid",
@@ -2896,12 +2896,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "0ea4f7ed06ca55da1d8fc45da26ff87f261c4088"
+                "reference": "106313aa0d501782260e48ac04a1c671b5d418ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/0ea4f7ed06ca55da1d8fc45da26ff87f261c4088",
-                "reference": "0ea4f7ed06ca55da1d8fc45da26ff87f261c4088",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/106313aa0d501782260e48ac04a1c671b5d418ea",
+                "reference": "106313aa0d501782260e48ac04a1c671b5d418ea",
                 "shasum": ""
             },
             "require": {
@@ -2946,7 +2946,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2016-12-01 00:05:05"
+            "time": "2017-08-19 11:43:55"
         },
         {
             "name": "fzaninotto/faker",
@@ -3571,12 +3571,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "8c0bca4db90bb0a0b400ad8e90fee3210081701d"
+                "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/8c0bca4db90bb0a0b400ad8e90fee3210081701d",
-                "reference": "8c0bca4db90bb0a0b400ad8e90fee3210081701d",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/9a02332089ac48e704c70f6cefed30c224e3c0b0",
+                "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0",
                 "shasum": ""
             },
             "require": {
@@ -3612,7 +3612,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2017-08-03 14:21:49"
+            "time": "2017-08-20 05:47:52"
         },
         {
             "name": "phpunit/phpunit",
@@ -3620,12 +3620,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "011cc0e386e33c1ea80048a9690b6c00278e9660"
+                "reference": "3bfbdd9a0c8510afeabee01eab3f7b98789ed072"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/011cc0e386e33c1ea80048a9690b6c00278e9660",
-                "reference": "011cc0e386e33c1ea80048a9690b6c00278e9660",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3bfbdd9a0c8510afeabee01eab3f7b98789ed072",
+                "reference": "3bfbdd9a0c8510afeabee01eab3f7b98789ed072",
                 "shasum": ""
             },
             "require": {
@@ -3694,7 +3694,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-08-17 07:36:00"
+            "time": "2017-08-18 07:34:02"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

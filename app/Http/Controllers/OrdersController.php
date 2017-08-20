@@ -8,29 +8,27 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Log;
-use App\Order;
-use App\Notice;
-use App\Comment;
-use Carbon\Carbon;
-use App\OrderDetail;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
 use App\Repositories\OrderRepository;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\ { User, Order, Notice, Comment, OrderDetail };
 
 //shop components.
-use App\User;
 use Antvel\Product\Products;
 use Antvel\User\Models\Business;
 use Antvel\Product\Models\Product;
 use Antvel\AddressBook\Models\Address;
 use Antvel\Product\Suggestions\Suggest;
+
+//others
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrdersController extends Controller
 {
@@ -91,13 +89,6 @@ class OrdersController extends Controller
                 $basicCart->type = $destination;
                 $basicCart->status = 'open';
                 $basicCart->save();
-
-                $log = Log::create([
-                    'action_type_id' => '1',
-                    'details'        => $destination,
-                    'source_id'      => $basicCart->id,
-                    'user_id'        => $user->id,
-                ]);
             }
 
             //if the request has an email address, we keep it, otherwise we use the user one
@@ -132,13 +123,6 @@ class OrdersController extends Controller
 
             //saving detail order
             $orderDetail->save();
-
-            $log = Log::create([
-                'action_type_id' => '4',
-                'details'        => $basicCart->id,
-                'source_id'      => $orderDetail->id,
-                'user_id'        => $user->id,
-            ]);
 
             //callback url
             if ($destination == 'wishlist') {
@@ -264,15 +248,6 @@ class OrdersController extends Controller
             }
 
             $orderDetail->save();
-
-            $log = Log::create(
-                [
-                    'action_type_id' => '4',
-                    'details'        => $order->id,
-                    'source_id'      => $orderDetail->id,
-                    'user_id'        => $user->id,
-                ]
-            );
 
             Session::push('message', trans('store.productAddedToWishList').', '.trans('globals.reference_label').$order->description);
         } else {
@@ -677,15 +652,6 @@ class OrdersController extends Controller
             $destinationOrder->type = $destination;
             $destinationOrder->status = 'open';
             $destinationOrder->save();
-
-            $log = Log::create(
-                [
-                    'action_type_id' => '1',
-                    'details'        => $destinationOrder->id,
-                    'source_id'      => $destinationOrder->id,
-                    'user_id'        => $user->id,
-                ]
-            );
         }
 
         //checking if the user already has a product in the origin order, if so, it can be read to update the destination order.

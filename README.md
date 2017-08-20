@@ -2,7 +2,7 @@
 
 <a href="https://packagist.org/packages/ant-vel/Shop"><img src="https://img.shields.io/packagist/dt/antvel/shop.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/ant-vel/Shop"><img src="https://img.shields.io/packagist/v/antvel/shop.svg" alt="Latest Stable Version"></a>
-<a href="https://github.com/ant-vel/Shop"><img src="https://img.shields.io/badge/Core%20Package-Dev-brightgreen.svg" alt="Latest Stable Version"></a>
+<a href="https://github.com/ant-vel/Shop"><img src="https://img.shields.io/badge/Core%20Package-Shop-brightgreen.svg" alt="Latest Stable Version"></a>
 
 
 
