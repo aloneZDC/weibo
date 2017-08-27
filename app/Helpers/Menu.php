@@ -31,7 +31,6 @@ class Menu
         if (auth()->check() && auth()->user()->hasRole(['seller', 'admin'])) {
             $menu = array_merge($menu, [
                 ['route' => route('dashboard.home'), 'text' => trans('globals.dashboard'), 'icon' => 'glyphicon glyphicon-dashboard'],
-                ['route' => route('users.products'), 'text' => trans('user.your_products'), 'icon' => 'glyphicon glyphicon-briefcase'],
                 ['route' => '/orders/usersOrders', 'text' => trans('user.your_sales'), 'icon' => 'glyphicon glyphicon-piggy-bank'],
             ]);
         }
