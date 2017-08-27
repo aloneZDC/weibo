@@ -8,7 +8,10 @@
 	</a>
 
 	<ul class="dropdown-menu" role="menu" ng-if="hasNotifications">
-		<li ng-repeat="notification in unread" class="new">
+		<li ng-repeat="notification in unread" style="background-color: #fafafa">
+			<a href="[[notification.path]]?notif_id=[[notification.id]]">[[ notification.label ]]</a>
+		</li>
+		<li ng-repeat="notification in read">
 			<a href="[[notification.path]]?notif_id=[[notification.id]]">[[ notification.label ]]</a>
 		</li>
 		<li role="separator" class="divider"></li>
