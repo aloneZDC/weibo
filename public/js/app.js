@@ -8,27 +8,22 @@
 'use strict';
 var app=angular.module('AntVel');
 
-//Template service
-app.factory('Templates',function(){
-	return {
-		noticeDescription:function(actions){
-			return function(notice){
-				var filter={},template=(actions&&actions[notice.action_type_id]&&actions[notice.action_type_id].notice_template)||[];
-				template.match(/\[[^\]]+\]/g).forEach(function(value){
-					filter[value.replace(/\[|\]/g,'')]=value;
-				});
-				for(var item in filter)
-					template=template.replace(filter[item],notice[item]||item);
-				return template;
-			};
-		},
-		noticeLink:function(actions){
-			return function(notice){
-				var link=(actions&&actions[notice.action_type_id]&&actions[notice.action_type_id].link)||'';
-				return link.replace('source_id',notice.source_id);
-			};
-		}
+app.controller('PushNotificationsController', function($scope, $http, $location)
+{
+	var query = function()
+	{
+		$http
+			.get('/push', { ignoreLoadingBar: true  })
+			.success(function(data) {
+				$scope.hasNotifications = data.unread.length || data.read.length;
+				$scope.unread = data.unread;
+				$scope.read = data.read;
+			}).finally(function() {
+				setTimeout(function() { query(); }, 5000);
+			});
 	};
+
+	query();
 });
 
 // Auto Complete Busqueda general
@@ -56,63 +51,6 @@ app.controller('AutoCompleteCtrl', function($scope,$http,$location) {
 			$('#search_value').val(result.title);
 			$('#searchForm').submit();
 		}
-	};
-});
-
-app.controller('AutoCompleteGroupCtrl', function($scope, $http, notify, $compile) {
-
-	$scope.selectedItem = function(result){
-
-	   $http.post(
-			'productsGroup',
-			{ignoreLoadingBar : true,
-			 group : $('#group_id').val(),
-			 id : result.originalObject.id}
-		).success(function(data){
-
-			if(data.price!==undefined){
-
-				var row = $('#group_id').val()+'_'+result.originalObject.id;
-
-				var html='<tr id="product_'+row+'">'+
-				          '<th scope="row">'+result.originalObject.id+'</th>'+
-				          '<td>'+result.title+'</td>'+
-				          '<td>'+data.price+'</td>'+
-				          '<td>'+
-				          	'<button class="btn btn-danger btn-sm" ng-click="deleteFromGroup(\''+row+'\')">'+
-				          		 data.label_delete+'&nbsp;<span class="glyphicon glyphicon-trash"></span>'+
-				          	'</button>'+
-				          '</td>'+
-				        '</tr>';
-
-				$('.grouped_list').append(html);
-				$compile($('.grouped_list'))($scope);
-				$('#searchGroup_value').val('');
-				notify({duration:5000, messageTemplate: '<p>'+data.message+'!</p>', classes:'alert alert-success'});
-
-			}
-
-		});
-	};
-});
-
-app.controller('listGroupCtrl', function($scope, $http, notify) {
-
-	$scope.deleteFromGroup = function(id){
-
-	   $http.delete('productsGroup/'+id, {ignoreLoadingBar : true})
-	   		.success(function(data){
-
-			if(data.deleteAll){
-
-				$('.grouped_list').html('');
-
-			}else{
-
-				$("#product_"+id).remove();
-			}
-			notify({duration:5000, messageTemplate: '<p>'+data.message+'!</p>', classes:'alert alert-success'});
-		});
 	};
 });
 
@@ -154,83 +92,6 @@ app.controller('ModalCtrl', function($scope, $uibModal){
 		}
 	};
 });
-//control para notificaciones de menu (push)
-app.controller('PushNoticesController',
-['$scope','$http','$timeout','Templates',function($scope,$http,$timeout,Templates){
-	var loop,ajax,$t;
-	var actions={};
-	$scope.getDesc=Templates.noticeDescription(actions);
-	$scope.getLink=Templates.noticeLink(actions);
-	var repeat=function(){
-			if(angular.isDefined(ajax)) return;
-			loop=true;
-			ajax=$http.get(
-				'/user/notices'+($scope.date===undefined?'':'?date='+$scope.date), {ignoreLoadingBar: true}
-			).success(function(data){
-				$scope.push=data.push;
-				$scope.date=data.date;
-				if(data.notices&&data.notices.length)
-					$scope.notices=data.notices;
-				if(data.action_types){
-					actions=data.action_types;
-					$scope.getDesc=Templates.noticeDescription(actions);
-					$scope.getLink=Templates.noticeLink(actions);
-				}
-			}).finally(function(){
-				ajax=undefined;
-				//llamado ajax periodicamente
-				if(loop) $t=$timeout(function(){ repeat(); },5000);
-			});
-		},
-		check=function(notice){
-			if(
-				$scope.date===undefined ||
-				(notice&&notice.status=='read') ||
-				(!notice&&$('#push-notices').hasClass('open'))
-			) return;
-			var id=notice&&notice.id;
-			if(id) console.log('check notice '+id);
-			$scope.push=0;
-			$http.get(
-				'/user/notices/check/'+(id||'')+'?date='+$scope.date,
-				{ignoreLoadingBar: true}
-			).success(function(data){
-				//if checking a notice, redirect to the link
-				if(id) document.location=$scope.getLink(notice);
-				$scope.push=data.push;
-				$scope.date=data.date;
-				if(data.notices&&data.notices.length)
-					$scope.notices=data.notices;
-			});
-		},
-		start=function(){
-			if(loop) return;
-			repeat();
-		},
-		stop=function(){
-			if(loop) loop=false;
-		};
-	$scope.repeat=repeat;
-	$scope.start=start;
-	$scope.stop=stop;
-	$scope.$on('$destroy',function(){
-		$scope.stop();
-	});
-	$scope.date=undefined;
-	$scope.push=undefined;
-	$scope.count=0;
-	$scope.notices=[];
-	$scope.check=check;
-	$(function(){
-		//if click a notice not read, stop link function and execute ng-click
-		$('#push-notices').off('.notice').on('click.notice','ul>li.new>a,ul>li.unread>a',function(e){
-			e.preventDefault();
-			return false;
-		});
-	});
-	start();
-}]);
-//control para vista de notificaciones
 
 //Control de login
 app.controller('LoginController',['$scope','$http',function($scope, $http){

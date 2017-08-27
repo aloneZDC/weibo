@@ -129,7 +129,7 @@
 	@section('before.angular') @show
 
 	(function(){
-		angular.module('AntVel',ngModules,
+		angular.module('AntVel', ngModules,
 		function($interpolateProvider){
 			$interpolateProvider.startSymbol('[[');
 			$interpolateProvider.endSymbol(']]');
@@ -138,6 +138,8 @@
 			localStorageServiceProvider.setPrefix('tb');
 			$locationProvider.html5Mode({enabled:true,rewriteLinks:false});
 		});
+
+		angular.module('AntVel').constant('CSRF_TOKEN', '{{ csrf_token() }}');
 	})();
 
 </script>

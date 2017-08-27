@@ -8,25 +8,25 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-
+//work in progress
+use App\ { User, Comment };
 use App\Http\Controllers\Controller;
 use App\Repositories\OrderRepository;
-use App\ { User, Order, Notice, Comment, OrderDetail };
 
-//shop components.
+//shop & laravel components.
 use Antvel\Product\Products;
-use Antvel\User\Models\Business;
+use Illuminate\Http\Request;
 use Antvel\Product\Models\Product;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Antvel\AddressBook\Models\Address;
 use Antvel\Product\Suggestions\Suggest;
-
-//others
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Antvel\User\Notifications\OrderWasUpdated;
+use Antvel\Orders\Models\{ Order, OrderDetail };
+use Antvel\User\Notifications\OrderWasCommented;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -967,32 +967,21 @@ class OrdersController extends Controller
      */
     public function startOrder($order_id)
     {
-        $user = \Auth::user();
         $order = Order::where('id', $order_id)
-            ->where('seller_id', $user->id)
+            ->where('seller_id', Auth::user()->id)
             ->ofStatus('open')
-            ->select('id', 'status', 'user_id', 'seller_id')
             ->first();
-        //checks if the orders is sold by the user and if it is on open status
+
         if ($order) {
-            //Mails and notifications are now sent in the save method for the order
             $order->status = 'pending';
             $order->save();
 
-            Notice::create([
-                'user_id'        => $order->user_id,
-                'sender_id'      => $order->seller_id,
-                'action_type_id' => 15,
-                'source_id'      => $order->id,
-                'status'         => 'new',
-            ]);
+            $order->owner->notify(new OrderWasUpdated($order));
 
             Session::push('message', trans('store.orders_index.order_started').' (#'.$order->id.')');
-
-            return redirect(route('orders.pendingOrders'));
-        } else {
-            return redirect(route('orders.pendingOrders'));
         }
+
+        return redirect(route('orders.pendingOrders'));
     }
 
     /**
@@ -1002,31 +991,25 @@ class OrdersController extends Controller
      */
     public function sendOrder($order_id)
     {
+        // $order->owner->notify(new OrderWasUpdated($order));
         $user = \Auth::user();
-        $order = Order::where('id', $order_id)
-        ->where('seller_id', $user->id)
-        ->ofStatus('pending')
-        ->select('id', 'user_id', 'status', 'seller_id')
-        ->first();
 
-        //checks if the orders is sold by the user and if it is on open status
+        $order = Order::where('id', $order_id)
+            ->where('seller_id', Auth::user()->id)
+            ->ofStatus('pending')
+            ->select('id', 'user_id', 'status', 'seller_id')
+            ->first();
+
         if ($order) {
-            //Mails and notifications are now sent in the save method for the order
             $order->status = 'sent';
             $order->save();
 
-            Notice::create([
-                'user_id'        => $order->user_id,
-                'sender_id'      => $order->seller_id,
-                'action_type_id' => 11,
-                'source_id'      => $order->id,
-                'status'         => 'new',
-            ]);
+            $order->owner->notify(new OrderWasUpdated($order));
 
-            $order_content = OrderDetail::where('order_id', $order->id)->get();
-            $band = false;
-
-            Session::push('message', trans('store.orders_index.order_sent').' (#'.$order->id.')'.(!$band ? '' : trans('store.order_closed_message')));
+            Session::push(
+                'message',
+                trans('store.orders_index.order_sent') .'(#'. $order->id .')'
+            );
 
             return redirect(route('orders.pendingOrders'));
         } else {
@@ -1041,44 +1024,22 @@ class OrdersController extends Controller
      */
     public function closeOrder($order_id)
     {
-        $user = \Auth::user();
-        $order = Order::where('id', $order_id)->where('user_id', $user->id)->ofStatus('sent')->select('id', 'user_id', 'status', 'end_date', 'seller_id')->first();
-        //checks if the orders is own by the user and if it is on open status
+        $order = Order::where('id', $order_id)
+            ->where('user_id', Auth::user()->id)
+            ->ofStatus('sent')
+            ->select('id', 'user_id', 'status', 'end_date', 'seller_id')
+            ->first();
+
         if ($order) {
-            //Mails and notifications are now sent in the save method for the order
             $order->status = 'closed';
             $order->end_date = DB::raw('NOW()');
-            // $order->end_date = Carbon::now(); Esto lo cambie porque no me parece guardar la fecha de php en la bd...
             $order->save();
+
+            $order->seller->notify(new OrderWasUpdated($order));
             Session::push('message', trans('store.orders_index.order_received').' (#'.$order->id.')');
-
-            Notice::create([
-                'user_id'        => $order->seller_id,
-                'sender_id'      => $order->user_id,
-                'action_type_id' => 10,
-                'source_id'      => $order->id,
-                'status'         => 'new',
-            ]);
-
-            if (config('app.offering_user_points')) {
-                //The order total points are passed to the seller
-                $seller = User::findOrFail($order->seller_id);
-                if ($seller) {
-                    $order_content = OrderDetail::where('order_id', $order->id)->get();
-                    $total_points = 0;
-                    foreach ($order_content as $order_detail) {
-                        $total_points += $order_detail->quantity * $order_detail->price;
-                        $order_detail->status = 0;
-                        $order_detail->delivery_date = DB::raw('NOW()');
-                        $order_detail->save();
-                    }
-                }
-            }
-
-            return redirect(route('orders.show_orders'));
-        } else {
-            return redirect(route('orders.show_orders'));
         }
+
+        return redirect(route('orders.show_orders'));
     }
 
     public function reports($type, $filter)
@@ -1261,7 +1222,7 @@ class OrdersController extends Controller
     /**
      *   @return view
      */
-    public function showOrder($id)
+    public function showOrder(Request $request, $id)
     {
         $panel = [
             'left'   => ['width' => '2', 'class' => 'user-panel'],
@@ -1270,8 +1231,7 @@ class OrdersController extends Controller
 
         $user = \Auth::user();
         if ($user) {
-            $order = Order::
-                where('id', $id)->where('user_id', $user->id)
+            $order = Order::where('id', $id)->where('user_id', $user->id)
                 ->with('details')
                 ->first();
 
@@ -1284,14 +1244,9 @@ class OrdersController extends Controller
 
                 $grandTotal = $order->details->sum('price');
 
+                $order->owner->markNotificationAsRead($request->get('notif_id')); //while refactoring
+
                 return view('orders.detail', compact('user', 'panel', 'orderAddress', 'is_buyer', 'order', 'orderAddress', 'order_comments', 'totalItems', 'grandTotal'));
-            } else {
-                $order = Order::where('id', $id)->where('seller_id', $user->id)->first();
-                if ($order) {
-                    return redirect()->route('orders.show_seller_order', [$id]);
-                } else {
-                    return redirect()->route('orders.show_orders');
-                }
             }
         } else {
             return redirect()->route('orders.show_orders');
@@ -1305,7 +1260,7 @@ class OrdersController extends Controller
      *
      * @return Response
      */
-    public function showSellerOrder($id)
+    public function showSellerOrder(Request $request, $id)
     {
         $user = \Auth::user();
 
@@ -1321,8 +1276,7 @@ class OrdersController extends Controller
 
         $orderAddress = Address::find($order->address_id);
 
-        $order_comments = Comment::
-            where('action_type_id', 3)
+        $order_comments = Comment::where('action_type_id', 3)
             ->where('source_id', $id)
             ->orderBy('created_at', 'asc')
             ->get();
@@ -1333,6 +1287,8 @@ class OrdersController extends Controller
         ];
 
         $is_seller = true;
+
+        $order->seller->markNotificationAsRead($request->get('notif_id')); //while refactoring
 
         return view('orders.detail', compact('user', 'is_seller', 'panel', 'orderAddress', 'order', 'order_comments', 'totalItems', 'grandTotal'));
     }
@@ -1367,25 +1323,15 @@ class OrdersController extends Controller
                     $mail_subject = trans('email.order_commented.comment_from_user');
                     $seller_user = User::find($order->seller_id);
                     $email = $seller_user->email;
-                    Notice::create([
-                       'user_id' => $order->seller_id,
-                       'sender_id' => $order->user_id,
-                       'action_type_id' => 3,
-                       'source_id' => $order->id,
-                       'status' => 'new',
-                    ]);
+
+                    $order->seller->notify(new OrderWasCommented($order));
                 }
                 if ($order->seller_id == $user->id) {
                     $mail_subject = trans('email.order_commented.comment_from_seller');
                     $buyer_user = User::find($order->user_id);
                     $email = $buyer_user->email;
-                    Notice::create([
-                       'user_id' => $order->user_id,
-                       'sender_id' => $order->seller_id,
-                       'action_type_id' => 3,
-                       'source_id' => $order->id,
-                       'status' => 'new',
-                    ]);
+
+                    $order->owner->notify(new OrderWasCommented($order));
                 }
 
                 $data = [
@@ -1506,15 +1452,7 @@ class OrdersController extends Controller
                 $order->save();
                 $seller->save();
 
-                $noticeType = (trim($seller_comment) != '') ? '3' : '14';
-
-                Notice::create([
-                    'user_id'        => $seller->id,
-                    'sender_id'      => $user->id,
-                    'action_type_id' => 14,
-                    'source_id'      => $order->id,
-                    'status'         => 'new',
-                ]);
+                $order->seller->notify(new OrderWasUpdated($order, 'rated'));
 
                 return \Response::json(['success' => true, 'message' => trans('store.order_rate_view.http_messages.success'), 'order_id' => $order_id, 'seller_rate' => $seller_rate], 200);
             } else {
@@ -1589,13 +1527,7 @@ class OrdersController extends Controller
                     $detail->rate_comment = $product_comment;
                     $detail->save();
 
-                    Notice::create([
-                        'user_id'        => $seller_user->id,
-                        'sender_id'      => $user->id,
-                        'action_type_id' => 14,
-                        'source_id'      => $order->id,
-                        'status'         => 'new',
-                    ]);
+                    $order->seller->notify(new OrderWasUpdated($order, 'rated'));
 
                     return \Response::json(['success' => true, 'message' => trans('store.order_rate_view.http_messages.success'), 'detail_id' => $detail_id, 'product_rate' => $product_rate], 200);
                 } else {
@@ -1638,8 +1570,6 @@ class OrdersController extends Controller
          * @var [array]
          */
         $cart_content = Session::get('user.cart_content');
-
-        //dd($cart_content, Session::get('user.cart'));
 
         foreach (Session::get('user.cart_content') as $product => $value) {
             $ordersController->addToOrder(

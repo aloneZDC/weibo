@@ -9,7 +9,7 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.2.9",
+            "version": "1.2.9.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
@@ -429,12 +429,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/php-webdriver.git",
-                "reference": "735a6156617d62fe95ed20e6d038daa22b98e74b"
+                "reference": "9482a3e31fae5938a892baaf128557a593224102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/735a6156617d62fe95ed20e6d038daa22b98e74b",
-                "reference": "735a6156617d62fe95ed20e6d038daa22b98e74b",
+                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/9482a3e31fae5938a892baaf128557a593224102",
+                "reference": "9482a3e31fae5938a892baaf128557a593224102",
                 "shasum": ""
             },
             "require": {
@@ -473,7 +473,7 @@
                 "selenium",
                 "webdriver"
             ],
-            "time": "2017-08-05 13:57:20"
+            "time": "2017-08-26 14:18:43"
         },
         {
             "name": "greggilbert/recaptcha",
@@ -811,12 +811,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ef6177ffa39f107bb005739239be158944d40359"
+                "reference": "603ed4a73f926e2a94fb39a01ac1d1dbaf5255d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ef6177ffa39f107bb005739239be158944d40359",
-                "reference": "ef6177ffa39f107bb005739239be158944d40359",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/603ed4a73f926e2a94fb39a01ac1d1dbaf5255d1",
+                "reference": "603ed4a73f926e2a94fb39a01ac1d1dbaf5255d1",
                 "shasum": ""
             },
             "require": {
@@ -932,7 +932,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-19 14:49:55"
+            "time": "2017-08-26 23:56:53"
         },
         {
             "name": "laravel/tinker",
@@ -1941,12 +1941,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "e8a71970b33410591f664f72dba6bd755fa7bf55"
+                "reference": "0dcea9240098b05c2415e189221f0eed514d8cb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/e8a71970b33410591f664f72dba6bd755fa7bf55",
-                "reference": "e8a71970b33410591f664f72dba6bd755fa7bf55",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0dcea9240098b05c2415e189221f0eed514d8cb7",
+                "reference": "0dcea9240098b05c2415e189221f0eed514d8cb7",
                 "shasum": ""
             },
             "require": {
@@ -1981,13 +1981,13 @@
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
-            "homepage": "http://swiftmailer.org",
+            "homepage": "http://swiftmailer.symfony.com",
             "keywords": [
                 "email",
                 "mail",
                 "mailer"
             ],
-            "time": "2017-08-10 12:25:50"
+            "time": "2017-08-22 22:04:30"
         },
         {
             "name": "symfony/console",

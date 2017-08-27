@@ -9,6 +9,7 @@ namespace App;
  */
 
 use App\ActionType;
+use Antvel\Orders\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model

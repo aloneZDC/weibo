@@ -8,7 +8,7 @@ namespace App\Helpers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Order;
+use Antvel\Orders\Models\Order;
 use Antvel\Product\Models\Product;
 
 class Menu

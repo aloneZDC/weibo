@@ -282,7 +282,7 @@ return [
   'cost' => 'Cost', //used
   'details' => 'Details', //used
   'default' => 'Default', //used
-
+  'notifications' => 'Notifications', //used
   //----
   'submit' => 'Submit'
 ];

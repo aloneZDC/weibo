@@ -8,7 +8,7 @@ namespace App;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Order;
+use Antvel\Orders\Models\Order;
 use Antvel\User\Models\User as BaseUser;
 
 class User extends BaseUser

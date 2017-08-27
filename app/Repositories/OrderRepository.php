@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Order;
 use App\User;
+use Antvel\Orders\Models\Order;
 
 class OrderRepository
 {

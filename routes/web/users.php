@@ -1,15 +1,5 @@
 <?php
 
-//notices
-Route::get('user/notices/check/{id?}', 'NoticesController@check');
-
-Route::get('user/notices/list/{num?}', 'NoticesController@index');
-
-Route::get('user/notices/{type?}', 'NoticesController@push');
-
-Route::resource('user/notices', 'NoticesController');
-
-
 Route::group(['prefix' => 'user', 'roles' => array_keys(trans('globals.roles')), 'middleware' => ['auth', 'roles']], function () {
 
     //Store Cart

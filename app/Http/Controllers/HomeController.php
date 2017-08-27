@@ -8,7 +8,7 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Order;
+use Antvel\Orders\Models\Order;
 use App\Http\Controllers\Controller;
 use Antvel\Product\Suggestions\Suggest;
 

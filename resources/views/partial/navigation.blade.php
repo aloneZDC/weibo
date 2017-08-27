@@ -92,22 +92,8 @@
                     @endif
 				</li>
 
-				@if(Auth::user())
-					<li class="dropdown " id="push-notices" ng-controller="PushNoticesController"  ng-click="check()" ng-focus="check()">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							<span class="badge badge-notifications ng-hide" ng-cloak  ng-show="push">[[push]]</span>
-							<span class="fui fui-chat"></span>{{ trans('globals.notices') }}
-							<span class="visible-xs-inline">
-								<span class="caret"></span>
-							</span>
-						</a>
-						<ul class="dropdown-menu notices" role="menu" ng-if="notices.length">
-							<li ng-repeat="notice in notices" class="[[notice.status]]">
-								<a href="[[getLink(notice)]]" ng-click="check(notice)">[[getDesc(notice)]]</a>
-							</li>
-							<li>{!! link_to('user/notices/list', trans('globals.all')) !!}</li>
-						</ul>
-					</li>
+				@if(Auth::check())
+					@include ('partial.notifications')
 				@endif
 
 			</ul>

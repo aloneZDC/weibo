@@ -8,15 +8,12 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-use App\Order;
-use App\OrderDetail;
-
-//shop components.
 use Antvel\Product\Models\Product;
 use Antvel\Features\Models\Feature;
 use App\Http\Controllers\Controller;
 use Antvel\Categories\Models\Category;
 use Antvel\Product\Suggestions\Suggest;
+use Antvel\Orders\Models\{ Order, OrderDetail };
 use Antvel\Product\Repositories\ProductsRepository;
 
 class ProductsController extends Controller
