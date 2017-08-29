@@ -30,6 +30,5 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductsTableSeeder::class);
         $this->call(GroupingSeeder::class);
         $this->call(FeaturesTableSeeder::class);
-        $this->call(ActionTypeSeeder::class);
     }
 }

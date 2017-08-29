@@ -26,11 +26,11 @@
             <div class="col-md-12">
                 <ol class="breadcrumb">
 
-                    @if (count($order_comments))
+                    @if ($order->comments->count() > 0)
                         <li>
                             <span class="glyphicon glyphicon-comment"></span>&nbsp;
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#comments_panel">
-                                {{ trans('store.view_comments') }}&nbsp;<span class="badge">{{ count($order_comments) }}</span>
+                                {{ trans('store.view_comments') }}&nbsp;<span class="badge">{{ $order->comments->count() }}</span>
                             </a>
                         </li>
                     @endif
@@ -166,7 +166,7 @@
                     <h5><span class="glyphicon glyphicon-comment"></span>&nbsp;{{ trans('store.order_comments') }}</h5>
                 </div>
                 <div>
-                    @include('orders.partial.comments', ['order' => $order, 'comments' => $order_comments])
+                    @include('orders.partial.comments', ['order' => $order])
                 </div>
             </div>
         </div>

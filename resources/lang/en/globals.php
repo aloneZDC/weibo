@@ -71,26 +71,6 @@ return [
         'price_range'  => 'Price Range',
         'size'         => 'size',
     ],
-    'action_types'            => [
-        //Orders
-        ['id' => 1, 'source_type' => 'order', 'action' => 'open'],
-        ['id' => 2, 'source_type' => 'order', 'action' => 'pending'],
-        ['id' => 3, 'source_type' => 'order', 'action' => 'comment'],
-        ['id' => 8, 'source_type' => 'order', 'action' => 'closed'],
-        ['id' => 9, 'source_type' => 'order', 'action' => 'cancelled'],
-        ['id' => 10, 'source_type' => 'order', 'action' => 'received'],
-        ['id' => 11, 'source_type' => 'order', 'action' => 'sent'],
-        ['id' => 14, 'source_type' => 'order', 'action' => 'rate'],
-        ['id' => 15, 'source_type' => 'order', 'action' => 'processing'],
-        //Checkout
-        ['id' => 6, 'source_type' => 'order', 'action' => 'reload points'],
-        ['id' => 7, 'source_type' => 'order', 'action' => 'check out'],
-        //Order Details
-        ['id' => 4, 'source_type' => 'order_detail', 'action' => 'create'],
-        ['id' => 5, 'source_type' => 'order_detail', 'action' => 'update'],
-        //PayPal
-        ['id' => 13, 'source_type' => 'paypal', 'action' => 'buy points'],
-    ],
     //------------ Globals Traductions----------------
     'product_features'        => [
         'brand'                    => 'brand',

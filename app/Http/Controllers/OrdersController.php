@@ -9,7 +9,7 @@ namespace App\Http\Controllers;
  */
 
 //work in progress
-use App\ { User, Comment };
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Repositories\OrderRepository;
 
@@ -1238,7 +1238,6 @@ class OrdersController extends Controller
             if ($order) {
                 $orderAddress = Address::find($order->address_id);
                 $is_buyer = true;
-                $order_comments = Comment::where('action_type_id', 3)->where('source_id', $id)->orderBy('created_at', 'asc')->get();
 
                 $totalItems = $order->details->sum('quantity');
 
@@ -1246,7 +1245,7 @@ class OrdersController extends Controller
 
                 $order->owner->markNotificationAsRead($request->get('notif_id')); //while refactoring
 
-                return view('orders.detail', compact('user', 'panel', 'orderAddress', 'is_buyer', 'order', 'orderAddress', 'order_comments', 'totalItems', 'grandTotal'));
+                return view('orders.detail', compact('user', 'panel', 'orderAddress', 'is_buyer', 'order', 'orderAddress', 'totalItems', 'grandTotal'));
             }
         } else {
             return redirect()->route('orders.show_orders');
@@ -1262,10 +1261,9 @@ class OrdersController extends Controller
      */
     public function showSellerOrder(Request $request, $id)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
-        $order = Order::
-            where('id', $id)
+        $order = Order::where('id', $id)
             ->where('seller_id', $user->id)
             ->with('details')
             ->first();
@@ -1276,11 +1274,6 @@ class OrdersController extends Controller
 
         $orderAddress = Address::find($order->address_id);
 
-        $order_comments = Comment::where('action_type_id', 3)
-            ->where('source_id', $id)
-            ->orderBy('created_at', 'asc')
-            ->get();
-
         $panel = [
             'left'   => ['width' => '2', 'class' => 'user-panel'],
             'center' => ['width' => '10'],
@@ -1290,7 +1283,7 @@ class OrdersController extends Controller
 
         $order->seller->markNotificationAsRead($request->get('notif_id')); //while refactoring
 
-        return view('orders.detail', compact('user', 'is_seller', 'panel', 'orderAddress', 'order', 'order_comments', 'totalItems', 'grandTotal'));
+        return view('orders.detail', compact('user', 'is_seller', 'panel', 'orderAddress', 'order', 'totalItems', 'grandTotal'));
     }
 
     public function commentOrder($order_id)
@@ -1300,13 +1293,13 @@ class OrdersController extends Controller
 
     public function storeComment(Request $request) //while refactoring
     {
-        $order = Order::where('id', $order_id = $request->get('order_id'))->firstOrFail();
+        $order = Order::where('id', $order_id = $request->get('order_id'))
+            ->where('user_id', Auth::user()->id)
+            ->orWhere('seller_id', Auth::user()->id)
+            ->firstOrFail();
 
-        Comment::create([
-            'comment' => $request->get('comment_text'),
-            'user_id' => Auth::user()->id,
-            'source_id' => $order_id,
-            'action_type_id' => 3,
+        $order->comments()->create([
+            'data' => ['sender_id' => Auth::user()->id, 'message' => $request->get('comment_text')]
         ]);
 
         if ($order->user_id == Auth::user()->id) {
