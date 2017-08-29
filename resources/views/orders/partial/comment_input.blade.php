@@ -4,7 +4,8 @@
         <h6>{{ trans('store.create_comment_modal.create_comment') }}{{$order_id}}</h6>
     </div>
 
-    <form ng-submit="commentOrderForm.$valid && commentOrder({{$order_id}})" xt-form role="form" name="commentOrderForm" novalidate>
+    <form action="{{ route('orders.store_comment') }}" method="POST" role="form" name="commentOrderForm">
+        {{ csrf_field() }}
         <div class="modal-body">
             <div class="container-fluid">
                     {!! Form::hidden('order_id', $order_id, ['ng-model'=>'newComment.order_id']) !!}
@@ -15,19 +16,14 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            {!! Form::textarea(
-                                    'comment_text', null,
-                                    [
-                                        'id' => 'comment_text',
-                                        'rows' => 3,
-                                        'class' => 'form-control form-group',
-                                        'ng-model' => 'newComment.comment_text',
-                                        'required' => 'required',
-                                        'placeholder' => trans('store.create_comment_modal.create_comment_placeholder')
-                                    ]
-                                )
-                            !!}
-                            <xt-validation-inline for="comment_subject"></xt-validation-inline>
+                            {!! Form::textarea('comment_text', null,
+                                [
+                                    'placeholder' => trans('store.create_comment_modal.create_comment_placeholder'),
+                                    'class' => 'form-control form-group',
+                                    'required' => 'required',
+                                    'rows' => 3,
+                                ]
+                            ) !!}
                         </div>
                     </div>
             </div>

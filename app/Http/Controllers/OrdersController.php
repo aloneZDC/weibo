@@ -1298,68 +1298,28 @@ class OrdersController extends Controller
         return view('orders.partial.comment_input', compact('order_id'));
     }
 
-    public function storeComment(Request $request)
+    public function storeComment(Request $request) //while refactoring
     {
-        $order_id = $request->get('order_id');
-        $text = $request->get('comment_text');
-        $user = \Auth::user();
+        $order = Order::where('id', $order_id = $request->get('order_id'))->firstOrFail();
 
-        if ($user) {
-            $order = Order::find($order_id);
+        Comment::create([
+            'comment' => $request->get('comment_text'),
+            'user_id' => Auth::user()->id,
+            'source_id' => $order_id,
+            'action_type_id' => 3,
+        ]);
 
-            //Checks if the order belongs to the current user, or if the user is the seller of the order
-            if (($order->user_id == $user->id) || ($order->seller_id == $user->id)) {
-
-                $data = [
-                    'user_id'        => $user->id,
-                    'action_type_id' => 3,
-                    'source_id'      => $order_id,
-                    'comment'        => $text,
-                ];
-
-                $new_comment = Comment::create($data);
-
-                if ($order->user_id == $user->id) {
-                    $mail_subject = trans('email.order_commented.comment_from_user');
-                    $seller_user = User::find($order->seller_id);
-                    $email = $seller_user->email;
-
-                    $order->seller->notify(new OrderWasCommented($order));
-                }
-                if ($order->seller_id == $user->id) {
-                    $mail_subject = trans('email.order_commented.comment_from_seller');
-                    $buyer_user = User::find($order->user_id);
-                    $email = $buyer_user->email;
-
-                    $order->owner->notify(new OrderWasCommented($order));
-                }
-
-                $data = [
-                    'order_id'      => $order_id,
-                    'subject'       => $mail_subject,
-                    'email_message' => $mail_subject,
-                    'email'         => $email,
-                    'comment'       => $text,
-                    'title'         => $mail_subject,
-                ];
-
-                Mail::send('emails.order_comment', $data, function ($message) use ($user, $data) {
-                    $message->to($data['email'])->subject($data['subject']);
-                });
-
-            } else {
-                return \Response::json(['success' => false, 'order_id' => $order_id], 200);
-            }
-
-
-        } else {
-            return \Response::json(['success' => false, 'order_id' => $order_id], 200);
+        if ($order->user_id == Auth::user()->id) {
+            $order->seller->notify(new OrderWasCommented($order));
         }
 
+        if ($order->seller_id == Auth::user()->id) {
+            $order->owner->notify(new OrderWasCommented($order));
+        }
 
         Session::push('message', trans('store.create_comment_modal.added_order_comment'));
 
-        return \Response::json(['success' => true, 'order_id' => $order_id], 200);
+        return back();
     }
 
     /**

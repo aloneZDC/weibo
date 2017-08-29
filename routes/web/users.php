@@ -32,8 +32,6 @@ Route::group(['prefix' => 'user', 'roles' => array_keys(trans('globals.roles')),
 
     //Route used to login an user and send it back to the product show
 
-    Route::get('logAndShow/{productId}', ['uses' => 'ProductsController@show', 'as' => 'products.log_and_show']);
-
     Route::get('orders/close/{order_id}', ['uses' => 'OrdersController@closeOrder', 'as' => 'orders.close']);
 
     Route::get('orders/comment/{order_id}', ['uses' => 'OrdersController@commentOrder', 'as' => 'orders.comment']);

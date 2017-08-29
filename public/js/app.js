@@ -174,36 +174,6 @@ app.controller('WishListControllerModal', function($scope, $http, $rootScope,$ui
     };
 });
 
-//Control de Feedback entre vendedor y cliente
-app.controller('CommentControllerModal', function($scope, $http, $rootScope,$uibModalInstance){
-    $scope.newComment = {};
-
-    $scope.commentOrder = function(order_id){
-        $scope.newComment.order_id = order_id;
-        if($scope.newComment.comment_text){
-            $http.post('/user/orders/storeComment', $scope.newComment).
-                success(function(data, status) {
-                    if (data.success) {
-                        console.log(data);
-                        $uibModalInstance.close();
-                        window.location.replace('/user/orders/show/'+data.order_id);
-                    }else{
-                        console.log(data); //mensajes de error
-                    }
-                }).
-                error(function(data, status, headers, config) {
-                    //$rootScope.allLists.pop();
-                    console.log(data);
-                });
-            console.log($scope.newComment);
-        }else{
-            console.log($scope.newComment);
-        }
-        $uibModalInstance.close();
-    };
-});
-
-
 /**
  * PassInfo
  * Services to pass a var between controllers

@@ -37,7 +37,7 @@
 
                     <li>
                         <span class="glyphicon glyphicon-envelope"></span>&nbsp;
-                        <a href="javascript:void(0);" ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'/user/orders/comment/{{ $order->id }}',controller:'CommentControllerModal',resolve:'comment'})">
+                        <a href="javascript:void(0);" ng-controller="ModalCtrl" ng-click="modalOpen({templateUrl:'/user/orders/comment/{{ $order->id }}'})">
                             {{ isset($is_buyer) ? trans('store.show_order_details_view.contact_seller') : trans('store.contactBuyer') }}
                         </a>
                     </li>
@@ -212,7 +212,7 @@
 
                                 <div class="col-md-7 col-xs-8">
                                     <h6>
-                                        <a href="{{ action('ProductsController@show', $detail->product->id) }}">{{ $detail->product->name }}</a>
+                                        <a href="{{ route('products.show', $detail->product) }}">{{ $detail->product->name }}</a>
                                         @if ($detail->rate)
                                             <br>
                                             <small>
@@ -305,7 +305,7 @@
             {
                 $scope.message = '';
                 $scope.messageClass = '';
-                $scope.urlShow = '{{ action("ProductsController@show", "productId") }}';
+                $scope.urlShow = '{{ route("products.show", "productId") }}';
                 $scope.busissnes = {};
                 $scope.ratingOrdItems = {};
                 $scope.noRate = false;

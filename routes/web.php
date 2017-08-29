@@ -34,9 +34,6 @@ require __DIR__ . '/web/users.php';
 //business routes
 require __DIR__ . '/web/business.php';
 
-//products lists
-require __DIR__ . '/web/products.php';
-
 //wish lists
 require __DIR__ . '/web/wish_lists.php';
 
