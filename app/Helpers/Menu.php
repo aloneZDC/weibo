@@ -28,14 +28,14 @@ class Menu
             ['route' => route('addressBook.index'), 'text' => trans('user.address_book'), 'icon' => 'glyphicon glyphicon-map-marker', 'divider' => 1],
         ];
 
-        if (auth()->check() && auth()->user()->hasRole(['seller', 'admin'])) {
+        if (auth()->check() && auth()->user()->isAdmin()) {
             $menu = array_merge($menu, [
                 ['route' => route('dashboard.home'), 'text' => trans('globals.dashboard'), 'icon' => 'glyphicon glyphicon-dashboard'],
-                ['route' => '/orders/usersOrders', 'text' => trans('user.your_sales'), 'icon' => 'glyphicon glyphicon-piggy-bank'],
+                ['route' => route('orders.pendingOrders'), 'text' => trans('user.your_sales'), 'icon' => 'glyphicon glyphicon-piggy-bank'],
             ]);
         }
 
-        if (auth()->check() && auth()->user()->hasRole(['customer', 'admin'])) {
+        else {
             $menu[] = ['route' => '/user/orders', 'text' => trans('user.your_orders'), 'icon' => 'glyphicon glyphicon-shopping-cart', 'divider' => 1];
         }
 

@@ -991,9 +991,6 @@ class OrdersController extends Controller
      */
     public function sendOrder($order_id)
     {
-        // $order->owner->notify(new OrderWasUpdated($order));
-        $user = \Auth::user();
-
         $order = Order::where('id', $order_id)
             ->where('seller_id', Auth::user()->id)
             ->ofStatus('pending')
@@ -1010,11 +1007,9 @@ class OrdersController extends Controller
                 'message',
                 trans('store.orders_index.order_sent') .'(#'. $order->id .')'
             );
-
-            return redirect(route('orders.pendingOrders'));
-        } else {
-            return redirect(route('orders.pendingOrders'));
         }
+
+        return redirect(route('orders.pendingOrders'));
     }
 
     /**
@@ -1293,10 +1288,15 @@ class OrdersController extends Controller
 
     public function storeComment(Request $request) //while refactoring
     {
-        $order = Order::where('id', $order_id = $request->get('order_id'))
-            ->where('user_id', Auth::user()->id)
-            ->orWhere('seller_id', Auth::user()->id)
-            ->firstOrFail();
+        $order = Order::where('id', $order_id = $request->get('order_id'));
+
+        if (Auth::user()->isAdmin()) {
+            $order->where('seller_id', Auth::user()->id);
+        } else {
+            $order->where('user_id', Auth::user()->id);
+        }
+
+        $order = $order->firstOrFail();
 
         $order->comments()->create([
             'data' => ['sender_id' => Auth::user()->id, 'message' => $request->get('comment_text')]
