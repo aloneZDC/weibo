@@ -10,6 +10,7 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
+    |
     */
 
     'name' => 'Antvel eCommerce',
@@ -177,15 +178,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
-        Laravel\Dusk\DuskServiceProvider::class,
-        Antvel\AntvelServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
-        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
 
         /*
@@ -249,15 +242,10 @@ return [
         /*
          * Package Aliases...
          */
-        'Form'        => Collective\Html\FormFacade::class,
-        'Html'        => Collective\Html\HtmlFacade::class,
-        'Image'       => Intervention\Image\Facades\Image::class,
         'Debugbar'    => Barryvdh\Debugbar\Facade::class,
         'Recaptcha'   => Greggilbert\Recaptcha\Facades\Recaptcha::class,
         'DNS1D'       => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D'       => Milon\Barcode\Facades\DNS2DFacade::class,
-        'PDF'         => Barryvdh\DomPDF\Facade::class,
-        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
         /*
          * App Alieses...

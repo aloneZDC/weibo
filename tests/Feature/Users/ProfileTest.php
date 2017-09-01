@@ -165,7 +165,9 @@ class ProfileTest extends TestCase
         ]);
 
         $this->assertEquals($this->user->pic_url, $this->user->fresh()->pic_url);
-        $this->assertArrayHasKey('error', $response->decodeResponseJson());
+
+        $error = $response->decodeResponseJson();
+        $this->assertEquals('Unauthenticated.', $error['message']);
         $response->assertStatus(401);
     }
 }

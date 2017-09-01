@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -49,5 +48,4 @@ return [
             'driver' => 'null',
         ],
     ],
-
 ];

@@ -23,27 +23,28 @@
 		}
 	],
 	"require": {
-		"php": ">=5.6.4",
-        "laravel/framework": "5.4.*",
-		"laravelcollective/html": "5.4.*",
-		"intervention/image": "2.*",
+		"php": ">=7.0.0",
+        "laravel/framework": "5.5.*",
+		"laravelcollective/html": "5.5.*",
+		"intervention/image": "2.4.*",
 		"greggilbert/recaptcha": "2.*",
 		"barryvdh/laravel-dompdf": "0.*",
-		"barryvdh/laravel-debugbar": "2.*",
+		"barryvdh/laravel-debugbar": "3.*",
 		"predis/predis": "^1.0",
-		"davejamesmiller/laravel-breadcrumbs": "3.*",
+		"davejamesmiller/laravel-breadcrumbs": "4.*",
 		"milon/barcode": "5.*",
 		"antvel/shop": "dev-master",
 		"laravel/tinker": "~1.0",
-		"laravel/dusk": "^1.0"
+		"laravel/dusk": "2.*"
 	},
 	"require-dev": {
+		"filp/whoops": "~2.0",
 		"friendsofphp/php-cs-fixer": "^1.10",
 		"symfony/dom-crawler": "~3.0",
 		"symfony/css-selector": "~3.0",
 		"fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7"
+        "phpunit/phpunit": "~6.0"
 	},
 	"autoload": {
 		"classmap": [
