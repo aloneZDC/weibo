@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.2.13",
+            "version": "1.2.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "183e94d275477f81e3f48703b886a1c2869729da"
+                "reference": "a8c5d413ac9b426cd18619c29fadd5b7e23dbf18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/183e94d275477f81e3f48703b886a1c2869729da",
-                "reference": "183e94d275477f81e3f48703b886a1c2869729da",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/a8c5d413ac9b426cd18619c29fadd5b7e23dbf18",
+                "reference": "a8c5d413ac9b426cd18619c29fadd5b7e23dbf18",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-09-01 19:58:53"
+            "time": "2017-09-03 20:35:48"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -979,12 +979,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a3db80b101d91a1aeac0c8d1d4aebeb815c07c60"
+                "reference": "55dc730acdb951b6a7e89d07c08e05ad3e12ec9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a3db80b101d91a1aeac0c8d1d4aebeb815c07c60",
-                "reference": "a3db80b101d91a1aeac0c8d1d4aebeb815c07c60",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/55dc730acdb951b6a7e89d07c08e05ad3e12ec9f",
+                "reference": "55dc730acdb951b6a7e89d07c08e05ad3e12ec9f",
                 "shasum": ""
             },
             "require": {
@@ -1103,7 +1103,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-09-03 19:44:34"
+            "time": "2017-09-04 17:52:54"
         },
         {
             "name": "laravel/tinker",
@@ -1239,12 +1239,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "2a12dff63eca980f103747935b6178862d9c88db"
+                "reference": "3245df3acae2dded99694b499d3bbf937679c8f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2a12dff63eca980f103747935b6178862d9c88db",
-                "reference": "2a12dff63eca980f103747935b6178862d9c88db",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3245df3acae2dded99694b499d3bbf937679c8f3",
+                "reference": "3245df3acae2dded99694b499d3bbf937679c8f3",
                 "shasum": ""
             },
             "require": {
@@ -1314,7 +1314,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-09-01 19:06:55"
+            "time": "2017-09-04 09:35:39"
         },
         {
             "name": "maximebf/debugbar",
@@ -3295,12 +3295,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "c3f82846fdfd1760b277767ac21426ca030f795e"
+                "reference": "633549c771ae745af3e0e4ea26665b29ec01b7b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/c3f82846fdfd1760b277767ac21426ca030f795e",
-                "reference": "c3f82846fdfd1760b277767ac21426ca030f795e",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/633549c771ae745af3e0e4ea26665b29ec01b7b9",
+                "reference": "633549c771ae745af3e0e4ea26665b29ec01b7b9",
                 "shasum": ""
             },
             "require": {
@@ -3337,7 +3337,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-08-30 09:14:20"
+            "time": "2017-09-04 07:21:24"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -3655,16 +3655,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.2.3",
+            "version": "4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "86e24012a3139b42a7b71155cfaa325389f00f1f"
+                "reference": "2d3d238c433cf69caeb4842e97a3223a116f94b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/86e24012a3139b42a7b71155cfaa325389f00f1f",
-                "reference": "86e24012a3139b42a7b71155cfaa325389f00f1f",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2d3d238c433cf69caeb4842e97a3223a116f94b2",
+                "reference": "2d3d238c433cf69caeb4842e97a3223a116f94b2",
                 "shasum": ""
             },
             "require": {
@@ -3696,7 +3696,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2017-08-29 19:37:41"
+            "time": "2017-08-30 18:51:59"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -3751,12 +3751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "15ea9ac619e37009edcda64089e3fa4cc88aa659"
+                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/15ea9ac619e37009edcda64089e3fa4cc88aa659",
-                "reference": "15ea9ac619e37009edcda64089e3fa4cc88aa659",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
+                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
                 "shasum": ""
             },
             "require": {
@@ -3806,7 +3806,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2017-09-03 09:38:53"
+            "time": "2017-09-04 11:05:03"
         },
         {
             "name": "phpunit/php-code-coverage",

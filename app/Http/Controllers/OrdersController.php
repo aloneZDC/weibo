@@ -8,16 +8,12 @@ namespace App\Http\Controllers;
  * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
  */
 
-//work in progress
-use App\User;
-use App\Http\Controllers\Controller;
-use App\Repositories\OrderRepository;
-
-//shop & laravel components.
 use Antvel\Product\Products;
 use Illuminate\Http\Request;
+use Antvel\User\Models\User;
 use Antvel\Product\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Antvel\AddressBook\Models\Address;
@@ -32,27 +28,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrdersController extends Controller
 {
-    /**
-     * The order repository instance.
-     *
-     * @var OrderRepository
-     */
-    protected $order;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param OrderRepository $order
-     *
-     * @return void
-     */
-    public function __construct(OrderRepository $order)
-    {
-        $this->middleware('auth');
-
-        $this->order = $order;
-    }
-
     /**
      * Adds the selected product to the BASE cart.
      *
@@ -1159,15 +1134,11 @@ class OrdersController extends Controller
      */
     public function destroy($order_id, $type)
     {
-        if ($this->order->belongToUser(auth()->user(), $order_id, $order) && $this->order->canBeDeleted($type)) {
-            $order->details()->delete();
+        $order = Auth::user() ->orders()->findOrFail($order_id);
 
-            $order->delete();
+        $order->delete();
 
-            Session::push('message', trans('store.wish_list_view.success_deleting_msg'));
-        } else {
-            Session::push('message', trans('store.wish_list_view.error_deleting_msg'));
-        }
+        Session::push('message', trans('store.wish_list_view.success_deleting_msg'));
 
         return redirect()->back();
     }

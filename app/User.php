@@ -13,35 +13,27 @@ use Antvel\User\Models\User as BaseUser;
 
 class User extends BaseUser
 {
+    /**
+     * The user's orders. | while refactoring
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
-    //Cart Manage
-    public function getCartCount()
+    /**
+     * The user's shopping cart. | while refactoring
+     *
+     * @return mixed
+     */
+    public function shoppingCart()
     {
-        $basicCart = Order::ofType('cart')->where('user_id', $this->id)->first();
-        if (!($basicCart)) {
-            return 0;
-        } else {
-            $totalItems = 0;
-            foreach ($basicCart->details  as $orderDetail) {
-                $totalItems += $orderDetail->quantity;
-            }
+        $shoppingCart = $this->orders()->with('details')
+            ->where('type', 'cart')
+            ->first();
 
-            return $totalItems;
-        }
-    }
-
-    public function getCartContent()
-    {
-        $shoppingCart = Order::ofType('cart')->where('user_id', $this->id)->first();
-
-        if ($shoppingCart) {
-            return $shoppingCart->details->sortByDesc('created_at')->take(5);
-        }
-
-        return [];
+        return is_null($shoppingCart) ? collect() : $shoppingCart->details;
     }
 }

@@ -45,54 +45,11 @@
 					</li>
 				@endif
 
-				<li class="dropdown">
-					<a href="#cart" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						@if(Auth::check() && Auth::user()->getCartCount())
-						<span class="badge badge-cart">{{ Auth::user()->getCartCount() }} </span>
-						@elseif(!Auth::user() && is_array(Session::get('user.cart_content')) && array_sum(Session::get('user.cart_content')))
-						<span class="badge badge-cart">{{ array_sum(Session::get('user.cart_content')) }} </span>
-						@endif
+				@if (auth()->check() && auth()->user()->shoppingCart()->count())
+					@include ('partial.shoppingCart')
+				@endif
 
-						<span class="glyphicon glyphicon-shopping-cart"></span>{{ trans('store.cart') }}
-						<span class="caret"></span>
-					</a>
-
-                    @if(Auth::check() && Auth::user()->getCartCount() > 0)
-                        <ul class="dropdown-menu cart" role="menu">
-                            @foreach(Auth::user()->getCartContent() as $orderDetail)
-                                <li>
-                                    <a href="{{ route('products.show',[$orderDetail->product->id]) }}" >
-
-                                            <img src="{{ $orderDetail->product->default_picture }}" alt="{{ $orderDetail->product->name }}" width="32" height="32" style="float: left; margin-right: 2px"/>
-                                            {{ $orderDetail->product->name }}
-                                             - {{ trans('store.quantity') }}: {{ $orderDetail->quantity }}
-
-                                    </a>
-                                </li>
-                            @endforeach
-                            <li><a class="btn btn-default" href="{{ route('orders.show_cart') }}" role="button">{{ trans('store.view_cart') }}</a></li>
-                        </ul>
-                    @elseif(!Auth::user() && is_array(Session::get('user.cart_content')))
-                        <ul class="dropdown-menu cart" role="menu">
-                        @foreach(Session::get('user.cart_content') as $product_id => $quantity)
-                        @if($product=\App\Product::find($product_id))
-                            <li>
-                                <a href="{{ route('products.show',[$product_id]) }}" >
-
-                                        <img src="{{ $product->first_image }}" width="32" height="32" style="float: left; margin-right: 2px"/>
-                                        {{ $product->name }}
-                                         - {{ trans('store.quantity') }}: {{ $quantity }}
-
-                                </a>
-                            </li>
-                        @endif
-                        @endforeach
-                            <li><a class="btn btn-default" href="{{ route('orders.show_cart') }}" role="button">{{ trans('store.view_cart') }}</a></li>
-                        </ul>
-                    @endif
-				</li>
-
-				@if(Auth::check())
+				@if (auth()->check())
 					@include ('partial.notifications')
 				@endif
 

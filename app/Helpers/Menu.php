@@ -36,7 +36,7 @@ class Menu
         }
 
         else {
-            $menu[] = ['route' => '/user/orders', 'text' => trans('user.your_orders'), 'icon' => 'glyphicon glyphicon-shopping-cart', 'divider' => 1];
+            $menu[] = ['route' => route('orders.show_orders'), 'text' => trans('user.your_orders'), 'icon' => 'glyphicon glyphicon-shopping-cart', 'divider' => 1];
         }
 
         return $returnArray ? $menu : json_encode($menu);
