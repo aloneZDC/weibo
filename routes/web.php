@@ -13,17 +13,9 @@ Route::get('img/{file?}', 'FileController@img')->where('file', '(.*)')->name('im
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('summary', ['as' => 'home', 'uses' => 'HomeController@summary']); //while refactoring
 
-Route::group(['prefix' => 'home'], function () {
-    Route::get('/', 'HomeController@index');
+Route::group(['prefix' => 'home'], function ($router) {
+    $router->name('home')->get('/', 'HomeController@index');
 });
-
-//about routes
-Route::post('contact', ['as' => 'contact_store', 'uses' => 'AboutController@store']);
-Route::get('refunds', ['as' => 'refunds', 'uses' => 'AboutController@refunds']);
-Route::get('privacy', ['as' => 'privacy', 'uses' => 'AboutController@privacy']);
-Route::get('contact', ['as' => 'contact', 'uses' => 'AboutController@create']);
-Route::get('about', ['as' => 'about', 'uses' => 'AboutController@about']);
-Route::get('terms', ['as' => 'terms', 'uses' => 'AboutController@terms']);
 
 //orders routes
 Route::middleware('auth')->group(function ($router) {

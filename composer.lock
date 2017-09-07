@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "antvel/shop",
-            "version": "1.2.14",
+            "version": "1.2.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ant-vel/Shop.git",
-                "reference": "a8c5d413ac9b426cd18619c29fadd5b7e23dbf18"
+                "reference": "10efe2d9c93f5dce11b0afff93b1a4f341098eac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/a8c5d413ac9b426cd18619c29fadd5b7e23dbf18",
-                "reference": "a8c5d413ac9b426cd18619c29fadd5b7e23dbf18",
+                "url": "https://api.github.com/repos/ant-vel/Shop/zipball/10efe2d9c93f5dce11b0afff93b1a4f341098eac",
+                "reference": "10efe2d9c93f5dce11b0afff93b1a4f341098eac",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "shop",
                 "store"
             ],
-            "time": "2017-09-03 20:35:48"
+            "time": "2017-09-04 21:31:17"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -95,12 +95,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "bce341e3194bbeffa60ac782d645067557f5075e"
+                "reference": "1189ebccda6172d9010188e3dbcd24d9558231c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/bce341e3194bbeffa60ac782d645067557f5075e",
-                "reference": "bce341e3194bbeffa60ac782d645067557f5075e",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/1189ebccda6172d9010188e3dbcd24d9558231c2",
+                "reference": "1189ebccda6172d9010188e3dbcd24d9558231c2",
                 "shasum": ""
             },
             "require": {
@@ -155,7 +155,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2017-08-29 08:54:25"
+            "time": "2017-09-07 11:36:18"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -592,12 +592,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/php-webdriver.git",
-                "reference": "f6998eb508c8410354ad62408909245910420945"
+                "reference": "27d5dfbb6e2ab218890b59166f6a735c73381fce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/f6998eb508c8410354ad62408909245910420945",
-                "reference": "f6998eb508c8410354ad62408909245910420945",
+                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/27d5dfbb6e2ab218890b59166f6a735c73381fce",
+                "reference": "27d5dfbb6e2ab218890b59166f6a735c73381fce",
                 "shasum": ""
             },
             "require": {
@@ -636,7 +636,7 @@
                 "selenium",
                 "webdriver"
             ],
-            "time": "2017-09-01 08:30:08"
+            "time": "2017-09-06 10:23:31"
         },
         {
             "name": "greggilbert/recaptcha",
@@ -979,12 +979,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "55dc730acdb951b6a7e89d07c08e05ad3e12ec9f"
+                "reference": "d00031ff0e4c29450a1727b7aedb582d5d9858e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/55dc730acdb951b6a7e89d07c08e05ad3e12ec9f",
-                "reference": "55dc730acdb951b6a7e89d07c08e05ad3e12ec9f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d00031ff0e4c29450a1727b7aedb582d5d9858e2",
+                "reference": "d00031ff0e4c29450a1727b7aedb582d5d9858e2",
                 "shasum": ""
             },
             "require": {
@@ -1103,7 +1103,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-09-04 17:52:54"
+            "time": "2017-09-07 18:54:31"
         },
         {
             "name": "laravel/tinker",
@@ -2024,12 +2024,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "8ba576394268e77768556a4f2cb7be1d02d9e8dd"
+                "reference": "71b422a177d10d266a8dcb8154ae3a5bfbc26adf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/8ba576394268e77768556a4f2cb7be1d02d9e8dd",
-                "reference": "8ba576394268e77768556a4f2cb7be1d02d9e8dd",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/71b422a177d10d266a8dcb8154ae3a5bfbc26adf",
+                "reference": "71b422a177d10d266a8dcb8154ae3a5bfbc26adf",
                 "shasum": ""
             },
             "require": {
@@ -2089,7 +2089,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-08-18 06:12:53"
+            "time": "2017-09-06 07:27:32"
         },
         {
             "name": "ramsey/uuid",
@@ -3295,12 +3295,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "633549c771ae745af3e0e4ea26665b29ec01b7b9"
+                "reference": "d35b1165f34f09ffefef77a3344e84705cde4077"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/633549c771ae745af3e0e4ea26665b29ec01b7b9",
-                "reference": "633549c771ae745af3e0e4ea26665b29ec01b7b9",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d35b1165f34f09ffefef77a3344e84705cde4077",
+                "reference": "d35b1165f34f09ffefef77a3344e84705cde4077",
                 "shasum": ""
             },
             "require": {
@@ -3337,7 +3337,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-09-04 07:21:24"
+            "time": "2017-09-06 07:11:10"
         },
         {
             "name": "hamcrest/hamcrest-php",

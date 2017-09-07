@@ -50,14 +50,14 @@
 <table border="0" width="100%" cellpadding="0" cellspacing="0" class="report-font-style">
     <tr>
         <td>
-            <a href="{{ route('home') }}"><img src="{{ $main_company['logo'] }}" alt="antvel"></a>
+            <a href="{{ route('home') }}"><img src="{{ $company['logo'] }}" alt="antvel"></a>
         </td>
         <td>
-        	<span>{{ $main_company['name'] }}</span><br>
+        	<span>{{ $company['name'] }}</span><br>
         	<ul>
-        		<li>{{ trans('company.contact_email') }}:&nbsp;{{ $main_company['email'] }}</li>
-        		<li>{{ trans('company.cell_phone') }}:&nbsp;{{ $main_company['cell_phone'] }}</li>
-        		<li>{{ trans('company.phone') }}:&nbsp;{{ $main_company['phone_number'] }}</li>
+        		<li>{{ trans('company.contact_email') }}:&nbsp;{{ $company['email'] }}</li>
+        		<li>{{ trans('company.cell_phone') }}:&nbsp;{{ $company['cell_phone'] }}</li>
+        		<li>{{ trans('company.phone') }}:&nbsp;{{ $company['phone_number'] }}</li>
         		<li>
         			@if ($dateFrom != '' && $dateTo == '')
         				<strong>{{ trans('globals.filtered') }}:</strong>&nbsp;{{ $dateFrom }}
@@ -74,9 +74,9 @@
         <td>
         	<span>{{ trans('globals.location') }}</span><br>
         	<ul>
-        		<li>{{ $main_company['address'] }}</li>
-        		<li>{{ $main_company['city'] }},&nbsp;{{ strtoupper($main_company['state']) }}</li>
-        		<li>{{ trans('company.zip') }}:&nbsp;{{ $main_company['zip_code'] }}</li>
+        		<li>{{ $company['address'] }}</li>
+        		<li>{{ $company['city'] }},&nbsp;{{ strtoupper($company['state']) }}</li>
+        		<li>{{ trans('globals.zip_code') }}:&nbsp;{{ $company['zip_code'] }}</li>
         		<li>&nbsp;</li>
         	</ul>
         </td>

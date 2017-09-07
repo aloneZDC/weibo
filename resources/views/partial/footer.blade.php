@@ -1,30 +1,26 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-4 col-sm-4 col-md-4 menu">
-			<?php $menu=\Menu::help(true); ?>
 			<h3>{{ trans('globals.company_label') }}</h3>
 			<ul>
-				@foreach ($menu as $item)
-					<li><a href = '{{ $item['route'] }}'>{{ $item['text'] }}</a></li>
-				@endforeach
+				<li><a href="{{ route('about') }}">{{ trans('company.about') }}</a></li>
+				<li><a href="{{ route('about', ['section' => 'refunds']) }}">{{ trans('company.refunds') }}</a></li>
+				<li><a href="{{ route('about', ['section' => 'terms']) }}">{{ trans('company.terms') }}</a></li>
 			</ul>
 		</div>
 
-		@if (isset($main_company))
 		<div class="col-xs-4 col-sm-4 col-md-4 menu">
 			<h3>{{ trans('globals.social_label') }}</h3>
 			<ul>
-				<li><a href="https://www.facebook.com/{{ $main_company['facebook'] }}" target="_blank">{{ trans('globals.facebook_label') }}</a></li>
-				<li><a href="https://twitter.com/{{ $main_company['twitter'] }}" target="_blank">{{ trans('globals.twitter_label') }}</a></li>
-				<li><a href="https://plus.google.com/u/0/{{ $main_company['google_plus'] }}" target="_blank">{{ trans('globals.google_label') }}</a></li>
+				<li><a href="https://www.facebook.com/{{ $company['facebook'] }}" target="_blank">{{ trans('globals.facebook_label') }}</a></li>
+				<li><a href="https://twitter.com/{{ $company['twitter'] }}" target="_blank">{{ trans('globals.twitter_label') }}</a></li>
 			</ul>
 		</div>
-		@endif
 
 		<div class="col-xs-4 col-sm-4 col-md-4 newsletter" ng-controller = "NewslettersCtrl">
-			@if (\Auth::user())
+			@if (auth()->check())
 				<p>{{ trans('globals.reach_us_msg') }}</p>
-				<p><strong><a href="/contact"><span class="glyphicon glyphicon-envelope"></span>&nbsp;{{ trans('globals.send_a_email_label') }}</a></strong></p>
+				<p><strong><a href="{{ route('contact') }}"><span class="glyphicon glyphicon-envelope"></span>&nbsp;{{ trans('globals.send_a_email_label') }}</a></strong></p>
 			@else
 				<div class="signup clearfix">
 					<p>{{ trans('user.newsletter_sign_up') }}</p>

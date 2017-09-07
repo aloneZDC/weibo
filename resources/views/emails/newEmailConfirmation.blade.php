@@ -22,15 +22,15 @@
         </td>
     </tr>
     <tr><td>&nbsp;</td></tr>
-    @if (isset($main_company))
+
     <tr>
         <td align="left">
             {{ trans('user.emails.email_confirmation.msg_03') }}
-                <a href="mailto:{{ $main_company['support_email'] }}">{{ $main_company['support_email'] }}</a>
+                <a href="mailto:{{ $company['support_email'] }}">{{ $company['support_email'] }}</a>
             {{ trans('user.emails.email_confirmation.msg_04') }}
         </td>
     </tr>
-    @endif
+
     <tr><td>&nbsp;</td></tr>
     <tr>
         <td align="left">

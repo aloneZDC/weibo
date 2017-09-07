@@ -181,7 +181,7 @@ return [
   'error_not_available'    => 'This content is not available.',
   'file_does_not_exist'    => 'File does not exist',
   'filter'                 => 'Filter',
-  'filtered'               => 'Filtered',
+  'filtered'               => 'Filtered', //used
   'filter_results'         => 'Filter Results',
   'induced_error'          => 'To better serve you follow the instructions properly.',
   'name'                   => 'Name', //used
@@ -263,6 +263,6 @@ return [
   'details' => 'Details', //used
   'default' => 'Default', //used
   'notifications' => 'Notifications', //used
-  //----
-  'submit' => 'Submit'
+  'submit' => 'Submit', //used
+  'zip_code' => 'Zip Code',
 ];

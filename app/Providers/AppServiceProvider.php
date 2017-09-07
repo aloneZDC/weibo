@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\View;
 use Laravel\Dusk\DuskServiceProvider;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,26 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (Schema::hasTable('companies')) {
-            View::share('categories_menu', $this->categoriesMenu());
-            View::share('main_company', \Antvel\Company\Models\Company::find(1));
-        }
-    }
-
-    /**
-     * Returns the categories menu.
-     *
-     * @return array
-     */
-    protected function categoriesMenu() : array
-    {
-        if (! $this->app->bound($repository = 'category.repository.cahe')) {
-            return [];
-        }
-
-        return $this->app->make($repository)->categoriesWithProducts()->mapWithKeys(function ($item) {
-            return [$item->id => $item];
-        })->all();
+        //
     }
 
     /**

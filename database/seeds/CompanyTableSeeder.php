@@ -31,6 +31,7 @@ class CompanyTableSeeder extends Seeder
             'website' => 'http://antvel.com',
             'twitter' => 'https://twitter.com/_antvel',
             'facebook' => 'https://www.facebook.com/antvelecommerce',
+            'default' => true,
         ]);
     }
 }

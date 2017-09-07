@@ -1,5 +1,6 @@
 <div class="navbar-wrapper container">
 	<nav class="navbar navbar-inverse navbar-static-top">
+
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 				<span class="sr-only">Toggle navigation</span>
@@ -8,29 +9,26 @@
 				<span class="icon-bar"></span>
 			</button>
 			<div class="navbar-brand">
-				@if (isset($main_company))
-					<a href="/home" class="navbar-brand">
-						@if($main_company['logo'])
-							<span class="navbar-brand-text">
-								<img src="{{$main_company['logo']}}" alt="">
-							</span>
-						@else
-							<span class="navbar-brand-text">{{ $main_company['name'] }}</span>
-						@endif
-
-						@if(isset($main_company['slogan']))
-							<span class="navbar-brand-slogan">{{$main_company['slogan']}}</span>
-						@endif
-					</a>
-				@else
-					Antvel
-				@endif
+				@include ('partial.branding')
 			</div>
 		</div>
+
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 
-				@include('user.partial.menu_top')
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<span class="glyphicon glyphicon-menu-right"></span>{{ trans('company.who_we_are') }}
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ route('about') }}">{{ trans('company.about') }}</a></li>
+						<li><a href="{{ route('about', ['section' => 'refunds']) }}">{{ trans('company.refunds') }}</a></li>
+						<li><a href="{{ route('about', ['section' => 'terms']) }}">{{ trans('company.terms') }}</a></li>
+					</ul>
+				</li>
+
+				@include ('user.partial.menu_top')
 
 				@if (auth()->check())
 					<li class="dropdown">
@@ -53,8 +51,13 @@
 					@include ('partial.notifications')
 				@endif
 
+				<li class="dropdown">
+					<a href="{{ route('contact') }}">
+						<span class="glyphicon glyphicon-envelope"></span>{{ trans('company.contact.title') }}
+					</a>
+				</li>
+
 			</ul>
-			@include('partial.navigation_help')
 		</div>
 	</nav>
 

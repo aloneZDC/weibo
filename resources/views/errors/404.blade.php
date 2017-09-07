@@ -6,14 +6,14 @@
 
 @section('content')
 
-	<h1> <span class="glyphicon glyphicon-alert"></span> {{ $main_company['name'] }} 404!</h1>
-	
+	<h1> <span class="glyphicon glyphicon-alert"></span> {{ $company['name'] }} 404!</h1>
+
 	<p class="lead">
-		
+
 		{{ trans('globals.404_error.message_01') }}
-		
+
 		<a href="javascript.void(0)" onclick="window.history.back();">{{ trans('globals.404_error.link_01') }}</a>
-		
+
 		{{ trans('globals.404_error.message_02') }} <a href="/home">{{ trans('globals.404_error.link_02') }}</a>
 	</p>
 

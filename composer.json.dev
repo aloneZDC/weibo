@@ -35,7 +35,8 @@
 		"milon/barcode": "5.*",
 		"antvel/shop": "dev-master",
 		"laravel/tinker": "~1.0",
-		"laravel/dusk": "2.*"
+		"laravel/dusk": "2.*",
+		"doctrine/dbal": "^2.5"
 	},
 	"require-dev": {
 		"filp/whoops": "~2.0",

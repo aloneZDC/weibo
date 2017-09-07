@@ -62,24 +62,4 @@ class Menu
 
         return $returnArray ? $menu : json_encode($menu);
     }
-
-    /**
-     * Help menu.
-     *
-     * @param  boolean $returnArray
-     *
-     * @return mixed
-     */
-    public static function help($returnArray = false)
-    {
-        $menu = [
-            ['route' => '/about', 'text' => trans('company.about_us')],
-            ['route' => '/refunds', 'text' => trans('company.refund_policy')],
-            ['route' => '/privacy', 'text' => trans('company.privacy_policy')],
-            ['route' => '/terms', 'text' => trans('company.terms_of_service'), 'divider' => 1],
-            ['route' => '/contact', 'text' => trans('about.contact_us')],
-        ];
-
-        return $returnArray ? $menu : json_encode($menu);
-    }
 }

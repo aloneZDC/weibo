@@ -4,10 +4,10 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>@section('title'){{ $main_company['website_name']}} @show</title>
+	<title>@section('title'){{ $company['name']}} @show</title>
 
 	{!! Html::style('/css/vendor/bootstrap.css') !!}
-	
+
 	@section('css')
 		{!! Html::style('/css/app.css') !!}
 	@show
@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="panel panel-default @section('classPanel') @show">
 			@section('content')
-			
+
 
 			@show
 			<p>
