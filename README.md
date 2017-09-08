@@ -6,7 +6,7 @@
 
 
 
-***Antvel*** is an ecommerce project written in Laravel 5.* intended for building a friendly eStore either for startups or big companies. 
+***Antvel*** is an ecommerce project written in Laravel 5.* intended for building a friendly eStore either for startups or big companies.
 
 In spite of ***Antvel*** seems to be a whole couple app, it is powered by its <a href="https://github.com/ant-vel/Shop" target="_blank">core shop</a> which is a package that allows you to build a complete e-commerce based application for your needs.
 
@@ -28,7 +28,7 @@ Make sure to place the `$HOME/.composer/vendor/bin` directory (or the equivalent
 Once installed, the `antvel install` command will create a fresh copy of the project in the directory you provided. For example, `antvel install` will create a directory named `App-master` containing a fresh Antvel installation with all of its dependencies already installed:
 
     antvel install
-    
+
 
 <a href="https://github.com/ant-vel/Installer" _target="blank">More info</a>
 
@@ -70,7 +70,7 @@ Once installed, the `antvel install` command will create a fresh copy of the pro
 
 ## Dashboard
 
-Here, you will be able to manage the base information of your store, such as categories, products features and more. 
+Here, you will be able to manage the base information of your store, such as categories, products features and more.
 
 At the moment, the panel just has the module to manage the store categories, products and products features. However, it is intended to be the replacement for ***wpanel***.
 

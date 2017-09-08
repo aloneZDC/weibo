@@ -7,11 +7,9 @@ Route::get('register/confirm/{token}/{email}', [
     'as' => 'register.confirm',
 ]);
 
-Route::get('img/{file?}', 'FileController@img')->where('file', '(.*)')->name('images'); //while refactoring
-
 // home
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-Route::get('summary', ['as' => 'home', 'uses' => 'HomeController@summary']); //while refactoring
+Route::get('summary', ['as' => 'summary', 'uses' => 'HomeController@summary']); //while refactoring
 
 Route::group(['prefix' => 'home'], function ($router) {
     $router->name('home')->get('/', 'HomeController@index');

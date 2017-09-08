@@ -15,16 +15,6 @@ use Antvel\Product\Suggestions\Suggest;
 class HomeController extends Controller
 {
     /**
-     * Creates a new instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth')->only('dashboard');
-    }
-
-    /**
      * Shows the home page.
      *
      * @return void
@@ -36,9 +26,8 @@ class HomeController extends Controller
         $suggestion['carousel'] = $suggestion['product_purchased'];
 
         return view('home', [
-            'banner' => ['/img/banner/01.png', '/img/banner/02.png', '/img/banner/03.png', '/img/banner/04.png'], //while refactoring
+            'banner' => ['/images/banner.jpg', '/images/banner.jpg', '/images/banner.jpg', '/images/banner.jpg'], //while refactoring
             'tagsCloud' => $this->tagsCloud($suggestion),
-            'panel' => $this->panelLayout(),
             'suggestion' => $suggestion,
             'events' => [],
         ]);
@@ -57,24 +46,6 @@ class HomeController extends Controller
             $tags[] = explode(',', $item->pluck('tags')->implode(','));
             return $tags;
         })->flatten()->unique()->all();
-    }
-
-    /**
-     * Returns the panel layout.
-     *
-     * @return array
-     */
-    protected function panelLayout()
-    {
-        return [
-            'center' => [
-                'width' => 10,
-            ],
-            'left' => [
-                'width' => 2,
-                'class' => 'home-no-padding',
-            ],
-        ];
     }
 
     //moved here while refactoring

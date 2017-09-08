@@ -16,46 +16,16 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						<span class="glyphicon glyphicon-menu-right"></span>{{ trans('company.who_we_are') }}
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{ route('about') }}">{{ trans('company.about') }}</a></li>
-						<li><a href="{{ route('about', ['section' => 'refunds']) }}">{{ trans('company.refunds') }}</a></li>
-						<li><a href="{{ route('about', ['section' => 'terms']) }}">{{ trans('company.terms') }}</a></li>
-					</ul>
-				</li>
-
-				@include ('user.partial.menu_top')
-
 				@if (auth()->check())
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							<span class="fui fui-heart"></span>{{ trans('store.wish_list') }}
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="{{ route('orders.show_wish_list') }}">{{ trans('store.wish_list') }}</a></li>
-							<li><a href="{{ route('orders.show_list_directory') }}">{{ trans('store.your_wish_lists') }}</a></li>
-						</ul>
-					</li>
+					@include ('partial.topMenu.signed_user_menu')
+					@include ('partial.topMenu.wish_list')
+					@include ('partial.topMenu.notifications')
+					@include ('partial.topMenu.shopping_cart')
+				@else
+					@include ('partial.topMenu.guest_user_menu')
 				@endif
 
-				@if (auth()->check() && auth()->user()->shoppingCart()->count())
-					@include ('partial.shoppingCart')
-				@endif
-
-				@if (auth()->check())
-					@include ('partial.notifications')
-				@endif
-
-				<li class="dropdown">
-					<a href="{{ route('contact') }}">
-						<span class="glyphicon glyphicon-envelope"></span>{{ trans('company.contact.title') }}
-					</a>
-				</li>
+				@include ('partial.topMenu.about')
 
 			</ul>
 		</div>

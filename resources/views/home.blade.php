@@ -1,4 +1,14 @@
-@extends('layouts.master')
+@extends('layouts.master', [
+    'panel' => [
+            'center' => [
+                'width' => 10,
+            ],
+            'left' => [
+                'width' => 2,
+                'class' => 'home-no-padding',
+            ],
+        ]
+])
 
 @section('title')@parent - {{ trans('globals.home') }} @stop
 

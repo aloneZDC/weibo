@@ -251,7 +251,6 @@ return [
          * App Alieses...
          */
 
-        'Menu'      => App\Helpers\Menu::class,
         'Utility'   => App\Helpers\Utility::class,
     ],
 
