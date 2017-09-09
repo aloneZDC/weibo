@@ -32,7 +32,8 @@
     "angular-route": "~1.4.7",
     "angular-local-storage": "~0.2.3",
     "font-awesome": "~4.4.0",
-    "angular-lazy-img": "~1.2.2"
+    "angular-lazy-img": "~1.2.2",
+    "angular": "~1.4.14"
   },
   "resolutions": {
     "angular": "1.4.14"
