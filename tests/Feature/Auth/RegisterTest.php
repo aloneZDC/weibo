@@ -9,56 +9,87 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Tests\Feature\Auth;
 
+use App\User;
 use Tests\TestCase;
-use Antvel\User\Mail\Registration;
+use Antvel\User\Policies\Roles;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Antvel\User\Notifications\RegistrationNotification;
 
 class RegisterTest extends TestCase
 {
 	use DatabaseMigrations;
 
-    public function test_a_register_page_can_be_visited()
+	/** @test */
+	public function the_signup_page_can_be_visited()
 	{
-		$this->get('/register')
-			->assertStatus(200)
-			->assertSee('register');
+		$this->get(route('register'))->assertStatus(200)->assertSee('register');
 	}
 
-	public function test_a_user_is_able_to_sign_up()
+	/** @test */
+	public function a_new_user_can_sign_up()
 	{
 		Notification::fake();
 
-		$data = [
-            'email' => 'gocanto@gmail.com',
-			'password' => bcrypt('123456'),
-            'first_name' => 'Gustavo',
-            'last_name' => 'Ocanto',
-		];
-
-		$response = $this->post('register', $data);
-
-		$response->assertRedirect('login')
+		$this->post('register', ['email' => 'foo@bar.com','password' => bcrypt('123456'),'first_name' => 'foo','last_name' => 'bar'])
+			->assertRedirect('login')
 			->assertSessionHas('message');
 
-		$user = app()->make(\Antvel\User\UsersRepository::class)->find([
-			'email' => $data['email']
-		]);
+		$this->assertFalse($this->app->make('auth')->check());
 
-		Notification::assertSentTo(
-            [$user], \Antvel\User\Notifications\Registration::class
-        );
+		tap($user = User::latest()->first(), function ($user) {
+			$this->assertEquals('foo@bar.com', $user->nickname);
+			$this->assertEquals(Roles::default(), $user->role);
+			$this->assertEquals('foo@bar.com', $user->email);
+			$this->assertNotNull($user->confirmation_token);
+			$this->assertEquals('foo', $user->first_name);
+			$this->assertEquals('bar', $user->last_name);
+			$this->assertFalse($user->verified);
+		});
+
+		Notification::assertSentTo($user, RegistrationNotification::class);
 	}
 
-	public function test_a_user_must_provide_a_valid_information_when_registering()
+	/** @test */
+	function an_user_is_able_to_confirm_his_account()
 	{
-		$response = $this->post('register', []);
+		Notification::fake();
 
-		$errors = $this->app->make('session')->get('errors')->all();
+		$this->post('register', ['email' => 'foo@bar.com','password' => bcrypt('123456'),'first_name' => 'foo','last_name' => 'bar']);
 
-		$this->assertTrue(count($errors) > 0);
+		$user = User::latest()->first();
+
+		$response = $this->get(route('register.confirm', [
+			'token' => $user->confirmation_token,
+			'email' => $user->email,
+		]));
+
+		$this->assertTrue($user->fresh()->verified);
+
+		tap($this->app->make('auth'), function ($auth) use ($user) {
+			$this->assertTrue($auth->check());
+			$this->assertTrue($auth->user()->is($user));
+		});
+	}
+
+	/** @test */
+	function it_throws_404_if_the_given_data_did_not_match_any_users()
+	{
+		Notification::fake();
+
+		$this->post('register', ['email' => 'foo@bar.com','password' => bcrypt('123456'),'first_name' => 'foo','last_name' => 'bar']);
+
+		$user = User::latest()->first();
+
+		$response = $this->get(route('register.confirm', [
+			'token' => 'foo',
+			'email' => $user->email,
+		]));
+
+		$response->assertStatus(404);
+		$this->assertFalse($user->fresh()->verified);
+		$this->assertFalse($this->app->make('auth')->check());
 	}
 }

@@ -50,7 +50,7 @@
 							{!! Form::label('email',trans('user.email')) !!}:
 							<div class="input-group">
 					      		<div class="input-group-addon"><span class="fa fa-envelope"></span></div>
-								{!! Form::email('email', $email, ['ng-disabled'=>'disabled','class'=>'form-control']) !!}
+								{!! Form::email('email', session()->has('email') ? session()->get('email') : '', ['ng-disabled'=>'disabled','class'=>'form-control']) !!}
 							</div>
 						</div>
 					</div>

@@ -1,44 +1,69 @@
 <?php
 
+/*
+ * This file is part of the Antvel e-commerce.
+ *
+ * (c) Gustavo Ocanto <gustavoocanto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Http\Controllers\Auth;
 
-use Antvel\User\Auth\Login;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Antvel\User\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
     use AuthenticatesUsers;
 
     /**
-     * The Antvel sessions driver.
+     * Where to redirect users after login.
      *
-     * @var Login
+     * @var string
      */
-    protected $antvel = null;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Login $antvel)
+    public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
-
-        $this->antvel = $antvel;
+        $this->middleware('guest')->except('logout');
     }
 
     /**
-     * Process the user login.
+     * Validate the user login request.
      *
-     * @param  Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    public function login(LoginRequest $request)
+    protected function validateLogin(Request $request)
     {
-        return $this->antvel->authenticate($request);
+        $rules = [
+            'email' => 'required|email',
+            'password' => 'required',
+        ];
+
+        if (env('APP_ENV') === 'production') {
+            $rules['g-recaptcha-response'] = 'required|recaptcha';
+        }
+
+        $this->validate($request, $rules);
     }
 }

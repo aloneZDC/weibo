@@ -20,48 +20,58 @@ class LoginTest extends TestCase
 {
 	use DatabaseMigrations;
 
-	public function test_a_login_page_can_be_visited()
+	/** @test */
+	public function the_login_page_can_be_visited()
 	{
 		$this->get('/login')
 			->assertStatus(200)
 			->assertSee('login');
 	}
 
-	public function test_a_user_can_authenticate()
+	/** @test */
+	public function an_existing_user_can_be_authenticated()
 	{
-		$user = factory(User::class)->create([
-			'nickname' => 'gocanto'
-		])->first();
+		$user = factory(User::class)->create(['nickname' => 'gocanto']);
 
-		$response = $this->post('login', [
-			'email' => $user->email,
-			'password' => '123456'
-		]);
+		$response = $this->post('login', ['email' => $user->email, 'password' => '123456']);
 
-		$this->assertEquals($user->email, $this->app->make('auth')->user()->email);
-		$this->assertEquals($user->nickname, $this->app->make('auth')->user()->nickname);
+		tap($this->app->make('auth')->user(), function ($auth) use ($user) {
+			$this->assertEquals($auth->nickname, $user->nickname);
+			$this->assertEquals($auth->email, $user->email);
+		});
 	}
 
-	public function test_a_user_must_be_registered_to_log_into_the_app()
+	/** @test */
+	public function an_unregistered_user_cannot_login_into_the_application()
 	{
-		$response = $this->post('login', [
-			'email' => 'foo@bar.com',
-			'password' => '123456'
-		]);
-
-		$response->assertRedirect('/login');
+		$this
+			->post('login', ['email' => 'foo@bar.com', 'password' => '123456'])
+			->assertStatus(302);
 
 		$this->assertNull($this->app->make('auth')->user());
 	}
 
-	public function test_the_credentials_given_have_to_be_well_formatted()
+	/** @test */
+	function the_user_email_is_required()
 	{
-		$response = $this->post('login', [
-			'email' => 'foo',
-			'password' => ''
-		]);
-
-		$response->assertSessionHasErrors(['email', 'password']);
+		$this
+			->post('login', ['email' => '', 'password' => '123456'])
+			->assertSessionHasErrors('email');
 	}
 
+	/** @test */
+	function the_user_email_has_to_be_a_valid_email_format()
+	{
+		$this
+			->post('login', ['email' => 'foo', 'password' => '123456'])
+			->assertSessionHasErrors('email');
+	}
+
+	/** @test */
+	function the_user_password_is_required()
+	{
+		$this
+			->post('login', ['email' => 'foo@bar.com', 'password' => ''])
+			->assertSessionHasErrors('password');
+	}
 }

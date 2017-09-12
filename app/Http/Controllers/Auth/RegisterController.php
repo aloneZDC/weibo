@@ -1,40 +1,53 @@
 <?php
 
+/*
+ * This file is part of the Antvel e-commerce.
+ *
+ * (c) Gustavo Ocanto <gustavoocanto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Http\Controllers\Auth;
 
-use Antvel\User\Auth\Register;
+use App\User;
+use Illuminate\Http\Request;
+use Antvel\User\Policies\Roles;
 use App\Http\Controllers\Controller;
-use Antvel\User\Requests\RegisterRequest;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Antvel\User\Notifications\RegistrationNotification;
 
 class RegisterController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
+
     use RegistersUsers;
 
     /**
-     * Where to redirect users after login / registration.
+     * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/login';
 
     /**
-     * The Antvel sessions driver.
-     *
-     * @var Antvel\Components\Customer\Register
-     */
-    protected $register = null;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Register $register)
+    public function __construct()
     {
         $this->middleware('guest');
-
-        $this->register = $register;
     }
 
     /**
@@ -44,70 +57,75 @@ class RegisterController extends Controller
      */
     protected function showRegistrationForm()
     {
-        return view('auth.register', [
-            'email' => session()->has('email') ? session()->get('email') : ''
-        ]);
+        return view('auth.register');
     }
 
     /**
-     * Handles the user registration.
+     * Handle a registration request for the application.
      *
-     * @param RegisterRequest $request
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected function register(RegisterRequest $request)
+    public function register(Request $request)
     {
-        $this->register
-            ->store($request)
-            ->withEmail($this->emailBody())
-            ->withMessage($this->message($request));
+        $data = $request->validate($this->rules(
+            $request->all()
+        ));
+
+        $user = $this->create($data);
+
+        session()->flash('message', trans('user.signUp_message', ['_name' => $user->full_name]));
 
         return redirect($this->redirectTo);
     }
 
     /**
-     * Returns the registration success message.
+     * Get a validator for an incoming registration request.
      *
-     * @param  RegisterRequest $request
-     * @return string
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function message($request) : string
-    {
-        $fullName = $request['first_name'] . ' ' . $request['last_name'];
-
-        return trans('user.signUp_message', ['_name' => $fullName]);
-    }
-
-    /**
-     * Returns the registration email body.
-     *
-     * @return array
-     */
-    protected function emailBody() : array
+    protected function rules()
     {
         return [
-            'subject' => trans('user.emails.verification_account.subject'),
-            'view' => 'emails.accountVerification',
+            'email' => 'required|email|max:255|unique:users',
+            'first_name' => 'required|max:20|min:3',
+            'last_name' => 'required|max:20|min:3',
+            'password' => 'required|min:6',
         ];
     }
 
     /**
-     * Confirms the user subscription.
+     * Create a new user instance after a valid registration.
      *
-     * @param  string $token
-     * @param  string $email
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function create(array $data)
+    {
+        $user = User::create(array_merge($data, [
+            'confirmation_token' => str_limit(md5($data['email'] . str_random()), 25, ''),
+            'nickname' => $data['email'],
+            'role' => Roles::default()
+        ]));
+
+        $this->sendEmailVerification($user);
+
+        return $user;
+    }
+
+    /**
+     * We send an email to the given user with a link to confirm his account.
+     *
+     * @param  \App\User $user
+     *
      * @return void
      */
-    protected function confirm($token, $email)
+    protected function sendEmailVerification(User $user)
     {
-        $confirm = $this->register->confirm($token, $email);
-
-        if ($confirm->response() == 'ok') {
-            return redirect('/');
-        }
-
-        $confirm->flashError(trans('user.account_verified_error_message'));
-
-        return redirect($this->redirectTo);
+        $user->notify(new RegistrationNotification([
+            'subject' => trans('user.emails.verification_account.subject'),
+            'view' => 'emails.accountVerification',
+        ]));
     }
 }
