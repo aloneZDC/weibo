@@ -1,12 +1,15 @@
 <?php
 
-namespace App;
-
 /*
- * Antvel - Users Model
+ * This file is part of the Antvel e-commerce.
  *
- * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
+ * (c) Gustavo Ocanto <gustavoocanto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
+namespace App;
 
 use Antvel\User\Models\User as BaseUser;
 
