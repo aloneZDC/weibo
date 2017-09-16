@@ -1,7 +1,9 @@
 <?php
 
 return [
-        'summary' => 'Summary',
+        'summary' => 'Summary', //used
+        'avatar' => 'Avatar',
+        'success' => 'Your profile has been successfully updated.',
 
         'account'                      => 'Account',
         'facebook'                     => 'Facebook',
@@ -35,12 +37,12 @@ return [
         'role'                         => 'Role',
         'sex'                          => 'Sex',
         'social_info'                  => 'Social Info',
-        'social_information'           => 'Social Information',
+        'social_information'           => 'Social Information', //used
         'update'                       => 'Update',
         'update_profile'               => 'Update Profile',
         'user_info'                    => 'User Info',
-        'user_prifle_info'             => 'User Profile Infomartion',
-        'user_account_settings'        => 'Account Settings',
+        'user_prifle_info'             => 'User Profile Infomartion', //used
+        'user_account_settings'        => 'Account Settings', //used
         'website'                      => 'Web Site',
         'wishlist'                     => 'Wishlist',
         'wpanel'                       => 'Web Panel',

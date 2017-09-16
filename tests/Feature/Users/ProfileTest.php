@@ -12,11 +12,11 @@
 namespace Tests\Users\Feature;
 
 use Tests\TestCase;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Antvel\User\Events\ProfileWasUpdated;
+use Antvel\Users\Events\ProfileWasUpdated;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProfileTest extends TestCase
@@ -30,27 +30,33 @@ class ProfileTest extends TestCase
         $this->user = factory(User::class)->create()->first();
     }
 
+    protected function submit($request)
+    {
+        return $this->patch('user/' . $this->user->id, $request);
+    }
+
+    protected function validData($overwrites = [])
+    {
+        return array_merge([
+            'first_name' => 'Gustavo',
+            'last_name' => 'Ocanto',
+            'gender' => 'male',
+            'referral' => 'profile',
+            'email' => 'foo@bar.com',
+            'nickname' => 'foobar'
+        ], $overwrites);
+    }
+
     /** @test */
     function an_authorized_can_see_his_profile_page()
     {
         $this->actingAs($this->user)->get(route('user.index'))->assertSuccessful();
     }
 
-    protected function submit($request)
-    {
-        return $this->patch('user/' . $this->user->id, $request);
-    }
-
     /** @test */
     function an_unauthorized_user_cannot_manage_profiles()
     {
-        $response = $this->submit([
-            'referral' => 'profile',
-            'email' => 'foo@bar.com',
-            'nickname' => 'foobar'
-        ]);
-
-        $response
+        $this->submit(['referral' => 'profile', 'email' => 'foo@bar.com', 'nickname' => 'foobar'])
             ->assertStatus(302)
             ->assertRedirect('/login');
     }
@@ -60,17 +66,10 @@ class ProfileTest extends TestCase
     {
         Event::fake();
 
-        $this->actingAs($this->user);
-
-        $response = $this->submit([
-            'referral' => 'profile',
-            'email' => 'foo@bar.com',
-            'nickname' => 'foobar'
-        ]);
+        $this->actingAs($this->user)->submit($this->validData());
 
         Event::assertDispatched(ProfileWasUpdated::class, function ($e) {
-            return $e->user->id === $this->user->id
-                && $e->request['email'] = 'foo@bar.com'
+            return $e->request['email'] = 'foo@bar.com'
                 && $e->request['referal'] = 'profile'
                 && $e->request['nickname'] = 'foobar';
         });
@@ -79,63 +78,9 @@ class ProfileTest extends TestCase
     /** @test */
     function the_update_request_requires_the_referral_section_to_authorize_the_petition()
     {
-        $this->actingAs($this->user);
-
-        $response = $this->submit([
-            // 'referral' => 'profile',
-            'email' => 'foo@bar.com',
-            'nickname' => 'foobar'
-        ]);
-
-        $response->assertStatus(403);
-    }
-
-    /** @test */
-    function the_email_address_is_required()
-    {
-        $this->actingAs($this->user);
-
-        $response = $this->submit([
-            'referral' => 'profile',
-            // 'email' => 'foo@bar.com',
-            'nickname' => 'foobar'
-        ]);
-
-        $errors = $this->app->make('session')->get('errors');
-        $response->assertStatus(302);
-        $this->assertCount(1, $errors->get('email'));
-    }
-
-    /** @test */
-    function the_email_address_has_to_be_well_formatted()
-    {
-        $this->actingAs($this->user);
-
-        $response = $this->submit([
-            'referral' => 'profile',
-            'email' => 'foocom',
-            'nickname' => 'foobar'
-        ]);
-
-        $errors = $this->app->make('session')->get('errors');
-        $response->assertStatus(302);
-        $this->assertCount(1, $errors->get('email'));
-    }
-
-    /** @test */
-    function the_nickname_is_required()
-    {
-        $this->actingAs($this->user);
-
-        $response = $this->submit([
-            'referral' => 'profile',
-            'email' => 'foo@bar.com',
-            // 'nickname' => 'foobar'
-        ]);
-
-        $errors = $this->app->make('session')->get('errors');
-        $response->assertStatus(302);
-        $this->assertCount(1, $errors->get('nickname'));
+        $this->actingAs($this->user)
+            ->submit(['email' => 'foo@bar.com', 'nickname' => 'foobar'])
+            ->assertStatus(403);
     }
 
     /** @test */
@@ -143,16 +88,19 @@ class ProfileTest extends TestCase
     {
         Storage::fake('images');
 
-        $this->actingAs($this->user);
-
-        $response = $this->json('PATCH', route('user.update', ['user' => $this->user]), [
+        $this->actingAs($this->user)->patch(route('user.update', ['user' => $this->user]), $this->validData([
             'referral' => 'upload',
-            'file' => $file = UploadedFile::fake()->image('avatar.jpg'),
-        ]);
+            'pictures' => [
+                'storing' => [
+                    $file = UploadedFile::fake()->image('avatar.jpg'),
+                ]
+            ],
+        ]));
 
-        tap($this->user->fresh()->pic_url, function ($pic_url) use ($file) {
-            $this->assertEquals('images/avatars/' . $file->hashName(), $pic_url);
+        tap($this->user->fresh(), function ($user) use ($file) {
+            $this->assertEquals('images/avatars/' . $file->hashName(), $user->image);
             Storage::disk('images')->assertExists('avatars/' . $file->hashName());
+            $this->assertNotNull($user->image);
         });
     }
 

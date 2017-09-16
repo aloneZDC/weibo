@@ -11,7 +11,7 @@
 
 namespace App;
 
-use Antvel\User\Models\User as BaseUser;
+use Antvel\Users\Models\User as BaseUser;
 
 class User extends BaseUser
 {

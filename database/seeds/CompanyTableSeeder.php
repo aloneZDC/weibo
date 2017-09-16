@@ -10,7 +10,7 @@
  */
 
 use Illuminate\Database\Seeder;
-use Antvel\Company\Models\Company;
+use Antvel\Companies\Models\Company;
 
 class CompanyTableSeeder extends Seeder
 {

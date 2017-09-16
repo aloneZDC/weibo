@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Illuminate\Database\Seeder;
 use Antvel\AddressBook\Models\Address;
 

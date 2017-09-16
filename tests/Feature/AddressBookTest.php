@@ -13,7 +13,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Antvel\AddressBook\Models\Address;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 

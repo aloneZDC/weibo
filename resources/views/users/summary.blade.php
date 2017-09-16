@@ -5,7 +5,7 @@
 @section('content')
 	@parent
 	@section('panel_left_content')
-		@include('user.partial.menu_dashboard')
+		@include('users.partials.menu_dashboard')
 	@stop
 	@section('center_content')
 
@@ -24,7 +24,7 @@
 			<div class="row">&nbsp;</div>
 
 			<div class="list-group">
-				<a href="javascript:void(0);" class="list-group-item active">{{ trans('user.your_products') }}</a>
+				<a href="javascript:void(0);" class="list-group-item active">{{ trans('users.your_products') }}</a>
 				<a href="{{ route('products.myProducts') }}" class="list-group-item">{{ trans('globals.all') }}<span class="badge">1</span></a>
 				<a href="{{ route('products.myProducts').'?filter=active' }}" class="list-group-item">{{ trans('globals.active') }}<span class="badge">2</span></a>
 				<a href="{{ route('products.myProducts').'?filter=inactive' }}" class="list-group-item">{{ trans('globals.inactive') }}<span class="badge">3</span></a>
@@ -32,7 +32,7 @@
 			</div>
 
 			<div class="list-group">
-				<a href="javascript:void(0);" class="list-group-item active">{{ trans('user.your_sales') }}</a>
+				<a href="javascript:void(0);" class="list-group-item active">{{ trans('users.your_sales') }}</a>
 				<a href="{{ route('orders.pendingOrders') }}" class="list-group-item">{{ trans('store.all_transactions') }}<span class="badge">{{ $sales['all'] }}</span></a>
 				<a href="javascript:void(0);" class="list-group-item"><strong>{{ trans('store.grand_total') }}</strong><span class="badge">{{ \Utility::showPrice($sales['total']) }}</span></a>
 				<a href="{{ route('orders.pendingOrders') }}" class="list-group-item">{{ trans('store.openOrders') }}<span class="badge">{{ $sales['open'] }}</span></a>
@@ -44,7 +44,7 @@
 		@else
 
 			<div class="list-group">
-				<a href="javascript:void(0);" class="list-group-item active">{{ trans('user.your_orders') }}</a>
+				<a href="javascript:void(0);" class="list-group-item active">{{ trans('users.your_orders') }}</a>
 				<a href="{{ route('orders.show_orders') }}" class="list-group-item">{{ trans('globals.all') }}&nbsp;<span class="badge">{{ $orders['all'] }}</span></a>
 				<a href="{{ route('orders.show_orders') }}" class="list-group-item">{{ trans('store.openOrders') }}&nbsp;<span class="badge">{{ $orders['open'] }}</span></a>
 				<a href="{{ route('orders.show_orders').'?show=closed' }}" class="list-group-item">{{ trans('store.closedOrders') }}&nbsp;<span class="badge">{{ $orders['closed'] }}</span></a>

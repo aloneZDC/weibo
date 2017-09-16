@@ -13,7 +13,7 @@
 namespace Tests\Feature\Products;
 
 use Tests\TestCase;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Antvel\Features\Models\Feature;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -26,7 +26,7 @@ class ProductsFeaturesTest extends TestCase
     {
         parent::setUp();
 
-        $this->admin = factory('Antvel\User\Models\User')->states('admin')->create();
+        $this->admin = factory('Antvel\Users\Models\User')->states('admin')->create();
     }
 
     protected function validData($attributes = [])

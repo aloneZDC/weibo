@@ -13,10 +13,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Illuminate\Http\Request;
-use Antvel\User\Policies\Roles;
+use Antvel\Users\Policies\Roles;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Antvel\User\Notifications\RegistrationNotification;
+use Antvel\Users\Notifications\RegistrationNotification;
 
 class RegisterController extends Controller
 {
@@ -105,8 +105,9 @@ class RegisterController extends Controller
     {
         $user = User::create(array_merge($data, [
             'confirmation_token' => str_limit(md5($data['email'] . str_random()), 25, ''),
+            'image' => '/images/no-avatar.png',
             'nickname' => $data['email'],
-            'role' => Roles::default()
+            'role' => Roles::default(),
         ]));
 
         $this->sendEmailVerification($user);

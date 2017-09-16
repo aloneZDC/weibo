@@ -29,7 +29,7 @@ class ManageProductsTest extends TestCase
 			'name' => 'Category Name'
 		])->first();
 
-		$this->seller = factory('Antvel\User\Models\User')->states('seller')->create()->first();
+		$this->seller = factory('Antvel\Users\Models\User')->states('seller')->create()->first();
 	}
 
 	protected function validaData($attributes = [])

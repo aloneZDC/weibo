@@ -13,7 +13,7 @@ namespace App\Http\Controllers;
 
 use Antvel\Product\Products;
 use Illuminate\Http\Request;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Antvel\Product\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -23,9 +23,9 @@ use Antvel\AddressBook\Models\Address;
 use Antvel\Product\Suggestions\Suggest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Antvel\User\Notifications\OrderWasUpdated;
+use Antvel\Users\Notifications\OrderWasUpdated;
 use Antvel\Orders\Models\{ Order, OrderDetail };
-use Antvel\User\Notifications\OrderWasCommented;
+use Antvel\Users\Notifications\OrderWasCommented;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

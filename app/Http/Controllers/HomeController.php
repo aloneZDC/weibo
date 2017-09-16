@@ -106,6 +106,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.summary', compact('panel', 'orders', 'sales'));
+        return view('users.summary', compact('panel', 'orders', 'sales'));
     }
 }

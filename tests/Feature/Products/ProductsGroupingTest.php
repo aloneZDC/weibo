@@ -23,7 +23,7 @@ class ProductsGroupingTest extends TestCase
 	{
 		parent::setUp();
 
-		$this->seller = factory('Antvel\User\Models\User')->states('seller')->create()->first();
+		$this->seller = factory('Antvel\Users\Models\User')->states('seller')->create()->first();
 	}
 
 	/** @test */

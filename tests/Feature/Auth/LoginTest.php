@@ -13,7 +13,7 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LoginTest extends TestCase
@@ -31,9 +31,9 @@ class LoginTest extends TestCase
 	/** @test */
 	public function an_existing_user_can_be_authenticated()
 	{
-		$user = factory(User::class)->create(['nickname' => 'gocanto']);
+		$user = factory(User::class)->create(['email' => 'foo@bar.com', 'verified' => true]);
 
-		$response = $this->post('login', ['email' => $user->email, 'password' => '123456']);
+		$response = $this->post('login', ['email' => 'foo@bar.com', 'password' => '123456']);
 
 		tap($this->app->make('auth')->user(), function ($auth) use ($user) {
 			$this->assertEquals($auth->nickname, $user->nickname);

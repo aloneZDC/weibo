@@ -13,7 +13,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Illuminate\Http\UploadedFile;
 use Antvel\Categories\Models\Category;
 use Illuminate\Support\Facades\Storage;

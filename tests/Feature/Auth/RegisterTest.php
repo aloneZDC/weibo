@@ -13,10 +13,10 @@ namespace Tests\Feature\Auth;
 
 use App\User;
 use Tests\TestCase;
-use Antvel\User\Policies\Roles;
+use Antvel\Users\Policies\Roles;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Antvel\User\Notifications\RegistrationNotification;
+use Antvel\Users\Notifications\RegistrationNotification;
 
 class RegisterTest extends TestCase
 {

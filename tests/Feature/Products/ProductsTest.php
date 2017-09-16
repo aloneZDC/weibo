@@ -50,7 +50,7 @@ class ProductsTest extends TestCase
 	function update_signed_user_preferences_when_showing_a_given_product_details()
 	{
 		$this->actingAs(
-			$user =  factory('Antvel\User\Models\User')->create()->first()
+			$user =  factory('Antvel\Users\Models\User')->create()->first()
 		);
 
 		$this->assertSame('', trim($user->preferences['product_viewed']));

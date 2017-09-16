@@ -13,7 +13,7 @@
 namespace Tests\Browser;
 
 use Tests\DuskTestCase;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Tests\Browser\Pages\HomePage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 

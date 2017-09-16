@@ -265,4 +265,5 @@ return [
   'notifications' => 'Notifications', //used
   'submit' => 'Submit', //used
   'zip_code' => 'Zip Code',
+  'action_not_allowed' => 'The requested action is not allowed.',
 ];

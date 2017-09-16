@@ -13,7 +13,7 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ResetPasswordTest extends TestCase
@@ -39,7 +39,7 @@ class ResetPasswordTest extends TestCase
 	/** @test */
 	function an_authorized_user_with_a_valid_token_is_able_to_reset_his_password()
 	{
-		$user = factory(User::class)->create(['password' => '123456']);
+		$user = factory(User::class)->create();
 
 	    $response = $this->post('password/reset', [
 	    	'token' => $this->app->make('auth.password')->createToken($user),

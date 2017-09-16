@@ -11,7 +11,7 @@
 @section('content')
     @parent
     @section('panel_left_content')
-        @include('user.partial.menu_dashboard')
+        @include('users.partials.menu_dashboard')
     @stop
 
     @section('center_content')

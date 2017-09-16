@@ -12,7 +12,7 @@
 namespace Tests\Users\Feature;
 
 use Tests\TestCase;
-use Antvel\User\Models\User;
+use Antvel\Users\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class AccountSecurityTest extends TestCase
@@ -26,7 +26,7 @@ class AccountSecurityTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->patch('user/security/disable');
+        $response = $this->patch(route('user.action', ['action' => 'disable']));
 
         $payload = $response->decodeResponseJson();
 
@@ -41,7 +41,7 @@ class AccountSecurityTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->patch('user/security/enable');
+        $response = $this->patch(route('user.action', ['action' => 'enable']));
 
         $payload = $response->decodeResponseJson();
 
@@ -56,7 +56,7 @@ class AccountSecurityTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->patch('user/security/foo');
+        $response = $this->patch(route('user.action', ['action' => 'foo']));
 
         $payload = $response->decodeResponseJson();
 
@@ -67,13 +67,12 @@ class AccountSecurityTest extends TestCase
     /** @test */
     function an_unauthorized_user_is_not_allowed_to_manage_his_account_security_options()
     {
-    	$user = factory(User::class)->create()->first();
+        $user = factory(User::class)->create()->first();
 
-        $response = $this->patch('user/security/disable');
+        $response = $response = $this->patch(route('user.action', ['action' => 'enable']));
 
         $response
         	->assertStatus(302)
         	->assertRedirect('/login');
     }
-
 }
