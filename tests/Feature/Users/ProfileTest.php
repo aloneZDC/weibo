@@ -14,9 +14,11 @@ namespace Tests\Users\Feature;
 use Tests\TestCase;
 use Antvel\Users\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Antvel\Users\Events\ProfileWasUpdated;
+use Antvel\Users\Mail\NewEmailConfirmation;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProfileTest extends TestCase
@@ -41,9 +43,8 @@ class ProfileTest extends TestCase
             'first_name' => 'Gustavo',
             'last_name' => 'Ocanto',
             'gender' => 'male',
-            'referral' => 'profile',
             'email' => 'foo@bar.com',
-            'nickname' => 'foobar'
+            'nickname' => 'foobar',
         ], $overwrites);
     }
 
@@ -66,7 +67,9 @@ class ProfileTest extends TestCase
     {
         Event::fake();
 
-        $this->actingAs($this->user)->submit($this->validData());
+        $this->actingAs($this->user)->submit($this->validData([
+            'referral' => 'profile',
+        ]));
 
         Event::assertDispatched(ProfileWasUpdated::class, function ($e) {
             return $e->request['email'] = 'foo@bar.com'
@@ -86,20 +89,19 @@ class ProfileTest extends TestCase
     /** @test */
     function an_authorized_user_can_update_his_profile_picture()
     {
-        Storage::fake('images');
+        Mail::fake();
+        Storage::fake('images/avatars');
 
-        $this->actingAs($this->user)->patch(route('user.update', ['user' => $this->user]), $this->validData([
-            'referral' => 'upload',
+        $response = $this->actingAs($this->user)->patch(route('user.update', $this->user), $this->validData([
+            'referral' => 'profile',
             'pictures' => [
-                'storing' => [
-                    $file = UploadedFile::fake()->image('avatar.jpg'),
-                ]
+                'storing' => $file = UploadedFile::fake()->image('foo.jpg'),
             ],
         ]));
 
         tap($this->user->fresh(), function ($user) use ($file) {
             $this->assertEquals('images/avatars/' . $file->hashName(), $user->image);
-            Storage::disk('images')->assertExists('avatars/' . $file->hashName());
+            Storage::disk('images/avatars')->assertExists($file->hashName());
             $this->assertNotNull($user->image);
         });
     }
@@ -108,8 +110,10 @@ class ProfileTest extends TestCase
     function an_unauthorized_user_cannot_update_his_profile_picture()
     {
         $response = $this->json('PATCH', route('user.update', ['user' => $this->user]), [
-            'referral' => 'upload',
-            'file' => $file = UploadedFile::fake()->image('avatar.jpg'),
+            'referral' => 'profile',
+            'pictures' => [
+                'storing' => $file = UploadedFile::fake()->image('foo.jpg'),
+            ],
         ]);
 
         $this->assertEquals($this->user->pic_url, $this->user->fresh()->pic_url);
@@ -117,5 +121,40 @@ class ProfileTest extends TestCase
         $error = $response->decodeResponseJson();
         $this->assertEquals('Unauthenticated.', $error['message']);
         $response->assertStatus(401);
+    }
+
+    /** @test */
+    function an_authorized_user_might_want_to_change_his_email_address()
+    {
+        Mail::fake();
+
+        $this->actingAs($this->user)->submit($this->validData([
+            'email' => 'gustavo@antvel.com',
+            'referral' => 'profile',
+        ]));
+
+        Mail::assertQueued(NewEmailConfirmation::class, function ($mail) {
+            $petition = auth()->user()->emailChangePetitions->last();
+            return $mail->petition->is($petition);
+        });
+
+        $this->assertEquals($this->user->email, auth()->user()->fresh()->email);
+    }
+
+    /** @test */
+    function an_authorized_user_might_want_to_change_his_password()
+    {
+        Mail::fake();
+
+        $this->actingAs($this->user)->submit($this->validData([
+            'referral' => 'account',
+            'old_password' => '123456',
+            'password' => '654321',
+            'password_confirmation' => '654321',
+        ]));
+
+        $this->assertTrue(
+            $this->app->make('hash')->check('654321', auth()->user()->fresh()->password)
+        );
     }
 }

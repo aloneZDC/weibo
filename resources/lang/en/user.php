@@ -1,9 +1,18 @@
 <?php
 
 return [
-        'summary' => 'Summary', //used
-        'avatar' => 'Avatar',
         'success' => 'Your profile has been successfully updated.',
+        'user_prifle_info' => 'User Profile Infomartion',
+        'user_account_settings' => 'Account Settings',
+        'social_information' => 'Social Information',
+        'summary' => 'Summary',
+        'avatar' => 'Avatar',
+
+        'validation_errors' => [
+            'avatar' => 'Your avatar is invalid. Please, provide a (jpeg,png,jpg) image with a maximum size of 500x500.',
+        ],
+
+        //----
 
         'account'                      => 'Account',
         'facebook'                     => 'Facebook',
@@ -37,12 +46,11 @@ return [
         'role'                         => 'Role',
         'sex'                          => 'Sex',
         'social_info'                  => 'Social Info',
-        'social_information'           => 'Social Information', //used
+
         'update'                       => 'Update',
         'update_profile'               => 'Update Profile',
         'user_info'                    => 'User Info',
-        'user_prifle_info'             => 'User Profile Infomartion', //used
-        'user_account_settings'        => 'Account Settings', //used
+
         'website'                      => 'Web Site',
         'wishlist'                     => 'Wishlist',
         'wpanel'                       => 'Web Panel',

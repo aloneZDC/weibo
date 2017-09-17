@@ -133,8 +133,7 @@ class AddressBookTest extends TestCase
 
         $this->actingAs($this->user)
             ->get(route('addressBook.edit', ['addressBook' => $address->id]))
-            ->assertStatus(200)
-            ->assertSee($address->name_contact);
+            ->assertStatus(200);
     }
 
     /** @test */
