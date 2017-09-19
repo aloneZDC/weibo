@@ -121,7 +121,6 @@ Don't forget to [follow me on twitter](https://twitter.com/gocanto)!
 Thanks!
 
 Gustavo Ocanto.
-gustavoocanto@gmail.com
 
 
 
