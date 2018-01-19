@@ -38,7 +38,7 @@
 
     @if (auth()->check() && in_array(auth()->user()->role, ['admin', 'seller']))
         @section('panel_left_content')
-            @include('user.partial.menu_dashboard')
+            @include('users.partials.menu_dashboard')
 
 			<div class="row hidden-xs">
 	            <div class="col-md-12">
