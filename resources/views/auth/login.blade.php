@@ -42,10 +42,12 @@
 					</div>
 				</div>
 
-				<div class="form-group" style="height: 120px">
-					<h6 class="black_color">{{ trans('user.are_you_human') }}</h6>
-					{!! Recaptcha::render() !!}
-				</div>
+				@if (app()->environment() == 'production')
+					<div class="form-group" style="height: 120px">
+						<h6 class="black_color">{{ trans('user.are_you_human') }}</h6>
+						{!! Recaptcha::render() !!}
+					</div>
+				@endif
 
 				<div class="form-group">
 					<label>
