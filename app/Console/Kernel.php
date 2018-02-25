@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Antvel e-commerce.
- *
- * (c) Gustavo Ocanto <gustavoocanto@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -21,7 +12,9 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [];
+    protected $commands = [
+        //
+    ];
 
     /**
      * Define the application's command schedule.
@@ -36,13 +29,13 @@ class Kernel extends ConsoleKernel
     }
 
     /**
-     * Register the Closure based commands for the application.
+     * Register the commands for the application.
      *
      * @return void
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

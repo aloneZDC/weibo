@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -121,23 +120,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Logging Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the log settings for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
-    |
-    */
-
-    'log' => env('APP_LOG', 'single'),
-
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -148,7 +130,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -204,7 +185,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -242,16 +222,15 @@ return [
         /*
          * Package Aliases...
          */
-        'Debugbar'    => Barryvdh\Debugbar\Facade::class,
-        'Recaptcha'   => Greggilbert\Recaptcha\Facades\Recaptcha::class,
-        'DNS1D'       => Milon\Barcode\Facades\DNS1DFacade::class,
-        'DNS2D'       => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
         /*
          * App Alieses...
          */
 
-        'Utility'   => App\Helpers\Utility::class,
+        'Utility' => App\Helpers\Utility::class,
     ],
-
 ];
